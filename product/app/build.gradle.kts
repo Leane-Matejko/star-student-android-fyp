@@ -1,7 +1,12 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id("com.android.application")
+    kotlin("android")
+    id("com.github.triplet.play")
+}    
+
+play {
+    serviceAccountCredentials.set(file("starstudent-76c6c19da849.json")) // Json file in you app directory
+    track.set("pre-alpha") // set track for playstore  like 'production','beta','alpha'
 }
 
 android {
@@ -18,9 +23,20 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+   
+            storeFile = file("release-keystore.jks") //keystore
+            storePassword = "password"
+            keyAlias = "alias"
+            keyPassword = "password"
+
+        }
+    }
+
     buildTypes {
-        release {
-            isMinifyEnabled = false
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
