@@ -50,6 +50,7 @@ before_script:
   - sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}"
 
   # Not necessary, but just for surity
+  - cd product
   - chmod +x ./gradlew
 
 stages:
