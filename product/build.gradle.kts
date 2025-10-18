@@ -11,7 +11,6 @@ plugins {
 buildscript {
     dependencies {
         classpath("com.github.triplet.gradle:play-publisher:3.8.4")
-        implementation("androidx.compose.compiler:compiler:1.5.0")
     }
 }
 
