@@ -1,4 +1,4 @@
-image: openjdk:11-jdk
+image: ghcr.io/android/supported-images:ubuntu-22.04-android-34
 
 variables:
 
