@@ -1,0 +1,2 @@
+json_key_file("./app/starstudent-76c6c19da849.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("com.example.myapplication") # e.g. com.krausefx.app
