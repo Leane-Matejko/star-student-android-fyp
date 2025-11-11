@@ -23,5 +23,9 @@
 - **Next steps:** Complete implentation of basic UI features. *(Placeholders if necessary)*
 
 ### Week 6 - 27/10
--
-- **Next steps:**
+- Researching into the database options avaliable, restructuring plan to reflect the remaining time avaliable.
+- **Next steps:** Complete prototype and update requirements
+
+### Week 7 - 03/11
+- Prototype created with Figma using process flow diagram previously created. Outlines the serveral features outlined in the project, and creates a possible layout for the UI.
+- **Next steps:** Create the user accounts and connect the database.
