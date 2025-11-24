@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.starstudent.app-mergeDebugResources-44:/values-v30/values-v30.xml",
+            "outputFile": "com.example.starstudent.app-mergeDebugResources-68:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "/Users/leanematejko/.gradle/caches/8.13/transforms/0bcb1f5a294d6a45678a49d139f6bc1b/transformed/material3-release/res/values-v30/values-v30.xml",
+                    "source": "/Users/leanematejko/.gradle/caches/9.2.1/transforms/814617465f5a4daa0f9472d5b55ba7c6/transformed/material3-release/res/values-v30/values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

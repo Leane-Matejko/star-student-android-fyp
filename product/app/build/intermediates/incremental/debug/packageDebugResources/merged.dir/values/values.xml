@@ -8,5 +8,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">Star Student</string>
+    <string name="button_test">Click me</string>
+    <string name="gcm_defaultSenderId" translatable="false">740988320933</string>
+    <string name="google_api_key" translatable="false">AIzaSyCYFks0nO9l_SW4LfjfRWzqEyOgQVCUANs</string>
+    <string name="google_app_id" translatable="false">1:740988320933:android:2d52ffecb2d981e694214c</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCYFks0nO9l_SW4LfjfRWzqEyOgQVCUANs</string>
+    <string name="google_storage_bucket" translatable="false">starstudent-b3330.firebasestorage.app</string>
+    <string name="project_id" translatable="false">starstudent-b3330</string>
     <style name="Theme.StarStudent" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>
