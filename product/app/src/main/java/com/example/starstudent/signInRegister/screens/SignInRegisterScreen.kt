@@ -1,4 +1,4 @@
-package com.example.starstudent.screens
+package com.example.starstudent.signInRegister.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,8 +18,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.starstudent.screens.uiComponents.Background
-import com.example.starstudent.screens.uiComponents.button
+import com.example.starstudent.navigation.Screens
+import com.example.starstudent.signInRegister.screens.uiComponents.Background
+import com.example.starstudent.signInRegister.screens.uiComponents.button
 
 @Composable
     fun SignInRegisterScreen(navController: NavHostController) {

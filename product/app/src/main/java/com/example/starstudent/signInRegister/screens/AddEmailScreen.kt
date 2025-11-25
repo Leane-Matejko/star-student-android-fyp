@@ -1,4 +1,4 @@
-package com.example.starstudent.screens
+package com.example.starstudent.signInRegister.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,12 +15,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.starstudent.screens.uiComponents.Background
-import com.example.starstudent.screens.uiComponents.button
-import com.example.starstudent.screens.uiComponents.inputField
+import com.example.starstudent.navigation.Screens
+import com.example.starstudent.signInRegister.screens.uiComponents.Background
+import com.example.starstudent.signInRegister.screens.uiComponents.button
+import com.example.starstudent.signInRegister.screens.uiComponents.inputField
 
 @Composable
-fun CreatePassword(navController: NavController){
+fun AddEmailScreen(navController: NavController) {
     Background()
     Column(
         verticalArrangement = Arrangement.Center,
@@ -31,19 +32,16 @@ fun CreatePassword(navController: NavController){
             .padding(40.dp)
     ) {
         Text(
-            text = "Set Password",
+            text = "Add your Email",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier)
-        inputField("PASSWORD")
-        Spacer(modifier = Modifier)
-        inputField("RE-RENTER PASSWORD")
+        inputField("EMAIL")
         Spacer(modifier = Modifier)
         button("Next") {
-            navController.navigate(Screens.HomeScreen.route)
+            navController.navigate(Screens.VerifyEmailScreen.route)
         }
-
     }
 }
