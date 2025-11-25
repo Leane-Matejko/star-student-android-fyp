@@ -120,9 +120,8 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
 
 }
 
-@Preview
 @Composable
-fun largeNavWidget(){
+fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
     Box(
         modifier = Modifier
             .size(70.dp, 25.dp)
@@ -133,7 +132,7 @@ fun largeNavWidget(){
             .padding(2.dp)
     ){
         Icon(
-            imageVector = Icons.Filled.Star,
+            imageVector =repIcon,
             contentDescription = "Representation Icon",
             modifier = Modifier.size(20
                 .dp),
@@ -146,17 +145,38 @@ fun largeNavWidget(){
                 .dp))
         {
             Text(
-                "Study Centre",
+                title,
                 color = White01,
                 fontSize = 6.sp
             )
 
             Text(
-                text = "Last Study Session: 3 days ago",
+                text = description,
                 color = LightPink,
                 fontSize = 3.sp
             )
         }
 
+    }
+}
+
+@Preview
+@Composable
+fun avatarWindow(){
+    Box(
+        modifier = Modifier
+            .background(Brush.verticalGradient(listOf(White01,Yellow)),
+                shape = RoundedCornerShape(15f
+                ))
+            .size(40.dp, 60f.dp)
+            .padding(0.dp, 2.dp)
+
+    ) {
+        Text(
+            text = "Get some rest!",
+            color = DarkPink,
+            fontSize = 4.sp,
+            modifier = Modifier.align(Alignment.BottomCenter)
+            )
     }
 }
