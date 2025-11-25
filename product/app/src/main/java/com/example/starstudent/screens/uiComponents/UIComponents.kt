@@ -160,9 +160,8 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
     }
 }
 
-@Preview
 @Composable
-fun avatarWindow(){
+fun avatarWindow(prompt: String){
     Box(
         modifier = Modifier
             .background(Brush.verticalGradient(listOf(White01,Yellow)),
@@ -173,10 +172,36 @@ fun avatarWindow(){
 
     ) {
         Text(
-            text = "Get some rest!",
+            text = prompt,
             color = DarkPink,
             fontSize = 4.sp,
             modifier = Modifier.align(Alignment.BottomCenter)
             )
+    }
+}
+
+@Composable
+fun textField(header: String, info: String){
+    Column(){
+        Text(
+            text = header,
+            color = DarkPink,
+            fontSize = 4.sp
+        )
+        Box(
+            modifier = Modifier
+                .background(
+                    shape = RoundedCornerShape(12f),
+                    color = Yellow
+                )
+                .size(45.dp, 8.dp)
+                .padding(2.dp)
+        ){
+            Text(
+                text = info,
+                fontSize = 3.sp,
+                color = DarkPink
+            )
+        }
     }
 }
