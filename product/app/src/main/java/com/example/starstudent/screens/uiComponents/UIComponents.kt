@@ -6,16 +6,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -23,14 +27,14 @@ import com.example.starstudent.ui.theme.DarkPink
 import com.example.starstudent.ui.theme.White01
 import com.example.starstudent.ui.theme.Yellow
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.ui.theme.LightPink
-import com.example.starstudent.ui.theme.Pink
-
 @Composable
 fun Background() {
     Box(
@@ -147,13 +151,13 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
             Text(
                 title,
                 color = White01,
-                fontSize = 6.sp
+                fontSize = 12.sp
             )
 
             Text(
                 text = description,
                 color = LightPink,
-                fontSize = 3.sp
+                fontSize = 6.sp
             )
         }
 
@@ -174,7 +178,7 @@ fun avatarWindow(prompt: String){
         Text(
             text = prompt,
             color = DarkPink,
-            fontSize = 4.sp,
+            fontSize = 12.sp,
             modifier = Modifier.align(Alignment.BottomCenter)
             )
     }
@@ -186,7 +190,7 @@ fun textField(header: String, info: String){
         Text(
             text = header,
             color = DarkPink,
-            fontSize = 4.sp
+            fontSize = 12.sp
         )
         Box(
             modifier = Modifier
@@ -204,4 +208,24 @@ fun textField(header: String, info: String){
             )
         }
     }
+}
+
+@Composable
+fun inputField(label: String){
+
+    var info by remember { mutableStateOf("") }
+
+    TextField(
+        value = info,
+        onValueChange = { info = it},
+        label = {Text(text = label, fontSize = 12.sp)
+                },
+        singleLine = true,
+        shape = RoundedCornerShape(36f),
+        textStyle = LocalTextStyle.current.copy(
+            textAlign = TextAlign.Left
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+    )
 }
