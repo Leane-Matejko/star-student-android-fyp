@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.core.ktx)
     implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.ui)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
