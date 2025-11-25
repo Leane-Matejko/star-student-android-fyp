@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
@@ -228,4 +229,17 @@ fun inputField(label: String){
         modifier = Modifier
             .fillMaxWidth()
     )
+}
+
+@Preview
+@Composable
+fun button() {
+    Button(
+        onClick = {
+
+        }) {
+
+        Text("text")
+
+    }
 }
