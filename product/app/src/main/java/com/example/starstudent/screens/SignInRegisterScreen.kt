@@ -23,10 +23,6 @@ import com.example.starstudent.screens.uiComponents.button
 
 @Composable
     fun SignInRegisterScreen(navController: NavHostController) {
-//        var info by remember {
-//            mutableStateOf("")
-//        }
-
         Background()
 
         Column(
