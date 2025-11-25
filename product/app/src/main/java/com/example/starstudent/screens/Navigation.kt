@@ -22,5 +22,19 @@ fun Navigation() {
             {
             SignInScreen(navController = navController)
         }
+
+        //User enters their email - will check to
+        composable(route = Screens.AddEmailScreen.route) {
+            AddEmailScreen(navController = navController)
+        }
+
+        composable(route = Screens.VerifyEmailScreen.route) {
+            VerifyEmail(navController = navController)
+        }
+
+        composable(route = Screens.HomeScreen.route) {
+            Homepage(navController = navController)
+        }
+
     }
 }

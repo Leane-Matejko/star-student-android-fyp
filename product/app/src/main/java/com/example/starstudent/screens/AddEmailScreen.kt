@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,8 +21,7 @@ import com.example.starstudent.screens.uiComponents.button
 import com.example.starstudent.screens.uiComponents.inputField
 
 @Composable
-fun SignInScreen(navController: NavController){
-
+fun AddEmailScreen(navController: NavController) {
     Background()
     Column(
         verticalArrangement = Arrangement.Center,
@@ -34,7 +32,7 @@ fun SignInScreen(navController: NavController){
             .padding(40.dp)
     ) {
         Text(
-            text = "Sign In",
+            text = "Add your Email",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
@@ -42,13 +40,8 @@ fun SignInScreen(navController: NavController){
         Spacer(modifier = Modifier)
         inputField("EMAIL")
         Spacer(modifier = Modifier)
-        inputField("PASSWORD")
-        Spacer(modifier = Modifier)
         button("Next") {
-            navController.navigate(Screens.HomeScreen.route)
+            navController.navigate(Screens.VerifyEmailScreen.route)
         }
     }
-
-
-
 }
