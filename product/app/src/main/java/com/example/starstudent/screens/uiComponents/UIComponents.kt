@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -231,15 +233,23 @@ fun inputField(label: String){
     )
 }
 
-@Preview
 @Composable
-fun button() {
+fun button(label : String, onClick: () -> Unit) {
     Button(
-        onClick = {
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onSecondary
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+    ){
 
-        }) {
-
-        Text("text")
+        Text(text = label,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp
+        )
 
     }
 }

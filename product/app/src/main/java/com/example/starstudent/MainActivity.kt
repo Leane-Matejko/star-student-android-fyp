@@ -1,32 +1,37 @@
 package com.example.starstudent
 
-import android.content.ContentValues.TAG
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
-import android.net.NetworkRequest
+//import android.content.ContentValues.TAG
+//import android.content.Context
+//import android.net.ConnectivityManager
+//import android.net.Network
+//import android.net.NetworkCapabilities
+//import android.net.NetworkRequest
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+//import android.util.Log
+//import android.view.View
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.lifecycle.lifecycleScope
+//import androidx.core.content.ContextCompat.getSystemService
+//import androidx.lifecycle.lifecycleScope
+import com.example.starstudent.screens.Navigation
+//import com.example.starstudent.screens.SignInRegisterScreenView
 import com.example.starstudent.ui.theme.StarStudentTheme
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
+//import com.google.firebase.Firebase
+//import com.google.firebase.firestore.firestore
 
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContent{
+            Navigation()
+        }
         enableEdgeToEdge()
 
 //        lifecycleScope.launchWhenCreated {
@@ -34,9 +39,9 @@ class MainActivity : ComponentActivity() {
 //        }
     }
 
-    fun buttonClick(view: View?) {
-        println("This is a test")
-    }
+//    fun buttonClick(view: View?) {
+//        println("This is a test")
+//    }
 }
 
 @Composable
