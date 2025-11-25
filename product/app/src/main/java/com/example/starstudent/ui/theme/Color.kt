@@ -21,3 +21,5 @@ val Pink = Color(0xFFD98977)
 val DarkPink = Color(0xFFD95F5F)
 
 val White01 = Color(0xFFFFFFFFF)
+
+val LightPink = Color(0xFFEBBDBD)
