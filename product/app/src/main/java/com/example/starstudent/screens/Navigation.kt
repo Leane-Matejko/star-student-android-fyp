@@ -35,6 +35,9 @@ fun Navigation() {
         composable(route = Screens.HomeScreen.route) {
             Homepage(navController = navController)
         }
+        composable(route = Screens.CreatePasswordsScreen.route) {
+            CreatePassword(navController = navController)
+        }
 
     }
 }
