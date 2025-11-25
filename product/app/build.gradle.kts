@@ -33,6 +33,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
@@ -46,9 +47,9 @@ android {
 tasks.register("checkGoogleServicesPlugin") {
     doLast {
         if (plugins.hasPlugin("com.google.gms.google-services")) {
-            println("✅ Google Services plugin is applied.")
+            println("Google Services plugin is applied.")
         } else {
-            println("❌ Google Services plugin is NOT applied.")
+            println("Google Services plugin is NOT applied.")
         }
     }
 }
@@ -69,10 +70,15 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
     implementation(libs.core.ktx)
+    implementation(libs.androidx.junit.ktx)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.junit)
+    testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -85,5 +91,6 @@ dependencies {
     testImplementation("org.mockito:mockito-core:5.5.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
     testImplementation(kotlin("test"))
+    testImplementation(libs.junit)
 
 }
