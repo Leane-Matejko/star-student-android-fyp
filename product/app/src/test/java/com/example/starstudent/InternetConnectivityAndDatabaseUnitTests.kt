@@ -4,21 +4,20 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import android.util.Log
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
 import org.junit.Test
 
 import org.junit.Assert.*
 import org.mockito.Mockito.mock
 import org.mockito.kotlin.whenever
 
+import kotlin.test.assertFails
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class InternetConnectivityAndDatabaseUnitTests {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
@@ -46,12 +45,19 @@ class ExampleUnitTest {
     @Test
     fun checkDatabaseConnectionTrueTest() {
         val mockNetworkInstance = createMockNetworkInstance(true)
-        assertTrue( mockNetworkInstance)
+        assertTrue(mockNetworkInstance)
     }
 
     @Test
     fun checkDatabaseConnectionFalseTest() {
         val mockNetworkInstance = createMockNetworkInstance(false)
         assertFalse( mockNetworkInstance)
+    }
+
+    @Test
+    fun noInternetConnectionExceptionTest(){
+        val exception = assertFails {
+            throw NoInternetConnection() }
+        assertEquals("No Internet Connection. Please try again later.", exception.message)
     }
 }

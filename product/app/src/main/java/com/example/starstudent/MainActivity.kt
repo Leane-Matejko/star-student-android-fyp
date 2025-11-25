@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.lifecycle.lifecycleScope
 import com.example.starstudent.ui.theme.StarStudentTheme
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -27,6 +28,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         enableEdgeToEdge()
+
+//        lifecycleScope.launchWhenCreated {
+//
+//        }
     }
 
     fun buttonClick(view: View?) {
@@ -50,24 +55,24 @@ fun GreetingPreview() {
     }
 }
 
-fun checkDatabaseConnection(view: View) {
-    Log.d("FirestoreCheck", "Starting to connect to database")
-    val db = Firebase.firestore
-    db.collection("test").document("testingFile")
-        .get()
-        .addOnSuccessListener { result ->
-            Log.d("FirestoreDebug", "Firestore call succeeded")
-
-            if (result == null) {
-                Log.d(TAG, "Testing file cannot be found.");
-            }else {
-                Log.d(TAG, "${result.id} => ${result.data}")
-            }
-
-        }.addOnFailureListener { exception ->
-            Log.w(TAG, "Error getting documents.", exception)
-            Log.d("FirestoreCheck", "Starting to connect to database")
-        }
-    println(db);
-}
+//fun checkDatabaseConnection(view: View) {
+//    Log.d("FirestoreCheck", "Starting to connect to database")
+//    val db = Firebase.firestore
+//    db.collection("test").document("testingFile")
+//        .get()
+//        .addOnSuccessListener { result ->
+//            Log.d("FirestoreDebug", "Firestore call succeeded")
+//
+//            if (result == null) {
+//                Log.d(TAG, "Testing file cannot be found.");
+//            }else {
+//                Log.d(TAG, "${result.id} => ${result.data}")
+//            }
+//
+//        }.addOnFailureListener { exception ->
+//            Log.w(TAG, "Error getting documents.", exception)
+//            Log.d("FirestoreCheck", "Starting to connect to database")
+//        }
+//    println(db);
+//}
 
