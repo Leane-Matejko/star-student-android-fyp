@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Star Student</string>
+    <string name="button_test">Click me</string>
 </resources>

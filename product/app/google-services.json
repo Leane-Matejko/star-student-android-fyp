@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "740988320933",
+    "project_id": "starstudent-b3330",
+    "storage_bucket": "starstudent-b3330.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740988320933:android:2d52ffecb2d981e694214c",
+        "android_client_info": {
+          "package_name": "com.example.starstudent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYFks0nO9l_SW4LfjfRWzqEyOgQVCUANs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
