@@ -21,10 +21,8 @@ import com.example.starstudent.screens.uiComponents.Background
 import com.example.starstudent.screens.uiComponents.button
 import com.example.starstudent.screens.uiComponents.inputField
 
-//@Preview
 @Composable
 fun SignInScreen(navController: NavController){
-//    fun SignInScreen(){
 
     Background()
     Column(
@@ -43,6 +41,8 @@ fun SignInScreen(navController: NavController){
         )
         Spacer(modifier = Modifier)
         inputField("EMAIL")
+        Spacer(modifier = Modifier)
+        inputField("PASSWORD")
         Spacer(modifier = Modifier)
         button("Next") {
 

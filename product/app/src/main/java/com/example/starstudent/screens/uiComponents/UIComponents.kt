@@ -215,9 +215,9 @@ fun textField(header: String, info: String){
 }
 
 @Composable
-fun spacer(){
-    Spacer(modifier = Modifier
-        .size(10.dp))
+fun spacer(modifier :Modifier){
+    Spacer(modifier
+        .size(20.dp))
 }
 
 @Composable
