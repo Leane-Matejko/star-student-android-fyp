@@ -29,14 +29,7 @@ fun Navigation() {
         }
 
         //User enters their email
-        composable(route = Screens.AddEmailScreen.route + "/{email}",
-            arguments = listOf(
-                navArgument("email"){
-                    type = NavType.StringType
-                    defaultValue = "No email"
-                    nullable = false
-                }
-            )) { entry ->
+        composable(route = Screens.AddEmailScreen.route) {
             AddEmailScreen(navController = navController)
         }
 
