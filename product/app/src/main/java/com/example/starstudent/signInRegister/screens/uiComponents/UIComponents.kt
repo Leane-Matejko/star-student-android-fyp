@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -217,7 +218,7 @@ fun textField(header: String, info: String){
 @Composable
 fun spacer(modifier :Modifier){
     Spacer(modifier
-        .size(20.dp))
+        .height(20.dp))
 }
 
 @Composable

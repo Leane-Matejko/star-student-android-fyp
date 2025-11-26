@@ -7,4 +7,13 @@ sealed class Screens(val route: String) {
     object VerifyEmailScreen: Screens("verify_email")
     object HomeScreen: Screens("home_page")
     object CreatePasswordsScreen: Screens("create_password")
+
+    fun withArgs(vararg args: String) : String {
+        return buildString {
+            append(route)
+            args.forEach { arg ->
+                append("/$arg")
+            }
+        }
+    }
 }

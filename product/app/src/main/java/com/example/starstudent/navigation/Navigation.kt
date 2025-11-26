@@ -1,9 +1,11 @@
 package com.example.starstudent.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.starstudent.signInRegister.screens.AddEmailScreen
 import com.example.starstudent.signInRegister.screens.CreatePassword
 import com.example.starstudent.signInRegister.screens.Homepage
@@ -17,8 +19,8 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screens.SignInRegisterScreen.route) {
         //Opening screen (Sign-in or register)
-        composable(route = Screens.SignInRegisterScreen.route) {
-            SignInRegisterScreen(navController = navController)
+        composable( route = Screens.SignInRegisterScreen.route ) {
+            SignInRegisterScreen( navController = navController)
         }
         //Sign in (Existing User)
         composable(route = Screens.SignInScreen.route)
@@ -27,7 +29,14 @@ fun Navigation() {
         }
 
         //User enters their email
-        composable(route = Screens.AddEmailScreen.route) {
+        composable(route = Screens.AddEmailScreen.route + "/{email}",
+            arguments = listOf(
+                navArgument("email"){
+                    type = NavType.StringType
+                    defaultValue = "No email"
+                    nullable = false
+                }
+            )) { entry ->
             AddEmailScreen(navController = navController)
         }
 
