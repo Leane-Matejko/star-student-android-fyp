@@ -29,3 +29,11 @@
 ### Week 7 - 03/11
 - Prototype created with Figma using process flow diagram previously created. Outlines the serveral features outlined in the project, and creates a possible layout for the UI.
 - **Next steps:** Create the user accounts and connect the database.
+
+### Week 8 - 10/11
+- Found cloud database options, and decided to use Firebase due to the volume of documentation and pre-existing intergrations.
+- **Next steps:** Developing the UI and navigation.
+
+### Week 9 - 17/11
+- Completed research about architectual models and best practises. Currently untilising clean architecture methodology with the project using a MVVM structure for communciation and separation. Basic UI for the sign in and register pages completed, with some base of the model and viewmodels completed. Reusable UI components are also available outside of the currently completed ones. A navigtion system has been implemented, and users are able to move around sign in/ register portion of the app.
+- **Next steps:** Create the user accounts and complete the model for sign in and register .
