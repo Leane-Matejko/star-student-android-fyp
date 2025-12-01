@@ -40,7 +40,8 @@ fun Navigation() {
 
         //Redirect to the homepage
         composable(route = Screens.HomeScreen.route) {
-            Homepage(navController = navController)
+//            Homepage(navController = navController)
+              Homepage()
         }
 
         //Saves user's new passwords to the database and creates a new user

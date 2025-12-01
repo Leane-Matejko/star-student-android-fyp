@@ -54,5 +54,22 @@ class EmailTests {
     }
 
 
+    @Test
+    fun testCheckRealEmail(){
+        assertEquals(true, Email("testreal@gmail.com").checkRealEmail())
+    }
+
+    @Test
+    fun testCheckFakeEmail() {
+        val exception = assertFails {
+            Email("fakeemail.com").checkRealEmail()
+        }
+        assertEquals(
+            "This is not a real email address. Please try again.",
+            exception.message
+        )
+    }
+
+
 
 }

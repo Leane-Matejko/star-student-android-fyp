@@ -74,7 +74,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.firebase.functions.ktx)
+//    implementation(libs.firebase.functions.ktx)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
