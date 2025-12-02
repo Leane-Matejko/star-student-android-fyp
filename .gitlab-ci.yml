@@ -3,6 +3,11 @@ image: gradle:8.3-jdk17-jammy
 stages:
   - unit_test
 
+variables:
+  ANDROID_SDK_ROOT: "$CI_PROJECT_DIR/android-sdk"
+  ANDROID_HOME: "$CI_PROJECT_DIR/android-sdk"
+  PATH: "$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
+
 unit-tests-job:
   stage: unit_test
 
