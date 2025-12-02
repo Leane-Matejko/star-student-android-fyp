@@ -105,28 +105,34 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
             .background(
                 color = DarkPink,
                 shape = RoundedCornerShape(24.dp)
-            ),
+            )
+            .testTag("smallProgressWidgetBackground"),
     ){
         CircularProgressIndicator(
-            progress = Math.floorDiv(numCompleteTasks, numTasks).toFloat(),
+            progress = numCompleteTasks / numTasks.toFloat(),
             modifier = Modifier.size(80.dp)
-                .align(Alignment.Center),
+                .align(Alignment.Center)
+                .testTag("smallProgressWidgetProgressBar"),
             color = Color.White,
-            trackColor = Color.LightGray,
+            trackColor = LightPink,
             strokeWidth = 10.dp,
         )
 
         Column(modifier = Modifier.align(Alignment.Center)) {
             Text(
                 text = label,
-                color = White01
+                color = White01,
+                modifier = Modifier
+                    .testTag("smallProgressWidgetNameLabel")
             )
 
             Text(
                 text = "$numCompleteTasks/$numTasks",
                 color = LightPink,
                 fontSize = 6.sp,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .testTag("smallProgressWidgetTaskLabel")
             )
 
         }

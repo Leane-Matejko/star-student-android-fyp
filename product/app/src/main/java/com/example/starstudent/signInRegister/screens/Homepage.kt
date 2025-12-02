@@ -61,11 +61,11 @@ fun Homepage(){
         spacer(Modifier.height(20.dp))
 
         Row(){
-            smallProgressWidget(10, 10, "Tasks")
+            smallProgressWidget(9, 10, "Tasks")
             spacer(Modifier.width(10.dp))
-            smallProgressWidget(10, 10, "Tasks")
+            smallProgressWidget(8, 10, "Tasks")
             spacer(Modifier.width(10.dp))
-            smallProgressWidget(10, 10, "Tasks")
+            smallProgressWidget(7, 10, "Tasks")
         }
 
     }
