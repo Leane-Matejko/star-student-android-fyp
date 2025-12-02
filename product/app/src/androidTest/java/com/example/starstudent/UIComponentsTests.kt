@@ -10,10 +10,11 @@ import com.example.starstudent.signInRegister.screens.uiComponents.avatarWindow
 import com.example.starstudent.signInRegister.screens.uiComponents.largeNavWidget
 import com.example.starstudent.signInRegister.screens.uiComponents.mediumIconWidget
 import com.example.starstudent.signInRegister.screens.uiComponents.smallProgressWidget
+import com.example.starstudent.signInRegister.screens.uiComponents.textField
 import org.junit.Rule
 import org.junit.Test
 
-//@RunWith(AndroidJUnit4::class)
+
 class UIComponentsTests {
 
     @get:Rule
@@ -238,6 +239,47 @@ class UIComponentsTests {
 
         composeTest
             .onNodeWithTag("avatarWindowLabel")
+            .assertIsDisplayed()
+    }
+
+    //Testing the render of the text field
+    @Test
+    fun testTextFieldExists(){
+        composeTest.setContent {
+            textField("","")
+        }
+    }
+
+    @Test
+    fun testTextFieldHeaderLabelRender(){
+        composeTest.setContent {
+            textField("Test","Test")
+        }
+
+        composeTest
+            .onNodeWithTag("textFieldHeaderLabel")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTextFieldBackgroundRender(){
+        composeTest.setContent {
+            textField("","")
+        }
+
+        composeTest
+            .onNodeWithTag("textFieldBackground")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTextFieldInfoLabelRender(){
+        composeTest.setContent {
+            textField("Test","Test")
+        }
+
+        composeTest
+            .onNodeWithTag("textFieldInfoLabel")
             .assertIsDisplayed()
     }
 }

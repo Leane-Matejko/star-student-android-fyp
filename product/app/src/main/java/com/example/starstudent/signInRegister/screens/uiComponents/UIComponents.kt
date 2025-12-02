@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
@@ -217,7 +218,9 @@ fun textField(header: String, info: String){
         Text(
             text = header,
             color = DarkPink,
-            fontSize = 12.sp
+            fontSize = 12.sp,
+            modifier = Modifier
+                .testTag("textFieldHeaderLabel")
         )
         Box(
             modifier = Modifier
@@ -227,11 +230,14 @@ fun textField(header: String, info: String){
                 )
                 .size(45.dp, 8.dp)
                 .padding(2.dp)
+                .testTag("textFieldBackground")
         ){
             Text(
                 text = info,
                 fontSize = 3.sp,
-                color = DarkPink
+                color = DarkPink,
+                modifier = Modifier
+                    .testTag("textFieldInfoLabel")
             )
         }
     }
