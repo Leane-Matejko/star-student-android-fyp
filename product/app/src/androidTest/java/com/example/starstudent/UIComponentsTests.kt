@@ -4,10 +4,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.example.starstudent.signInRegister.screens.uiComponents.Background
 import com.example.starstudent.signInRegister.screens.uiComponents.avatarWindow
+import com.example.starstudent.signInRegister.screens.uiComponents.button
 import com.example.starstudent.signInRegister.screens.uiComponents.inputField
 import com.example.starstudent.signInRegister.screens.uiComponents.largeNavWidget
 import com.example.starstudent.signInRegister.screens.uiComponents.mediumIconWidget
@@ -312,4 +314,37 @@ class UIComponentsTests {
             .onNodeWithTag("inputField")
             .assertIsDisplayed()
     }
+
+    //Testing the render of the button component
+    @Test
+    fun testButtonExists(){
+        composeTest.setContent {
+            button("test") {}
+        }
+    }
+
+    @Test
+    fun testButtonRender(){
+        composeTest.setContent {
+            button("test") {}
+        }
+
+        composeTest
+            .onNodeWithTag("button")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testButtonLabelRender(){
+        composeTest.setContent {
+            button("test") {}
+        }
+
+        composeTest
+            .onNodeWithTag("buttonLabel", useUnmergedTree = true)
+            .assertTextEquals("test")
+    }
+
+
+
 }

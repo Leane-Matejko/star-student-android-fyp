@@ -281,11 +281,14 @@ fun button(label : String, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
+            .testTag("button")
     ){
 
         Text(text = label,
             fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
+            fontSize = 20.sp,
+            modifier = Modifier
+                .testTag("buttonLabel")
         )
 
     }
