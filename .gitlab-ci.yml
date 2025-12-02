@@ -1,4 +1,4 @@
-image: gradle:8.3-jdk17-bullseye
+image: gradle:8.3-jdk17-jammy
 
 stages:
   - unit_test
