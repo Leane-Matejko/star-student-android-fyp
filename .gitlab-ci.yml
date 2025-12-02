@@ -1,21 +1,21 @@
 image: ubuntu:latest
 
 variables:
-	JAVA_HOME: "/usr/lib/jvm/java-17-openjdk-amd64"
+  JAVA_HOME: "/usr/lib/jvm/java-17-openjdk-amd64"
 
 before_script:
-	- apt-get update
-  	- apt-get install -y openjdk-17-jdk wget unzip
+  - apt-get update
+  - apt-get install -y openjdk-17-jdk wget unzip
 
-	- chmod +x ./gradlew
+  - chmod +x ./gradlew
 
 stages:
-	- model_unit_tests
+  - model_unit_tests
 	
 
 model-unit-tests-job:
-	stage: model_unit_tests
-	script:
-		- ./gradlew testDebugUnitTest --stacktrace
+  stage: model_unit_tests
+  script:
+    - ./gradlew testDebugUnitTest --stacktrace
 
 
