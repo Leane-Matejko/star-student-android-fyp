@@ -1,13 +1,4 @@
-image: ubuntu:latest
-
-variables:
-  JAVA_HOME: "/usr/lib/jvm/java-17-openjdk-amd64"
-
-before_script:
-  - apt-get update
-  - apt-get install -y openjdk-17-jdk wget unzip
-
-  - chmod +x ./gradlew
+image: gradle:8.3-jdk17 
 
 stages:
   - model_unit_tests
@@ -16,6 +7,7 @@ stages:
 model-unit-tests-job:
   stage: model_unit_tests
   script:
+    - chmod +x ./gradlew
     - ./gradlew testDebugUnitTest --stacktrace
 
 
