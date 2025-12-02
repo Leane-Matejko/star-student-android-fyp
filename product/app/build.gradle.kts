@@ -1,9 +1,12 @@
+import org.gradle.testing.jacoco.tasks.JacocoReport
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 //    id("com.android.application")
     id("com.google.gms.google-services")
+    jacoco
 }
 
 android {
@@ -29,6 +32,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isTestCoverageEnabled = true
         }
     }
     compileOptions {
@@ -101,4 +107,34 @@ dependencies {
     debugImplementation ("androidx.compose.ui:ui-test-manifest:$rootProject.composeVersion")
 
 
+}
+
+val jacocoAndroidTestReport by tasks.registering(JacocoReport::class) {
+    // Make sure unit tests run first
+    dependsOn("connectedDebugAndroidTest")
+
+    reports {
+        html.required.set(true) // HTML report
+        xml.required.set(true)  // XML report (for CI tools)
+    }
+
+    // compiled classes for coverage
+    classDirectories.setFrom(
+        fileTree("$buildDir/tmp/kotlin-classes/debug") {
+            exclude(
+                "**/R.class",
+                "**/R$*.class",
+                "**/BuildConfig.*",
+                "**/Manifest*.*"
+            )
+        }
+    )
+
+    // source code for reporting
+    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
+
+    // Jacoco execution data from androidTest
+    executionData.setFrom(fileTree(buildDir) {
+        include("outputs/code_coverage/debugAndroidTest/connected/**/*.ec")
+    })
 }
