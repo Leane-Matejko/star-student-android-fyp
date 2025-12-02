@@ -7,6 +7,6 @@ unit-tests-job:
   stage: unit_test
 
   script:
-    cd product
-    ./gradlew testDebugUnitTest --stacktrace
+    - cd product
+    - ./gradlew testDebugUnitTest --stacktrace
 
