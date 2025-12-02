@@ -3,9 +3,9 @@ package com.example.starstudent.signInRegister.domain
 //Function to be readdressed at a later time
 //Firebase JSON has been set up, just kotlin set up remaining
 
-import android.content.Context
-import com.example.starstudent.CurrentApplication
-import com.google.firebase.Firebase
+//import android.content.Context
+//import com.example.starstudent.CurrentApplication
+//import com.google.firebase.Firebase
 //import com.google.firebase.functions.FirebaseFunctions
 
 //import com.example.starstudent.NetworkConnectivity

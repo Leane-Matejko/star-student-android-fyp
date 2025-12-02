@@ -15,333 +15,347 @@
 13    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
 14    <!-- <uses-sdk android:minSdkVersion="21"/> -->
 15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-15-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:22:5-79
-15-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:22:22-76
+15-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:22:5-79
+15-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:22:22-76
 16    <uses-permission android:name="android.permission.WAKE_LOCK" />
-16-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:25:5-68
-16-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:25:22-65
+16-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:25:5-68
+16-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:25:22-65
 17    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
-17-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:26:5-110
-17-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:26:22-107
+17-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:26:5-110
+17-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:26:22-107
 18    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-18-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:25:5-79
-18-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:25:22-76
+18-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:25:5-79
+18-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:25:22-76
 19    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
-19-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:26:5-88
-19-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:26:22-85
+19-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:26:5-88
+19-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:26:22-85
 20    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
-20-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:27:5-82
-20-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:27:22-79
-21    <uses-permission android:name="android.permission.REORDER_TASKS" />
-21-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:24:5-72
-21-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:24:22-69
-22
-23    <permission
-23-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/0a4ca14776e94b5246ecb752b4683513/transformed/core-1.17.0/AndroidManifest.xml:22:5-24:47
-24        android:name="com.example.starstudent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-24-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/0a4ca14776e94b5246ecb752b4683513/transformed/core-1.17.0/AndroidManifest.xml:23:9-81
-25        android:protectionLevel="signature" />
-25-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/0a4ca14776e94b5246ecb752b4683513/transformed/core-1.17.0/AndroidManifest.xml:24:9-44
-26
-27    <uses-permission android:name="com.example.starstudent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-27-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/0a4ca14776e94b5246ecb752b4683513/transformed/core-1.17.0/AndroidManifest.xml:26:5-97
-27-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/0a4ca14776e94b5246ecb752b4683513/transformed/core-1.17.0/AndroidManifest.xml:26:22-94
+20-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:27:5-82
+20-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:27:22-79
+21
+22    <permission
+22-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b4e8b9ee9c2e341b4a3826ffbf4f417c/transformed/core-1.17.0/AndroidManifest.xml:22:5-24:47
+23        android:name="com.example.starstudent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+23-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b4e8b9ee9c2e341b4a3826ffbf4f417c/transformed/core-1.17.0/AndroidManifest.xml:23:9-81
+24        android:protectionLevel="signature" />
+24-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b4e8b9ee9c2e341b4a3826ffbf4f417c/transformed/core-1.17.0/AndroidManifest.xml:24:9-44
+25
+26    <uses-permission android:name="com.example.starstudent.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+26-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b4e8b9ee9c2e341b4a3826ffbf4f417c/transformed/core-1.17.0/AndroidManifest.xml:26:5-97
+26-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b4e8b9ee9c2e341b4a3826ffbf4f417c/transformed/core-1.17.0/AndroidManifest.xml:26:22-94
+27    <uses-permission android:name="android.permission.REORDER_TASKS" />
+27-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:24:5-72
+27-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:24:22-69
 28
-29    <application
-29-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:7:5-29:19
-30        android:allowBackup="true"
-30-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:8:9-35
-31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-31-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/0a4ca14776e94b5246ecb752b4683513/transformed/core-1.17.0/AndroidManifest.xml:28:18-86
-32        android:dataExtractionRules="@xml/data_extraction_rules"
-32-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:9:9-65
-33        android:debuggable="true"
-34        android:extractNativeLibs="false"
-35        android:fullBackupContent="@xml/backup_rules"
-35-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:10:9-54
-36        android:icon="@mipmap/ic_launcher"
-36-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:11:9-43
-37        android:label="@string/app_name"
-37-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:12:9-41
-38        android:roundIcon="@mipmap/ic_launcher_round"
-38-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:13:9-54
-39        android:supportsRtl="true"
-39-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:14:9-35
-40        android:theme="@style/Theme.StarStudent" >
-40-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:15:9-49
-41        <activity
-41-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:18:9-28:20
-42            android:name="com.example.starstudent.MainActivity"
-42-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:19:13-41
-43            android:exported="true"
-43-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:20:13-36
-44            android:label="@string/app_name"
-44-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:21:13-45
-45            android:theme="@style/Theme.StarStudent" >
-45-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:22:13-53
-46            <intent-filter>
-46-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:23:13-27:29
-47                <action android:name="android.intent.action.MAIN" />
-47-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:24:17-69
-47-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:24:25-66
-48
-49                <category android:name="android.intent.category.LAUNCHER" />
-49-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:17-77
-49-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:27-74
-50            </intent-filter>
-51        </activity>
-52
-53        <service
-53-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:26:9-35:19
-54            android:name="com.google.firebase.components.ComponentDiscoveryService"
-54-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:27:13-84
-55            android:directBootAware="true"
-55-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:32:13-43
-56            android:exported="false" >
-56-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:28:13-37
-57            <meta-data
-57-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:29:13-31:85
-58                android:name="com.google.firebase.components:com.google.firebase.database.FirebaseDatabaseKtxRegistrar"
-58-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:30:17-120
-59                android:value="com.google.firebase.components.ComponentRegistrar" />
-59-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:31:17-82
-60            <meta-data
-60-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:32:13-34:85
-61                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
-61-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:33:17-109
-62                android:value="com.google.firebase.components.ComponentRegistrar" />
-62-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/851b3568216b8e86ca851ea436d7029d/transformed/firebase-database-22.0.1/AndroidManifest.xml:34:17-82
-63            <meta-data
-63-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5f9f9093a542f23ec4285910ef4c4541/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:17:13-19:85
-64                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
-64-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5f9f9093a542f23ec4285910ef4c4541/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:18:17-122
-65                android:value="com.google.firebase.components.ComponentRegistrar" />
-65-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5f9f9093a542f23ec4285910ef4c4541/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:19:17-82
-66            <meta-data
-66-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5f9f9093a542f23ec4285910ef4c4541/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:20:13-22:85
-67                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-67-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5f9f9093a542f23ec4285910ef4c4541/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:21:17-111
-68                android:value="com.google.firebase.components.ComponentRegistrar" />
-68-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5f9f9093a542f23ec4285910ef4c4541/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:22:17-82
-69            <meta-data
-69-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:33:13-35:85
-70                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
-70-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:34:17-139
-71                android:value="com.google.firebase.components.ComponentRegistrar" />
-71-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/88fe19dcd5c5857da4cb30b6bcc90b76/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:35:17-82
-72            <meta-data
-72-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9ec5ae79d3ba88d183506470f375ff5f/transformed/firebase-installations-19.0.1/AndroidManifest.xml:15:13-17:85
-73                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
-73-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9ec5ae79d3ba88d183506470f375ff5f/transformed/firebase-installations-19.0.1/AndroidManifest.xml:16:17-130
-74                android:value="com.google.firebase.components.ComponentRegistrar" />
-74-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9ec5ae79d3ba88d183506470f375ff5f/transformed/firebase-installations-19.0.1/AndroidManifest.xml:17:17-82
-75            <meta-data
-75-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9ec5ae79d3ba88d183506470f375ff5f/transformed/firebase-installations-19.0.1/AndroidManifest.xml:18:13-20:85
-76                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
-76-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9ec5ae79d3ba88d183506470f375ff5f/transformed/firebase-installations-19.0.1/AndroidManifest.xml:19:17-127
-77                android:value="com.google.firebase.components.ComponentRegistrar" />
-77-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9ec5ae79d3ba88d183506470f375ff5f/transformed/firebase-installations-19.0.1/AndroidManifest.xml:20:17-82
-78            <meta-data
-78-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:35:13-37:85
-79                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
-79-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:36:17-109
-80                android:value="com.google.firebase.components.ComponentRegistrar" />
-80-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:37:17-82
-81        </service>
-82
-83        <receiver
-83-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:29:9-33:20
-84            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
-84-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:30:13-85
-85            android:enabled="true"
-85-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:31:13-35
-86            android:exported="false" >
-86-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:32:13-37
-87        </receiver>
-88
-89        <service
-89-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:35:9-38:40
-90            android:name="com.google.android.gms.measurement.AppMeasurementService"
-90-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:36:13-84
-91            android:enabled="true"
-91-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:37:13-35
-92            android:exported="false" />
-92-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:38:13-37
-93        <service
-93-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:39:9-43:72
-94            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
-94-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:40:13-87
-95            android:enabled="true"
-95-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:41:13-35
-96            android:exported="false"
-96-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:42:13-37
-97            android:permission="android.permission.BIND_JOB_SERVICE" />
-97-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/de3e2233cab589ed6e2acd74ec9947bb/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:43:13-69
-98
-99        <provider
-99-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:23:9-28:39
-100            android:name="com.google.firebase.provider.FirebaseInitProvider"
-100-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:24:13-77
-101            android:authorities="com.example.starstudent.firebaseinitprovider"
-101-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:25:13-72
-102            android:directBootAware="true"
-102-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:26:13-43
+29    <queries>
+29-->[androidx.test:runner:1.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/f9b15a76cb46ff68d79da9c93dfc8a7e/transformed/runner-1.5.0/AndroidManifest.xml:24:5-28:15
+30        <package android:name="androidx.test.orchestrator" />
+30-->[androidx.test:runner:1.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/f9b15a76cb46ff68d79da9c93dfc8a7e/transformed/runner-1.5.0/AndroidManifest.xml:25:9-62
+30-->[androidx.test:runner:1.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/f9b15a76cb46ff68d79da9c93dfc8a7e/transformed/runner-1.5.0/AndroidManifest.xml:25:18-59
+31        <package android:name="androidx.test.services" />
+31-->[androidx.test:runner:1.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/f9b15a76cb46ff68d79da9c93dfc8a7e/transformed/runner-1.5.0/AndroidManifest.xml:26:9-58
+31-->[androidx.test:runner:1.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/f9b15a76cb46ff68d79da9c93dfc8a7e/transformed/runner-1.5.0/AndroidManifest.xml:26:18-55
+32        <package android:name="com.google.android.apps.common.testing.services" />
+32-->[androidx.test:runner:1.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/f9b15a76cb46ff68d79da9c93dfc8a7e/transformed/runner-1.5.0/AndroidManifest.xml:27:9-83
+32-->[androidx.test:runner:1.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/f9b15a76cb46ff68d79da9c93dfc8a7e/transformed/runner-1.5.0/AndroidManifest.xml:27:18-80
+33    </queries>
+34
+35    <application
+35-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:7:5-29:19
+36        android:allowBackup="true"
+36-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:8:9-35
+37        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+37-->[androidx.core:core:1.17.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b4e8b9ee9c2e341b4a3826ffbf4f417c/transformed/core-1.17.0/AndroidManifest.xml:28:18-86
+38        android:dataExtractionRules="@xml/data_extraction_rules"
+38-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:9:9-65
+39        android:debuggable="true"
+40        android:extractNativeLibs="false"
+41        android:fullBackupContent="@xml/backup_rules"
+41-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:10:9-54
+42        android:icon="@mipmap/ic_launcher"
+42-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:11:9-43
+43        android:label="@string/app_name"
+43-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:12:9-41
+44        android:roundIcon="@mipmap/ic_launcher_round"
+44-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:13:9-54
+45        android:supportsRtl="true"
+45-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:14:9-35
+46        android:testOnly="true"
+47        android:theme="@style/Theme.StarStudent" >
+47-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:15:9-49
+48        <activity
+48-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:18:9-28:20
+49            android:name="com.example.starstudent.MainActivity"
+49-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:19:13-41
+50            android:exported="true"
+50-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:20:13-36
+51            android:label="@string/app_name"
+51-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:21:13-45
+52            android:theme="@style/Theme.StarStudent" >
+52-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:22:13-53
+53            <intent-filter>
+53-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:23:13-27:29
+54                <action android:name="android.intent.action.MAIN" />
+54-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:24:17-69
+54-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:24:25-66
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:17-77
+56-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:27-74
+57            </intent-filter>
+58        </activity>
+59
+60        <service
+60-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:26:9-35:19
+61            android:name="com.google.firebase.components.ComponentDiscoveryService"
+61-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:27:13-84
+62            android:directBootAware="true"
+62-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:32:13-43
+63            android:exported="false" >
+63-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:28:13-37
+64            <meta-data
+64-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:29:13-31:85
+65                android:name="com.google.firebase.components:com.google.firebase.database.FirebaseDatabaseKtxRegistrar"
+65-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:30:17-120
+66                android:value="com.google.firebase.components.ComponentRegistrar" />
+66-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:31:17-82
+67            <meta-data
+67-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:32:13-34:85
+68                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+68-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:33:17-109
+69                android:value="com.google.firebase.components.ComponentRegistrar" />
+69-->[com.google.firebase:firebase-database:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/a3b2e585c579069956ecc81a810ce65d/transformed/firebase-database-22.0.1/AndroidManifest.xml:34:17-82
+70            <meta-data
+70-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/e442b45b278d2c1d5e682907bcec431f/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:17:13-19:85
+71                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
+71-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/e442b45b278d2c1d5e682907bcec431f/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:18:17-122
+72                android:value="com.google.firebase.components.ComponentRegistrar" />
+72-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/e442b45b278d2c1d5e682907bcec431f/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:19:17-82
+73            <meta-data
+73-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/e442b45b278d2c1d5e682907bcec431f/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:20:13-22:85
+74                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+74-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/e442b45b278d2c1d5e682907bcec431f/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:21:17-111
+75                android:value="com.google.firebase.components.ComponentRegistrar" />
+75-->[com.google.firebase:firebase-firestore:26.0.2] /Users/leanematejko/.gradle/caches/9.2.1/transforms/e442b45b278d2c1d5e682907bcec431f/transformed/firebase-firestore-26.0.2/AndroidManifest.xml:22:17-82
+76            <meta-data
+76-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:33:13-35:85
+77                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+77-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:34:17-139
+78                android:value="com.google.firebase.components.ComponentRegistrar" />
+78-->[com.google.android.gms:play-services-measurement-api:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2f7201a5acbecf49e5e3ca6e1655246c/transformed/play-services-measurement-api-23.0.0/AndroidManifest.xml:35:17-82
+79            <meta-data
+79-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/697513a4c5d89e1eaca32c38009ed6ee/transformed/firebase-installations-19.0.1/AndroidManifest.xml:15:13-17:85
+80                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+80-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/697513a4c5d89e1eaca32c38009ed6ee/transformed/firebase-installations-19.0.1/AndroidManifest.xml:16:17-130
+81                android:value="com.google.firebase.components.ComponentRegistrar" />
+81-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/697513a4c5d89e1eaca32c38009ed6ee/transformed/firebase-installations-19.0.1/AndroidManifest.xml:17:17-82
+82            <meta-data
+82-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/697513a4c5d89e1eaca32c38009ed6ee/transformed/firebase-installations-19.0.1/AndroidManifest.xml:18:13-20:85
+83                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+83-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/697513a4c5d89e1eaca32c38009ed6ee/transformed/firebase-installations-19.0.1/AndroidManifest.xml:19:17-127
+84                android:value="com.google.firebase.components.ComponentRegistrar" />
+84-->[com.google.firebase:firebase-installations:19.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/697513a4c5d89e1eaca32c38009ed6ee/transformed/firebase-installations-19.0.1/AndroidManifest.xml:20:17-82
+85            <meta-data
+85-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:35:13-37:85
+86                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+86-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:36:17-109
+87                android:value="com.google.firebase.components.ComponentRegistrar" />
+87-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:37:17-82
+88        </service>
+89
+90        <receiver
+90-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:29:9-33:20
+91            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+91-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:30:13-85
+92            android:enabled="true"
+92-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:31:13-35
+93            android:exported="false" >
+93-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:32:13-37
+94        </receiver>
+95
+96        <service
+96-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:35:9-38:40
+97            android:name="com.google.android.gms.measurement.AppMeasurementService"
+97-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:36:13-84
+98            android:enabled="true"
+98-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:37:13-35
+99            android:exported="false" />
+99-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:38:13-37
+100        <service
+100-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:39:9-43:72
+101            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+101-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:40:13-87
+102            android:enabled="true"
+102-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:41:13-35
 103            android:exported="false"
-103-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:27:13-37
-104            android:initOrder="100" />
-104-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/4cdc1866b93dfe60bafc001a831df53c/transformed/firebase-common-22.0.1/AndroidManifest.xml:28:13-36
+103-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:42:13-37
+104            android:permission="android.permission.BIND_JOB_SERVICE" />
+104-->[com.google.android.gms:play-services-measurement:23.0.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/3d06c2193c8c7c79db80c51110c24378/transformed/play-services-measurement-23.0.0/AndroidManifest.xml:43:13-69
 105
-106        <activity
-106-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:27:9-34:20
-107            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
-107-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:28:13-99
-108            android:exported="true"
-108-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:29:13-36
-109            android:theme="@style/WhiteBackgroundTheme" >
-109-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:30:13-56
-110            <intent-filter android:priority="-100" >
-110-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:31:13-33:29
-110-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:31:28-51
-111                <category android:name="android.intent.category.LAUNCHER" />
-111-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:17-77
-111-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:27-74
-112            </intent-filter>
-113        </activity>
-114        <activity
-114-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:35:9-42:20
-115            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
-115-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:36:13-95
-116            android:exported="true"
-116-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:37:13-36
-117            android:theme="@style/WhiteBackgroundTheme" >
-117-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:38:13-56
-118            <intent-filter android:priority="-100" >
-118-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:31:13-33:29
-118-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:31:28-51
-119                <category android:name="android.intent.category.LAUNCHER" />
-119-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:17-77
-119-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:27-74
-120            </intent-filter>
-121        </activity>
-122        <activity
-122-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:43:9-50:20
-123            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
-123-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:44:13-103
-124            android:exported="true"
-124-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:45:13-36
-125            android:theme="@style/WhiteBackgroundDialogTheme" >
-125-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:46:13-62
-126            <intent-filter android:priority="-100" >
-126-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:31:13-33:29
-126-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c5c72468ab95cf3ad25d3e4b8b477bad/transformed/core-1.7.0/AndroidManifest.xml:31:28-51
-127                <category android:name="android.intent.category.LAUNCHER" />
-127-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:17-77
-127-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:27-74
-128            </intent-filter>
-129        </activity>
-130        <activity
-130-->[androidx.compose.ui:ui-tooling-android:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b5e757350f209452d5fa0d2f19d10e6d/transformed/ui-tooling/AndroidManifest.xml:23:9-25:39
-131            android:name="androidx.compose.ui.tooling.PreviewActivity"
-131-->[androidx.compose.ui:ui-tooling-android:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b5e757350f209452d5fa0d2f19d10e6d/transformed/ui-tooling/AndroidManifest.xml:24:13-71
-132            android:exported="true" />
-132-->[androidx.compose.ui:ui-tooling-android:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/b5e757350f209452d5fa0d2f19d10e6d/transformed/ui-tooling/AndroidManifest.xml:25:13-36
-133        <activity
-133-->[androidx.compose.ui:ui-test-manifest:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/27a95fe7292ec62b2573c50f6869dd53/transformed/ui-test-manifest-1.9.5/AndroidManifest.xml:23:9-26:79
-134            android:name="androidx.activity.ComponentActivity"
-134-->[androidx.compose.ui:ui-test-manifest:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/27a95fe7292ec62b2573c50f6869dd53/transformed/ui-test-manifest-1.9.5/AndroidManifest.xml:24:13-63
-135            android:exported="true"
-135-->[androidx.compose.ui:ui-test-manifest:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/27a95fe7292ec62b2573c50f6869dd53/transformed/ui-test-manifest-1.9.5/AndroidManifest.xml:25:13-36
-136            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
-136-->[androidx.compose.ui:ui-test-manifest:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/27a95fe7292ec62b2573c50f6869dd53/transformed/ui-test-manifest-1.9.5/AndroidManifest.xml:26:13-76
-137
-138        <provider
-138-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/85cc92140ee480b9a25ae9b549f2e213/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
-139            android:name="androidx.startup.InitializationProvider"
-139-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/85cc92140ee480b9a25ae9b549f2e213/transformed/emoji2-1.4.0/AndroidManifest.xml:25:13-67
-140            android:authorities="com.example.starstudent.androidx-startup"
-140-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/85cc92140ee480b9a25ae9b549f2e213/transformed/emoji2-1.4.0/AndroidManifest.xml:26:13-68
-141            android:exported="false" >
-141-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/85cc92140ee480b9a25ae9b549f2e213/transformed/emoji2-1.4.0/AndroidManifest.xml:27:13-37
-142            <meta-data
-142-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/85cc92140ee480b9a25ae9b549f2e213/transformed/emoji2-1.4.0/AndroidManifest.xml:29:13-31:52
-143                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-143-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/85cc92140ee480b9a25ae9b549f2e213/transformed/emoji2-1.4.0/AndroidManifest.xml:30:17-75
-144                android:value="androidx.startup" />
-144-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/85cc92140ee480b9a25ae9b549f2e213/transformed/emoji2-1.4.0/AndroidManifest.xml:31:17-49
-145            <meta-data
-145-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2ee2558eada4da57cb9bb822e0d103c4/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:29:13-31:52
-146                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-146-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2ee2558eada4da57cb9bb822e0d103c4/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:30:17-78
-147                android:value="androidx.startup" />
-147-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2ee2558eada4da57cb9bb822e0d103c4/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:31:17-49
-148            <meta-data
-148-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
-149                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-149-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
-150                android:value="androidx.startup" />
-150-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
-151        </provider>
-152
-153        <activity
-153-->[com.google.android.gms:play-services-base:18.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2931d4744347b9676645e5133b0b1c60/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
-154            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-154-->[com.google.android.gms:play-services-base:18.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2931d4744347b9676645e5133b0b1c60/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
-155            android:exported="false"
-155-->[com.google.android.gms:play-services-base:18.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2931d4744347b9676645e5133b0b1c60/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
-156            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-156-->[com.google.android.gms:play-services-base:18.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/2931d4744347b9676645e5133b0b1c60/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
-157
-158        <receiver
-158-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
-159            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-159-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
-160            android:directBootAware="false"
-160-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
-161            android:enabled="true"
-161-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
-162            android:exported="true"
-162-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
-163            android:permission="android.permission.DUMP" >
-163-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
-164            <intent-filter>
-164-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
-165                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-165-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
-165-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
-166            </intent-filter>
-167            <intent-filter>
-167-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
-168                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-168-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
-168-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
-169            </intent-filter>
-170            <intent-filter>
-170-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
-171                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-171-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
-171-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
-172            </intent-filter>
-173            <intent-filter>
-173-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
-174                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-174-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
-174-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/56c0f7f9d77c471d232bbd96f01744ba/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
-175            </intent-filter>
-176        </receiver>
-177
-178        <uses-library
-178-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d471e5c7110243a3b905c2e23eb5eb99/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:23:9-25:40
-179            android:name="android.ext.adservices"
-179-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d471e5c7110243a3b905c2e23eb5eb99/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:24:13-50
-180            android:required="false" />
-180-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d471e5c7110243a3b905c2e23eb5eb99/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:25:13-37
-181
-182        <meta-data
-182-->[com.google.android.gms:play-services-basement:18.8.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/67ea81ef8b44be18517ea1750a1a797e/transformed/play-services-basement-18.8.0/AndroidManifest.xml:21:9-23:69
-183            android:name="com.google.android.gms.version"
-183-->[com.google.android.gms:play-services-basement:18.8.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/67ea81ef8b44be18517ea1750a1a797e/transformed/play-services-basement-18.8.0/AndroidManifest.xml:22:13-58
-184            android:value="@integer/google_play_services_version" />
-184-->[com.google.android.gms:play-services-basement:18.8.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/67ea81ef8b44be18517ea1750a1a797e/transformed/play-services-basement-18.8.0/AndroidManifest.xml:23:13-66
-185    </application>
-186
-187</manifest>
+106        <provider
+106-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:23:9-28:39
+107            android:name="com.google.firebase.provider.FirebaseInitProvider"
+107-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:24:13-77
+108            android:authorities="com.example.starstudent.firebaseinitprovider"
+108-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:25:13-72
+109            android:directBootAware="true"
+109-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:26:13-43
+110            android:exported="false"
+110-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:27:13-37
+111            android:initOrder="100" />
+111-->[com.google.firebase:firebase-common:22.0.1] /Users/leanematejko/.gradle/caches/9.2.1/transforms/d507f7bd68ab92a4fdb670e5af2888a5/transformed/firebase-common-22.0.1/AndroidManifest.xml:28:13-36
+112
+113        <activity
+113-->[androidx.compose.ui:ui-tooling-android:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9b38c41b482fb7767991d0a76e87bb62/transformed/ui-tooling/AndroidManifest.xml:23:9-25:39
+114            android:name="androidx.compose.ui.tooling.PreviewActivity"
+114-->[androidx.compose.ui:ui-tooling-android:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9b38c41b482fb7767991d0a76e87bb62/transformed/ui-tooling/AndroidManifest.xml:24:13-71
+115            android:exported="true" />
+115-->[androidx.compose.ui:ui-tooling-android:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/9b38c41b482fb7767991d0a76e87bb62/transformed/ui-tooling/AndroidManifest.xml:25:13-36
+116        <activity
+116-->[androidx.compose.ui:ui-test-manifest:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/95b27f44280798506b6c97ef1fa897fd/transformed/ui-test-manifest-1.9.5/AndroidManifest.xml:23:9-26:79
+117            android:name="androidx.activity.ComponentActivity"
+117-->[androidx.compose.ui:ui-test-manifest:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/95b27f44280798506b6c97ef1fa897fd/transformed/ui-test-manifest-1.9.5/AndroidManifest.xml:24:13-63
+118            android:exported="true"
+118-->[androidx.compose.ui:ui-test-manifest:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/95b27f44280798506b6c97ef1fa897fd/transformed/ui-test-manifest-1.9.5/AndroidManifest.xml:25:13-36
+119            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+119-->[androidx.compose.ui:ui-test-manifest:1.9.5] /Users/leanematejko/.gradle/caches/9.2.1/transforms/95b27f44280798506b6c97ef1fa897fd/transformed/ui-test-manifest-1.9.5/AndroidManifest.xml:26:13-76
+120        <activity
+120-->[com.google.android.gms:play-services-base:18.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/15cb04117d3aef16294a15551eaac797/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+121            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+121-->[com.google.android.gms:play-services-base:18.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/15cb04117d3aef16294a15551eaac797/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+122            android:exported="false"
+122-->[com.google.android.gms:play-services-base:18.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/15cb04117d3aef16294a15551eaac797/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+123            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+123-->[com.google.android.gms:play-services-base:18.5.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/15cb04117d3aef16294a15551eaac797/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+124
+125        <provider
+125-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/35be891f0028d209f235d966bacc6ced/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
+126            android:name="androidx.startup.InitializationProvider"
+126-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/35be891f0028d209f235d966bacc6ced/transformed/emoji2-1.4.0/AndroidManifest.xml:25:13-67
+127            android:authorities="com.example.starstudent.androidx-startup"
+127-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/35be891f0028d209f235d966bacc6ced/transformed/emoji2-1.4.0/AndroidManifest.xml:26:13-68
+128            android:exported="false" >
+128-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/35be891f0028d209f235d966bacc6ced/transformed/emoji2-1.4.0/AndroidManifest.xml:27:13-37
+129            <meta-data
+129-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/35be891f0028d209f235d966bacc6ced/transformed/emoji2-1.4.0/AndroidManifest.xml:29:13-31:52
+130                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+130-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/35be891f0028d209f235d966bacc6ced/transformed/emoji2-1.4.0/AndroidManifest.xml:30:17-75
+131                android:value="androidx.startup" />
+131-->[androidx.emoji2:emoji2:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/35be891f0028d209f235d966bacc6ced/transformed/emoji2-1.4.0/AndroidManifest.xml:31:17-49
+132            <meta-data
+132-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/leanematejko/.gradle/caches/9.2.1/transforms/8100cfbe73d79e90efdee5938d52f6ad/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:29:13-31:52
+133                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+133-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/leanematejko/.gradle/caches/9.2.1/transforms/8100cfbe73d79e90efdee5938d52f6ad/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:30:17-78
+134                android:value="androidx.startup" />
+134-->[androidx.lifecycle:lifecycle-process:2.9.4] /Users/leanematejko/.gradle/caches/9.2.1/transforms/8100cfbe73d79e90efdee5938d52f6ad/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:31:17-49
+135            <meta-data
+135-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+136                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+136-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+137                android:value="androidx.startup" />
+137-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+138        </provider>
+139
+140        <activity
+140-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:27:9-34:20
+141            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+141-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:28:13-99
+142            android:exported="true"
+142-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:29:13-36
+143            android:theme="@style/WhiteBackgroundTheme" >
+143-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:30:13-56
+144            <intent-filter android:priority="-100" >
+144-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:31:13-33:29
+144-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:31:28-51
+145                <category android:name="android.intent.category.LAUNCHER" />
+145-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:17-77
+145-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:27-74
+146            </intent-filter>
+147        </activity>
+148        <activity
+148-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:35:9-42:20
+149            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+149-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:36:13-95
+150            android:exported="true"
+150-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:37:13-36
+151            android:theme="@style/WhiteBackgroundTheme" >
+151-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:38:13-56
+152            <intent-filter android:priority="-100" >
+152-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:31:13-33:29
+152-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:31:28-51
+153                <category android:name="android.intent.category.LAUNCHER" />
+153-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:17-77
+153-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:27-74
+154            </intent-filter>
+155        </activity>
+156        <activity
+156-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:43:9-50:20
+157            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+157-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:44:13-103
+158            android:exported="true"
+158-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:45:13-36
+159            android:theme="@style/WhiteBackgroundDialogTheme" >
+159-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:46:13-62
+160            <intent-filter android:priority="-100" >
+160-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:31:13-33:29
+160-->[androidx.test:core:1.7.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/5444bf923513c23306cf2f21bb3f3844/transformed/core-1.7.0/AndroidManifest.xml:31:28-51
+161                <category android:name="android.intent.category.LAUNCHER" />
+161-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:17-77
+161-->/Users/leanematejko/git/PROJECT/product/app/src/main/AndroidManifest.xml:26:27-74
+162            </intent-filter>
+163        </activity>
+164
+165        <receiver
+165-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+166            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+166-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+167            android:directBootAware="false"
+167-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+168            android:enabled="true"
+168-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+169            android:exported="true"
+169-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+170            android:permission="android.permission.DUMP" >
+170-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+171            <intent-filter>
+171-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+172                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+172-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+172-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+173            </intent-filter>
+174            <intent-filter>
+174-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+175                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+175-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+175-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+176            </intent-filter>
+177            <intent-filter>
+177-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+178                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+178-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+178-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+179            </intent-filter>
+180            <intent-filter>
+180-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+181                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+181-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+181-->[androidx.profileinstaller:profileinstaller:1.4.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/ae91ffb628f0decd0f6daff0caec5ba0/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+182            </intent-filter>
+183        </receiver>
+184
+185        <uses-library
+185-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /Users/leanematejko/.gradle/caches/9.2.1/transforms/68620973c8827b2790f1a4e96ba72bd5/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:23:9-25:40
+186            android:name="android.ext.adservices"
+186-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /Users/leanematejko/.gradle/caches/9.2.1/transforms/68620973c8827b2790f1a4e96ba72bd5/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:24:13-50
+187            android:required="false" />
+187-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] /Users/leanematejko/.gradle/caches/9.2.1/transforms/68620973c8827b2790f1a4e96ba72bd5/transformed/ads-adservices-1.1.0-beta11/AndroidManifest.xml:25:13-37
+188
+189        <meta-data
+189-->[com.google.android.gms:play-services-basement:18.8.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c1bde582f4c6342eeacf46bed44f05f4/transformed/play-services-basement-18.8.0/AndroidManifest.xml:21:9-23:69
+190            android:name="com.google.android.gms.version"
+190-->[com.google.android.gms:play-services-basement:18.8.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c1bde582f4c6342eeacf46bed44f05f4/transformed/play-services-basement-18.8.0/AndroidManifest.xml:22:13-58
+191            android:value="@integer/google_play_services_version" />
+191-->[com.google.android.gms:play-services-basement:18.8.0] /Users/leanematejko/.gradle/caches/9.2.1/transforms/c1bde582f4c6342eeacf46bed44f05f4/transformed/play-services-basement-18.8.0/AndroidManifest.xml:23:13-66
+192    </application>
+193
+194</manifest>

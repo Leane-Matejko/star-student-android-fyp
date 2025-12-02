@@ -44,7 +44,7 @@ class EmailTests {
     }
 
     @Test
-    fun testCheckRealEmailFalseThrows(){
+    fun testNotRealEmailAddressException(){
 
         val exception = assertFails {
             throw NotRealEmailAddress()

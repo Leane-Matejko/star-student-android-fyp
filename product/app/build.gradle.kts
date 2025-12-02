@@ -20,6 +20,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -74,17 +76,13 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
-//    implementation(libs.firebase.functions.ktx)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    implementation(libs.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.junit.junit)
     testImplementation(libs.junit.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
@@ -96,5 +94,11 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
     testImplementation(kotlin("test"))
     testImplementation(libs.junit)
+
+    testImplementation("androidx.compose.ui:ui-test-junit4:1.9.5")
+    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:$version")
+
+    debugImplementation ("androidx.compose.ui:ui-test-manifest:$rootProject.composeVersion")
+
 
 }

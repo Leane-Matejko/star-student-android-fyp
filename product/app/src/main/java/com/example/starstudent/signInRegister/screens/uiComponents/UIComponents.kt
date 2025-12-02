@@ -181,6 +181,7 @@ fun avatarWindow(prompt: String){
             .width(120f.dp)
             .height(120.dp)
             .padding(0.dp, 2.dp)
+            .testTag("avatarWindow")
 
     ) {
         Text(
