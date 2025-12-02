@@ -11,7 +11,7 @@ before_script:
 
 stages:
   - model_unit_tests
-	
+
 
 model-unit-tests-job:
   stage: model_unit_tests
