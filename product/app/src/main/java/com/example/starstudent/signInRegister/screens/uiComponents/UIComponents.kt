@@ -266,6 +266,7 @@ fun inputField(label: String){
         ),
         modifier = Modifier
             .fillMaxWidth()
+            .testTag("inputField")
     )
 }
 

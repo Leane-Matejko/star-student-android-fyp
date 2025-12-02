@@ -2,14 +2,17 @@ package com.example.starstudent
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.example.starstudent.signInRegister.screens.uiComponents.Background
 import com.example.starstudent.signInRegister.screens.uiComponents.avatarWindow
+import com.example.starstudent.signInRegister.screens.uiComponents.inputField
 import com.example.starstudent.signInRegister.screens.uiComponents.largeNavWidget
 import com.example.starstudent.signInRegister.screens.uiComponents.mediumIconWidget
 import com.example.starstudent.signInRegister.screens.uiComponents.smallProgressWidget
+import com.example.starstudent.signInRegister.screens.uiComponents.spacer
 import com.example.starstudent.signInRegister.screens.uiComponents.textField
 import org.junit.Rule
 import org.junit.Test
@@ -242,7 +245,7 @@ class UIComponentsTests {
             .assertIsDisplayed()
     }
 
-    //Testing the render of the text field
+    //Testing the render of the text field component
     @Test
     fun testTextFieldExists(){
         composeTest.setContent {
@@ -280,6 +283,33 @@ class UIComponentsTests {
 
         composeTest
             .onNodeWithTag("textFieldInfoLabel")
+            .assertIsDisplayed()
+    }
+
+    //Testing the render of the text field
+    @Test
+    fun testSpacerExists(){
+        composeTest.setContent {
+            spacer(modifier = Modifier)
+        }
+    }
+
+    //Testing the render of the input field component
+    @Test
+    fun testInputFieldExists(){
+        composeTest.setContent {
+            inputField("")
+        }
+    }
+
+    @Test
+    fun testInputFieldRender(){
+        composeTest.setContent {
+            inputField("")
+        }
+
+        composeTest
+            .onNodeWithTag("inputField")
             .assertIsDisplayed()
     }
 }
