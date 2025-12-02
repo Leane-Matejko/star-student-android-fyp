@@ -7,6 +7,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.example.starstudent.signInRegister.screens.uiComponents.Background
 import com.example.starstudent.signInRegister.screens.uiComponents.avatarWindow
+import com.example.starstudent.signInRegister.screens.uiComponents.largeNavWidget
 import com.example.starstudent.signInRegister.screens.uiComponents.mediumIconWidget
 import com.example.starstudent.signInRegister.screens.uiComponents.smallProgressWidget
 import org.junit.Rule
@@ -161,15 +162,82 @@ class UIComponentsTests {
             .assertIsDisplayed()
     }
 
+    //Testing the render of the large navigation widget
+    @Test
+    fun testLargeNavWidgetExists(){
+        composeTest.setContent {
+            largeNavWidget(Icons.Filled.Star,
+                "Test",
+                "Test")
+        }
+    }
+
+    @Test
+    fun testLargeNavWidgetRepIconRender(){
+        composeTest.setContent {
+            largeNavWidget(Icons.Filled.Star,
+                "Test",
+                "Test")
+        }
+
+        composeTest
+            .onNodeWithTag("largeNavWidgetRepIcon")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testLargeNavWidgetTitleLabelRender(){
+        composeTest.setContent {
+            largeNavWidget(Icons.Filled.Star,
+                "Test",
+                "Test")
+        }
+
+        composeTest
+            .onNodeWithTag("largeNavWidgetTitleLabel")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testLargeNavWidgetDescriptionLabelRender(){
+        composeTest.setContent {
+            largeNavWidget(Icons.Filled.Star,
+                "Test",
+                "Test")
+        }
+
+        composeTest
+            .onNodeWithTag("largeNavWidgetDescriptionLabel")
+            .assertIsDisplayed()
+    }
+
     //Testing the render of the avatar window component
     @Test
-    fun testAvatarWindowRender(){
+    fun testAvatarWindowExists(){
+        composeTest.setContent {
+            avatarWindow("")
+        }
+    }
+
+    @Test
+    fun testAvatarWindowBackgroundRender(){
         composeTest.setContent {
             avatarWindow("")
         }
 
         composeTest
-            .onNodeWithTag("avatarWindow")
+            .onNodeWithTag("avatarWindowBackground")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testAvatarWindowLabelRender(){
+        composeTest.setContent {
+            avatarWindow("Test")
+        }
+
+        composeTest
+            .onNodeWithTag("avatarWindowLabel")
             .assertIsDisplayed()
     }
 }

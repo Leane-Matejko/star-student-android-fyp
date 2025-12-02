@@ -151,12 +151,14 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(2.dp)
+            .testTag("largeNavWidgetBackground")
     ){
         Icon(
             imageVector =repIcon,
             contentDescription = "Representation Icon",
-            modifier = Modifier.size(20
-                .dp),
+            modifier = Modifier
+                .size(20.dp)
+                .testTag("largeNavWidgetRepIcon"),
             tint = White01
 
         )
@@ -168,13 +170,17 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
             Text(
                 title,
                 color = White01,
-                fontSize = 12.sp
+                fontSize = 12.sp,
+                modifier = Modifier
+                    .testTag("largeNavWidgetTitleLabel")
             )
 
             Text(
                 text = description,
                 color = LightPink,
-                fontSize = 6.sp
+                fontSize = 6.sp,
+                modifier = Modifier
+                    .testTag("largeNavWidgetDescriptionLabel")
             )
         }
 
@@ -191,14 +197,16 @@ fun avatarWindow(prompt: String){
             .width(120f.dp)
             .height(120.dp)
             .padding(0.dp, 2.dp)
-            .testTag("avatarWindow")
+            .testTag("avatarWindowBackground")
 
     ) {
         Text(
             text = prompt,
             color = DarkPink,
             fontSize = 12.sp,
-            modifier = Modifier.align(Alignment.BottomCenter)
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .testTag("avatarWindowLabel")
             )
     }
 }
