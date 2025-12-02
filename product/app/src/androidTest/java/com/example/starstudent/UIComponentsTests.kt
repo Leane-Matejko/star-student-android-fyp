@@ -1,5 +1,7 @@
 package com.example.starstudent
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -23,6 +25,58 @@ class UIComponentsTests {
 
         composeTest
             .onNodeWithTag("background")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testMediumIconWidgetBackgroundRender(){
+        composeTest.setContent {
+            mediumIconWidget(Icons.Filled.Star,
+                Icons.Filled.Star,
+                "Test")
+        }
+
+        composeTest
+            .onNodeWithTag("mediumIconWidgetBackground")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testMediumIconWidgetQuanIconRender(){
+        composeTest.setContent {
+            mediumIconWidget(Icons.Filled.Star,
+                Icons.Filled.Star,
+                "Test")
+        }
+
+        composeTest
+            .onNodeWithTag("mediumIconWidgetQuanIcon")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testMediumIconWidgetRepIconRender(){
+        composeTest.setContent {
+            mediumIconWidget(Icons.Filled.Star,
+                Icons.Filled.Star,
+                "Test")
+        }
+
+        composeTest
+            .onNodeWithTag("mediumIconWidgetRepIcon")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testMediumIconWidgetTextRender(){
+        composeTest.setContent {
+            mediumIconWidget(Icons.Filled.Star,
+                Icons.Filled.Star,
+                "Test")
+        }
+
+        composeTest
+            .onNodeWithTag("mediumIconWidgetText")
             .assertIsDisplayed()
     }
 

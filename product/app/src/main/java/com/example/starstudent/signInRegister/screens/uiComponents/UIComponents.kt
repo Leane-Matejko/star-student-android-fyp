@@ -60,21 +60,26 @@ fun mediumIconWidget(quanIcon: ImageVector, repIcon: ImageVector, label: String)
                 shape = RoundedCornerShape(24.dp)
             )
             .padding(horizontal = 10.dp, vertical = 8.dp)
+            .testTag("mediumIconWidgetBackground")
     ){
         Row(modifier = Modifier
-            .align(Alignment.TopCenter) )
+            .align(Alignment.TopCenter))
         {
                 Icon(
                     imageVector = quanIcon,
                     contentDescription = "Quantify Icon",
-                    modifier = Modifier.size(40.dp),
+                    modifier = Modifier
+                        .size(40.dp)
+                        .testTag("mediumIconWidgetQuanIcon"),
                     tint = White01
 
                 )
                 Icon(
                     imageVector = repIcon,
                     contentDescription = "Representation Icon",
-                    modifier = Modifier.size(40.dp),
+                    modifier = Modifier
+                        .size(40.dp)
+                        .testTag("mediumIconWidgetRepIcon"),
                     tint = White01
 
                 )
@@ -83,7 +88,8 @@ fun mediumIconWidget(quanIcon: ImageVector, repIcon: ImageVector, label: String)
             Text(text = label,
                     modifier = Modifier
                         .size(100.dp)
-                        .align(Alignment.BottomCenter),
+                        .align(Alignment.BottomCenter)
+                        .testTag("mediumIconWidgetText"),
                     fontWeight = FontWeight.Bold,
                     color = White01
                 )
