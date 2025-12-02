@@ -8,6 +8,6 @@ model-unit-tests-job:
   stage: model_unit_tests
   script:
     - chmod +x ./product/gradlew
-    - ./product/app/gradlew testDebugUnitTest --stacktrace
+    - ./product/gradlew testDebugUnitTest --stacktrace
 
 
