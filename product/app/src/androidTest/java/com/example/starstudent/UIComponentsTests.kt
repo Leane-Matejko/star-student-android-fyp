@@ -7,15 +7,15 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import com.example.starstudent.signInRegister.screens.uiComponents.Background
-import com.example.starstudent.signInRegister.screens.uiComponents.avatarWindow
-import com.example.starstudent.signInRegister.screens.uiComponents.button
-import com.example.starstudent.signInRegister.screens.uiComponents.inputField
-import com.example.starstudent.signInRegister.screens.uiComponents.largeNavWidget
-import com.example.starstudent.signInRegister.screens.uiComponents.mediumIconWidget
-import com.example.starstudent.signInRegister.screens.uiComponents.smallProgressWidget
-import com.example.starstudent.signInRegister.screens.uiComponents.spacer
-import com.example.starstudent.signInRegister.screens.uiComponents.textField
+import com.example.starstudent.core.uiComponents.Background
+import com.example.starstudent.core.uiComponents.avatarWindow
+import com.example.starstudent.core.uiComponents.button
+import com.example.starstudent.core.uiComponents.inputField
+import com.example.starstudent.core.uiComponents.largeNavWidget
+import com.example.starstudent.core.uiComponents.mediumIconWidget
+import com.example.starstudent.core.uiComponents.smallProgressWidget
+import com.example.starstudent.core.uiComponents.spacer
+import com.example.starstudent.core.uiComponents.textField
 import org.junit.Rule
 import org.junit.Test
 

@@ -19,12 +19,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.example.starstudent.signInRegister.screens.uiComponents.Background
-import com.example.starstudent.signInRegister.screens.uiComponents.avatarWindow
-import com.example.starstudent.signInRegister.screens.uiComponents.mediumIconWidget
-import com.example.starstudent.signInRegister.screens.uiComponents.smallProgressWidget
-import com.example.starstudent.signInRegister.screens.uiComponents.spacer
+import com.example.starstudent.core.uiComponents.Background
+import com.example.starstudent.core.uiComponents.avatarWindow
+import com.example.starstudent.core.uiComponents.mediumIconWidget
+import com.example.starstudent.core.uiComponents.smallProgressWidget
+import com.example.starstudent.core.uiComponents.spacer
 
 @Preview
 @Composable

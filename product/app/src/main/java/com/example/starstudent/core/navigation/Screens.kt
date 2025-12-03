@@ -1,4 +1,4 @@
-package com.example.starstudent.navigation
+package com.example.starstudent.core.navigation
 
 sealed class Screens(val route: String) {
     object SignInRegisterScreen: Screens("sign_in_register")

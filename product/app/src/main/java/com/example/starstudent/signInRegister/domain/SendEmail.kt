@@ -4,7 +4,7 @@ package com.example.starstudent.signInRegister.domain
 //Firebase JSON has been set up, just kotlin set up remaining
 
 //import android.content.Context
-//import com.example.starstudent.CurrentApplication
+//import com.example.starstudent.core.CurrentApplication
 //import com.google.firebase.Firebase
 //import com.google.firebase.functions.FirebaseFunctions
 

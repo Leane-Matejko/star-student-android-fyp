@@ -1,4 +1,4 @@
-package com.example.starstudent
+package com.example.starstudent.core
 
 import android.content.Context
 import android.content.ContentValues.TAG

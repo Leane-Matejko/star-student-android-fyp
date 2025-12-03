@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+import com.example.starstudent.core.NoInternetConnection
+import com.example.starstudent.core.testingInternetConnection
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -57,7 +59,8 @@ class InternetConnectivityAndDatabaseUnitTests {
     @Test
     fun noInternetConnectionExceptionTest(){
         val exception = assertFails {
-            throw NoInternetConnection() }
+            throw NoInternetConnection()
+        }
         assertEquals("No Internet Connection. Please try again later.", exception.message)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.starstudent.signInRegister.screens.uiComponents
+package com.example.starstudent.core.uiComponents
 
 import android.R
 import androidx.compose.foundation.background
