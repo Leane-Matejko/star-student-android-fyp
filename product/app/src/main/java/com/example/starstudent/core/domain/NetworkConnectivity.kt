@@ -1,4 +1,4 @@
-package com.example.starstudent.core
+package com.example.starstudent.core.domain
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -1,4 +1,4 @@
-package com.example.starstudent.core.uiComponents
+package com.example.starstudent.core.view.uiComponents
 
 import android.R
 import androidx.compose.foundation.background
@@ -46,13 +46,20 @@ fun Background() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Brush.verticalGradient(listOf(White01, Yellow)))
+            .background(Brush
+                .verticalGradient(
+                    listOf(
+                        White01,
+                        Yellow)))
             .testTag("background")
     )
 }
 
 @Composable
-fun mediumIconWidget(quanIcon: ImageVector, repIcon: ImageVector, label: String){
+fun mediumIconWidget(
+    quanIcon: ImageVector,
+    repIcon: ImageVector,
+    label: String){
     Box(
         modifier = Modifier
             .size(100.dp)
@@ -248,6 +255,7 @@ fun spacer(modifier :Modifier){
     Spacer(modifier
         .height(20.dp))
 }
+
 
 @Composable
 fun inputField(label: String){

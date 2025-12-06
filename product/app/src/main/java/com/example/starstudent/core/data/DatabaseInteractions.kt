@@ -1,9 +1,11 @@
-package com.example.starstudent.core
+package com.example.starstudent.core.data
 
+import android.content.ContentValues
 import android.content.Context
-import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.View
+import com.example.starstudent.core.data.NoInternetConnection
+import com.example.starstudent.core.domain.testingInternetConnection
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
@@ -22,15 +24,15 @@ class DatabaseInteractions{
                     Log.d("FirestoreDebug", "Firestore call succeeded")
 
                     if (result == null) {
-                        Log.d(TAG, "Testing file cannot be found.");
+                        Log.d(ContentValues.TAG, "Testing file cannot be found.");
                         resultDoc = arrayOf("File is Empty")
                     }else {
-                        Log.d(TAG, "${result.id} => ${result.data}")
+                        Log.d(ContentValues.TAG, "${result.id} => ${result.data}")
                         resultDoc = arrayOf(result.id.toString(), result.data.toString())
                     }
 
                 }.addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting documents.", exception)
+                    Log.w(ContentValues.TAG, "Error getting documents.", exception)
                     Log.d("FirestoreCheck", "Cannot connect to database")
                 }
 

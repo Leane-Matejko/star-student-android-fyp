@@ -16,7 +16,7 @@
 
 
         <activity
-            android:name=".core.MainActivity"
+            android:name=".core.domain.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.StarStudent">

@@ -1,4 +1,4 @@
-package com.example.starstudent.core
+package com.example.starstudent.core.data
 
 /* Exception throw when there is no internet connection*/
 class NoInternetConnection()

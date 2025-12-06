@@ -18,9 +18,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.starstudent.core.navigation.Screens
-import com.example.starstudent.core.uiComponents.Background
-import com.example.starstudent.core.uiComponents.button
+import com.example.starstudent.core.domain.navigation.Screens
+import com.example.starstudent.core.view.uiComponents.Background
+import com.example.starstudent.core.view.uiComponents.button
 
 @Composable
     fun SignInRegisterScreen(navController: NavHostController) {

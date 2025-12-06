@@ -15,10 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.starstudent.core.navigation.Screens
-import com.example.starstudent.core.uiComponents.Background
-import com.example.starstudent.core.uiComponents.button
-import com.example.starstudent.core.uiComponents.inputField
+import com.example.starstudent.core.domain.navigation.Screens
+import com.example.starstudent.core.view.uiComponents.Background
+import com.example.starstudent.core.view.uiComponents.button
+import com.example.starstudent.core.view.uiComponents.inputField
 
 @Composable
 fun SignInScreen(navController: NavController){

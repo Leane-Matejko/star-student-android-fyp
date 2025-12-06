@@ -1,4 +1,4 @@
-package com.example.starstudent.core.navigation
+package com.example.starstudent.core.domain.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost

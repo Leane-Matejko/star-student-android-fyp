@@ -19,11 +19,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.starstudent.core.uiComponents.Background
-import com.example.starstudent.core.uiComponents.avatarWindow
-import com.example.starstudent.core.uiComponents.mediumIconWidget
-import com.example.starstudent.core.uiComponents.smallProgressWidget
-import com.example.starstudent.core.uiComponents.spacer
+import com.example.starstudent.core.view.uiComponents.Background
+import com.example.starstudent.core.view.uiComponents.avatarWindow
+import com.example.starstudent.core.view.uiComponents.mediumIconWidget
+import com.example.starstudent.core.view.uiComponents.smallProgressWidget
+import com.example.starstudent.core.view.uiComponents.spacer
 
 @Preview
 @Composable

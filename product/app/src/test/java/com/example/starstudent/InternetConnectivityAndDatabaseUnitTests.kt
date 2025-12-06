@@ -4,8 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import com.example.starstudent.core.NoInternetConnection
-import com.example.starstudent.core.testingInternetConnection
+import com.example.starstudent.core.data.NoInternetConnection
+import com.example.starstudent.core.domain.testingInternetConnection
 import org.junit.Test
 
 import org.junit.Assert.*
