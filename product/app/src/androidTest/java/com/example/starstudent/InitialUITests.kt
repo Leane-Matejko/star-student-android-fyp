@@ -1,0 +1,11 @@
+package com.example.starstudent
+
+import org.junit.Assert
+import org.junit.Test
+
+class InitialUITests {
+    @Test
+    fun addition_isCorrect() {
+        Assert.assertEquals(4, 2 + 2)
+    }
+}

@@ -4,18 +4,18 @@ import android.content.ContentValues
 import android.content.Context
 import android.util.Log
 import android.view.View
-import com.example.starstudent.core.data.NoInternetConnection
-import com.example.starstudent.core.domain.testingInternetConnection
+import com.example.starstudent.core.domain.CurrentApplication
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
 class DatabaseInteractions{
 
     var resultDoc = arrayOf<String>()
+    val applicationContext = CurrentApplication
 
     fun checkDatabaseConnection(context: Context, view: View) {
 
-        if(context.testingInternetConnection()) {
+        if(NetworkConnectivity(applicationContext.instance.connectivityManager).testingInternetConnection()) {
             Log.d("FirestoreCheck", "Starting to connect to database")
             val db = Firebase.firestore
             db.collection("test").document("testingFile")
