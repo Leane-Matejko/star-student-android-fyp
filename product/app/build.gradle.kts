@@ -93,8 +93,10 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:34.6.0")){
+        exclude(group = "com.google.android.gms")
+    }
+//    implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-functions")
 
     testImplementation("org.mockito:mockito-core:5.5.0")
@@ -106,6 +108,10 @@ dependencies {
     androidTestImplementation ("androidx.compose.ui:ui-test-junit4:$version")
 
     debugImplementation ("androidx.compose.ui:ui-test-manifest:$rootProject.composeVersion")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
 
 }
@@ -139,3 +145,5 @@ val jacocoAndroidTestReport by tasks.registering(JacocoReport::class) {
         include("outputs/code_coverage/debugAndroidTest/connected/**/*.ec")
     })
 }
+
+fun Dependency.exclude(group: String) {}

@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.core.view.uiComponents.Background
@@ -24,6 +26,9 @@ import com.example.starstudent.core.view.uiComponents.button
 
 @Composable
     fun SignInRegisterScreen(navController: NavHostController) {
+
+        val viewModel: SignInRegisterViewModel = viewModel()
+
         Background()
 
         Column(
@@ -45,7 +50,8 @@ import com.example.starstudent.core.view.uiComponents.button
                 navController.navigate(Screens.SignInScreen.route)
             }
             button("Register") {
-                navController.navigate(Screens.AddEmailScreen.route)
+                viewModel.sendEmail()
+//                navController.navigate(Screens.AddEmailScreen.route)
             }
         }
     }
