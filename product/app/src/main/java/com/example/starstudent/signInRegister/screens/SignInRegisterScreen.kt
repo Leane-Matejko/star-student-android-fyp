@@ -23,6 +23,7 @@ import androidx.navigation.NavHostController
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.button
+//import kotlinx.coroutines.runBlocking
 
 @Composable
     fun SignInRegisterScreen(navController: NavHostController) {
@@ -50,7 +51,7 @@ import com.example.starstudent.core.view.uiComponents.button
                 navController.navigate(Screens.SignInScreen.route)
             }
             button("Register") {
-                viewModel.sendEmail()
+                viewModel.testDB()
 //                navController.navigate(Screens.AddEmailScreen.route)
             }
         }

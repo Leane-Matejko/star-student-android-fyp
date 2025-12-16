@@ -65,4 +65,6 @@ class InternetConnectivityAndDatabaseUnitTests {
         }
         assertEquals("No Internet Connection. Please try again later.", exception.message)
     }
+
+
 }

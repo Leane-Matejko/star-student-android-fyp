@@ -2,11 +2,15 @@ package com.example.starstudent
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import com.example.starstudent.core.domain.MainActivity
+import com.example.starstudent.core.domain.TestActivity
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
@@ -23,22 +27,25 @@ import org.junit.Test
 class UIComponentsTests {
 
     @get:Rule
-    val composeTest = createComposeRule()
+    var composeTest = createComposeRule()
 
     //Testing the render of the background component
     @Test
     fun testBackgroundExists(){
         composeTest.setContent {
-            Background()
+                Background()
+
         }
     }
 
     @Test
     fun testBackgroundRender(){
         composeTest.setContent {
-            Background()
-        }
+                Background()
+            }
 
+
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("background")
             .assertIsDisplayed()
@@ -48,20 +55,27 @@ class UIComponentsTests {
     @Test
     fun testMediumIconWidgetExists(){
         composeTest.setContent {
-            mediumIconWidget(Icons.Filled.Star,
-                Icons.Filled.Star,
-                "Test")
+                mediumIconWidget(
+                    Icons.Filled.Star,
+                    Icons.Filled.Star,
+                    "Test"
+                )
+
         }
     }
 
     @Test
     fun testMediumIconWidgetBackgroundRender(){
         composeTest.setContent {
-            mediumIconWidget(Icons.Filled.Star,
-                Icons.Filled.Star,
-                "Test")
+                mediumIconWidget(
+                    Icons.Filled.Star,
+                    Icons.Filled.Star,
+                    "Test"
+                )
+
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("mediumIconWidgetBackground")
             .assertIsDisplayed()
@@ -70,11 +84,15 @@ class UIComponentsTests {
     @Test
     fun testMediumIconWidgetQuanIconRender(){
         composeTest.setContent {
-            mediumIconWidget(Icons.Filled.Star,
-                Icons.Filled.Star,
-                "Test")
+                mediumIconWidget(
+                    Icons.Filled.Star,
+                    Icons.Filled.Star,
+                    "Test"
+                )
+
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("mediumIconWidgetQuanIcon")
             .assertIsDisplayed()
@@ -88,6 +106,7 @@ class UIComponentsTests {
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("mediumIconWidgetRepIcon")
             .assertIsDisplayed()
@@ -101,6 +120,7 @@ class UIComponentsTests {
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("mediumIconWidgetText")
             .assertIsDisplayed()
@@ -124,6 +144,7 @@ class UIComponentsTests {
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("smallProgressWidgetBackground")
             .assertIsDisplayed()
@@ -137,6 +158,7 @@ class UIComponentsTests {
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("smallProgressWidgetProgressBar")
             .assertIsDisplayed()
@@ -150,6 +172,7 @@ class UIComponentsTests {
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("smallProgressWidgetNameLabel")
             .assertIsDisplayed()
@@ -163,6 +186,7 @@ class UIComponentsTests {
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("smallProgressWidgetTaskLabel")
             .assertIsDisplayed()
@@ -186,6 +210,7 @@ class UIComponentsTests {
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("largeNavWidgetRepIcon")
             .assertIsDisplayed()
@@ -199,6 +224,7 @@ class UIComponentsTests {
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("largeNavWidgetTitleLabel")
             .assertIsDisplayed()
@@ -206,12 +232,15 @@ class UIComponentsTests {
 
     @Test
     fun testLargeNavWidgetDescriptionLabelRender(){
+
+
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
                 "Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("largeNavWidgetDescriptionLabel")
             .assertIsDisplayed()
@@ -231,6 +260,7 @@ class UIComponentsTests {
             avatarWindow("")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("avatarWindowBackground")
             .assertIsDisplayed()
@@ -242,6 +272,7 @@ class UIComponentsTests {
             avatarWindow("Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("avatarWindowLabel")
             .assertIsDisplayed()
@@ -261,6 +292,7 @@ class UIComponentsTests {
             textField("Test","Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("textFieldHeaderLabel")
             .assertIsDisplayed()
@@ -272,6 +304,7 @@ class UIComponentsTests {
             textField("","")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("textFieldBackground")
             .assertIsDisplayed()
@@ -283,6 +316,7 @@ class UIComponentsTests {
             textField("Test","Test")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("textFieldInfoLabel")
             .assertIsDisplayed()
@@ -310,6 +344,7 @@ class UIComponentsTests {
             inputField("")
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("inputField")
             .assertIsDisplayed()
@@ -329,6 +364,7 @@ class UIComponentsTests {
             button("test") {}
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("button")
             .assertIsDisplayed()
@@ -340,11 +376,10 @@ class UIComponentsTests {
             button("test") {}
         }
 
+        composeTest.waitForIdle()
         composeTest
             .onNodeWithTag("buttonLabel", useUnmergedTree = true)
             .assertTextEquals("test")
     }
-
-
 
 }
