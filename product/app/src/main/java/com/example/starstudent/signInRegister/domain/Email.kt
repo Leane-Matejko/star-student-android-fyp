@@ -2,9 +2,9 @@ package com.example.starstudent.signInRegister.domain
 
 class Email {
 
-    private var email: String
+    private var email = ""
 
-    constructor(providedEmail: String){ email = providedEmail }
+//    constructor(providedEmail: String){ email = providedEmail }
 
     //Further conditions for real emails can be implemented
     fun checkRealEmail() : Boolean{
@@ -20,5 +20,9 @@ class Email {
 
     fun getEmail() : String{
         return email
+    }
+
+    fun setEmail(emailValue: String){
+        email = emailValue
     }
 }

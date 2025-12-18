@@ -1,5 +1,6 @@
 package com.example.starstudent.signInRegister.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -18,15 +20,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
+import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
+import androidx.compose.runtime.LaunchedEffect
+
 
 @Composable
 fun SignInScreen(navController: NavController){
 
     val viewModel = viewModel<SignInViewModel>()
+    val context = LocalContext.current
 
     Background()
     Column(
@@ -45,15 +51,24 @@ fun SignInScreen(navController: NavController){
         )
         Spacer(modifier = Modifier)
         inputField("EMAIL",
-            viewModel.email,
+            viewModel.emailString,
          onValueChange = {viewModel.setEmailChange(it)})
         Spacer(modifier = Modifier)
         inputField("PASSWORD",
-            viewModel.password,
+            viewModel.passwordString,
             onValueChange = {viewModel.setPasswordChange(it)})
         Spacer(modifier = Modifier)
         button("Next") {
-            viewModel.navigateToHomepage(navController)
+            viewModel.next(navController)
+        }
+        LaunchedEffect(viewModel.errorWindow) {
+            if (viewModel.errorWindow) {
+                Toast.makeText(
+                    context,
+                    viewModel.errorMessage,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
