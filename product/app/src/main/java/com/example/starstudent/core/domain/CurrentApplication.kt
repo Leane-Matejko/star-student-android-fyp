@@ -27,4 +27,8 @@ class CurrentApplication : Application(){
             as ConnectivityManager
         FirebaseApp.initializeApp(this)
     }
+
+//    fun getNetworkConnectivity(): NetworkConnectivity{
+//        return networkConnectivity
+//    }
 }
