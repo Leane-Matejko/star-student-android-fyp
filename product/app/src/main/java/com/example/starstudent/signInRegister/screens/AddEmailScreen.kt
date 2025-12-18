@@ -1,5 +1,7 @@
 package com.example.starstudent.signInRegister.screens
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,19 +11,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
+import kotlinx.coroutines.launch
 
 @Composable
 fun AddEmailScreen(navController: NavController) {
+
+    val viewModel = viewModel<AddEmailViewModel>()
+    val context = LocalContext.current
+
     Background()
     Column(
         verticalArrangement = Arrangement.Center,
@@ -39,11 +51,25 @@ fun AddEmailScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier)
         inputField("EMAIL",
-            "",
-            onValueChange = {})
+            viewModel.emailString,
+            onValueChange = {viewModel.setEmailChange(it)})
         Spacer(modifier = Modifier)
         button("Next") {
-            navController.navigate(Screens.VerifyEmailScreen.route)
+
+            viewModel.next(navController)
+        }
+        LaunchedEffect(viewModel.errorWindow) {
+            if (viewModel.errorWindow) {
+                Toast.makeText(
+                    context,
+                    viewModel.errorMessage,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
+}
+
+fun navigateToCreatePassword(navController: NavController){
+    navController.navigate(Screens.VerifyEmailScreen.route)
 }

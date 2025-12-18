@@ -51,8 +51,7 @@ import com.example.starstudent.core.view.uiComponents.button
                 viewModel.navigateToSignInScreen(navController)
             }
             button("Register") {
-                viewModel.testDB()
-//                navController.navigate(Screens.AddEmailScreen.route)
+                viewModel.navigateToAddEmailScreen(navController)
             }
         }
     }
