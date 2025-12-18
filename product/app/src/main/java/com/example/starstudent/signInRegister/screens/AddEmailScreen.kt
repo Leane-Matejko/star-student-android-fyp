@@ -38,7 +38,9 @@ fun AddEmailScreen(navController: NavController) {
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier)
-        inputField("EMAIL")
+        inputField("EMAIL",
+            "",
+            onValueChange = {})
         Spacer(modifier = Modifier)
         button("Next") {
             navController.navigate(Screens.VerifyEmailScreen.route)

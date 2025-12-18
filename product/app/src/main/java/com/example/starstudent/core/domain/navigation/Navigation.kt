@@ -37,7 +37,7 @@ fun Navigation() {
         }
 
         //Redirect to the homepage
-        composable(route = Screens.HomeScreen.route) {
+        composable(route = Screens.HomePageScreen.route) {
 //            Homepage(navController = navController)
               Homepage()
         }

@@ -38,12 +38,16 @@ fun CreatePassword(navController: NavController){
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier)
-        inputField("PASSWORD")
+        inputField("PASSWORD",
+            "",
+            onValueChange = {})
         Spacer(modifier = Modifier)
-        inputField("RE-RENTER PASSWORD")
+        inputField("RE-RENTER PASSWORD",
+            "",
+            onValueChange = {})
         Spacer(modifier = Modifier)
         button("Next") {
-            navController.navigate(Screens.HomeScreen.route)
+            navController.navigate(Screens.HomePageScreen.route)
         }
 
     }

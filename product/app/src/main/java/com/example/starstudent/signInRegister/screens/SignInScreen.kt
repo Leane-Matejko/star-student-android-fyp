@@ -14,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.core.view.uiComponents.Background
@@ -22,6 +25,8 @@ import com.example.starstudent.core.view.uiComponents.inputField
 
 @Composable
 fun SignInScreen(navController: NavController){
+
+    val viewModel = viewModel<SignInViewModel>()
 
     Background()
     Column(
@@ -39,12 +44,16 @@ fun SignInScreen(navController: NavController){
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier)
-        inputField("EMAIL")
+        inputField("EMAIL",
+            viewModel.email,
+         onValueChange = {viewModel.setEmailChange(it)})
         Spacer(modifier = Modifier)
-        inputField("PASSWORD")
+        inputField("PASSWORD",
+            viewModel.password,
+            onValueChange = {viewModel.setPasswordChange(it)})
         Spacer(modifier = Modifier)
         button("Next") {
-            navController.navigate(Screens.HomeScreen.route)
+            viewModel.navigateToHomepage(navController)
         }
     }
 

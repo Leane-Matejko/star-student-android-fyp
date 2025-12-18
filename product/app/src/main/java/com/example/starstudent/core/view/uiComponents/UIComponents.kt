@@ -258,13 +258,15 @@ fun spacer(modifier :Modifier){
 
 
 @Composable
-fun inputField(label: String){
+fun inputField(label: String,
+               value: String,
+               onValueChange: (String) -> Unit){
 
     var info by remember { mutableStateOf("") }
 
     TextField(
-        value = info,
-        onValueChange = { info = it},
+        value = value,
+        onValueChange = onValueChange,
         label = {Text(text = label, fontSize = 12.sp)
                 },
         singleLine = true,

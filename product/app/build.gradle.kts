@@ -113,6 +113,10 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
+
 
 }
 

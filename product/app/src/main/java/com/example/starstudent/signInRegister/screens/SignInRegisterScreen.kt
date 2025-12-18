@@ -48,7 +48,7 @@ import com.example.starstudent.core.view.uiComponents.button
                 color = MaterialTheme.colorScheme.primary
             )
             button("Sign In") {
-                navController.navigate(Screens.SignInScreen.route)
+                viewModel.navigateToSignInScreen(navController)
             }
             button("Register") {
                 viewModel.testDB()

@@ -38,7 +38,9 @@ fun VerifyEmail(navController: NavController){
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier)
-        inputField("Send the 6 digit code sent to your inbox")
+        inputField("Send the 6 digit code sent to your inbox",
+            "",
+            {})
         Spacer(modifier = Modifier)
         button("Verify") {
             navController.navigate(Screens.CreatePasswordsScreen.route)

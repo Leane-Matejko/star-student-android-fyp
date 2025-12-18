@@ -334,14 +334,16 @@ class UIComponentsTests {
     @Test
     fun testInputFieldExists(){
         composeTest.setContent {
-            inputField("")
+            inputField("",
+                {})
         }
     }
 
     @Test
     fun testInputFieldRender(){
         composeTest.setContent {
-            inputField("")
+            inputField("",
+                {})
         }
 
         composeTest.waitForIdle()
