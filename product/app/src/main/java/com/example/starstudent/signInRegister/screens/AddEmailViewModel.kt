@@ -16,8 +16,6 @@ class AddEmailViewModel() : ViewModel(){
     var emailString by mutableStateOf("")
         private set
 
-    var realEmail = false
-
     var errorWindow by mutableStateOf(false)
         private set
 
