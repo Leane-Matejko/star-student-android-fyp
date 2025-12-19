@@ -335,6 +335,7 @@ class UIComponentsTests {
     fun testInputFieldExists(){
         composeTest.setContent {
             inputField("",
+                "",
                 {})
         }
     }
@@ -343,6 +344,7 @@ class UIComponentsTests {
     fun testInputFieldRender(){
         composeTest.setContent {
             inputField("",
+                "",
                 {})
         }
 

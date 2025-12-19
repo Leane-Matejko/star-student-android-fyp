@@ -52,8 +52,8 @@ fun Background() {
             .background(Brush
                 .verticalGradient(
                     listOf(
-                        White01,
-                        Yellow)))
+                        MaterialTheme.colorScheme.background,
+                        MaterialTheme.colorScheme.secondary)))
             .testTag("background")
     )
 }
@@ -70,7 +70,7 @@ fun mediumIconWidget(
         modifier = Modifier
             .size(100.dp)
             .background(
-                color = DarkPink,
+                color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(24.dp)
             )
             .padding(horizontal = 10.dp, vertical = 8.dp)
@@ -85,7 +85,7 @@ fun mediumIconWidget(
                     modifier = Modifier
                         .size(40.dp)
                         .testTag("mediumIconWidgetQuanIcon"),
-                    tint = White01
+                    tint = MaterialTheme.colorScheme.background
 
                 )
                 Icon(
@@ -94,7 +94,7 @@ fun mediumIconWidget(
                     modifier = Modifier
                         .size(40.dp)
                         .testTag("mediumIconWidgetRepIcon"),
-                    tint = White01
+                    tint = MaterialTheme.colorScheme.background
 
                 )
             }
@@ -105,7 +105,7 @@ fun mediumIconWidget(
                         .align(Alignment.BottomCenter)
                         .testTag("mediumIconWidgetText"),
                     fontWeight = FontWeight.Bold,
-                    color = White01
+                    color = MaterialTheme.colorScheme.background
                 )
 
     }
@@ -120,7 +120,7 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
         modifier = Modifier
             .size(100.dp)
             .background(
-                color = DarkPink,
+                color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(24.dp)
             )
             .testTag("smallProgressWidgetBackground"),
@@ -130,22 +130,22 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
             modifier = Modifier.size(80.dp)
                 .align(Alignment.Center)
                 .testTag("smallProgressWidgetProgressBar"),
-            color = Color.White,
-            trackColor = LightPink,
+            color = MaterialTheme.colorScheme.background,
+            trackColor = MaterialTheme.colorScheme.secondary,
             strokeWidth = 10.dp,
         )
 
         Column(modifier = Modifier.align(Alignment.Center)) {
             Text(
                 text = label,
-                color = White01,
+                color = MaterialTheme.colorScheme.background,
                 modifier = Modifier
                     .testTag("smallProgressWidgetNameLabel")
             )
 
             Text(
                 text = "$numCompleteTasks/$numTasks",
-                color = LightPink,
+                color = MaterialTheme.colorScheme.secondary,
                 fontSize = 6.sp,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -167,7 +167,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
         modifier = Modifier
             .size(70.dp, 25.dp)
             .background(
-                color = DarkPink,
+                color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(2.dp)
@@ -179,7 +179,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
             modifier = Modifier
                 .size(20.dp)
                 .testTag("largeNavWidgetRepIcon"),
-            tint = White01
+            tint = MaterialTheme.colorScheme.background
 
         )
 
@@ -189,7 +189,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
         {
             Text(
                 title,
-                color = White01,
+                color = MaterialTheme.colorScheme.background,
                 fontSize = 12.sp,
                 modifier = Modifier
                     .testTag("largeNavWidgetTitleLabel")
@@ -197,7 +197,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
 
             Text(
                 text = description,
-                color = LightPink,
+                color = MaterialTheme.colorScheme.secondary,
                 fontSize = 6.sp,
                 modifier = Modifier
                     .testTag("largeNavWidgetDescriptionLabel")
@@ -214,7 +214,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
 fun avatarWindow(prompt: String){
     Box(
         modifier = Modifier
-            .background(Brush.verticalGradient(listOf(White01,Yellow)),
+            .background(Brush.verticalGradient(listOf(MaterialTheme.colorScheme.background,MaterialTheme.colorScheme.secondary)),
                 shape = RoundedCornerShape(15f
                 ))
             .width(120f.dp)
@@ -225,7 +225,7 @@ fun avatarWindow(prompt: String){
     ) {
         Text(
             text = prompt,
-            color = DarkPink,
+            color = MaterialTheme.colorScheme.primary,
             fontSize = 12.sp,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -242,7 +242,7 @@ fun textField(header: String, info: String){
     Column(){
         Text(
             text = header,
-            color = DarkPink,
+            color = MaterialTheme.colorScheme.background,
             fontSize = 12.sp,
             modifier = Modifier
                 .testTag("textFieldHeaderLabel")
@@ -251,7 +251,7 @@ fun textField(header: String, info: String){
             modifier = Modifier
                 .background(
                     shape = RoundedCornerShape(12f),
-                    color = Yellow
+                    color = MaterialTheme.colorScheme.tertiary
                 )
                 .size(45.dp, 8.dp)
                 .padding(2.dp)
@@ -260,7 +260,7 @@ fun textField(header: String, info: String){
             Text(
                 text = info,
                 fontSize = 3.sp,
-                color = DarkPink,
+                color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .testTag("textFieldInfoLabel")
             )
@@ -311,7 +311,7 @@ fun button(label : String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.secondary,
+            containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onSecondary
         ),
         modifier = Modifier
