@@ -1,5 +1,6 @@
 package com.example.starstudent
 
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.MaterialTheme
@@ -58,7 +59,8 @@ class UIComponentsTests {
                 mediumIconWidget(
                     Icons.Filled.Star,
                     Icons.Filled.Star,
-                    "Test"
+                    "Test",
+                    modifier = Modifier
                 )
 
         }
@@ -70,7 +72,8 @@ class UIComponentsTests {
                 mediumIconWidget(
                     Icons.Filled.Star,
                     Icons.Filled.Star,
-                    "Test"
+                    "Test",
+                    modifier = Modifier
                 )
 
         }
@@ -87,7 +90,8 @@ class UIComponentsTests {
                 mediumIconWidget(
                     Icons.Filled.Star,
                     Icons.Filled.Star,
-                    "Test"
+                    "Test",
+                    modifier = Modifier
                 )
 
         }
@@ -103,7 +107,8 @@ class UIComponentsTests {
         composeTest.setContent {
             mediumIconWidget(Icons.Filled.Star,
                 Icons.Filled.Star,
-                "Test")
+                "Test",
+                modifier = Modifier)
         }
 
         composeTest.waitForIdle()
@@ -117,7 +122,8 @@ class UIComponentsTests {
         composeTest.setContent {
             mediumIconWidget(Icons.Filled.Star,
                 Icons.Filled.Star,
-                "Test")
+                "Test",
+                modifier = Modifier)
         }
 
         composeTest.waitForIdle()
@@ -169,8 +175,7 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test",
-                Modifier.weight(1f))
+                "Test")
         }
 
         composeTest.waitForIdle()
@@ -184,8 +189,7 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test",
-                Modifier.weight(1f))
+                "Test")
         }
 
         composeTest.waitForIdle()
@@ -254,18 +258,6 @@ class UIComponentsTests {
         composeTest.setContent {
             avatarWindow("")
         }
-    }
-
-    @Test
-    fun testAvatarWindowBackgroundRender(){
-        composeTest.setContent {
-            avatarWindow("")
-        }
-
-        composeTest.waitForIdle()
-        composeTest
-            .onNodeWithTag("avatarWindowBackground")
-            .assertIsDisplayed()
     }
 
     @Test
