@@ -16,6 +16,9 @@ class CurrentApplication : Application(){
     lateinit var connectivityManager: ConnectivityManager
         private set
 
+    var user = User()
+        private set
+
     val networkConnectivity: NetworkConnectivity by lazy {
         NetworkConnectivity(connectivityManager)
     }
@@ -26,6 +29,10 @@ class CurrentApplication : Application(){
         connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE)
             as ConnectivityManager
         FirebaseApp.initializeApp(this)
+    }
+
+    fun setUser(emailValue: String){
+        user.setEmail(emailValue)
     }
 
 //    fun getNetworkConnectivity(): NetworkConnectivity{

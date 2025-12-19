@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
+import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Email
 
@@ -27,6 +28,8 @@ class AddEmailViewModel() : ViewModel(){
           email.setEmail(emailString)
             if (email.checkRealEmail()){
                 errorWindow = false
+                CurrentApplication.instance.setUser(email.getEmail())
+                Log.d("TEST", email.getEmail())
                 navigateToCreatePassword(navController)
             }
             }catch(e: Exception){

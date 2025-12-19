@@ -45,6 +45,12 @@ fun CreatePassword(navController: NavController){
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
+        Text(
+            text = "Welcome, " + viewModel.userEmail,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
         Spacer(modifier = Modifier)
         inputField("PASSWORD",
             viewModel.firstPassword,
@@ -55,6 +61,7 @@ fun CreatePassword(navController: NavController){
             onValueChange = {viewModel.setSecondPasswordValue(it)})
         Spacer(modifier = Modifier)
         button("Next") {
+
             viewModel.verify(navController)
         }
         LaunchedEffect(viewModel.errorWindow) {
