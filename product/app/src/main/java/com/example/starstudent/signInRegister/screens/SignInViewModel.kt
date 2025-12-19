@@ -12,6 +12,9 @@ import com.example.starstudent.signInRegister.domain.Email
 import com.example.starstudent.signInRegister.domain.EmailOrPasswordNotCorrectException
 import kotlinx.coroutines.launch
 
+
+/* ViewModel responsible for the Sign In page.
+*/
 class SignInViewModel : ViewModel() {
 
     private val email = Email()
@@ -28,18 +31,23 @@ class SignInViewModel : ViewModel() {
     var errorMessage by mutableStateOf("")
         private set
 
+    //Represent the email entered within the input field.
     fun setEmailChange(emailValue: String){
         emailString = emailValue
     }
-
+    //Represent the password entered within the input field.
     fun setPasswordChange(passwordValue: String){
         passwordString = passwordValue
     }
 
+
+    //Resetting the error window.
     fun resetErrorWindow(){
         errorWindow = false
     }
 
+
+    //Checks if the user's email is real, and then validated the user account. If successful then move onto the homepage
     fun next(navController: NavController){
         email.setEmail(emailString)
         try{
@@ -60,10 +68,13 @@ class SignInViewModel : ViewModel() {
         }
     }
 
+    //Buffer for checking the password
     private fun Unit.await() {
         Log.d("AWAIT", "CHECKING PASSWORD....")
     }
 
+
+    //Navigation the homepage
     fun navigateToHomepage(navController: NavController){
         navController.navigate(Screens.HomePageScreen.route)
     }

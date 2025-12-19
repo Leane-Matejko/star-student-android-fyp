@@ -41,6 +41,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.ui.theme.LightPink
+
+/* UI component for backgrounds.
+*/
 @Composable
 fun Background() {
     Box(
@@ -55,6 +58,9 @@ fun Background() {
     )
 }
 
+
+/* UI component for a medium icon widget.
+*/
 @Composable
 fun mediumIconWidget(
     quanIcon: ImageVector,
@@ -105,6 +111,9 @@ fun mediumIconWidget(
     }
 }
 
+
+/* UI component for a small progress widget.
+*/
 @Composable
 fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
     Box(
@@ -149,6 +158,9 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
 
 }
 
+
+/* UI component for the large navigation widget.
+*/
 @Composable
 fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
     Box(
@@ -195,6 +207,9 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
     }
 }
 
+
+/* UI component for avatar window.
+*/
 @Composable
 fun avatarWindow(prompt: String){
     Box(
@@ -219,6 +234,9 @@ fun avatarWindow(prompt: String){
     }
 }
 
+
+/* UI component for text field.
+*/
 @Composable
 fun textField(header: String, info: String){
     Column(){
@@ -250,6 +268,8 @@ fun textField(header: String, info: String){
     }
 }
 
+/* UI component for spacers.
+*/
 @Composable
 fun spacer(modifier :Modifier){
     Spacer(modifier
@@ -257,6 +277,9 @@ fun spacer(modifier :Modifier){
 }
 
 
+
+/* UI component for input fields.
+*/
 @Composable
 fun inputField(label: String,
                value: String,
@@ -280,6 +303,9 @@ fun inputField(label: String,
     )
 }
 
+
+/* UI component for buttons.
+*/
 @Composable
 fun button(label : String, onClick: () -> Unit) {
     Button(

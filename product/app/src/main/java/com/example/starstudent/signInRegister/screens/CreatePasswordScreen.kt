@@ -24,6 +24,8 @@ import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 
+/* Responsible for populating the create password screen within the register flow.
+*/
 @Composable
 fun CreatePassword(navController: NavController){
 
@@ -64,6 +66,7 @@ fun CreatePassword(navController: NavController){
 
             viewModel.verify(navController)
         }
+        //Error window
         LaunchedEffect(viewModel.errorWindow) {
             if (viewModel.errorWindow) {
                 Toast.makeText(

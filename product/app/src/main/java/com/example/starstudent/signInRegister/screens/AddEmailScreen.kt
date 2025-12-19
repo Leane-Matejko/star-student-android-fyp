@@ -28,6 +28,8 @@ import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 import kotlinx.coroutines.launch
 
+/* Responsible for populating the add email screen within the register flow.
+*/
 @Composable
 fun AddEmailScreen(navController: NavController) {
 
@@ -55,9 +57,10 @@ fun AddEmailScreen(navController: NavController) {
             onValueChange = {viewModel.setEmailChange(it)})
         Spacer(modifier = Modifier)
         button("Next") {
-
             viewModel.next(navController)
         }
+
+        //Error Window
         LaunchedEffect(viewModel.errorWindow) {
             if (viewModel.errorWindow) {
                 Toast.makeText(
@@ -70,6 +73,7 @@ fun AddEmailScreen(navController: NavController) {
     }
 }
 
+//Navigate to the create password window.
 fun navigateToCreatePassword(navController: NavController){
     navController.navigate(Screens.VerifyEmailScreen.route)
 }

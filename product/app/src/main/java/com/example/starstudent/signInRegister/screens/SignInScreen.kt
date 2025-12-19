@@ -16,18 +16,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
-import com.example.starstudent.core.domain.CurrentApplication
-import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 import androidx.compose.runtime.LaunchedEffect
 
-
+/* Responsible for populating the sign in screen within the existing user sign in flow.
+*/
 @Composable
 fun SignInScreen(navController: NavController){
 
@@ -61,6 +58,8 @@ fun SignInScreen(navController: NavController){
         button("Next") {
             viewModel.next(navController)
         }
+
+        //Error window pop-up
         LaunchedEffect(viewModel.errorWindow) {
             if (viewModel.errorWindow) {
                 Toast.makeText(

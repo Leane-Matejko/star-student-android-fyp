@@ -20,6 +20,9 @@ import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 
+/* Responsible for populating the verify email screen within the register flow.
+*  Will be revisited once the Send email function had been completed.
+*/
 @Composable
 fun VerifyEmail(navController: NavController){
     Background()

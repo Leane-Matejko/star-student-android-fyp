@@ -6,10 +6,9 @@ import android.net.NetworkCapabilities
 
 class NetworkConnectivity(private val connectivityManager : ConnectivityManager) {
 
+    /* Testing if the device has an internet connection.
+    * */
     fun testingInternetConnection(): Boolean {
-
-//        val connectivityManager =
-//            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         //Return null if there are no active network
         val network = connectivityManager.activeNetwork ?: return false

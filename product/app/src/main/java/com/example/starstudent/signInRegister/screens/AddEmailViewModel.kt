@@ -10,6 +10,8 @@ import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Email
 
+/* ViewModel for the add email view.
+*/
 class AddEmailViewModel() : ViewModel(){
 
     private val email = Email()
@@ -23,6 +25,8 @@ class AddEmailViewModel() : ViewModel(){
     var errorMessage by mutableStateOf("")
         private set
 
+
+    //Checks if the email enter is real, and then setting the user email to the account.
     fun next(navController: NavController){
         try{
           email.setEmail(emailString)
@@ -40,20 +44,25 @@ class AddEmailViewModel() : ViewModel(){
             }
     }
 
+    //Navigate the create password screen.
     fun navigateToCreatePassword(navController: NavController){
         navController.navigate(Screens.CreatePasswordsScreen.route)
     }
 
+    //Reset the error notification pop-up.
     fun resetErrorWindow(){
         errorWindow = false
     }
 
+    //Represent the email enter within the input field.
     fun setEmailChange(emailValue: String){
         emailString = emailValue
     }
 
 }
 
+
+//Buffer for loading
 private fun Boolean.await() {
     Log.d("AWAIT", "CHECKING EMAIL STRING...")
 }

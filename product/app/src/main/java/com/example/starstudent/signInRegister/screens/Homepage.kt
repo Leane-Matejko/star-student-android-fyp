@@ -25,10 +25,12 @@ import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.spacer
 
+
+/* Responsible for populating the homepage screen.
+*/
 @Preview
 @Composable
 fun Homepage(){
-//fun Homepage(navController: NavController) {
     Background()
     Column(
         verticalArrangement = Arrangement.Center,

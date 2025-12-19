@@ -12,6 +12,9 @@ import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Password
 import kotlinx.coroutines.launch
 
+
+/* ViewModel for the create password page.
+*/
 class CreatePasswordViewModel : ViewModel(){
 
     val password = Password()
@@ -30,6 +33,7 @@ class CreatePasswordViewModel : ViewModel(){
     var errorMessage by mutableStateOf("")
         private set
 
+    //Verify if the passwords are matching, if so then add the user to the database.
     fun verify(navController: NavController){
         try{
             if(password.checkPasswordsMatch(firstPassword, secondPassword)){
@@ -48,18 +52,22 @@ class CreatePasswordViewModel : ViewModel(){
         }
     }
 
+    //Reset the error notification pop-up.
     fun resetErrorWindow(){
         errorWindow = false
     }
 
+    //Represent the first password entered within the input field.
     fun setFirstPasswordValue(passwordValue: String){
         firstPassword = passwordValue
     }
 
+    //Represent the second entered within the input field.
     fun setSecondPasswordValue(passwordValue: String){
         secondPassword = passwordValue
     }
 
+    //Buffer added for connecting to the firebase database.
     private fun Unit.await() {
         Log.d("AWAIT", "DATABASE CONNECTION....")
     }
