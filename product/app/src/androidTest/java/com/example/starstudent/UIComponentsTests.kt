@@ -169,7 +169,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                Modifier.weight(1f))
         }
 
         composeTest.waitForIdle()
@@ -183,7 +184,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                Modifier.weight(1f))
         }
 
         composeTest.waitForIdle()

@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,6 +42,7 @@ import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.example.starstudent.signInRegister.screens.SignInRegisterViewModel
 import com.example.starstudent.ui.theme.LightPink
 
 /* UI component for backgrounds.
@@ -65,10 +68,12 @@ fun Background() {
 fun mediumIconWidget(
     quanIcon: ImageVector,
     repIcon: ImageVector,
-    label: String){
+    label: String,
+    modifier: Modifier){
     Box(
-        modifier = Modifier
-            .size(100.dp)
+        modifier = modifier
+            .aspectRatio(1f)
+//            .size(100.dp)
             .background(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(24.dp)
@@ -115,10 +120,10 @@ fun mediumIconWidget(
 /* UI component for a small progress widget.
 */
 @Composable
-fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
+fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, modifier: Modifier = Modifier){
     Box(
-        modifier = Modifier
-            .size(100.dp)
+        modifier = modifier
+            .aspectRatio(1f)
             .background(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(24.dp)
@@ -131,7 +136,7 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
                 .align(Alignment.Center)
                 .testTag("smallProgressWidgetProgressBar"),
             color = MaterialTheme.colorScheme.background,
-            trackColor = MaterialTheme.colorScheme.secondary,
+            trackColor = MaterialTheme.colorScheme.tertiary,
             strokeWidth = 10.dp,
         )
 
@@ -145,7 +150,7 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
 
             Text(
                 text = "$numCompleteTasks/$numTasks",
-                color = MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.onTertiary,
                 fontSize = 6.sp,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -162,10 +167,10 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String){
 /* UI component for the large navigation widget.
 */
 @Composable
-fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
+fun largeNavWidget(repIcon: ImageVector, title: String, description: String, modifier: Modifier = Modifier){
     Box(
-        modifier = Modifier
-            .size(70.dp, 25.dp)
+        modifier = modifier
+            .fillMaxWidth()
             .background(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(10.dp)
@@ -178,6 +183,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
             contentDescription = "Representation Icon",
             modifier = Modifier
                 .size(20.dp)
+                .fillMaxWidth()
                 .testTag("largeNavWidgetRepIcon"),
             tint = MaterialTheme.colorScheme.background
 
@@ -211,15 +217,18 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String){
 /* UI component for avatar window.
 */
 @Composable
-fun avatarWindow(prompt: String){
+fun avatarWindow(
+    prompt: String,
+    modifier: Modifier = Modifier){
     Box(
-        modifier = Modifier
+        modifier = modifier
             .background(Brush.verticalGradient(listOf(MaterialTheme.colorScheme.background,MaterialTheme.colorScheme.secondary)),
                 shape = RoundedCornerShape(15f
                 ))
-            .width(120f.dp)
-            .height(120.dp)
-            .padding(0.dp, 2.dp)
+//            .fillMaxWidth(0.70f)
+//            .fillMaxHeight(1f)
+            .height(300.dp)
+            .padding(5.dp, 2.dp)
             .testTag("avatarWindowBackground")
 
     ) {

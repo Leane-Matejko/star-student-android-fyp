@@ -1,5 +1,6 @@
 package com.example.starstudent.signInRegister.screens
 
+import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.avatarWindow
+import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.spacer
@@ -38,7 +40,7 @@ fun Homepage(){
         modifier = Modifier.Companion
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(40.dp)
+            .padding(30.dp)
     ) {
         Text(
             text = "Home",
@@ -46,27 +48,61 @@ fun Homepage(){
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
+
+        spacer(modifier = Modifier.width(10.dp))
         Row (
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(280.dp),
             horizontalArrangement =  Arrangement.Start,
 
         ){
-            avatarWindow("Placeholder Text")
-            spacer(Modifier.width(5.dp))
-            Column() {
-                mediumIconWidget(Icons.Filled.Star, Icons.Filled.Star, "Sleep")
-                spacer(Modifier.height(20.dp))
-                mediumIconWidget(Icons.Filled.Star, Icons.Filled.Star, "Sleep")
+            avatarWindow("Placeholder Text",
+                modifier = Modifier
+                    .weight(1f))
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(5.dp)
+
+            ) {
+
+                mediumIconWidget(
+                    Icons.Filled.Star,
+                    Icons.Filled.Star,
+                    "Sleep",
+                    modifier = Modifier
+                        .weight(1f))
+                mediumIconWidget(
+                    Icons.Filled.Star,
+                    Icons.Filled.Star,
+                    "Sleep",
+                    modifier = Modifier
+                        .weight(1f))
             }
         }
 
         spacer(Modifier.height(20.dp))
 
-        Row(){
-            smallProgressWidget(9, 10, "Tasks")
-            spacer(Modifier.width(10.dp))
-            smallProgressWidget(8, 10, "Tasks")
-            spacer(Modifier.width(10.dp))
-            smallProgressWidget(7, 10, "Tasks")
+        Row(Modifier
+            .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp))
+        {
+            smallProgressWidget(9, 10, "Tasks", Modifier.weight(1f))
+            smallProgressWidget(8, 10, "Tasks", Modifier.weight(1f))
+            smallProgressWidget(7, 10, "Tasks", Modifier.weight(1f))
+        }
+
+        spacer(Modifier.height(20.dp))
+
+        Column (Modifier
+            .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(10.dp))
+        {
+            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.weight(1f))
+            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing" , Modifier.weight(1f))
+            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing" , Modifier.weight(1f))
+            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing" , Modifier.weight(1f))
+            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing" , Modifier.weight(1f))
         }
 
     }
