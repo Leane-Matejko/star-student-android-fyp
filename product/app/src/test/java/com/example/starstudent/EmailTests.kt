@@ -15,12 +15,13 @@ class EmailTests {
 
     @Before
     fun setup(){
-        email = Email("testeremail@gmail.com")
+        email = Email()
+        email.setEmail("testeremail@gmail.com")
     }
 
     @Test
     fun testEmailExists(){
-        val email = Email("Test")
+        val email = Email()
     }
 
     @Test
@@ -35,7 +36,9 @@ class EmailTests {
 
     @Test
     fun testDoesNotContainAtSymbol(){
-        assertFalse(Email("fakeEmail.gmail.com").containsAtSymbol())
+        val testEmail = Email()
+        testEmail.setEmail("fakeEmail.gmail.com")
+        assertFalse(Email().containsAtSymbol())
     }
 
     @Test
@@ -56,13 +59,15 @@ class EmailTests {
 
     @Test
     fun testCheckRealEmail(){
-        assertEquals(true, Email("testreal@gmail.com").checkRealEmail())
+        assertEquals(true, email.checkRealEmail())
     }
 
     @Test
     fun testCheckFakeEmail() {
         val exception = assertFails {
-            Email("fakeemail.com").checkRealEmail()
+            val testEmail = Email()
+            testEmail.setEmail("fakeemail.com")
+            testEmail.checkRealEmail()
         }
         assertEquals(
             "This is not a real email address. Please try again.",

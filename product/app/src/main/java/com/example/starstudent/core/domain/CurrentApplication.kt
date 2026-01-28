@@ -34,8 +34,4 @@ class CurrentApplication : Application(){
     fun setUser(emailValue: String){
         user.setEmail(emailValue)
     }
-
-//    fun getNetworkConnectivity(): NetworkConnectivity{
-//        return networkConnectivity
-//    }
 }
