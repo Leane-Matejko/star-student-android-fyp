@@ -43,6 +43,7 @@ fun VerifyEmail(navController: NavController){
         Spacer(modifier = Modifier)
         inputField("Send the 6 digit code sent to your inbox",
             "",
+            1,
             {})
         Spacer(modifier = Modifier)
         button("Verify") {

@@ -52,11 +52,12 @@ fun AddEmailScreen(navController: NavController) {
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
-                .testTag("emailL-abel")
+                .testTag("emailLabel")
         )
         Spacer(modifier = Modifier)
         inputField("EMAIL",
             viewModel.emailString,
+            1,
             onValueChange = {viewModel.setEmailChange(it)})
         Spacer(modifier = Modifier)
         button("Next") {

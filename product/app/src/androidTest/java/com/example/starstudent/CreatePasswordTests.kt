@@ -4,28 +4,30 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.navigation.compose.rememberNavController
-import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.signInRegister.screens.AddEmailScreen
+import com.example.starstudent.signInRegister.screens.CreatePasswordScreen
 import org.junit.Rule
 import org.junit.Test
 
-class AddEmailScreenTests {
+class CreatePasswordTests {
+
+
     @get:Rule
     var composeTest = createComposeRule()
 
     @Test
-    fun addEmailScreenExists(){
+    fun createPasswordScreenExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            AddEmailScreen(navController)
+            CreatePasswordScreen(navController)
         }
     }
 
     @Test
-    fun addEmailScreenBackgroundExists(){
+    fun createPasswordScreenBackgroundExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            AddEmailScreen(navController)
+            CreatePasswordScreen(navController)
         }
 
         composeTest.waitForIdle()
@@ -35,23 +37,36 @@ class AddEmailScreenTests {
     }
 
     @Test
-    fun addEmailScreenEmailLabelExists(){
+    fun createPasswordScreenSetPasswordLabelExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            AddEmailScreen(navController)
+            CreatePasswordScreen(navController)
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("emailLabel")
+            .onNodeWithTag("setPasswordLabel")
             .assertIsDisplayed()
     }
 
     @Test
-    fun addEmailScreenInputFieldExists(){
+    fun createPasswordScreenWelcomeLabelExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            AddEmailScreen(navController)
+            CreatePasswordScreen(navController)
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("welcomeLabel")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun createPasswordScreenInputFieldOneExists(){
+        composeTest.setContent {
+            val navController = rememberNavController()
+            CreatePasswordScreen(navController)
         }
 
         composeTest.waitForIdle()
@@ -61,23 +76,23 @@ class AddEmailScreenTests {
     }
 
     @Test
-    fun addEmailScreenButtonExists(){
+    fun createPasswordScreenInputFieldTwoExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            AddEmailScreen(navController)
+            CreatePasswordScreen(navController)
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("button")
+            .onNodeWithTag("inputField2")
             .assertIsDisplayed()
     }
 
     @Test
-    fun completeRenderAddEmail(){
+    fun completeRenderCreatePasswordScreen(){
         composeTest.setContent {
             val navController = rememberNavController()
-            AddEmailScreen(navController)
+            CreatePasswordScreen(navController)
         }
 
         composeTest.waitForIdle()
@@ -85,13 +100,18 @@ class AddEmailScreenTests {
             .onNodeWithTag("background")
             .assertIsDisplayed()
         composeTest
-            .onNodeWithTag("emailLabel")
+            .onNodeWithTag("setPasswordLabel")
             .assertIsDisplayed()
         composeTest
-            .onNodeWithTag("inputField1")
+            .onNodeWithTag("welcomeLabel")
             .assertIsDisplayed()
         composeTest
-            .onNodeWithTag("button")
+            .onNodeWithTag("inputField2")
+            .assertIsDisplayed()
+        composeTest
+            .onNodeWithTag("inputField2")
             .assertIsDisplayed()
     }
+
+
 }

@@ -330,6 +330,7 @@ class UIComponentsTests {
         composeTest.setContent {
             inputField("",
                 "",
+                1,
                 {})
         }
     }
@@ -339,12 +340,13 @@ class UIComponentsTests {
         composeTest.setContent {
             inputField("",
                 "",
+                1,
                 {})
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("inputField")
+            .onNodeWithTag("inputField1")
             .assertIsDisplayed()
     }
 

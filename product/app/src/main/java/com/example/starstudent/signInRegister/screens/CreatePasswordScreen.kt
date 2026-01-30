@@ -14,12 +14,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
@@ -27,7 +27,7 @@ import com.example.starstudent.core.view.uiComponents.inputField
 /* Responsible for populating the create password screen within the register flow.
 */
 @Composable
-fun CreatePassword(navController: NavController){
+fun CreatePasswordScreen(navController: NavController){
 
     val viewModel = viewModel<CreatePasswordViewModel>()
     val context = LocalContext.current
@@ -45,21 +45,27 @@ fun CreatePassword(navController: NavController){
             text = "Set Password",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .testTag("setPasswordLabel")
         )
         Text(
             text = "Welcome, " + viewModel.userEmail,
             fontSize = 15.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .testTag("welcomeLabel")
         )
         Spacer(modifier = Modifier)
         inputField("PASSWORD",
             viewModel.firstPassword,
+            1,
             onValueChange = {viewModel.setFirstPasswordValue(it)})
         Spacer(modifier = Modifier)
         inputField("RE-RENTER PASSWORD",
             viewModel.secondPassword,
+            2,
             onValueChange = {viewModel.setSecondPasswordValue(it)})
         Spacer(modifier = Modifier)
         button("Next") {

@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.starstudent.signInRegister.screens.AddEmailScreen
-import com.example.starstudent.signInRegister.screens.CreatePassword
+import com.example.starstudent.signInRegister.screens.CreatePasswordScreen
 import com.example.starstudent.signInRegister.screens.Homepage
 import com.example.starstudent.signInRegister.screens.SignInRegisterScreen
 import com.example.starstudent.signInRegister.screens.SignInScreen
@@ -44,7 +44,7 @@ fun Navigation() {
 
         //Saves user's new passwords to the database and creates a new user
         composable(route = Screens.CreatePasswordsScreen.route) {
-            CreatePassword(navController = navController)
+            CreatePasswordScreen(navController = navController)
         }
 
     }

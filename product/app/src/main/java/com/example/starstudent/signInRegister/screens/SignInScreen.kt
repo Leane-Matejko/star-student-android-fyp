@@ -49,10 +49,12 @@ fun SignInScreen(navController: NavController){
         Spacer(modifier = Modifier)
         inputField("EMAIL",
             viewModel.emailString,
+            1,
          onValueChange = {viewModel.setEmailChange(it)})
         Spacer(modifier = Modifier)
         inputField("PASSWORD",
             viewModel.passwordString,
+            2,
             onValueChange = {viewModel.setPasswordChange(it)})
         Spacer(modifier = Modifier)
         button("Next") {

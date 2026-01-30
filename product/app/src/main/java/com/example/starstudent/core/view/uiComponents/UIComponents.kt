@@ -292,6 +292,7 @@ fun spacer(modifier :Modifier){
 @Composable
 fun inputField(label: String,
                value: String,
+               seqNumber: Int?,
                onValueChange: (String) -> Unit){
 
     var info by remember { mutableStateOf("") }
@@ -308,7 +309,7 @@ fun inputField(label: String,
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .testTag("inputField")
+            .testTag("inputField$seqNumber")
     )
 }
 

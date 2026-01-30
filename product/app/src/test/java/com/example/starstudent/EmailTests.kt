@@ -74,7 +74,4 @@ class EmailTests {
             exception.message
         )
     }
-
-
-
 }
