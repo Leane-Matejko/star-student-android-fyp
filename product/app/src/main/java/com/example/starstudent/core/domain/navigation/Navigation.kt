@@ -9,7 +9,7 @@ import com.example.starstudent.signInRegister.screens.CreatePasswordScreen
 import com.example.starstudent.signInRegister.screens.Homepage
 import com.example.starstudent.signInRegister.screens.SignInRegisterScreen
 import com.example.starstudent.signInRegister.screens.SignInScreen
-import com.example.starstudent.signInRegister.screens.VerifyEmail
+import com.example.starstudent.signInRegister.screens.VerifyEmailScreen
 
 
 @Composable
@@ -33,7 +33,7 @@ fun Navigation() {
 
         //Verify the use has access to their email
         composable(route = Screens.VerifyEmailScreen.route) {
-            VerifyEmail(navController = navController)
+            VerifyEmailScreen(navController = navController)
         }
 
         //Redirect to the homepage

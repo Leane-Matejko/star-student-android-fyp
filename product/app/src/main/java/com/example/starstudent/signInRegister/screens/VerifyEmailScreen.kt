@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,7 +25,7 @@ import com.example.starstudent.core.view.uiComponents.inputField
 *  Will be revisited once the Send email function had been completed.
 */
 @Composable
-fun VerifyEmail(navController: NavController){
+fun VerifyEmailScreen(navController: NavController){
     Background()
     Column(
         verticalArrangement = Arrangement.Center,
@@ -38,7 +39,9 @@ fun VerifyEmail(navController: NavController){
             text = "Verify your email",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .testTag("verifyLabel")
         )
         Spacer(modifier = Modifier)
         inputField("Send the 6 digit code sent to your inbox",

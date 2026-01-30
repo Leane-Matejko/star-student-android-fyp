@@ -4,27 +4,28 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.navigation.compose.rememberNavController
-import com.example.starstudent.signInRegister.screens.SignInScreen
+import com.example.starstudent.signInRegister.screens.VerifyEmailScreen
 import org.junit.Rule
 import org.junit.Test
 
-class SignInScreenTests {
+class VerifyEmailScreenTests {
+
     @get:Rule
     var composeTest = createComposeRule()
 
     @Test
-    fun signInScreenExists(){
+    fun verifyEmailScreenExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            SignInScreen(navController)
+            VerifyEmailScreen(navController)
         }
     }
 
     @Test
-    fun signInScreenBackgroundExists(){
+    fun verifyEmailScreenBackgroundExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            SignInScreen(navController)
+            VerifyEmailScreen(navController)
         }
 
         composeTest.waitForIdle()
@@ -34,23 +35,23 @@ class SignInScreenTests {
     }
 
     @Test
-    fun signInScreenSignInLabelExists(){
+    fun verifyEmailScreenVerifyExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            SignInScreen(navController)
+            VerifyEmailScreen(navController)
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("signInLabel")
+            .onNodeWithTag("verifyLabel")
             .assertIsDisplayed()
     }
 
     @Test
-    fun signInScreenInputFieldOneExists(){
+    fun verifyEmailScreenInputFieldOneExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            SignInScreen(navController)
+            VerifyEmailScreen(navController)
         }
 
         composeTest.waitForIdle()
@@ -60,23 +61,10 @@ class SignInScreenTests {
     }
 
     @Test
-    fun signInScreenInputFieldTwoExists(){
+    fun verifyEmailScreenButtonOneExists(){
         composeTest.setContent {
             val navController = rememberNavController()
-            SignInScreen(navController)
-        }
-
-        composeTest.waitForIdle()
-        composeTest
-            .onNodeWithTag("inputField2")
-            .assertIsDisplayed()
-    }
-
-    @Test
-    fun signInScreenButtonOneExists(){
-        composeTest.setContent {
-            val navController = rememberNavController()
-            SignInScreen(navController)
+            VerifyEmailScreen(navController)
         }
 
         composeTest.waitForIdle()
@@ -86,10 +74,10 @@ class SignInScreenTests {
     }
 
     @Test
-    fun completeRenderSignInScreen(){
+    fun completeRenderVerifyEmailScreen(){
         composeTest.setContent {
             val navController = rememberNavController()
-            SignInScreen(navController)
+            VerifyEmailScreen(navController)
         }
 
         composeTest.waitForIdle()
@@ -97,13 +85,10 @@ class SignInScreenTests {
             .onNodeWithTag("background")
             .assertIsDisplayed()
         composeTest
-            .onNodeWithTag("signInLabel")
+            .onNodeWithTag("verifyLabel")
             .assertIsDisplayed()
         composeTest
             .onNodeWithTag("inputField1")
-            .assertIsDisplayed()
-        composeTest
-            .onNodeWithTag("inputField2")
             .assertIsDisplayed()
         composeTest
             .onNodeWithTag("button1")
