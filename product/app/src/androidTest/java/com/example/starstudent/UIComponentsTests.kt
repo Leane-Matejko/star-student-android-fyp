@@ -354,31 +354,31 @@ class UIComponentsTests {
     @Test
     fun testButtonExists(){
         composeTest.setContent {
-            button("test") {}
+            button("test",1) {}
         }
     }
 
     @Test
     fun testButtonRender(){
         composeTest.setContent {
-            button("test") {}
+            button("test",1) {}
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("button")
+            .onNodeWithTag("button1")
             .assertIsDisplayed()
     }
 
     @Test
     fun testButtonLabelRender(){
         composeTest.setContent {
-            button("test") {}
+            button("test",1) {}
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("buttonLabel", useUnmergedTree = true)
+            .onNodeWithTag("buttonLabel1", useUnmergedTree = true)
             .assertTextEquals("test")
     }
 

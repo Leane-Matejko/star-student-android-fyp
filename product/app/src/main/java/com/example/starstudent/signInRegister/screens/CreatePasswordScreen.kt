@@ -68,7 +68,7 @@ fun CreatePasswordScreen(navController: NavController){
             2,
             onValueChange = {viewModel.setSecondPasswordValue(it)})
         Spacer(modifier = Modifier)
-        button("Next") {
+        button("Next",1) {
 
             viewModel.verify(navController)
         }

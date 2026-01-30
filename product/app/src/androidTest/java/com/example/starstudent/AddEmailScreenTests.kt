@@ -69,7 +69,7 @@ class AddEmailScreenTests {
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("button")
+            .onNodeWithTag("button1")
             .assertIsDisplayed()
     }
 
@@ -91,7 +91,7 @@ class AddEmailScreenTests {
             .onNodeWithTag("inputField1")
             .assertIsDisplayed()
         composeTest
-            .onNodeWithTag("button")
+            .onNodeWithTag("button1")
             .assertIsDisplayed()
     }
 }

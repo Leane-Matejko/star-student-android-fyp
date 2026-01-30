@@ -89,6 +89,19 @@ class CreatePasswordTests {
     }
 
     @Test
+    fun createPasswordScreenButtonOneExists(){
+        composeTest.setContent {
+            val navController = rememberNavController()
+            CreatePasswordScreen(navController)
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("button1")
+            .assertIsDisplayed()
+    }
+
+    @Test
     fun completeRenderCreatePasswordScreen(){
         composeTest.setContent {
             val navController = rememberNavController()

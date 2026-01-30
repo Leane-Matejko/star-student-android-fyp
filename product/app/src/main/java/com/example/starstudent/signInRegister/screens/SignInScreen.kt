@@ -57,7 +57,7 @@ fun SignInScreen(navController: NavController){
             2,
             onValueChange = {viewModel.setPasswordChange(it)})
         Spacer(modifier = Modifier)
-        button("Next") {
+        button("Next",1) {
             viewModel.next(navController)
         }
 

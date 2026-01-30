@@ -60,7 +60,7 @@ fun AddEmailScreen(navController: NavController) {
             1,
             onValueChange = {viewModel.setEmailChange(it)})
         Spacer(modifier = Modifier)
-        button("Next") {
+        button("Next", 1) {
             viewModel.next(navController)
         }
 

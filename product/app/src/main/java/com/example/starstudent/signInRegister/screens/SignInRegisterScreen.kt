@@ -42,10 +42,10 @@ import com.example.starstudent.core.view.uiComponents.button
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
-            button("Sign In") {
+            button("Sign In", 1) {
                 viewModel.navigateToSignInScreen(navController)
             }
-            button("Register") {
+            button("Register", 2) {
                 viewModel.navigateToAddEmailScreen(navController)
             }
         }

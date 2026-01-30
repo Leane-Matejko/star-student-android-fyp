@@ -46,7 +46,7 @@ fun VerifyEmail(navController: NavController){
             1,
             {})
         Spacer(modifier = Modifier)
-        button("Verify") {
+        button("Verify",1) {
             navController.navigate(Screens.CreatePasswordsScreen.route)
         }
     }

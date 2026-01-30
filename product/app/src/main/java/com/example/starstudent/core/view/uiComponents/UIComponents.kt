@@ -317,7 +317,7 @@ fun inputField(label: String,
 /* UI component for buttons.
 */
 @Composable
-fun button(label : String, onClick: () -> Unit) {
+fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
@@ -327,14 +327,14 @@ fun button(label : String, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .testTag("button")
+            .testTag("button$seqNumber")
     ){
 
         Text(text = label,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier
-                .testTag("buttonLabel")
+                .testTag("buttonLabel$seqNumber")
         )
 
     }
