@@ -22,6 +22,7 @@ import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.testTag
 
 /* Responsible for populating the sign in screen within the existing user sign in flow.
 */
@@ -44,7 +45,9 @@ fun SignInScreen(navController: NavController){
             text = "Sign In",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .testTag("signInLabel")
         )
         Spacer(modifier = Modifier)
         inputField("EMAIL",
