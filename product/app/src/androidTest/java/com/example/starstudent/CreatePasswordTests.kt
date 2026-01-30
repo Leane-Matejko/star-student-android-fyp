@@ -4,7 +4,6 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.navigation.compose.rememberNavController
-import com.example.starstudent.signInRegister.screens.AddEmailScreen
 import com.example.starstudent.signInRegister.screens.CreatePasswordScreen
 import org.junit.Rule
 import org.junit.Test
