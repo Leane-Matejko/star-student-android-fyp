@@ -33,6 +33,8 @@ fun CreatePasswordScreen(navController: NavController){
     val context = LocalContext.current
 
     Background()
+    Spacer(modifier = Modifier
+        .testTag("CreatePasswordsScreen"))
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Companion.CenterHorizontally,

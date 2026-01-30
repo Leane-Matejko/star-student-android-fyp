@@ -38,6 +38,8 @@ fun AddEmailScreen(navController: NavController) {
     val context = LocalContext.current
 
     Background()
+    Spacer(modifier = Modifier
+        .testTag("AddEmailScreen"))
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Companion.CenterHorizontally,

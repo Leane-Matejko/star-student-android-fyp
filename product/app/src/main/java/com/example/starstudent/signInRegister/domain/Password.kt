@@ -11,6 +11,6 @@ class Password {
         if (firstPassword.toString() == secondPassword.toString()) {
             return true
         }
-        throw PasswordsDoNotMatch()
+        throw PasswordsDoNotMatchException()
     }
 }

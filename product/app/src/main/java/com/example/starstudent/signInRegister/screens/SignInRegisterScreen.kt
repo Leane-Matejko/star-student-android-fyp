@@ -2,6 +2,7 @@ package com.example.starstudent.signInRegister.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,7 +28,8 @@ import com.example.starstudent.core.view.uiComponents.button
         val viewModel: SignInRegisterViewModel = viewModel()
 
         Background()
-
+        Spacer(modifier = Modifier
+            .testTag("SignInRegisterScreen"))
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,

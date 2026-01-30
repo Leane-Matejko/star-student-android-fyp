@@ -27,6 +27,8 @@ import com.example.starstudent.core.view.uiComponents.inputField
 @Composable
 fun VerifyEmailScreen(navController: NavController){
     Background()
+    Spacer(modifier = Modifier
+        .testTag("VerifyEmailScreen"))
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Companion.CenterHorizontally,

@@ -57,11 +57,13 @@ class Email {
                 .get()
                 .await()
 
+            Log.d("TEST", "Result $result")
+
             storedPassword = result.documents
                 .firstOrNull()
                 ?.getString("password")
 
-            Log.d("TEST", "Password $userEmail")
+            Log.d("TEST", "Email $userEmail")
 
             Log.d("TEST", "Password $storedPassword")
         }

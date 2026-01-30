@@ -33,6 +33,8 @@ fun SignInScreen(navController: NavController){
     val context = LocalContext.current
 
     Background()
+    Spacer(modifier = Modifier
+        .testTag("SignInScreen"))
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Companion.CenterHorizontally,

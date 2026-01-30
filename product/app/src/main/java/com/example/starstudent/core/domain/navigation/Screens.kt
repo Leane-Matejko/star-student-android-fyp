@@ -6,7 +6,7 @@ sealed class Screens(val route: String) {
     object AddEmailScreen: Screens("add_email")
     object VerifyEmailScreen: Screens("verify_email")
     object HomePageScreen: Screens("home_page")
-    object CreatePasswordsScreen: Screens("create_password")
+    object CreatePasswordsScreen: Screens("create_passwords")
 
     fun withArgs(vararg args: String) : String {
         return buildString {

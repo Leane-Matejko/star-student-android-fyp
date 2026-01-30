@@ -52,10 +52,13 @@ class SignInViewModel : ViewModel() {
         email.setEmail(emailString)
         try{
             if (email.checkRealEmail()){
+                Log.d("TEST", "Checking credentials...")
                 errorWindow = false
                 viewModelScope.launch {
                     val passwordValidation = email.checkEmailExists(emailString, passwordString)
+                    Log.d("TEST", "Validating...")
                     if(passwordValidation){
+                        Log.d("TEST", "Found. Loading homepage...")
                         navigateToHomepage(navController)
                     }
                 }
