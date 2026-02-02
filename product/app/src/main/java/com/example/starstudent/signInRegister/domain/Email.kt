@@ -74,7 +74,10 @@ class Email {
 
     //Compares the value of 2 passwords entered to see if they are the same.
     fun comparePassword(userPassword: String, realPassword: String?): Boolean {
-        return userPassword == realPassword.toString()
+        if (userPassword == realPassword.toString()){
+            return true
+        }
+        throw EmailOrPasswordNotCorrectException()
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.starstudent
 
 import com.example.starstudent.signInRegister.domain.Email
+import com.example.starstudent.signInRegister.domain.EmailOrPasswordNotCorrectException
 import com.example.starstudent.signInRegister.domain.NotRealEmailAddress
 import org.junit.Test
 import org.junit.Before
@@ -71,6 +72,36 @@ class EmailTests {
         }
         assertEquals(
             "This is not a real email address. Please try again.",
+            exception.message
+        )
+    }
+
+    @Test
+    fun testEmailOrPasswordNotCorrectException(){
+        val exception = assertFails {
+            throw EmailOrPasswordNotCorrectException()
+        }
+        assertEquals("Your email or password is not correct. Please try again.",
+            exception.message)
+    }
+
+    @Test
+    fun testCheckPasswordsMatch(){
+        val testEmail = Email()
+        testEmail.setEmail("testing@gmail.com")
+        assertTrue(testEmail.comparePassword(
+            "testing", "testing"))
+    }
+
+    @Test
+    fun testEmailOrPasswordNotCorrectPracticalException(){
+        val exception = assertFails {
+            val testEmail = Email()
+            testEmail.setEmail("fakeemail@gmail.com")
+            testEmail.comparePassword("testing", "test")
+        }
+        assertEquals(
+            "Your email or password is not correct. Please try again.",
             exception.message
         )
     }
