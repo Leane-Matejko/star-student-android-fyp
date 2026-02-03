@@ -18,22 +18,8 @@ class DatabaseInteractionTests {
 
     @Test
     fun testDatabaseConnection() {
-
-
-
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-//        runBlocking {
-//            val di = DatabaseInteractions()
-//            di.checkDatabaseConnection(context, "test", "testFile").await()
-//            assertEquals("testFile", di.resultDoc[0])
-//        }
-
-//        Log.d("COMPLETE", di.resultDoc.contentToString())
-
-
-
     }
 }
 

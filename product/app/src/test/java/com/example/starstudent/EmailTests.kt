@@ -2,6 +2,7 @@ package com.example.starstudent
 
 import com.example.starstudent.signInRegister.domain.Email
 import com.example.starstudent.signInRegister.domain.EmailOrPasswordNotCorrectException
+import com.example.starstudent.signInRegister.domain.ExistingUserException
 import com.example.starstudent.signInRegister.domain.NotRealEmailAddress
 import org.junit.Test
 import org.junit.Before
@@ -104,5 +105,14 @@ class EmailTests {
             "Your email or password is not correct. Please try again.",
             exception.message
         )
+    }
+
+    @Test
+    fun testExistingUserException(){
+        val exception = assertFails {
+            throw ExistingUserException()
+        }
+        assertEquals("This email has already been used. Please try again.",
+            exception.message)
     }
 }

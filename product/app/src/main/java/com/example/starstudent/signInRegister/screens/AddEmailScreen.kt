@@ -74,6 +74,7 @@ fun AddEmailScreen(navController: NavController) {
                     viewModel.errorMessage,
                     Toast.LENGTH_SHORT
                 ).show()
+                viewModel.resetErrorWindow()
             }
         }
     }

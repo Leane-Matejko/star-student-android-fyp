@@ -44,6 +44,25 @@ class Email {
         email = emailValue
     }
 
+    suspend fun  preexistingUser(): Boolean{
+        val context = applicationContext.instance
+
+        di.checkDatabaseConnection(context, "test", "testFile").await()
+        if (di.resultDoc[0] != "File is empty") {
+            //Queries the database
+            val result = Firebase.firestore
+                .collection("users")
+                .whereEqualTo("username", getEmail())
+                .get()
+                .await()
+            if(result.isEmpty){
+                return false
+            }
+        }
+
+        throw ExistingUserException()
+    }
+
     //Checks if the email has been stored within the firestore database.
     suspend fun checkEmailExists(userEmail: String, userPassword: String): Boolean {
         val context = applicationContext.instance
@@ -62,10 +81,6 @@ class Email {
             storedPassword = result.documents
                 .firstOrNull()
                 ?.getString("password")
-
-            Log.d("TEST", "Email $userEmail")
-
-            Log.d("TEST", "Password $storedPassword")
         }
 
         return comparePassword(userPassword, storedPassword)

@@ -74,6 +74,7 @@ fun SignInScreen(navController: NavController){
                     viewModel.errorMessage,
                     Toast.LENGTH_SHORT
                 ).show()
+                viewModel.resetErrorWindow()
             }
         }
     }

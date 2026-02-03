@@ -49,25 +49,27 @@ class SignInViewModel : ViewModel() {
 
     //Checks if the user's email is real, and then validated the user account. If successful then move onto the homepage
     fun next(navController: NavController){
-        email.setEmail(emailString)
-        try{
-            if (email.checkRealEmail()){
-                Log.d("TEST", "Checking credentials...")
-                errorWindow = false
-                viewModelScope.launch {
+        viewModelScope.launch {
+            email.setEmail(emailString)
+            try {
+                if (email.checkRealEmail()) {
+                    Log.d("TEST", "Checking credentials...")
+                    errorWindow = false
+
                     val passwordValidation = email.checkEmailExists(emailString, passwordString)
                     Log.d("TEST", "Validating...")
-                    if(passwordValidation){
+                    if (passwordValidation) {
                         Log.d("TEST", "Found. Loading homepage...")
                         navigateToHomepage(navController)
                     }
                 }
+
+            } catch (e: Exception) {
+                Log.d("TEST", "Error thrown")
+                errorMessage = e.message.toString()
+                resetErrorWindow()
+                errorWindow = true
             }
-        }catch(e: Exception){
-            Log.d("TEST", "Error thrown")
-            errorMessage = e.message.toString()
-            resetErrorWindow()
-            errorWindow = true
         }
     }
 

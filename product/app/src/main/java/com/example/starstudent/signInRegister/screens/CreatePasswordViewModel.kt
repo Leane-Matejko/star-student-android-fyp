@@ -35,20 +35,21 @@ class CreatePasswordViewModel : ViewModel(){
 
     //Verify if the passwords are matching, if so then add the user to the database.
     fun verify(navController: NavController){
-        try{
-            if(password.checkPasswordsMatch(firstPassword, secondPassword)){
-                viewModelScope.launch {
+        viewModelScope.launch {
+            try {
+                if (password.checkPasswordsMatch(firstPassword, secondPassword)) {
                     CurrentApplication.instance.user.addUserAccount(firstPassword).await()
-                }
-                Log.d("USER", "Added New User")
-                navController.navigate(Screens.HomePageScreen.route)
-            }
 
-        }catch (e: Exception){
-            Log.d("TEST", "Error thrown")
-            errorMessage = e.message.toString()
-            resetErrorWindow()
-            errorWindow = true
+                    Log.d("USER", "Added New User")
+                    navController.navigate(Screens.HomePageScreen.route)
+                }
+
+            } catch (e: Exception) {
+                Log.d("TEST", "Error thrown")
+                errorMessage = e.message.toString()
+                resetErrorWindow()
+                errorWindow = true
+            }
         }
     }
 

@@ -94,6 +94,7 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
     implementation(platform("com.google.firebase:firebase-bom:34.6.0")){
         exclude(group = "com.google.android.gms")
     }
@@ -104,6 +105,7 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
     testImplementation(kotlin("test"))
     testImplementation(libs.junit)
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
 
     testImplementation("androidx.compose.ui:ui-test-junit4:1.9.5")
     androidTestImplementation ("androidx.compose.ui:ui-test-junit4:$version")
@@ -117,6 +119,9 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
+
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
 
 
 }

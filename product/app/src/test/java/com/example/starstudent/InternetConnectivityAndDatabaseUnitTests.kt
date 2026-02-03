@@ -21,10 +21,6 @@ import kotlin.test.assertFails
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class InternetConnectivityAndDatabaseUnitTests {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
 
     fun createMockNetworkInstance(networkState: Boolean): Boolean {
         //creating the mock instance

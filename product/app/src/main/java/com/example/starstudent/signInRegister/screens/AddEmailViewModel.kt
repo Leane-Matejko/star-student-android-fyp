@@ -5,10 +5,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Email
+import kotlinx.coroutines.launch
 
 /* ViewModel for the add email view.
 */
@@ -27,21 +29,23 @@ class AddEmailViewModel() : ViewModel(){
 
 
     //Checks if the email enter is real, and then setting the user email to the account.
-    fun next(navController: NavController){
-        try{
-          email.setEmail(emailString)
-            if (email.checkRealEmail()){
-                errorWindow = false
-                CurrentApplication.instance.setUser(email.getEmail())
-                Log.d("TEST", email.getEmail())
-                navigateToCreatePassword(navController)
-            }
-            }catch(e: Exception){
+    fun next(navController: NavController) {
+        viewModelScope.launch {
+            try {
+                email.setEmail(emailString)
+                if ((email.checkRealEmail()) && !(email.preexistingUser())) {
+                    errorWindow = false
+                    CurrentApplication.instance.setUser(email.getEmail())
+                    Log.d("TEST", email.getEmail())
+                    navigateToCreatePassword(navController)
+                }
+            } catch (e: Exception){
                 Log.d("TEST", "Error thrown")
                 errorMessage = e.message.toString()
                 resetErrorWindow()
                 errorWindow = true
             }
+        }
     }
 
     //Navigate the create password screen.
