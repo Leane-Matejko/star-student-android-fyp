@@ -4,9 +4,10 @@
  **Leane Matejko - Supervisor: Susnas Sourjah**
 
 ### Pre-requisites
-- Android Phone
-- App_debug.apk file ->    [Project path - PROJECT/product/app/build/outputs/apk/debug](PROJECT/product/app/build/outputs/apk/debug)
-- On you android phone, allow security permissions to be lowered to allow non-Google Play Apps
+- **Android Phone**
+- App_debug.apk (Project Executable) file ->    [Project path - PROJECT/product/app/build/outputs/apk/debug](PROJECT/product/app/build/outputs/apk/debug)
+    - No additional downloads are required.
+- On you android phone, allow security permissions to be lowered to **allow non-Google Play Apps**
 - **Android Version: 16.0** 
 
 
@@ -20,12 +21,23 @@
 
 ### Usage Instructions
 - Register Account (New User)
-    ![Register Email](image-4.png){width=50%}
-    ![Setting Password](image-5.png){width=50%}
-- Sign in using credentials (Returning User){width=50%}
-    ![Sign In Page](image-3.png){width=50%}
+
+
+    <img src="image-4.png" alt="Register Image" width="25%"/>
+    <img src="image-5.png" alt="Setting Password" width="25%"/>
+
+- Sign in using credentials (Returning User)
+    
+    
+    <img src="image-3.png" alt="Sign In Page" width="25%"/>
+
 - Navigate the Homepage
-    ![Homepage](image-2.png){width=50%}
-- Light and Dark mode
-    ![Light Mode](image.png){width=50%}
-    ![Dark Mode](image-1.png){width=50%}
+
+
+    <img src="image-2.png" alt="Homepage" width="25%"/>
+
+- Light and Dark mode (Based on your device setting) 
+
+
+    <img src="image.png" alt="LightMode" width="25%"/>
+    <img src="image-1.png" alt="DarkMode" width="25%"/>
