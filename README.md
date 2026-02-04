@@ -20,12 +20,12 @@
 
 ### Usage Instructions
 - Register Account (New User)
-    ![Register Email](image-4.png)
-    ![Setting Password](image-5.png)
-- Sign in using credentials (Returning User)
-    ![Sign In Page](image-3.png)
+    ![Register Email](image-4.png){width=50%}
+    ![Setting Password](image-5.png){width=50%}
+- Sign in using credentials (Returning User){width=50%}
+    ![Sign In Page](image-3.png){width=50%}
 - Navigate the Homepage
-    ![Homepage](image-2.png)
+    ![Homepage](image-2.png){width=50%}
 - Light and Dark mode
-    ![Light Mode](image.png)
-    ![Dark Mode](image-1.png)
+    ![Light Mode](image.png){width=50%}
+    ![Dark Mode](image-1.png){width=50%}
