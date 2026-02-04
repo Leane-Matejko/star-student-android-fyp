@@ -180,3 +180,8 @@ fabric.properties
 .externalNativeBuild
 .cxx
 local.properties
+
+product/android-sdk/
+product/app/build/
+*.apk
+*.dex
