@@ -23,3 +23,9 @@ val DarkPink = Color(0xFFD95F5F)
 val White01 = Color(0xFFFFFFFFF)
 
 val LightPink = Color(0xFFEBBDBD)
+
+
+//Dark Model
+val Purple = Color(0xFF5B4F75)
+val OffWhite = Color(0xFFFFE0CC)
+val PalePink = Color(0xFFED9A91)

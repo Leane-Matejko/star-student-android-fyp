@@ -1,0 +1,46 @@
+.
+├── documents
+│   ├── FYP References
+│   └── Prototypes
+└── product
+    ├── app
+    │   └── src
+    │       ├── androidTest
+    │       │   └── java
+    │       │       └── com
+    │       │           └── example
+    │       │               └── starstudent
+    │       ├── main
+    │       │   ├── java
+    │       │   │   └── com
+    │       │   │       └── example
+    │       │   │           └── starstudent
+    │       │   │               ├── core
+    │       │   │               │   ├── navigation
+    │       │   │               │   └── uiComponents
+    │       │   │               ├── signInRegister
+    │       │   │               │   ├── data
+    │       │   │               │   ├── domain
+    │       │   │               │   └── screens
+    │       │   │               └── ui
+    │       │   │                   └── theme
+    │       │   └── res
+    │       │       ├── drawable
+    │       │       ├── layout
+    │       │       ├── mipmap-anydpi-v26
+    │       │       ├── mipmap-hdpi
+    │       │       ├── mipmap-mdpi
+    │       │       ├── mipmap-xhdpi
+    │       │       ├── mipmap-xxhdpi
+    │       │       ├── mipmap-xxxhdpi
+    │       │       ├── values
+    │       │       └── xml
+    │       └── test
+    │           └── java
+    │               └── com
+    │                   └── example
+    │                       └── starstudent
+    └── gradle
+        └── wrapper
+
+44 directories

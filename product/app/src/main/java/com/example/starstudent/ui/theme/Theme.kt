@@ -11,18 +11,8 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
 
-private val LightColorScheme = lightColorScheme(
-    primary = DarkPink,
-    secondary = Yellow,
-    tertiary = Pink
-
-    /* Other default colors to override
+/* Other default colors to override
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),
     onPrimary = Color.White,
@@ -31,13 +21,33 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Color(0xFF1C1B1F),
     onSurface = Color(0xFF1C1B1F),
     */
+private val LightColorScheme = lightColorScheme(
+    primary = DarkPink,
+    onPrimary = White01,
+    secondary = Pink,
+    onSecondary = White01,
+    tertiary = Peach,
+    onTertiary = White01,
+    background = White01,
+    onBackground = DarkPink
+)
+
+private val DarkColorScheme  = darkColorScheme(
+    primary = OffWhite,
+    onPrimary = Purple,
+    secondary = PalePink,
+    onSecondary = Purple,
+    tertiary = DarkPink,
+    onTertiary = White01,
+    background = Purple,
+    onBackground = White01
 )
 
 @Composable
 fun StarStudentTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
