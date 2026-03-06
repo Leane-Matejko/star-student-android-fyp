@@ -190,13 +190,6 @@ fun mediumIconWidget(
         }
 }
 
-
-
-
-
-
-
-
 /* UI component for a small progress widget.
 */
 @Composable
@@ -248,37 +241,39 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, mod
 */
 @Composable
 fun largeNavWidget(repIcon: ImageVector, title: String, description: String, modifier: Modifier = Modifier){
-    Box(
+    Row(
         modifier = modifier
             .fillMaxWidth()
             .background(
                 color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(10.dp)
+                shape = RoundedCornerShape(24.dp)
             )
-            .padding(2.dp)
-            .height(80.dp)
-            .testTag("largeNavWidgetBackground")
-
-    ){
+            .height(100.dp)
+            .padding(20.dp)
+            .testTag("largeNavWidgetBackground"),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         Icon(
             imageVector =repIcon,
             contentDescription = "Representation Icon",
             modifier = Modifier
-                .size(40.dp)
-                .fillMaxWidth()
+                .size(44.dp)
                 .testTag("largeNavWidgetRepIcon"),
             tint = MaterialTheme.colorScheme.background
 
         )
 
-        Column(Modifier.align(Alignment.CenterEnd)
-            .padding(0.dp, 2.dp, 2.dp, 4
-                .dp))
-        {
+        Spacer(modifier = Modifier.width(20.dp))
+
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
             Text(
-                title,
+                text = title,
                 color = MaterialTheme.colorScheme.background,
-                fontSize = 16.sp,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold ,
                 modifier = Modifier
                     .testTag("largeNavWidgetTitleLabel")
             )
@@ -286,12 +281,11 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String, mod
             Text(
                 text = description,
                 color = MaterialTheme.colorScheme.secondary,
-                fontSize = 10.sp,
+                fontSize = 14.sp,
                 modifier = Modifier
                     .testTag("largeNavWidgetDescriptionLabel")
             )
         }
-
     }
 }
 
@@ -436,7 +430,10 @@ fun TopBanner(){
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = { }) {
-                    Icon(Icons.Default.Menu, "Menu", tint = MaterialTheme.colorScheme.onPrimary)
+                    Icon(
+                        Icons.Default.Menu,
+                        "Menu",
+                        tint = MaterialTheme.colorScheme.onPrimary)
                 }
 
                 Spacer(modifier = Modifier.width(10.dp))
