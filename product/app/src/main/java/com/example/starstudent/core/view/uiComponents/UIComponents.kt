@@ -79,57 +79,122 @@ fun Background() {
 
 /* UI component for a medium icon widget.
 */
+//@Composable
+//fun mediumIconWidget(
+//    quanIcon: ImageVector,
+//    repIcon: ImageVector,
+//    label: String,
+//    modifier: Modifier){
+//    Box(
+//        modifier = modifier
+//            .aspectRatio(1f)
+////            .size(100.dp)
+//            .background(
+//                color = MaterialTheme.colorScheme.primary,
+//                shape = RoundedCornerShape(24.dp)
+//            )
+//            .padding(horizontal = 10.dp, vertical = 8.dp)
+//            .testTag("mediumIconWidgetBackground")
+//    ){
+//        Row(modifier = Modifier
+//            .align(Alignment.TopCenter))
+//        {
+//                Icon(
+//                    imageVector = quanIcon,
+//                    contentDescription = "Quantify Icon",
+//                    modifier = Modifier
+//                        .size(40.dp)
+//                        .testTag("mediumIconWidgetQuanIcon"),
+//                    tint = MaterialTheme.colorScheme.background
+//
+//                )
+//                Icon(
+//                    imageVector = repIcon,
+//                    contentDescription = "Representation Icon",
+//                    modifier = Modifier
+//                        .size(40.dp)
+//                        .testTag("mediumIconWidgetRepIcon"),
+//                    tint = MaterialTheme.colorScheme.background
+//
+//                )
+//            }
+//
+//            Text(text = label,
+//                    modifier = Modifier
+//                        .size(100.dp)
+//                        .align(Alignment.BottomCenter)
+//                        .testTag("mediumIconWidgetText"),
+//                    fontWeight = FontWeight.Bold,
+//                    color = MaterialTheme.colorScheme.background
+//                )
+//
+//    }
+//}
+
 @Composable
 fun mediumIconWidget(
     quanIcon: ImageVector,
     repIcon: ImageVector,
     label: String,
-    modifier: Modifier){
-    Box(
-        modifier = modifier
-            .aspectRatio(1f)
-//            .size(100.dp)
-            .background(
-                color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(24.dp)
+    modifier: Modifier)
+    {
+        Column(
+            modifier = modifier
+                .aspectRatio(1f)
+                .background(
+                    color = MaterialTheme.colorScheme.primary,
+                    shape = RoundedCornerShape(24.dp)
+                )
+                .padding(horizontal = 20.dp, vertical = 36.dp)
+                .testTag("mediumIconWidgetBackground"),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.Center
             )
-            .padding(horizontal = 10.dp, vertical = 8.dp)
-            .testTag("mediumIconWidgetBackground")
-    ){
-        Row(modifier = Modifier
-            .align(Alignment.TopCenter))
-        {
+            {
                 Icon(
                     imageVector = quanIcon,
                     contentDescription = "Quantify Icon",
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(36.dp)
                         .testTag("mediumIconWidgetQuanIcon"),
                     tint = MaterialTheme.colorScheme.background
 
                 )
+
+                Spacer(modifier = Modifier.width(5.dp))
+
                 Icon(
                     imageVector = repIcon,
                     contentDescription = "Representation Icon",
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(36.dp)
                         .testTag("mediumIconWidgetRepIcon"),
                     tint = MaterialTheme.colorScheme.background
 
                 )
             }
 
+            Spacer(modifier = Modifier.height(5.dp))
+
             Text(text = label,
                     modifier = Modifier
                         .size(100.dp)
-                        .align(Alignment.BottomCenter)
                         .testTag("mediumIconWidgetText"),
+                    textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.background
-                )
-
-    }
+            )
+        }
 }
+
+
+
+
+
+
 
 
 /* UI component for a small progress widget.
