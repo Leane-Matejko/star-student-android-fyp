@@ -1,9 +1,12 @@
 package com.example.starstudent.core.view.uiComponents
 
 import android.R
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -14,15 +17,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,14 +47,18 @@ import com.example.starstudent.ui.theme.White01
 import com.example.starstudent.ui.theme.Yellow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.signInRegister.screens.SignInRegisterViewModel
 import com.example.starstudent.ui.theme.LightPink
+import com.example.starstudent.R as myAppRes
 
 /* UI component for backgrounds.
 */
@@ -176,13 +191,15 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String, mod
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(2.dp)
+            .height(80.dp)
             .testTag("largeNavWidgetBackground")
+
     ){
         Icon(
             imageVector =repIcon,
             contentDescription = "Representation Icon",
             modifier = Modifier
-                .size(20.dp)
+                .size(40.dp)
                 .fillMaxWidth()
                 .testTag("largeNavWidgetRepIcon"),
             tint = MaterialTheme.colorScheme.background
@@ -196,7 +213,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String, mod
             Text(
                 title,
                 color = MaterialTheme.colorScheme.background,
-                fontSize = 12.sp,
+                fontSize = 16.sp,
                 modifier = Modifier
                     .testTag("largeNavWidgetTitleLabel")
             )
@@ -204,7 +221,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String, mod
             Text(
                 text = description,
                 color = MaterialTheme.colorScheme.secondary,
-                fontSize = 6.sp,
+                fontSize = 10.sp,
                 modifier = Modifier
                     .testTag("largeNavWidgetDescriptionLabel")
             )
@@ -337,5 +354,61 @@ fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
                 .testTag("buttonLabel$seqNumber")
         )
 
+    }
+}
+
+@Preview
+@Composable
+fun TopBanner(){
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary)
+                .padding(top = 40.dp, start = 20.dp, end = 20.dp, bottom = 16.dp),
+
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { }) {
+                    Icon(Icons.Default.Menu, "Menu", tint = MaterialTheme.colorScheme.onPrimary)
+                }
+
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Column() {
+                    Text(
+                        text = "Hello, Username",
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        fontSize = 16.sp
+                    )
+                    Text(
+                        text = "Date",
+                        color = MaterialTheme.colorScheme.onSecondary
+                    )
+                }
+            }
+
+            Image(
+                painter = painterResource(myAppRes.drawable.profile_picture),
+                contentDescription = "Profile Picture",
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+            )
+
+        }
+}
+
+@Composable
+fun BannerFormat(
+    content: @Composable (PaddingValues) -> Unit
+){
+    Scaffold(
+        topBar = {
+            TopBanner()
+        }
+    ) {
+       padding -> content(padding)
     }
 }

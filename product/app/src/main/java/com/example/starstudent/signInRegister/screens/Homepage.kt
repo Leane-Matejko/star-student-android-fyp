@@ -1,6 +1,6 @@
 package com.example.starstudent.signInRegister.screens
 
-import androidx.compose.foundation.gestures.snapping.SnapPosition
+import android.widget.ScrollView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.core.view.uiComponents.Background
+import com.example.starstudent.core.view.uiComponents.BannerFormat
+import com.example.starstudent.core.view.uiComponents.TopBanner
 import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
@@ -36,14 +41,31 @@ import com.example.starstudent.core.view.uiComponents.spacer
 @Composable
 fun Homepage(){
     Background()
-    Spacer(modifier = Modifier
-        .testTag("HomepageScreen"))
+    BannerFormat { padding ->
+        LazyColumn(
+            modifier = Modifier
+                .padding(padding)
+        ) {
+            item{
+                HomepageContent()
+            }
+        }
+
+    }
+
+}
+
+@Composable
+fun HomepageContent() {
+    Spacer(
+        modifier = Modifier
+            .testTag("HomepageScreen")
+    )
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Companion.CenterHorizontally,
         modifier = Modifier.Companion
             .fillMaxWidth()
-            .fillMaxHeight()
             .padding(30.dp)
     ) {
         Text(
@@ -54,16 +76,20 @@ fun Homepage(){
         )
 
         spacer(modifier = Modifier.width(10.dp))
-        Row (
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(280.dp),
-            horizontalArrangement =  Arrangement.Start,
+            horizontalArrangement = Arrangement.Start,
 
-        ){
-            avatarWindow("Placeholder Text",
+            ) {
+            avatarWindow(
+                "Placeholder Text",
                 modifier = Modifier
-                    .weight(1f))
+                    .weight(1f)
+            )
+
+            Spacer(modifier = Modifier.width(20.dp))
             Column(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(5.dp)
@@ -75,21 +101,25 @@ fun Homepage(){
                     Icons.Filled.Star,
                     "Sleep",
                     modifier = Modifier
-                        .weight(1f))
+                        .weight(1f)
+                )
                 mediumIconWidget(
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Sleep",
                     modifier = Modifier
-                        .weight(1f))
+                        .weight(1f)
+                )
             }
         }
 
         spacer(Modifier.height(20.dp))
 
-        Row(Modifier
-            .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(10.dp))
+        Row(
+            Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        )
         {
             smallProgressWidget(9, 10, "Tasks", Modifier.weight(1f))
             smallProgressWidget(8, 10, "Tasks", Modifier.weight(1f))
@@ -98,16 +128,17 @@ fun Homepage(){
 
         spacer(Modifier.height(20.dp))
 
-        Column (Modifier
-            .fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(10.dp))
-        {
-            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.weight(1f))
-            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing" , Modifier.weight(1f))
-            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing" , Modifier.weight(1f))
-            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing" , Modifier.weight(1f))
-            largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing" , Modifier.weight(1f))
-        }
+
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        spacer(Modifier.height(10.dp))
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        spacer(Modifier.height(10.dp))
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        spacer(Modifier.height(10.dp))
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        spacer(Modifier.height(10.dp))
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+
 
     }
 }
