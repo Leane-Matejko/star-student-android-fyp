@@ -13,6 +13,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import com.example.starstudent.core.domain.MainActivity
 import com.example.starstudent.core.domain.TestActivity
 import com.example.starstudent.core.view.uiComponents.Background
+import com.example.starstudent.core.view.uiComponents.TopBanner
 import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
@@ -381,5 +382,76 @@ class UIComponentsTests {
             .onNodeWithTag("buttonLabel1", useUnmergedTree = true)
             .assertTextEquals("test")
     }
+
+
+    @Test
+    fun testTopBannerExists(){
+        composeTest.setContent {
+            TopBanner()
+        }
+
+        composeTest.waitForIdle()
+    }
+
+    @Test
+    fun testTopBannerRender(){
+        composeTest.setContent {
+            TopBanner()
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBanner")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTopBannerMenuIconRender(){
+        composeTest.setContent {
+            TopBanner()
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBannerMenuIcon", useUnmergedTree = true)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTopBannerTextUsernameRender(){
+        composeTest.setContent {
+            TopBanner()
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBannerTextUsername")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTopBannerTextDateRender(){
+        composeTest.setContent {
+            TopBanner()
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBannerTextDate")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTopBannerProfilePictureRender(){
+        composeTest.setContent {
+            TopBanner()
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBannerProfilePicture", useUnmergedTree = true)
+            .assertIsDisplayed()
+    }
+
 
 }
