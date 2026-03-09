@@ -1,6 +1,5 @@
-package com.example.starstudent.signInRegister.screens
+package com.example.starstudent.core.view.screens
 
-import android.widget.ScrollView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,20 +21,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
+import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.spacer
-
 
 /* Responsible for populating the homepage screen.
 */
 @Preview
 @Composable
 fun Homepage(){
+
     Background()
     BannerFormat { padding ->
         LazyColumn(
@@ -53,6 +54,9 @@ fun Homepage(){
 
 @Composable
 fun HomepageContent() {
+
+    val viewModel = viewModel<HomepageViewModel>()
+
     Spacer(
         modifier = Modifier
             .testTag("HomepageScreen")

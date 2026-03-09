@@ -1,4 +1,4 @@
-package com.example.starstudent.signInRegister.screens
+ package com.example.starstudent.signInRegister.screens
 
 import android.util.Log
 import android.widget.Toast

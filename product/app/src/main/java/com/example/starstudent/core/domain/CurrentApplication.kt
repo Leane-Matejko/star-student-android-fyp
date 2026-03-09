@@ -3,6 +3,8 @@ package com.example.starstudent.core.domain
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
+import androidx.room.Room
+import com.example.starstudent.core.data.AppDatabase
 import com.example.starstudent.core.data.NetworkConnectivity
 import com.google.firebase.FirebaseApp
 

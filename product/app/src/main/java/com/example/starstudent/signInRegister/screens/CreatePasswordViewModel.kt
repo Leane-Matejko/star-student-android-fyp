@@ -7,9 +7,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Password
+import com.example.starstudent.userAccounts.data.entities.UserData
 import kotlinx.coroutines.launch
 
 
@@ -41,6 +43,21 @@ class CreatePasswordViewModel : ViewModel(){
                     CurrentApplication.instance.user.addUserAccount(firstPassword).await()
 
                     Log.d("USER", "Added New User")
+
+                    Log.d("Adding new user", "Adding the new user to the phone's db")
+
+                    val userDataDAO = DatabaseSingleton
+                        .getDatabase(CurrentApplication.instance)
+                        .userDao()
+
+                    userDataDAO.insertUser(
+                        UserData(
+                            id = CurrentApplication.instance.user.email.getEmail()
+                        )
+                    )
+
+                    Log.d("NEW USER ADDED", "New users added to the phone's db.")
+
                     navController.navigate(Screens.HomePageScreen.route)
                 }
 
