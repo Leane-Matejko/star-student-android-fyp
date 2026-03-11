@@ -10,6 +10,7 @@ import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.unit.dp
 import com.example.starstudent.core.domain.MainActivity
 import com.example.starstudent.core.domain.TestActivity
 import com.example.starstudent.core.view.uiComponents.Background
@@ -277,14 +278,14 @@ class UIComponentsTests {
     @Test
     fun testTextFieldExists(){
         composeTest.setContent {
-            textField("","")
+            textField("","", 40)
         }
     }
 
     @Test
     fun testTextFieldHeaderLabelRender(){
         composeTest.setContent {
-            textField("Test","Test")
+            textField("Test","Test",40)
         }
 
         composeTest.waitForIdle()
@@ -296,7 +297,7 @@ class UIComponentsTests {
     @Test
     fun testTextFieldBackgroundRender(){
         composeTest.setContent {
-            textField("","")
+            textField("","",40)
         }
 
         composeTest.waitForIdle()
@@ -308,7 +309,7 @@ class UIComponentsTests {
     @Test
     fun testTextFieldInfoLabelRender(){
         composeTest.setContent {
-            textField("Test","Test")
+            textField("Test","Test",40)
         }
 
         composeTest.waitForIdle()
@@ -387,7 +388,11 @@ class UIComponentsTests {
     @Test
     fun testTopBannerExists(){
         composeTest.setContent {
-            TopBanner()
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
         }
 
         composeTest.waitForIdle()
@@ -396,7 +401,11 @@ class UIComponentsTests {
     @Test
     fun testTopBannerRender(){
         composeTest.setContent {
-            TopBanner()
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
         }
 
         composeTest.waitForIdle()
@@ -408,7 +417,11 @@ class UIComponentsTests {
     @Test
     fun testTopBannerMenuIconRender(){
         composeTest.setContent {
-            TopBanner()
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
         }
 
         composeTest.waitForIdle()
@@ -420,7 +433,11 @@ class UIComponentsTests {
     @Test
     fun testTopBannerTextUsernameRender(){
         composeTest.setContent {
-            TopBanner()
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
         }
 
         composeTest.waitForIdle()
@@ -432,7 +449,11 @@ class UIComponentsTests {
     @Test
     fun testTopBannerTextDateRender(){
         composeTest.setContent {
-            TopBanner()
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
         }
 
         composeTest.waitForIdle()
@@ -444,7 +465,11 @@ class UIComponentsTests {
     @Test
     fun testTopBannerProfilePictureRender(){
         composeTest.setContent {
-            TopBanner()
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
         }
 
         composeTest.waitForIdle()

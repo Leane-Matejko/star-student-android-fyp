@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
@@ -33,18 +34,23 @@ import com.example.starstudent.core.view.uiComponents.spacer
 
 /* Responsible for populating the homepage screen.
 */
-@Preview
 @Composable
-fun Homepage(){
+fun Homepage(navController: NavController){
+
+    val viewModel = viewModel<HomepageViewModel>()
 
     Background()
-    BannerFormat { padding ->
+    BannerFormat(
+        "leane",
+        date = "Wed 11 Mar",
+        { viewModel.profileNav(navController) }
+    ) { padding ->
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
         ) {
             item{
-                HomepageContent()
+                HomepageContent(viewModel)
             }
         }
 
@@ -53,9 +59,9 @@ fun Homepage(){
 }
 
 @Composable
-fun HomepageContent() {
+fun HomepageContent(viewModel: HomepageViewModel) {
 
-    val viewModel = viewModel<HomepageViewModel>()
+    val viewModel = viewModel
 
     Spacer(
         modifier = Modifier

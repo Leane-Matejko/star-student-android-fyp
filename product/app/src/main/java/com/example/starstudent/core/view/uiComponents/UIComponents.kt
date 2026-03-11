@@ -1,6 +1,8 @@
 package com.example.starstudent.core.view.uiComponents
 
 import android.R
+import android.widget.Switch
+import android.widget.ToggleButton
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +30,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SwitchColors
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -42,6 +46,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -257,31 +262,40 @@ fun avatarWindow(
 /* UI component for text field.
 */
 @Composable
-fun textField(header: String, info: String){
+fun textField(header: String, info: String, height: Int){
     Column(){
         Text(
             text = header,
-            color = MaterialTheme.colorScheme.background,
-            fontSize = 12.sp,
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.SemiBold,
             modifier = Modifier
                 .testTag("textFieldHeaderLabel")
         )
+
+        Spacer(modifier = Modifier.height(6.dp))
+
         Box(
             modifier = Modifier
                 .background(
-                    shape = RoundedCornerShape(12f),
-                    color = MaterialTheme.colorScheme.tertiary
+                    shape = RoundedCornerShape(36f),
+                    color = MaterialTheme.colorScheme.background
                 )
-                .size(45.dp, 8.dp)
-                .padding(2.dp)
+                .fillMaxWidth()
+                .height(height.dp)
+//                .size(45.dp, 8.dp)
+                .padding(4.dp)
                 .testTag("textFieldBackground")
         ){
+
+//            Spacer(modifier = Modifier.width(10.dp))
             Text(
                 text = info,
-                fontSize = 3.sp,
+                fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .testTag("textFieldInfoLabel")
+                    .padding(10.dp)
             )
         }
     }
@@ -350,10 +364,11 @@ fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
     }
 }
 
-@Preview
 @Composable
 fun TopBanner(
-
+        username : String,
+        date: String,
+        profileOnClick: () -> Unit
     ){
     Row(
         modifier = Modifier
@@ -366,7 +381,7 @@ fun TopBanner(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = { }) {
+            IconButton(onClick = {}) {
                 Icon(
                     modifier = Modifier
                         .testTag("topBannerMenuIcon"),
@@ -381,21 +396,21 @@ fun TopBanner(
                 Text(
                     modifier = Modifier
                         .testTag("topBannerTextUsername"),
-                    text = "Hello, Username",
+                    text = ("Hello, $username"),
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 16.sp
                 )
                 Text(
                     modifier = Modifier
                         .testTag("topBannerTextDate"),
-                    text = "Date",
+                    text = date,
                     color = MaterialTheme.colorScheme.onSecondary,
                     fontSize = 12.sp
                 )
             }
         }
 
-        IconButton(onClick = {})
+        IconButton(onClick = {profileOnClick()})
         {
             Image(
                 painter = painterResource(myAppRes.drawable.profile_picture),
@@ -412,13 +427,56 @@ fun TopBanner(
 
 @Composable
 fun BannerFormat(
+    username : String,
+    date: String,
+    profileOnClick : () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ){
     Scaffold(
         topBar = {
-            TopBanner()
+            TopBanner(
+                username,
+                date,
+                profileOnClick
+            )
         }
     ) {
        padding -> content(padding)
+    }
+}
+
+@Composable
+fun toggle(
+    header : String,
+    isChecked : Boolean
+){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("toggle")
+    ) {
+
+        Text(
+            text = header,
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .testTag("textFieldHeaderLabel")
+        )
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        androidx.compose.material3.Switch(
+            checked = isChecked,
+            onCheckedChange = {},
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = MaterialTheme.colorScheme.background,
+                checkedTrackColor = MaterialTheme.colorScheme.primary,
+                uncheckedThumbColor = MaterialTheme.colorScheme.background,
+                uncheckedTrackColor = MaterialTheme.colorScheme.secondary
+
+            )
+        )
     }
 }
