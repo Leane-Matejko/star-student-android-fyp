@@ -1,104 +1,86 @@
 package com.example.starstudent.userAccounts.view.screens
 
-import android.R
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.starstudent.core.data.DatabaseSingleton
-import com.example.starstudent.core.domain.CurrentApplication
-import com.example.starstudent.userAccounts.data.entities.UserInfo
+import com.example.starstudent.userAccounts.data.AccessUserData
+import com.example.starstudent.userAccounts.domain.FormatProfile
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Date
 import java.util.Locale
 
 class ProfileInformationViewModel() : ViewModel(){
 
+    val accessUserData = AccessUserData()
+
+    val formatProfile = FormatProfile()
+
     var enableSettingUpdate by mutableStateOf(false)
         private set
 
-    var profileUsername by mutableStateOf(CurrentApplication.instance.getUserInfo().username)
+    var profileUsername by mutableStateOf(
+        accessUserData.getUsername()
+    )
         private set
 
-    var profileEmail by mutableStateOf(CurrentApplication.instance.getUserInfo().id)
+    var profileEmail by mutableStateOf(
+        accessUserData.getUserId()
+    )
         private set
 
     var profileBirthday by mutableStateOf(
-        convertLongToDate(
-            CurrentApplication.instance.getUserInfo().birthday,
+        formatProfile.convertLongToDate(
+            accessUserData.getBirthday(),
             "dd MMMM yyyy"
         )
     )
         private set
 
     var profileLocationAccess by mutableStateOf(
-        CurrentApplication
-                .instance
-                .getUserInfo()
-                .locationAccess
+        accessUserData
+                    .getUserLocationAccess()
     )
         private set
 
-    var updateUsername by mutableStateOf( CurrentApplication.instance.getUserInfo().username)
+    var updateUsername by mutableStateOf(
+        accessUserData.getUsername()
+    )
         private set
 
     var updateDD by mutableStateOf(
-        convertLongToDate(
-            CurrentApplication.instance.getUserInfo().birthday,
+        formatProfile.convertLongToDate(
+            accessUserData.getBirthday(),
             "dd"
         )
     )
         private set
 
     var updateMM by mutableStateOf(
-        convertLongToDate(
-            CurrentApplication.instance.getUserInfo().birthday,
+        formatProfile.convertLongToDate(
+            accessUserData.getBirthday(),
             "MM"
         )
     )
         private set
 
     var updateYYYY by mutableStateOf(
-        convertLongToDate(
-            CurrentApplication.instance.getUserInfo().birthday,
+        formatProfile.convertLongToDate(
+            accessUserData.getBirthday(),
             "yyyy"
         )
     )
         private set
 
     var updateLocationAccess by mutableStateOf(
-        CurrentApplication
-                .instance
-                .getUserInfo()
-                .locationAccess)
+        accessUserData.getUserLocationAccess())
         private set
 
-    val userInfo = DatabaseSingleton
-        .getDatabase(CurrentApplication.instance)
-        .userInfoDao()
-
-    var username by mutableStateOf(CurrentApplication.instance.getUserInfo().username)
-        private set
-
-
-    var curUserInfo: List<UserInfo> by mutableStateOf(
-        listOf(
-            (UserInfo(
-                CurrentApplication
-                    .instance
-                    .user
-                    .email
-                    .getEmail(),
-        "default",
-        0,
-                false
-            ))))
+    var username by mutableStateOf(
+        accessUserData.getUsername()
+    )
         private set
 
     var curDate by mutableStateOf(
@@ -114,15 +96,10 @@ class ProfileInformationViewModel() : ViewModel(){
     )
         private set
 
-    fun convertLongToDate(longDate : Long, pattern : String) : String{
-        return SimpleDateFormat(pattern , Locale.getDefault()).format(Date(longDate))
-    }
-
     fun profileLocationAccessFormatted() : String{
-        if(profileLocationAccess){
-            return "Enabled"
-        }
-        return "Denied"
+        return formatProfile.profileLocationAccessFormatted(
+            profileLocationAccess
+        )
     }
 
     fun showDialog(){
@@ -131,25 +108,6 @@ class ProfileInformationViewModel() : ViewModel(){
 
     fun closeDialog(){
         enableSettingUpdate = false
-    }
-
-    fun getUser(){
-        viewModelScope.launch {
-            curUserInfo = userInfo.getUserInfo(
-                CurrentApplication
-                    .instance
-                    .user
-                    .email
-                    .getEmail())!!
-
-            if (curUserInfo.isNotEmpty()){
-                username = curUserInfo[0].username
-            }
-        }
-    }
-
-    fun getBirthday() : Long{
-        return CurrentApplication.instance.getUserInfo().birthday
     }
 
     fun updateTime(){
@@ -185,32 +143,20 @@ class ProfileInformationViewModel() : ViewModel(){
     }
 
     fun withinMonthRange(day : String) : Boolean{
-
-        return day.toIntOrNull()!! in 1..12
-    }
-
-    fun leapYearCheck(day : String) : Boolean {
-        if (updateYYYY.toIntOrNull()?.div(4) == 0){
-            return (day.toIntOrNull()!! <= 29)
-        }
-        return (day.toIntOrNull()!! <= 28)
+        return formatProfile.withinMonthRange(day)
     }
 
     fun withinDayRange(day : String) : Boolean{
 
-        val result =
-            when (updateMM.toIntOrNull()) {
-            1, 3, 5, 7, 8, 10, 12 -> (day.toIntOrNull()!! <= 31)
-            4, 6, 9, 11 -> (day.toIntOrNull()!! <= 30)
-            2 -> (leapYearCheck(day))
-                else -> {false}
-            }
-
-        return result
+        return formatProfile.withinDayRange(
+            day,
+            updateMM,
+            updateYYYY
+        )
     }
 
     fun isRealYear(year : String) : Boolean{
-        return (year.toIntOrNull()!! <= LocalDateTime.now().year )
+        return formatProfile.isRealYear(year)
     }
 
     fun setDayNull(){
@@ -223,51 +169,17 @@ class ProfileInformationViewModel() : ViewModel(){
         updateYYYY = ""
     }
 
-    fun convertBirthdayToLong() : Long{
-
-        val birthdayDay = convertLongToDate(
-            getBirthday(),
-            "dd")
-        val birthdayMonth = convertLongToDate(
-            getBirthday(),
-            "MM")
-        val birthdayYear = convertLongToDate(
-            getBirthday(),
-            "yyyy")
-
-        var day = updateDD
-        var month = updateMM
-        var year = updateYYYY
-
-        day.ifBlank{
-            day = birthdayDay
-        }
-        month.ifBlank{
-            month = birthdayMonth
-        }
-        year.ifBlank{
-            year = birthdayYear
-        }
-
-        val newDate = LocalDate.of(
-            year.toInt(),
-            month.toInt(),
-            day.toInt())
-
-        return newDate
-            .atStartOfDay(ZoneId.systemDefault())
-            .toInstant()
-            .toEpochMilli()
-    }
-
     fun updateProfile(){
         profileUsername = updateUsername
-
-        profileBirthday = convertLongToDate(
-            convertBirthdayToLong(),
+        profileBirthday = formatProfile.convertLongToDate(
+            formatProfile.convertBirthdayToLong(
+                accessUserData.getBirthday(),
+                updateDD,
+                updateMM,
+                updateYYYY
+            ),
             "dd MMMM yyyy"
         )
-
         profileLocationAccess = updateLocationAccess
     }
 
@@ -275,29 +187,19 @@ class ProfileInformationViewModel() : ViewModel(){
 
         viewModelScope.launch {
             if(!updateUsername.isEmpty()){
-                userInfo.updateUsername(
-                    CurrentApplication
-                        .instance
-                        .user
-                        .email
-                        .getEmail(),
+                accessUserData.updateUsername(
                     updateUsername
                 )
             }
-            userInfo.updateBirthday(
-                CurrentApplication
-                        .instance
-                        .user
-                        .email
-                        .getEmail(),
-                    convertBirthdayToLong()
+            accessUserData.updateBirthday(
+                formatProfile.convertBirthdayToLong(
+                    accessUserData.getBirthday(),
+                    updateDD,
+                    updateMM,
+                    updateYYYY
+                )
             )
-            userInfo.updateLocationAccess(
-                CurrentApplication
-                    .instance
-                    .user
-                    .email
-                    .getEmail(),
+            accessUserData.updateLocationAccess(
                 updateLocationAccess
             )
             updateProfile()
