@@ -20,6 +20,10 @@
 5. Ready to go!
 
 ### Usage Instructions
+- [Sign In and Register](#sign-in-and-register)
+- [Profile Settings](#user-profile)
+
+#### Sign In and Register
 - Register Account (New User)
 
 
@@ -34,10 +38,38 @@
 - Navigate the Homepage
 
 
-    <img src="image-2.png" alt="Homepage" width="25%"/>
+    <img src="homepage.png" alt="Homepage" width="25%"/>
 
 - Light and Dark mode (Based on your device setting) 
 
 
     <img src="image.png" alt="LightMode" width="25%"/>
     <img src="image-1.png" alt="DarkMode" width="25%"/>
+
+
+#### Profile Settings
+- Homepage Reformated
+
+    <div style="display:flex; align-items:center; gap:10px;"><img src="image-2.png" alt="Original Homepage" width="25%"/> -> <img src="homepage.png" alt="Current Homepage" width="25%"/>
+    </div>
+
+
+- Profile Page
+    
+    <img src="ProfileSettings.png" alt="LightMode" width="25%"/>
+
+- Top Banner (Navigation to profile page)
+    
+    <img src="TopBanner.png" alt="LightMode" width="25%"/>
+
+- Update profile settings
+    
+    <img src="ProfileSettings.png" alt="LightMode" width="25%"/>
+
+- Update profile settings
+    
+    <img src="ProfileSettings.png" alt="LightMode" width="25%"/>
+
+- Avatar setting (Placeholder for future options)
+    
+    <img src="UpdateProfile.png" alt="LightMode" width="25%"/>
