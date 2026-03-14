@@ -18,19 +18,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
-import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.spacer
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /* Responsible for populating the homepage screen.
 */
@@ -39,10 +40,12 @@ fun Homepage(navController: NavController){
 
     val viewModel = viewModel<HomepageViewModel>()
 
+    viewModel.getUser()
+
     Background()
     BannerFormat(
-        "leane",
-        date = "Wed 11 Mar",
+        viewModel.username,
+        date = viewModel.curDate,
         { viewModel.profileNav(navController) }
     ) { padding ->
         LazyColumn(
@@ -54,6 +57,13 @@ fun Homepage(navController: NavController){
             }
         }
 
+    }
+
+    viewModel.viewModelScope.launch{
+        while(true){
+            viewModel.updateTime()
+            delay(60000)
+        }
     }
 
 }

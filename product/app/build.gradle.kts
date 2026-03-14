@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-//    id("com.android.application")
     id("com.google.gms.google-services")
     kotlin("kapt")
     jacoco
@@ -51,6 +50,12 @@ android {
     }
 }
 
+kapt{
+    arguments {
+        arg("room.schemaLocation","projectDir/schemas")
+    }
+}
+
 
 //testing that the google service plugin is correctly configured for the DB firebase connection
 tasks.register("checkGoogleServicesPlugin") {
@@ -89,7 +94,6 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
 
     testImplementation(libs.junit)
@@ -102,7 +106,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     implementation(platform("com.google.firebase:firebase-bom:34.6.0")){
-        exclude(group = "com.google.android.gms")
+//        exclude(group = "com.google.android.gms")
     }
 //    implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-functions")
@@ -162,4 +166,4 @@ val jacocoAndroidTestReport by tasks.registering(JacocoReport::class) {
     })
 }
 
-fun Dependency.exclude(group: String) {}
+//fun Dependency.exclude(group: String) {}

@@ -1,8 +1,5 @@
 package com.example.starstudent.core.view.uiComponents
 
-import android.R
-import android.widget.Switch
-import android.widget.ToggleButton
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +17,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -30,7 +29,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -46,11 +44,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.R as myAppRes
 
@@ -152,7 +149,8 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, mod
             strokeWidth = 10.dp,
         )
 
-        Column(modifier = Modifier.align(Alignment.Center)) {
+        Column(modifier = Modifier.align(Alignment.Center)
+            .padding(top = 6.dp)) {
             Text(
                 text = label,
                 color = MaterialTheme.colorScheme.background,
@@ -162,8 +160,8 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, mod
 
             Text(
                 text = "$numCompleteTasks/$numTasks",
-                color = MaterialTheme.colorScheme.onTertiary,
-                fontSize = 6.sp,
+                color = MaterialTheme.colorScheme.secondary,
+                fontSize = 10.sp,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .testTag("smallProgressWidgetTaskLabel")
@@ -263,10 +261,10 @@ fun avatarWindow(
 */
 @Composable
 fun textField(header: String, info: String, height: Int){
-    Column(){
+    Column{
         Text(
             text = header,
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.secondary,
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
@@ -283,12 +281,10 @@ fun textField(header: String, info: String, height: Int){
                 )
                 .fillMaxWidth()
                 .height(height.dp)
-//                .size(45.dp, 8.dp)
                 .padding(4.dp)
                 .testTag("textFieldBackground")
         ){
 
-//            Spacer(modifier = Modifier.width(10.dp))
             Text(
                 text = info,
                 fontSize = 16.sp,
@@ -334,6 +330,35 @@ fun inputField(label: String,
         modifier = Modifier
             .fillMaxWidth()
             .testTag("inputField$seqNumber")
+    )
+}
+
+@Composable
+fun numInputField(
+                label: String,
+                value: String,
+                seqNumber: Int?,
+                keyboardType: KeyboardType,
+                onValueChange: (String) -> Unit){
+
+    var info by remember { mutableStateOf("") }
+
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = {Text(text = label, fontSize = 12.sp)
+        },
+        singleLine = true,
+        shape = RoundedCornerShape(36f),
+        textStyle = LocalTextStyle.current.copy(
+            textAlign = TextAlign.Left
+        ),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("numInputField$seqNumber")
     )
 }
 
@@ -392,7 +417,7 @@ fun TopBanner(
 
             Spacer(modifier = Modifier.width(10.dp))
 
-            Column() {
+            Column{
                 Text(
                     modifier = Modifier
                         .testTag("topBannerTextUsername"),
@@ -447,8 +472,9 @@ fun BannerFormat(
 
 @Composable
 fun toggle(
-    header : String,
-    isChecked : Boolean
+    header: String,
+    isChecked: Boolean,
+    onChange: () -> Unit
 ){
     Column(
         modifier = Modifier
@@ -458,7 +484,7 @@ fun toggle(
 
         Text(
             text = header,
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.secondary,
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
@@ -469,14 +495,26 @@ fun toggle(
 
         androidx.compose.material3.Switch(
             checked = isChecked,
-            onCheckedChange = {},
+            onCheckedChange = {onChange()},
             colors = SwitchDefaults.colors(
                 checkedThumbColor = MaterialTheme.colorScheme.background,
-                checkedTrackColor = MaterialTheme.colorScheme.primary,
+                checkedTrackColor = MaterialTheme.colorScheme.secondary,
                 uncheckedThumbColor = MaterialTheme.colorScheme.background,
-                uncheckedTrackColor = MaterialTheme.colorScheme.secondary
+                uncheckedTrackColor = MaterialTheme.colorScheme.primary
 
             )
         )
+    }
+}
+
+@Composable
+fun closeButton(){
+    IconButton(onClick = {}) {
+        Icon(
+            modifier = Modifier
+                .testTag("closeButtonIcon"),
+            imageVector = Icons.Default.Close,
+            contentDescription = "Close",
+            tint = MaterialTheme.colorScheme.primary)
     }
 }

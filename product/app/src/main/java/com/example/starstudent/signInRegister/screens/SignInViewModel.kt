@@ -7,9 +7,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Email
 import com.example.starstudent.signInRegister.domain.EmailOrPasswordNotCorrectException
+import com.example.starstudent.userAccounts.data.entities.UserInfo
 import kotlinx.coroutines.launch
 
 
@@ -18,6 +20,14 @@ import kotlinx.coroutines.launch
 class SignInViewModel : ViewModel() {
 
     private val email = Email()
+
+    var currentUser by mutableStateOf(UserInfo(
+        "default",
+        "default",
+        0,
+        false
+    ))
+        private set
 
     var emailString by mutableStateOf("")
         private set
@@ -60,6 +70,8 @@ class SignInViewModel : ViewModel() {
                     Log.d("TEST", "Validating...")
                     if (passwordValidation) {
                         Log.d("TEST", "Found. Loading homepage...")
+                        CurrentApplication.instance.setUser(email.getEmail())
+                        CurrentApplication.instance.setUserInfo()
                         navigateToHomepage(navController)
                     }
                 }
@@ -71,6 +83,10 @@ class SignInViewModel : ViewModel() {
                 errorWindow = true
             }
         }
+    }
+
+    private fun setUserEmail(email: Email){
+        CurrentApplication.instance.setUser(email.getEmail())
     }
 
     //Buffer for checking the password
