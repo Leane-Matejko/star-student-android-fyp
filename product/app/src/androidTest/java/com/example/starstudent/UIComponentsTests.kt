@@ -10,9 +10,11 @@ import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.unit.dp
 import com.example.starstudent.core.domain.MainActivity
 import com.example.starstudent.core.domain.TestActivity
 import com.example.starstudent.core.view.uiComponents.Background
+import com.example.starstudent.core.view.uiComponents.TopBanner
 import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
@@ -276,14 +278,14 @@ class UIComponentsTests {
     @Test
     fun testTextFieldExists(){
         composeTest.setContent {
-            textField("","")
+            textField("","", 40)
         }
     }
 
     @Test
     fun testTextFieldHeaderLabelRender(){
         composeTest.setContent {
-            textField("Test","Test")
+            textField("Test","Test",40)
         }
 
         composeTest.waitForIdle()
@@ -295,7 +297,7 @@ class UIComponentsTests {
     @Test
     fun testTextFieldBackgroundRender(){
         composeTest.setContent {
-            textField("","")
+            textField("","",40)
         }
 
         composeTest.waitForIdle()
@@ -307,7 +309,7 @@ class UIComponentsTests {
     @Test
     fun testTextFieldInfoLabelRender(){
         composeTest.setContent {
-            textField("Test","Test")
+            textField("Test","Test",40)
         }
 
         composeTest.waitForIdle()
@@ -381,5 +383,100 @@ class UIComponentsTests {
             .onNodeWithTag("buttonLabel1", useUnmergedTree = true)
             .assertTextEquals("test")
     }
+
+
+    @Test
+    fun testTopBannerExists(){
+        composeTest.setContent {
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
+        }
+
+        composeTest.waitForIdle()
+    }
+
+    @Test
+    fun testTopBannerRender(){
+        composeTest.setContent {
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBanner")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTopBannerMenuIconRender(){
+        composeTest.setContent {
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBannerMenuIcon", useUnmergedTree = true)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTopBannerTextUsernameRender(){
+        composeTest.setContent {
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBannerTextUsername")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTopBannerTextDateRender(){
+        composeTest.setContent {
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBannerTextDate")
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testTopBannerProfilePictureRender(){
+        composeTest.setContent {
+            TopBanner(
+                "testing",
+                "Wed 11 Mar",
+                {}
+            )
+        }
+
+        composeTest.waitForIdle()
+        composeTest
+            .onNodeWithTag("topBannerProfilePicture", useUnmergedTree = true)
+            .assertIsDisplayed()
+    }
+
 
 }

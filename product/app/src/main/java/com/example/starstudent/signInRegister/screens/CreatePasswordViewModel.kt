@@ -7,10 +7,17 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Password
+import com.example.starstudent.userAccounts.data.entities.AppUserData
+import com.example.starstudent.userAccounts.data.entities.UserInfo
+import com.google.type.Date
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 /* ViewModel for the create password page.
@@ -41,6 +48,36 @@ class CreatePasswordViewModel : ViewModel(){
                     CurrentApplication.instance.user.addUserAccount(firstPassword).await()
 
                     Log.d("USER", "Added New User")
+
+                    Log.d("Adding new user", "Adding the new user to the phone's db")
+
+                    val userDataDAO = DatabaseSingleton
+                        .getDatabase(CurrentApplication.instance)
+                        .appUserDao()
+
+                    userDataDAO.insertUser(
+                        AppUserData(
+                            id = CurrentApplication.instance.user.email.getEmail()
+                        )
+                    )
+
+                    val userInfoDAO = DatabaseSingleton
+                        .getDatabase(CurrentApplication.instance)
+                        .userInfoDao()
+
+                    userInfoDAO.addNewUser(
+                        UserInfo(
+                            id = CurrentApplication.instance.user.email.getEmail(),
+                            username = CurrentApplication.instance.user.email.getEmail(),
+                            birthday = System.currentTimeMillis(),
+                            locationAccess = false
+                        )
+                    )
+
+                    CurrentApplication.instance.setUserInfo()
+
+                    Log.d("NEW USER ADDED", "New users added to the phone's db.")
+
                     navController.navigate(Screens.HomePageScreen.route)
                 }
 

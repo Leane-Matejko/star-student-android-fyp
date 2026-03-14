@@ -6,10 +6,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.starstudent.signInRegister.screens.AddEmailScreen
 import com.example.starstudent.signInRegister.screens.CreatePasswordScreen
-import com.example.starstudent.signInRegister.screens.Homepage
+import com.example.starstudent.core.view.screens.Homepage
 import com.example.starstudent.signInRegister.screens.SignInRegisterScreen
 import com.example.starstudent.signInRegister.screens.SignInScreen
 import com.example.starstudent.signInRegister.screens.VerifyEmailScreen
+import com.example.starstudent.userAccounts.view.screens.ProfileInformationScreen
 
 
 @Composable
@@ -36,15 +37,19 @@ fun Navigation() {
             VerifyEmailScreen(navController = navController)
         }
 
-        //Redirect to the homepage
-        composable(route = Screens.HomePageScreen.route) {
-//            Homepage(navController = navController)
-              Homepage()
-        }
-
         //Saves user's new passwords to the database and creates a new user
         composable(route = Screens.CreatePasswordsScreen.route) {
             CreatePasswordScreen(navController = navController)
+        }
+
+        //Redirect to the homepage
+        composable(route = Screens.HomePageScreen.route) {
+            Homepage(navController = navController)
+        }
+
+        //Redirect to the profile page
+        composable(route = Screens.ProfileInformationScreen.route) {
+            ProfileInformationScreen(navController = navController)
         }
 
     }

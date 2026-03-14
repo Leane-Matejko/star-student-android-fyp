@@ -1,0 +1,10 @@
+package com.example.starstudent.core.data
+
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+
+val MIGRATION_1_2 = object : Migration(1,2){
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE user_info ADD COLUMN locationAccess INTEGER NOT NULL DEFAULT 0")
+    }
+}
