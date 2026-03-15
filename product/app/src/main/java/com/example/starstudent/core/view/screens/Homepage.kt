@@ -28,6 +28,7 @@ import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
+import com.example.starstudent.core.view.uiComponents.navigationDropDown
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.spacer
 import kotlinx.coroutines.delay
@@ -44,9 +45,13 @@ fun Homepage(navController: NavController){
 
     Background()
     BannerFormat(
-        viewModel.username,
+        username = viewModel.username,
         date = viewModel.curDate,
-        { viewModel.profileNav(navController) }
+        profileOnClick = { viewModel.profileNav(navController) },
+        list = viewModel.getNavigationMenu(navController),
+        showNav = viewModel.showNavMenu,
+        navOnClick = {viewModel.showNavMenu()},
+        onDismissNav = {viewModel.dismissNavMenu()}
     ) { padding ->
         LazyColumn(
             modifier = Modifier

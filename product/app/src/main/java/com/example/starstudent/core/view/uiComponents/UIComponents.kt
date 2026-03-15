@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -24,6 +25,8 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -49,6 +52,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.R as myAppRes
 
 /* UI component for backgrounds.
@@ -391,9 +395,13 @@ fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
 
 @Composable
 fun TopBanner(
-        username : String,
-        date: String,
-        profileOnClick: () -> Unit
+    username : String,
+    date: String,
+    list: List<NavigationOptions>,
+    showNav: Boolean,
+    onDismissNav: () -> Unit,
+    navOnClick: () -> Unit,
+    profileOnClick: () -> Unit
     ){
     Row(
         modifier = Modifier
@@ -406,7 +414,7 @@ fun TopBanner(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navOnClick()}) {
                 Icon(
                     modifier = Modifier
                         .testTag("topBannerMenuIcon"),
@@ -447,6 +455,11 @@ fun TopBanner(
             )
         }
 
+        navigationDropDown(
+            list,
+            showNav,
+            onDismissNav
+        )
     }
 }
 
@@ -455,6 +468,10 @@ fun BannerFormat(
     username : String,
     date: String,
     profileOnClick : () -> Unit,
+    list: List<NavigationOptions>,
+    showNav: Boolean,
+    navOnClick: () -> Unit,
+    onDismissNav: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ){
     Scaffold(
@@ -462,6 +479,10 @@ fun BannerFormat(
             TopBanner(
                 username,
                 date,
+                list,
+                showNav,
+                onDismissNav,
+                navOnClick,
                 profileOnClick
             )
         }
@@ -516,5 +537,40 @@ fun closeButton(){
             imageVector = Icons.Default.Close,
             contentDescription = "Close",
             tint = MaterialTheme.colorScheme.primary)
+    }
+}
+
+@Composable
+fun navigationDropDown(
+    list: List<NavigationOptions>,
+    expanded : Boolean,
+    onDismiss: () -> Unit
+){
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = {onDismiss()},
+        modifier = Modifier
+            .heightIn(max= 340.dp)
+            .width(180.dp)
+            .background(MaterialTheme.colorScheme.primary)
+    ){
+        list.forEach{ option ->
+            DropdownMenuItem(
+                text = {
+                    Text(
+                        option.label,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 5.dp)
+                    )
+                },
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.primary)
+                ,
+                onClick = {option.navigation()}
+            )
+        }
     }
 }

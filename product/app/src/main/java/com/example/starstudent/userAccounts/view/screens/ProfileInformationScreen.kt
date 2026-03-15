@@ -45,7 +45,11 @@ fun ProfileInformationScreen(navController: NavController){
     BannerFormat (
         viewModel.profileUsername,
         date = viewModel.curDate,
-        {}
+        profileOnClick = { },
+        list = viewModel.getNavigationMenu(navController),
+        showNav = viewModel.showNavMenu,
+        navOnClick = {viewModel.showNavMenu()},
+        onDismissNav = {viewModel.dismissNavMenu()}
     ){
         padding ->
         LazyColumn(

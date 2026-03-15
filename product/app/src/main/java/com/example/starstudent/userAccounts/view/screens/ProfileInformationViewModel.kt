@@ -5,6 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import com.example.starstudent.core.domain.navigation.NavigationOptions
+import com.example.starstudent.core.domain.navigation.navigationFunctions
 import com.example.starstudent.userAccounts.data.AccessUserData
 import com.example.starstudent.userAccounts.domain.FormatProfile
 import kotlinx.coroutines.launch
@@ -17,6 +20,11 @@ class ProfileInformationViewModel() : ViewModel(){
     val accessUserData = AccessUserData()
 
     val formatProfile = FormatProfile()
+
+    var showNavMenu by mutableStateOf(
+        false
+    )
+        private set
 
     var enableSettingUpdate by mutableStateOf(false)
         private set
@@ -96,6 +104,16 @@ class ProfileInformationViewModel() : ViewModel(){
     )
         private set
 
+    fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
+
+        val navigationFunctions = navigationFunctions()
+
+        return listOf(
+            NavigationOptions("Homepage")
+            { navigationFunctions.goToHomepage(navController) }
+        )
+    }
+
     fun profileLocationAccessFormatted() : String{
         return formatProfile.profileLocationAccessFormatted(
             profileLocationAccess
@@ -109,6 +127,12 @@ class ProfileInformationViewModel() : ViewModel(){
     fun closeDialog(){
         enableSettingUpdate = false
     }
+
+    fun showNavMenu()
+    {showNavMenu = true}
+
+    fun dismissNavMenu()
+    {showNavMenu = false }
 
     fun updateTime(){
         curDate = LocalDateTime

@@ -10,7 +10,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
+import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.domain.navigation.Screens
+import com.example.starstudent.core.domain.navigation.navigationFunctions
 import com.example.starstudent.userAccounts.data.entities.UserInfo
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -26,6 +28,11 @@ class HomepageViewModel : ViewModel(){
             CurrentApplication
                 .instance)
         .userInfoDao()
+
+    var showNavMenu by mutableStateOf(
+        false
+    )
+        private set
 
     var username by mutableStateOf(
         CurrentApplication
@@ -62,6 +69,18 @@ class HomepageViewModel : ViewModel(){
     )
         private set
 
+    fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
+
+        val navigationFunctions = navigationFunctions()
+
+        return listOf(
+            NavigationOptions("Homepage")
+                { navigationFunctions.goToHomepage(navController) },
+            NavigationOptions("Profile Settings")
+                {navigationFunctions.goToProfile(navController)}
+        )
+    }
+
     fun getUser(){
         viewModelScope.launch {
             curUserInfo = userInfo.getUserInfo(
@@ -77,6 +96,11 @@ class HomepageViewModel : ViewModel(){
         Log.d("TEST USER", username)
     }
 
+    fun showNavMenu()
+    {showNavMenu = true}
+
+    fun dismissNavMenu()
+    {showNavMenu = false }
     fun updateTime(){
         curDate = LocalDateTime
             .now()
