@@ -2,7 +2,7 @@ package com.example.starstudent.core.domain.navigation
 
 import androidx.navigation.NavController
 
-class navigationFunctions {
+class NavigationFunctions {
 
     fun goToHomepage(navController: NavController){
         navController.navigate(Screens.HomePageScreen.route)
@@ -10,5 +10,9 @@ class navigationFunctions {
 
     fun goToProfile(navController: NavController){
         navController.navigate(Screens.ProfileInformationScreen.route)
+    }
+
+    fun goToStudyCentre(navController: NavController){
+        navController.navigate(Screens.StudyCentreScreen.route)
     }
 }

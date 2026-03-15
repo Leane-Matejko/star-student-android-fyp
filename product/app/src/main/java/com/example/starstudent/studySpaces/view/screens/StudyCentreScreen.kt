@@ -19,9 +19,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
@@ -31,10 +32,8 @@ import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.textField
 
-@Preview
 @Composable
-fun StudyCentre(){
-//    Background()
+fun StudyCentreScreen(navController: NavController){
     BannerFormat(
         username = "viewModel.username",
         date = "viewModel.curDate",
@@ -74,7 +73,7 @@ fun StudyCentreContent(){
     ){
 
         Text(
-            text = "Home",
+            text = "Study Centre",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
@@ -133,7 +132,7 @@ fun StudyCentreContent(){
             smallProgressWidget(
                 12,
                 16,
-                "Incomplete",
+                "This Week",
                 10
             )
 
@@ -150,22 +149,33 @@ fun StudyCentreContent(){
 
         largeNavWidget(
             Icons.Filled.Star,
-            "Study Centre",
+            "Goals for the session",
             "Testingld;kjflkd;sjfld;asjflkd;sjf",
             Modifier.fillMaxWidth()
-        )
+        ){ }
         
         Spacer(modifier = Modifier.height(20.dp))
 
         Column (
             modifier = Modifier
                 .background(
-                    color = MaterialTheme.colorScheme.secondary,
+                    color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(24.dp)
                 )
-                .height(300.dp)
+//                .height(300.dp)
                 .padding(all = 20.dp)
         ){
+
+            Text(
+                text = "History",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Left,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
             textField(
                 "askjhdfkjdshf",
                 "dskf;lsdkf;lskf",

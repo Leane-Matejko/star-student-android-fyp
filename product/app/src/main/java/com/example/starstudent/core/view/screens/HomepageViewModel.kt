@@ -11,8 +11,7 @@ import androidx.navigation.NavController
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.NavigationOptions
-import com.example.starstudent.core.domain.navigation.Screens
-import com.example.starstudent.core.domain.navigation.navigationFunctions
+import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.userAccounts.data.entities.UserInfo
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -23,6 +22,7 @@ import java.util.Locale
 */
 class HomepageViewModel : ViewModel(){
 
+    private val navigationFunctions = NavigationFunctions()
     val userInfo = DatabaseSingleton
         .getDatabase(
             CurrentApplication
@@ -71,11 +71,11 @@ class HomepageViewModel : ViewModel(){
 
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
 
-        val navigationFunctions = navigationFunctions()
-
         return listOf(
+           NavigationOptions("Study Centre")
+                {navigationFunctions.goToStudyCentre(navController)},
             NavigationOptions("Profile Settings")
-                {navigationFunctions.goToHomepage(navController)}
+                {navigationFunctions.goToProfile(navController)}
         )
     }
 
@@ -125,7 +125,12 @@ class HomepageViewModel : ViewModel(){
 
     fun profileNav(navController: NavController){
         Log.d("TEST", "Navigating to the profile...")
-        navController.navigate(Screens.ProfileInformationScreen.route)
+        navigationFunctions.goToProfile(navController)
+    }
+
+    fun navStudyCentre(navController: NavController){
+        Log.d("TEST", "Navigating to the Study Centre...")
+        navigationFunctions.goToStudyCentre(navController)
     }
 
 }

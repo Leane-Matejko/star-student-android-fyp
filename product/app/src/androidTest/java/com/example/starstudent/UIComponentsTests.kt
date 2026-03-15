@@ -212,7 +212,7 @@ class UIComponentsTests {
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
-                "Test")
+                "Test"){}
         }
     }
 
@@ -221,12 +221,12 @@ class UIComponentsTests {
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
-                "Test")
+                "Test"){}
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("largeNavWidgetRepIcon")
+            .onNodeWithTag("largeNavWidgetRepIcon", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -235,12 +235,12 @@ class UIComponentsTests {
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
-                "Test")
+                "Test"){}
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("largeNavWidgetTitleLabel")
+            .onNodeWithTag("largeNavWidgetTitleLabel", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -251,12 +251,12 @@ class UIComponentsTests {
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
-                "Test")
+                "Test"){}
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("largeNavWidgetDescriptionLabel")
+            .onNodeWithTag("largeNavWidgetDescriptionLabel", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 

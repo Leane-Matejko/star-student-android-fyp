@@ -10,6 +10,7 @@ import com.example.starstudent.core.view.screens.Homepage
 import com.example.starstudent.signInRegister.screens.SignInRegisterScreen
 import com.example.starstudent.signInRegister.screens.SignInScreen
 import com.example.starstudent.signInRegister.screens.VerifyEmailScreen
+import com.example.starstudent.studySpaces.view.screens.StudyCentreScreen
 import com.example.starstudent.userAccounts.view.screens.ProfileInformationScreen
 
 
@@ -50,6 +51,11 @@ fun Navigation() {
         //Redirect to the profile page
         composable(route = Screens.ProfileInformationScreen.route) {
             ProfileInformationScreen(navController = navController)
+        }
+
+        //Redirect to the study centre
+        composable(route = Screens.StudyCentreScreen.route) {
+            StudyCentreScreen(navController = navController)
         }
 
     }

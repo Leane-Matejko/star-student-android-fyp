@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.starstudent.core.domain.navigation.NavigationOptions
-import com.example.starstudent.core.domain.navigation.navigationFunctions
+import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.userAccounts.data.AccessUserData
 import com.example.starstudent.userAccounts.domain.FormatProfile
 import kotlinx.coroutines.launch
@@ -20,6 +20,8 @@ class ProfileInformationViewModel() : ViewModel(){
     val accessUserData = AccessUserData()
 
     val formatProfile = FormatProfile()
+
+    private val navigationFunctions = NavigationFunctions()
 
     var showNavMenu by mutableStateOf(
         false
@@ -106,11 +108,13 @@ class ProfileInformationViewModel() : ViewModel(){
 
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
 
-        val navigationFunctions = navigationFunctions()
+        val navigationFunctions = NavigationFunctions()
 
         return listOf(
             NavigationOptions("Homepage")
-            { navigationFunctions.goToHomepage(navController) }
+                { navigationFunctions.goToHomepage(navController) },
+            NavigationOptions("Study Centre")
+                { navigationFunctions.goToStudyCentre(navController) }
         )
     }
 

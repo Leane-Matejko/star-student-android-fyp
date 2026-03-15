@@ -60,7 +60,7 @@ fun Homepage(navController: NavController){
                 .padding(padding)
         ) {
             item{
-                HomepageContent(viewModel)
+                HomepageContent(viewModel, navController)
             }
         }
 
@@ -76,7 +76,7 @@ fun Homepage(navController: NavController){
 }
 
 @Composable
-fun HomepageContent(viewModel: HomepageViewModel) {
+fun HomepageContent(viewModel: HomepageViewModel, navController : NavController) {
 
     val viewModel = viewModel
 
@@ -152,15 +152,17 @@ fun HomepageContent(viewModel: HomepageViewModel) {
         spacer(Modifier.height(20.dp))
 
 
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){
+            viewModel.navStudyCentre(navController)
+        }
         spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
         spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
         spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
         spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
 
 
     }

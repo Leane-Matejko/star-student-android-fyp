@@ -1,6 +1,7 @@
 package com.example.starstudent.core.view.uiComponents
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -181,7 +182,12 @@ fun smallProgressWidget(
 /* UI component for the large navigation widget.
 */
 @Composable
-fun largeNavWidget(repIcon: ImageVector, title: String, description: String, modifier: Modifier = Modifier){
+fun largeNavWidget(
+    repIcon: ImageVector,
+    title: String,
+    description: String,
+    modifier: Modifier = Modifier,
+    navOnClick: () -> Unit){
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -191,6 +197,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String, mod
             )
             .height(100.dp)
             .padding(20.dp)
+            .clickable{navOnClick()}
             .testTag("largeNavWidgetBackground"),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
