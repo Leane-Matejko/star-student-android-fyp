@@ -74,10 +74,8 @@ class HomepageViewModel : ViewModel(){
         val navigationFunctions = navigationFunctions()
 
         return listOf(
-            NavigationOptions("Homepage")
-                { navigationFunctions.goToHomepage(navController) },
             NavigationOptions("Profile Settings")
-                {navigationFunctions.goToProfile(navController)}
+                {navigationFunctions.goToHomepage(navController)}
         )
     }
 
@@ -90,10 +88,22 @@ class HomepageViewModel : ViewModel(){
                     .email
                     .getEmail())!!
 
-            username = curUserInfo[0].username
+            if(curUserInfo.isNotEmpty()){
+                username = curUserInfo[0].username
+            }else {
+                username = CurrentApplication.instance.user.email.getEmail()
+                curUserInfo = listOf(
+                    (UserInfo
+                        (CurrentApplication
+                        .instance
+                        .user.email
+                        .getEmail(),
+                        "default",
+                        0,
+                        false)
+                            ))
+            }
         }
-
-        Log.d("TEST USER", username)
     }
 
     fun showNavMenu()

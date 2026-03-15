@@ -1,6 +1,5 @@
 package com.example.starstudent.core.view.uiComponents
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +19,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -36,10 +35,6 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -47,13 +42,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.core.domain.navigation.NavigationOptions
-import com.example.starstudent.R as myAppRes
 
 /* UI component for backgrounds.
 */
@@ -83,7 +76,7 @@ fun mediumIconWidget(
                 .aspectRatio(1f)
                 .background(
                     color = MaterialTheme.colorScheme.primary,
-                    shape = RoundedCornerShape(24.dp)
+                    shape = RoundedCornerShape(36.dp)
                 )
                 .padding(horizontal = 20.dp, vertical = 36.dp)
                 .testTag("mediumIconWidgetBackground"),
@@ -117,7 +110,7 @@ fun mediumIconWidget(
                 )
             }
 
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(text = label,
                     modifier = Modifier
@@ -125,6 +118,7 @@ fun mediumIconWidget(
                         .testTag("mediumIconWidgetText"),
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.background
             )
         }
@@ -133,7 +127,12 @@ fun mediumIconWidget(
 /* UI component for a small progress widget.
 */
 @Composable
-fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, modifier: Modifier = Modifier){
+fun smallProgressWidget(
+    numCompleteTasks: Int,
+    numTasks: Int,
+    label: String,
+    textSize:Int,
+    modifier: Modifier = Modifier){
     Box(
         modifier = modifier
             .aspectRatio(1f)
@@ -158,6 +157,7 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, mod
             Text(
                 text = label,
                 color = MaterialTheme.colorScheme.background,
+                fontSize = textSize.sp,
                 modifier = Modifier
                     .testTag("smallProgressWidgetNameLabel")
             )
@@ -242,9 +242,8 @@ fun avatarWindow(
             .background(Brush.verticalGradient(listOf(MaterialTheme.colorScheme.background,MaterialTheme.colorScheme.secondary)),
                 shape = RoundedCornerShape(15f
                 ))
-//            .fillMaxWidth(0.70f)
-//            .fillMaxHeight(1f)
             .height(300.dp)
+            .width(160.dp)
             .padding(5.dp, 2.dp)
             .testTag("avatarWindowBackground")
 
@@ -319,7 +318,7 @@ fun inputField(label: String,
                seqNumber: Int?,
                onValueChange: (String) -> Unit){
 
-    var info by remember { mutableStateOf("") }
+//    var info by remember { mutableStateOf("") }
 
     TextField(
         value = value,
@@ -345,7 +344,7 @@ fun numInputField(
                 keyboardType: KeyboardType,
                 onValueChange: (String) -> Unit){
 
-    var info by remember { mutableStateOf("") }
+//    var info by remember { mutableStateOf("") }
 
     TextField(
         value = value,
@@ -386,6 +385,7 @@ fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
         Text(text = label,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .testTag("buttonLabel$seqNumber")
         )
@@ -445,9 +445,10 @@ fun TopBanner(
 
         IconButton(onClick = {profileOnClick()})
         {
-            Image(
-                painter = painterResource(myAppRes.drawable.profile_picture),
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Profile Picture",
+                tint = MaterialTheme.colorScheme.onSecondary,
                 modifier = Modifier
                     .size(40.dp)
                     .clip(CircleShape)
@@ -525,18 +526,6 @@ fun toggle(
 
             )
         )
-    }
-}
-
-@Composable
-fun closeButton(){
-    IconButton(onClick = {}) {
-        Icon(
-            modifier = Modifier
-                .testTag("closeButtonIcon"),
-            imageVector = Icons.Default.Close,
-            contentDescription = "Close",
-            tint = MaterialTheme.colorScheme.primary)
     }
 }
 

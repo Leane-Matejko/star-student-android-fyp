@@ -13,6 +13,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.unit.dp
 import com.example.starstudent.core.domain.MainActivity
 import com.example.starstudent.core.domain.TestActivity
+import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.TopBanner
 import com.example.starstudent.core.view.uiComponents.avatarWindow
@@ -140,7 +141,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
     }
 
@@ -149,7 +151,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
 
         composeTest.waitForIdle()
@@ -163,7 +166,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
 
         composeTest.waitForIdle()
@@ -177,7 +181,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
 
         composeTest.waitForIdle()
@@ -191,7 +196,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
 
         composeTest.waitForIdle()
@@ -391,7 +397,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -404,7 +414,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -420,7 +434,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -436,7 +454,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -452,7 +474,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -468,7 +494,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
