@@ -63,6 +63,10 @@ fun ProfileInformationScreen(navController: NavController){
     }
 
     viewModel.viewModelScope.launch{
+
+        viewModel.updateTime()
+        delay(60000 - System.currentTimeMillis() % 60000)
+
         while(true){
             viewModel.updateTime()
             delay(60000)

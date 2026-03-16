@@ -70,6 +70,7 @@ fun mediumIconWidget(
     quanIcon: ImageVector,
     repIcon: ImageVector,
     label: String,
+    onClick: () -> Unit,
     modifier: Modifier)
     {
         Column(
@@ -79,7 +80,8 @@ fun mediumIconWidget(
                     color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(36.dp)
                 )
-                .padding(horizontal = 20.dp, vertical = 36.dp)
+                .padding(start = 20.dp,end = 20.dp, top = 36.dp, bottom = 10.dp)
+                .clickable{onClick()}
                 .testTag("mediumIconWidgetBackground"),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
@@ -263,6 +265,34 @@ fun avatarWindow(
                 .align(Alignment.BottomCenter)
                 .testTag("avatarWindowLabel")
             )
+    }
+}
+
+/* UI component for avatar window.
+*/
+@Composable
+fun smallAvatarWindow(
+    prompt: String,
+    modifier: Modifier = Modifier){
+    Box(
+        modifier = modifier
+            .background(Brush.verticalGradient(listOf(MaterialTheme.colorScheme.background,MaterialTheme.colorScheme.secondary)),
+                shape = RoundedCornerShape(15f
+                ))
+            .height(150.dp)
+            .width(160.dp)
+            .padding(5.dp, 2.dp)
+            .testTag("avatarWindowBackground")
+
+    ) {
+        Text(
+            text = prompt,
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 12.sp,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .testTag("avatarWindowLabel")
+        )
     }
 }
 

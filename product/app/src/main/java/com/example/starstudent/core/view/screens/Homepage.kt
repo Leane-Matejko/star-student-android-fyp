@@ -24,13 +24,11 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
-import com.example.starstudent.core.view.uiComponents.navigationDropDown
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.spacer
 import kotlinx.coroutines.delay
@@ -67,6 +65,10 @@ fun Homepage(navController: NavController){
     }
 
     viewModel.viewModelScope.launch{
+
+        viewModel.updateTime()
+        delay(60000 - System.currentTimeMillis() % 60000)
+
         while(true){
             viewModel.updateTime()
             delay(60000)
@@ -123,6 +125,7 @@ fun HomepageContent(viewModel: HomepageViewModel, navController : NavController)
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Sleep",
+                    onClick = {},
                     modifier = Modifier
                         .weight(1f)
                 )
@@ -130,6 +133,7 @@ fun HomepageContent(viewModel: HomepageViewModel, navController : NavController)
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Sleep",
+                    onClick = {},
                     modifier = Modifier
                         .weight(1f)
                 )

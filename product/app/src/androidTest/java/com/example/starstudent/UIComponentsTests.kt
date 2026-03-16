@@ -63,6 +63,7 @@ class UIComponentsTests {
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Test",
+                    onClick = {},
                     modifier = Modifier
                 )
 
@@ -76,6 +77,7 @@ class UIComponentsTests {
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Test",
+                    onClick = {},
                     modifier = Modifier
                 )
 
@@ -94,6 +96,7 @@ class UIComponentsTests {
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Test",
+                    onClick = {},
                     modifier = Modifier
                 )
 
@@ -111,6 +114,7 @@ class UIComponentsTests {
             mediumIconWidget(Icons.Filled.Star,
                 Icons.Filled.Star,
                 "Test",
+                onClick = {},
                 modifier = Modifier)
         }
 
@@ -126,6 +130,7 @@ class UIComponentsTests {
             mediumIconWidget(Icons.Filled.Star,
                 Icons.Filled.Star,
                 "Test",
+                onClick = {},
                 modifier = Modifier)
         }
 

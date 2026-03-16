@@ -22,6 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.view.uiComponents.BannerFormat
@@ -29,25 +32,30 @@ import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
+import com.example.starstudent.core.view.uiComponents.smallAvatarWindow
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.textField
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun StudyCentreScreen(navController: NavController){
+
+    val viewModel = viewModel<StudyCentreViewModel>()
+
     BannerFormat(
-        username = "viewModel.username",
-        date = "viewModel.curDate",
+        username = viewModel.username,
+        date = viewModel.curDate,
         profileOnClick = {
-//            viewModel.profileNav(navController)
+            viewModel.profileNav(navController)
                          },
-        list = listOf(NavigationOptions("Homepage"){}),// viewModel.getNavigationMenu(navController),
-        showNav = false,
-//            viewModel.showNavMenu,
+        list = viewModel.getNavigationMenu(navController),
+        showNav = viewModel.showNavMenu,
         navOnClick = {
-//            viewModel.showNavMenu()
+            viewModel.showNavMenu()
                      },
         onDismissNav = {
-//            viewModel.dismissNavMenu()
+            viewModel.dismissNavMenu()
         }
     ) { padding ->
         LazyColumn(
@@ -59,6 +67,17 @@ fun StudyCentreScreen(navController: NavController){
             }
         }
 
+    }
+
+    viewModel.viewModelScope.launch{
+
+        viewModel.updateTime()
+        delay(60000 - System.currentTimeMillis() % 60000)
+
+        while(true){
+            viewModel.updateTime()
+            delay(60000)
+        }
     }
 }
 
@@ -84,29 +103,47 @@ fun StudyCentreContent(){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(240.dp),
+                .height(380.dp),
             horizontalArrangement = Arrangement.Start
         ) {
-
-            avatarWindow(
-                "Leane, Actions",
-                modifier = Modifier
-            )
-
-            Spacer(modifier = Modifier.width(10.dp))
 
             Column(
                 modifier = Modifier.width(160.dp )
             ){
+                avatarWindow(
+                    "Leane, Actions",
+                    modifier = Modifier
+                )
+
                 button(
                     "Start Session",
                     1
                 ) { }
+            }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column(
+                modifier = Modifier.width(160.dp )
+            ){
+
 
                 mediumIconWidget(
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Study Time",
+                    onClick = {},
+                    modifier = Modifier
+                        .weight(1f)
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                mediumIconWidget(
+                    Icons.Filled.Star,
+                    Icons.Filled.Star,
+                    "Study Space Detector",
+                    onClick = {},
                     modifier = Modifier
                         .weight(1f)
                 )
@@ -162,7 +199,6 @@ fun StudyCentreContent(){
                     color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(24.dp)
                 )
-//                .height(300.dp)
                 .padding(all = 20.dp)
         ){
 
