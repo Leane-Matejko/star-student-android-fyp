@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -22,19 +21,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.view.uiComponents.BannerFormat
-import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
-import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.smallAvatarWindow
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.textField
+import com.example.starstudent.core.view.uiComponents.varLargeNavWidget
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -63,7 +59,7 @@ fun StudyCentreScreen(navController: NavController){
                 .padding(padding)
         ) {
             item{
-                StudyCentreContent()
+                StudyCentreContent(viewModel)
             }
         }
 
@@ -82,7 +78,7 @@ fun StudyCentreScreen(navController: NavController){
 }
 
 @Composable
-fun StudyCentreContent(){
+fun StudyCentreContent(viewModel: StudyCentreViewModel){
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Companion.CenterHorizontally,
@@ -98,57 +94,88 @@ fun StudyCentreContent(){
             color = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(380.dp),
+                .padding(10.dp)
+                .height(120.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+
+            varLargeNavWidget(
+                repIcon = Icons.Filled.Star,
+                title = "Study Space Detector",
+                titleSize = 16,
+                description = "Not Detected",
+                modifier = Modifier
+            ) { }
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(viewModel.studySessionLength.dp),
             horizontalArrangement = Arrangement.Start
         ) {
 
             Column(
-                modifier = Modifier.width(160.dp )
+                modifier = Modifier
+                    .background(
+                        color = MaterialTheme.colorScheme.secondary,
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .padding(all = 20.dp)
+                ,
+                verticalArrangement =  Arrangement.spacedBy(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ){
-                avatarWindow(
-                    "Leane, Actions",
-                    modifier = Modifier
+
+                Text(
+                    text = "Study Session",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Left,
+                    color = MaterialTheme.colorScheme.primary
                 )
+
+                smallAvatarWindow(
+                    "Leane",
+                    modifier = Modifier,
+                    viewModel.studyingStatus
+                )
+
+                largeNavWidget(
+                    Icons.Filled.Star,
+                    "Session Goals",
+                    "Placeholder",
+                    Modifier.fillMaxWidth()
+                ){ }
+
+                if(viewModel.showPauseButton()){
+                    button(
+                        viewModel.formatPauseSessionButton(),
+                        2
+                    ){viewModel.viewModelScope.launch {  viewModel.updatePauseSession()}}
+                }
 
                 button(
-                    "Start Session",
+                    viewModel.formatSessionButton(),
                     1
-                ) { }
-            }
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Column(
-                modifier = Modifier.width(160.dp )
-            ){
-
-
-                mediumIconWidget(
-                    Icons.Filled.Star,
-                    Icons.Filled.Star,
-                    "Study Time",
-                    onClick = {},
-                    modifier = Modifier
-                        .weight(1f)
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                mediumIconWidget(
-                    Icons.Filled.Star,
-                    Icons.Filled.Star,
-                    "Study Space Detector",
-                    onClick = {},
-                    modifier = Modifier
-                        .weight(1f)
-                )
+                ) { viewModel.viewModelScope.launch {viewModel.updateSessionStatus()}}
             }
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "Tasks",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Left,
+            color = MaterialTheme.colorScheme.primary
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -156,7 +183,7 @@ fun StudyCentreContent(){
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
 
             smallProgressWidget(
@@ -181,15 +208,6 @@ fun StudyCentreContent(){
             )
 
         }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        largeNavWidget(
-            Icons.Filled.Star,
-            "Goals for the session",
-            "Testingld;kjflkd;sjfld;asjflkd;sjf",
-            Modifier.fillMaxWidth()
-        ){ }
         
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -199,11 +217,12 @@ fun StudyCentreContent(){
                     color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(24.dp)
                 )
-                .padding(all = 20.dp)
+                .padding(all = 20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ){
 
             Text(
-                text = "History",
+                text = "Recent Study History",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Left,
@@ -212,44 +231,32 @@ fun StudyCentreContent(){
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            textField(
-                "askjhdfkjdshf",
-                "dskf;lsdkf;lskf",
-                50
-            )
+            viewModel.viewModelScope.launch {  viewModel.getRecentStudySessions()}
 
-            Spacer(modifier = Modifier.height(10.dp))
+            viewModel.recentStudySessions.forEach { option ->
 
-            textField(
-                "askjhdfkjdshf",
-                "dskf;lsdkf;lskf",
-                50
-            )
+                viewModel.viewModelScope.launch {
+                    val pausedSessions = viewModel.getPausedSessions(option.id)
+                    viewModel.getTotalPausedTime(pausedSessions)}
 
-            Spacer(modifier = Modifier.height(10.dp))
+                textField(
+                    viewModel.getLongToDate(option.startTime),
+                    viewModel.calculateTotalStudyTime(
+                        sessionId = option.id,
+                        startTime = option.startTime,
+                        endTime = option.endTime
+                    ),
+                    50
+                )
+            }
 
-            textField(
-                "askjhdfkjdshf",
-                "dskf;lsdkf;lskf",
-                50
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            textField(
-                "askjhdfkjdshf",
-                "dskf;lsdkf;lskf",
-                50
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            textField(
-                "askjhdfkjdshf",
-                "dskf;lsdkf;lskf",
-                50
-            )
+            viewModel.viewModelScope.launch {
+                while(viewModel.sessionStatus && !viewModel.isSessionPause){
+                    viewModel.updateTimer()
+                    viewModel.updateStudyingStatus()
+                    delay(1000)
+                }
+            }
         }
-
     }
 }

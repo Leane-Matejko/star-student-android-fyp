@@ -239,6 +239,65 @@ fun largeNavWidget(
     }
 }
 
+/* UI component for the large navigation widget.
+*/
+@Composable
+fun varLargeNavWidget(
+    repIcon: ImageVector,
+    title: String,
+    titleSize: Int,
+    description: String,
+    modifier: Modifier = Modifier,
+    navOnClick: () -> Unit){
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(24.dp)
+            )
+            .height(100.dp)
+            .padding(20.dp)
+            .clickable{navOnClick()}
+            .testTag("largeNavWidgetBackground"),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Icon(
+            imageVector =repIcon,
+            contentDescription = "Representation Icon",
+            modifier = Modifier
+                .size(44.dp)
+                .testTag("largeNavWidgetRepIcon"),
+            tint = MaterialTheme.colorScheme.background
+
+        )
+
+        Spacer(modifier = Modifier.width(20.dp))
+
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                text = title,
+                color = MaterialTheme.colorScheme.background,
+                fontSize = titleSize.sp,
+                fontWeight = FontWeight.Bold ,
+                modifier = Modifier
+                    .testTag("largeNavWidgetTitleLabel")
+            )
+
+            Text(
+                text = description,
+                color = MaterialTheme.colorScheme.secondary,
+                fontSize = 14.sp,
+                modifier = Modifier
+                    .testTag("largeNavWidgetDescriptionLabel")
+            )
+        }
+    }
+}
+
 
 /* UI component for avatar window.
 */
@@ -249,7 +308,7 @@ fun avatarWindow(
     Box(
         modifier = modifier
             .background(Brush.verticalGradient(listOf(MaterialTheme.colorScheme.background,MaterialTheme.colorScheme.secondary)),
-                shape = RoundedCornerShape(15f
+                shape = RoundedCornerShape(24.dp
                 ))
             .height(300.dp)
             .width(160.dp)
@@ -273,18 +332,31 @@ fun avatarWindow(
 @Composable
 fun smallAvatarWindow(
     prompt: String,
-    modifier: Modifier = Modifier){
+    modifier: Modifier = Modifier,
+    status: String){
     Box(
         modifier = modifier
             .background(Brush.verticalGradient(listOf(MaterialTheme.colorScheme.background,MaterialTheme.colorScheme.secondary)),
-                shape = RoundedCornerShape(15f
+                shape = RoundedCornerShape(24.dp
                 ))
             .height(150.dp)
-            .width(160.dp)
+            .fillMaxWidth()
+//            .width(160.dp)
             .padding(5.dp, 2.dp)
             .testTag("avatarWindowBackground")
 
     ) {
+        Text(
+            text = status,
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .testTag("avatarWindowLabel")
+        )
+
         Text(
             text = prompt,
             color = MaterialTheme.colorScheme.primary,
