@@ -39,6 +39,10 @@ class StudySession {
         )
     }
 
+    fun getSessionCountDown(): Int{
+        return sessionCountDown
+    }
+
     fun increaseSessionCountdown(){
         sessionCountDown += 1
     }

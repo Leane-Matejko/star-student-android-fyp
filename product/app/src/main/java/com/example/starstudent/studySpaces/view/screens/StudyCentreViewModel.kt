@@ -23,7 +23,6 @@ import java.util.Locale
 
 class StudyCentreViewModel : ViewModel() {
 
-
     //Banner Variables
     private val bannerFunctions = BannerFunctions()
 
@@ -213,6 +212,7 @@ class StudyCentreViewModel : ViewModel() {
 
     fun increaseSessionCountdown(){
         studySession.increaseSessionCountdown()
+        sessionCountDown = studySession.getSessionCountDown()
     }
 
 
