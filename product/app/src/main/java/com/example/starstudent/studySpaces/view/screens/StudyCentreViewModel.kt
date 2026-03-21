@@ -1,24 +1,24 @@
 package com.example.starstudent.studySpaces.view.screens
 
 import android.icu.text.SimpleDateFormat
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.example.starstudent.core.data.DatabaseSingleton
+import com.example.starstudent.core.domain.BannerFunctions
 import com.example.starstudent.core.domain.CurrentApplication
-import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.core.domain.navigation.NavigationOptions
+import com.example.starstudent.studySpaces.data.AccessPausedSessions
+import com.example.starstudent.studySpaces.data.AccessSavedLocations
+import com.example.starstudent.studySpaces.data.AccessStudySessions
 import com.example.starstudent.studySpaces.data.entities.PausedSessions
 import com.example.starstudent.studySpaces.data.entities.StudySessions
 import com.example.starstudent.studySpaces.domain.Timer
 import com.example.starstudent.userAccounts.data.AccessUserData
 import com.example.starstudent.studySpaces.data.entities.SavedLocations
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import kotlinx.coroutines.delay
+import com.example.starstudent.studySpaces.domain.LocationDetector
+import com.example.starstudent.studySpaces.domain.StudySession
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
@@ -26,19 +26,23 @@ import java.util.Locale
 
 class StudyCentreViewModel : ViewModel() {
 
-    private val navigationFunctions = NavigationFunctions()
 
-    val timer = Timer()
+    //Banner Variables
+    private val bannerFunctions = BannerFunctions()
 
-    val locationManager = LocationServices.getFusedLocationProviderClient(CurrentApplication.instance)
+    //Location Detector Variable
+    private val locationDetector = LocationDetector()
+
+    //Study Session Variables
+    private val accessSavedLocations = AccessSavedLocations()
+
+    private val accessPausedSessions = AccessPausedSessions()
+
+    private val accessStudySessions = AccessStudySessions()
 
     private val accessUserData = AccessUserData()
 
-    private val savedLocationsDAO =
-        DatabaseSingleton
-            .getDatabase(
-                CurrentApplication.instance
-            ).savedLocationsDao()
+    private val studySession = StudySession()
 
     var locationAccess by mutableStateOf(
         accessUserData.getUserLocationAccess()
@@ -46,14 +50,6 @@ class StudyCentreViewModel : ViewModel() {
 
     var sessionStatus by mutableStateOf(
         false
-    )
-
-    var longitude  by mutableStateOf(
-        0.0
-    )
-
-    var latitude  by mutableStateOf(
-        0.0
     )
 
     var timerClock by mutableStateOf(
@@ -87,21 +83,9 @@ class StudyCentreViewModel : ViewModel() {
         ))
     )
 
-    var studySessionLength by mutableStateOf(
+    var studySessionContainerLength by mutableStateOf(
         480
     )
-
-    private val studySessionsDAO = DatabaseSingleton
-        .getDatabase(
-            CurrentApplication
-                .instance)
-        .studySessionsDao()
-
-    private val pausedSessionsDAO = DatabaseSingleton
-        .getDatabase(
-            CurrentApplication
-                .instance)
-        .pausedSessionsDao()
 
     var username by mutableStateOf(
         CurrentApplication
@@ -147,10 +131,6 @@ class StudyCentreViewModel : ViewModel() {
         1
     )
 
-    var newLabel by mutableStateOf(
-        ""
-    )
-
     var withinStudySpace by mutableStateOf(
         false
     )
@@ -165,7 +145,7 @@ class StudyCentreViewModel : ViewModel() {
         }
     }
 
-    fun hideUpdateLocationDialog(){
+    fun dismissUpdateLocationDialog(){
         showUpdateLocationDialog = false
     }
 
@@ -192,9 +172,8 @@ class StudyCentreViewModel : ViewModel() {
     }
 
     suspend fun getSavedLocations(){
-        savedLocations = savedLocationsDAO.getSavedLocations(
-            getUser()
-        )
+        accessSavedLocations.getSavedLocations(getUser())
+        savedLocations = accessSavedLocations.getCurrentSavedLocationsList()
     }
 
     suspend fun updateSavedLocationLabel(
@@ -203,9 +182,9 @@ class StudyCentreViewModel : ViewModel() {
 
         val newLabel = getUpdatedLabel(id)
         if(newLabel.isNotEmpty()){
-            savedLocationsDAO.updateSavedLabel(
+            accessSavedLocations.updateSavedLocationLabel(
                 id,
-                CurrentApplication.instance.user.email.getEmail(),
+                getUser(),
                 newLabel
             )
             getSavedLocations()
@@ -215,60 +194,36 @@ class StudyCentreViewModel : ViewModel() {
     suspend fun updateSavedLocation(
         id: Int
     ){
-        getLocation()
-        savedLocationsDAO.updateSavedLocation(
+        locationDetector.getLocation()
+        accessSavedLocations.updateSavedLocation(
             id,
-            CurrentApplication.instance.user.email.getEmail(),
-            longitude,
-            latitude
+            getUser(),
+            locationDetector.getLongitude(),
+            locationDetector.getLatitude()
         )
         getSavedLocations()
     }
 
-    fun getLocationData() : String{
-        if(locationAccess){
-            updateLocation = true
-            return "Location"
-        }
-        updateLocation = false
-        return "Location Access: Off"
-    }
-
     fun updateTimer(){
-        timerClock =
-            "%02d:%02d:%02d".format(
-                timer.getHours(), timer.getMinutes(), timer.getSeconds()
-            )
+        timerClock = studySession.getTimerClock()
     }
 
     fun increaseSessionCountdown(){
-        sessionCountDown += 1
-        Log.d("COUNTDOWN", sessionCountDown.toString())
+        studySession.increaseSessionCountdown()
     }
 
+
+    //Banner Logic
     fun updateTime(){
-        curDate = LocalDateTime
-            .now()
-            .format(
-                DateTimeFormatter
-                    .ofPattern(
-                        "EEE d MMMM, HH:mm",
-                        Locale.getDefault()
-                    )
-            )
+        curDate = bannerFunctions.updateTime()
     }
 
-    fun getCurDateTime() : Long{
-        return System.currentTimeMillis()
+    fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
+        return bannerFunctions.getNavigationMenu(navController)
     }
 
-    fun updateStudyingStatus(){
-        studyingStatus = if(sessionStatus){
-            "Studying..." +
-                    "\n " + timerClock
-        }else{
-            "Let's Study"
-        }
+    fun profileNav(navController: NavController){
+        bannerFunctions.profileNav(navController)
     }
 
     fun showNavMenu()
@@ -277,24 +232,25 @@ class StudyCentreViewModel : ViewModel() {
     fun dismissNavMenu()
     {showNavMenu = false }
 
+    fun updateStudyingStatus(){
+        studyingStatus = if(studySession.getSessionStatus()){
+            "Studying..." +
+                    "\n " + studySession.getTimerClock()
+        }else{
+            "Let's Study"
+        }
+    }
+
     suspend fun updateSessionStatus(){
-        if(!sessionStatus){
-            startSession()
-            timer.resetTimer()
-            timer.startTimer()
-            studySessionLength = 540
-        }
-        else{
-            if(isSessionPause){
-                unpauseSession()
-                isSessionPause = !isSessionPause
-            }
-            endSession(getCurrentSession()[0])
-            studySessionLength = 480
-        }
-        sessionStatus = !sessionStatus
+        studySession.updateSessionStatus(getUser())
+        sessionStatus = studySession.getSessionStatus()
         updateStudyingStatus()
-        showSessionPause =! showSessionPause
+        showSessionPause = studySession.getShowSessionPause()
+        studySessionContainerLength = if(sessionStatus){
+            540
+        }else{
+            480
+        }
     }
 
     fun formatPauseSessionButton() : String{
@@ -311,35 +267,8 @@ class StudyCentreViewModel : ViewModel() {
 
 
     suspend fun updatePauseSession(){
-        if(!isSessionPause){
-            val currentSession = getCurrentSession()
-            if(currentSession.isNotEmpty()){
-                pausedSessionsDAO.pauseSession(
-                    PausedSessions(
-                        sessionId = currentSession[0].id,
-                        startTime = getCurDateTime(),
-                        endTime = 0L,
-                    )
-                )
-                timer.pauseTimer()
-            }
-        }else{
-            unpauseSession()
-            timer.resumeTimer()
-        }
-        isSessionPause = !isSessionPause
-    }
-
-    suspend fun unpauseSession(){
-        val currentPausedSession = getCurrentPausedSession()
-        if(currentPausedSession.isNotEmpty()){
-            pausedSessionsDAO.unpauseSession(
-                currentPausedSession[0].id,
-                currentPausedSession[0].sessionId,
-                currentPausedSession[0].startTime,
-                endTime = getCurDateTime()
-            )
-        }
+        studySession.updatePauseSession()
+        isSessionPause = studySession.getIsSessionPause()
     }
 
     fun formatSessionButton() : String{
@@ -353,85 +282,22 @@ class StudyCentreViewModel : ViewModel() {
         return CurrentApplication.instance.user.email.getEmail()
     }
 
-//    var checked = false
-
     suspend fun checkLocation(){
-        var checked = false
+//        var checked = false
         getSavedLocations()
-        for (location in savedLocations){
-            if((longitude <= (location.longitude + 0.0000350)) &&
-                (longitude >= (location.longitude - 0.0000350)) &&
-                (latitude <= (location.latitude + 0.0000350)) &&
-                (latitude >= (location.latitude - 0.0000350))
-                ){
-                checked = true
-                break
-            }
-        }
-
-        withinStudySpace = checked
-
-        studySpaceDetector = if (withinStudySpace){
-            "Study Space Detected"
-        }else{
-            "Not Detected"
-        }
-    }
-
-    suspend fun getCurrentSession(): List<StudySessions>{
-        return studySessionsDAO.getCurrentSession(
-            getUser()
-        )
-    }
-
-    suspend fun getCurrentPausedSession(): List<PausedSessions>{
-        return pausedSessionsDAO.getCurrentPausedSession(
-            getCurrentSession()[0].id
-        )
-    }
-
-    suspend fun startCurrentSession(){
-        studySessionsDAO.startSession(
-            StudySessions(
-                user = getUser(),
-                startTime = getCurDateTime(),
-                endTime = 0L
-            )
-        )
-    }
-
-    suspend fun endSession(
-        currentSession: StudySessions
-    ){
-        studySessionsDAO.endSession(
-            currentSession.id,
-            currentSession.user,
-            currentSession.startTime,
-            endTime = getCurDateTime()
-        )
-
-        timer.resetTimer()
-        sessionCountDown = 1
-    }
-
-    suspend fun startSession(){
-        if(getCurrentSession().isEmpty()){
-            startCurrentSession()
-            updateTimer()
-        }else {
-            endSession(getCurrentSession()[0])
-            startCurrentSession()
-        }
+        locationDetector.checkLocation(savedLocations)
+        withinStudySpace = locationDetector.getWithinStudySpace()
+        studySpaceDetector = locationDetector.studyDetectorFormatted()
     }
 
     suspend fun getRecentStudySessions(){
-        recentStudySessions = studySessionsDAO.getRecentSessions(
+        recentStudySessions = accessStudySessions.getRecentStudySessions(
             getUser()
         )
     }
 
     suspend fun getPausedSessions(sessionId: Int) : List<PausedSessions>{
-        return pausedSessionsDAO.getRecentSessions(sessionId)
+        return accessPausedSessions.getPausedSessions(sessionId)
     }
 
     fun calculateTotalStudyTime(
@@ -448,18 +314,6 @@ class StudyCentreViewModel : ViewModel() {
             return (session / (1000*60*60))
         }
         return 0
-    }
-
-    suspend fun totalPausedTime(sessionID: Int) : Long{
-        val pausedSessionList = pausedSessionsDAO.getCurrentPausedSession(sessionID)
-        if (pausedSessionList.isNotEmpty()){
-            var totalPausedTime = 0L
-            pausedSessionList.forEach { session ->
-                totalPausedTime += session.endTime - session.startTime
-            }
-            return totalPausedTime
-        }
-        return 0L
     }
 
     fun getMinutes(endTime: Long, startTime: Long) : Long{
@@ -488,31 +342,7 @@ class StudyCentreViewModel : ViewModel() {
         }
     }
 
-    fun getLocation(){
-        locationManager.lastLocation
-            .addOnSuccessListener { location ->
-                if (location != null) {
-                    latitude = location.latitude
-                    longitude = location.longitude
-                }
-            }
-            .addOnFailureListener {
-                locationAccess = false
-                Log.d("GPS LAT", "Failed to get location.")
-            }
-    }
-    fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
-
-        return listOf(
-            NavigationOptions("Homepage")
-            {navigationFunctions.goToHomepage(navController)},
-            NavigationOptions("Profile Settings")
-            {navigationFunctions.goToProfile(navController)}
-        )
-    }
-
-    fun profileNav(navController: NavController){
-        Log.d("TEST", "Navigating to the profile...")
-        navigationFunctions.goToProfile(navController)
+    fun getLocation() {
+        locationDetector.getLocation()
     }
 }

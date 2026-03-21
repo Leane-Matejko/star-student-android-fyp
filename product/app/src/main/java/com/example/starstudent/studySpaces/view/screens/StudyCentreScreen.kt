@@ -1,7 +1,5 @@
 package com.example.starstudent.studySpaces.view.screens
 
-import android.R
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +15,6 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -34,16 +31,10 @@ import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
-import com.example.starstudent.core.view.uiComponents.numInputField
 import com.example.starstudent.core.view.uiComponents.smallAvatarWindow
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.textField
-import com.example.starstudent.core.view.uiComponents.toggle
 import com.example.starstudent.core.view.uiComponents.varLargeNavWidget
-import com.example.starstudent.userAccounts.view.screens.ProfileInformationViewModel
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -133,7 +124,7 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(viewModel.studySessionLength.dp),
+                .height(viewModel.studySessionContainerLength.dp),
             horizontalArrangement = Arrangement.Start
         ) {
 
@@ -272,7 +263,7 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
 
     if(viewModel.showUpdateLocationDialog) {
         Dialog(
-            onDismissRequest = {viewModel.hideUpdateLocationDialog()}
+            onDismissRequest = {viewModel.dismissUpdateLocationDialog()}
         ) {
             viewModel.viewModelScope.launch {
                 viewModel.getSavedLocations()
@@ -309,32 +300,45 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
                     viewModel.increaseSessionCountdown()
                 }
                 delay(60000)
+            } else {
+                delay(60000)
             }
         }
-
+    }
+    LaunchedEffect(Unit) {
         //Checked every 10 seconds, checks if the user is within a Study Space
-        while(isActive){
-            if(viewModel.locationAccess){
+        while (isActive) {
+            if (viewModel.locationAccess) {
                 viewModel.getLocation()
                 viewModel.checkLocation()
                 delay(10000)
+            } else {
+                delay(10000)
             }
         }
-
+    }
+    LaunchedEffect(Unit) {
         //checked every second during a session that has not been paused
-        while(isActive){
-            if(viewModel.sessionStatus &&
-                !viewModel.isSessionPause){
+        while (isActive) {
+            if (viewModel.sessionStatus &&
+                !viewModel.isSessionPause
+            ) {
                 viewModel.updateTimer()
                 viewModel.updateStudyingStatus()
                 delay(1000)
+            } else {
+                delay(1000)
             }
         }
+    }
+    LaunchedEffect(Unit) {
 
         while(isActive){
             if(viewModel.updateLocation &&
                 viewModel.locationAccess){
                 viewModel.updateLocationAccess()
+                delay(1000)
+            }else{
                 delay(1000)
             }
         }
