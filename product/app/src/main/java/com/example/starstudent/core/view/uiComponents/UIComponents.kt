@@ -1,7 +1,7 @@
 package com.example.starstudent.core.view.uiComponents
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -19,11 +20,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -33,10 +36,6 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -44,12 +43,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.example.starstudent.R as myAppRes
+import com.example.starstudent.core.domain.navigation.NavigationOptions
 
 /* UI component for backgrounds.
 */
@@ -72,6 +70,7 @@ fun mediumIconWidget(
     quanIcon: ImageVector,
     repIcon: ImageVector,
     label: String,
+    onClick: () -> Unit,
     modifier: Modifier)
     {
         Column(
@@ -79,9 +78,10 @@ fun mediumIconWidget(
                 .aspectRatio(1f)
                 .background(
                     color = MaterialTheme.colorScheme.primary,
-                    shape = RoundedCornerShape(24.dp)
+                    shape = RoundedCornerShape(36.dp)
                 )
-                .padding(horizontal = 20.dp, vertical = 36.dp)
+                .padding(start = 20.dp,end = 20.dp, top = 36.dp, bottom = 10.dp)
+                .clickable{onClick()}
                 .testTag("mediumIconWidgetBackground"),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
@@ -113,7 +113,7 @@ fun mediumIconWidget(
                 )
             }
 
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(text = label,
                     modifier = Modifier
@@ -121,6 +121,7 @@ fun mediumIconWidget(
                         .testTag("mediumIconWidgetText"),
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.background
             )
         }
@@ -129,7 +130,12 @@ fun mediumIconWidget(
 /* UI component for a small progress widget.
 */
 @Composable
-fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, modifier: Modifier = Modifier){
+fun smallProgressWidget(
+    numCompleteTasks: Int,
+    numTasks: Int,
+    label: String,
+    textSize:Int,
+    modifier: Modifier = Modifier){
     Box(
         modifier = modifier
             .aspectRatio(1f)
@@ -154,6 +160,7 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, mod
             Text(
                 text = label,
                 color = MaterialTheme.colorScheme.background,
+                fontSize = textSize.sp,
                 modifier = Modifier
                     .testTag("smallProgressWidgetNameLabel")
             )
@@ -177,7 +184,12 @@ fun smallProgressWidget(numCompleteTasks: Int, numTasks: Int, label: String, mod
 /* UI component for the large navigation widget.
 */
 @Composable
-fun largeNavWidget(repIcon: ImageVector, title: String, description: String, modifier: Modifier = Modifier){
+fun largeNavWidget(
+    repIcon: ImageVector,
+    title: String,
+    description: String,
+    modifier: Modifier = Modifier,
+    navOnClick: () -> Unit){
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -187,6 +199,7 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String, mod
             )
             .height(100.dp)
             .padding(20.dp)
+            .clickable{navOnClick()}
             .testTag("largeNavWidgetBackground"),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -226,6 +239,65 @@ fun largeNavWidget(repIcon: ImageVector, title: String, description: String, mod
     }
 }
 
+/* UI component for the large navigation widget.
+*/
+@Composable
+fun varLargeNavWidget(
+    repIcon: ImageVector,
+    title: String,
+    titleSize: Int,
+    description: String,
+    modifier: Modifier = Modifier,
+    navOnClick: () -> Unit){
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(24.dp)
+            )
+            .height(100.dp)
+            .padding(20.dp)
+            .clickable{navOnClick()}
+            .testTag("largeNavWidgetBackground"),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Icon(
+            imageVector =repIcon,
+            contentDescription = "Representation Icon",
+            modifier = Modifier
+                .size(44.dp)
+                .testTag("largeNavWidgetRepIcon"),
+            tint = MaterialTheme.colorScheme.background
+
+        )
+
+        Spacer(modifier = Modifier.width(20.dp))
+
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                text = title,
+                color = MaterialTheme.colorScheme.background,
+                fontSize = titleSize.sp,
+                fontWeight = FontWeight.Bold ,
+                modifier = Modifier
+                    .testTag("largeNavWidgetTitleLabel")
+            )
+
+            Text(
+                text = description,
+                color = MaterialTheme.colorScheme.secondary,
+                fontSize = 14.sp,
+                modifier = Modifier
+                    .testTag("largeNavWidgetDescriptionLabel")
+            )
+        }
+    }
+}
+
 
 /* UI component for avatar window.
 */
@@ -236,11 +308,10 @@ fun avatarWindow(
     Box(
         modifier = modifier
             .background(Brush.verticalGradient(listOf(MaterialTheme.colorScheme.background,MaterialTheme.colorScheme.secondary)),
-                shape = RoundedCornerShape(15f
+                shape = RoundedCornerShape(24.dp
                 ))
-//            .fillMaxWidth(0.70f)
-//            .fillMaxHeight(1f)
             .height(300.dp)
+            .width(160.dp)
             .padding(5.dp, 2.dp)
             .testTag("avatarWindowBackground")
 
@@ -253,6 +324,47 @@ fun avatarWindow(
                 .align(Alignment.BottomCenter)
                 .testTag("avatarWindowLabel")
             )
+    }
+}
+
+/* UI component for avatar window.
+*/
+@Composable
+fun smallAvatarWindow(
+    prompt: String,
+    modifier: Modifier = Modifier,
+    status: String){
+    Box(
+        modifier = modifier
+            .background(Brush.verticalGradient(listOf(MaterialTheme.colorScheme.background,MaterialTheme.colorScheme.secondary)),
+                shape = RoundedCornerShape(24.dp
+                ))
+            .height(150.dp)
+            .fillMaxWidth()
+//            .width(160.dp)
+            .padding(5.dp, 2.dp)
+            .testTag("avatarWindowBackground")
+
+    ) {
+        Text(
+            text = status,
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .testTag("avatarWindowLabel")
+        )
+
+        Text(
+            text = prompt,
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 12.sp,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .testTag("avatarWindowLabel")
+        )
     }
 }
 
@@ -315,7 +427,7 @@ fun inputField(label: String,
                seqNumber: Int?,
                onValueChange: (String) -> Unit){
 
-    var info by remember { mutableStateOf("") }
+//    var info by remember { mutableStateOf("") }
 
     TextField(
         value = value,
@@ -341,7 +453,7 @@ fun numInputField(
                 keyboardType: KeyboardType,
                 onValueChange: (String) -> Unit){
 
-    var info by remember { mutableStateOf("") }
+//    var info by remember { mutableStateOf("") }
 
     TextField(
         value = value,
@@ -382,6 +494,7 @@ fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
         Text(text = label,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .testTag("buttonLabel$seqNumber")
         )
@@ -391,9 +504,13 @@ fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
 
 @Composable
 fun TopBanner(
-        username : String,
-        date: String,
-        profileOnClick: () -> Unit
+    username : String,
+    date: String,
+    list: List<NavigationOptions>,
+    showNav: Boolean,
+    onDismissNav: () -> Unit,
+    navOnClick: () -> Unit,
+    profileOnClick: () -> Unit
     ){
     Row(
         modifier = Modifier
@@ -406,7 +523,7 @@ fun TopBanner(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navOnClick()}) {
                 Icon(
                     modifier = Modifier
                         .testTag("topBannerMenuIcon"),
@@ -437,9 +554,10 @@ fun TopBanner(
 
         IconButton(onClick = {profileOnClick()})
         {
-            Image(
-                painter = painterResource(myAppRes.drawable.profile_picture),
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Profile Picture",
+                tint = MaterialTheme.colorScheme.onSecondary,
                 modifier = Modifier
                     .size(40.dp)
                     .clip(CircleShape)
@@ -447,6 +565,11 @@ fun TopBanner(
             )
         }
 
+        navigationDropDown(
+            list,
+            showNav,
+            onDismissNav
+        )
     }
 }
 
@@ -455,6 +578,10 @@ fun BannerFormat(
     username : String,
     date: String,
     profileOnClick : () -> Unit,
+    list: List<NavigationOptions>,
+    showNav: Boolean,
+    navOnClick: () -> Unit,
+    onDismissNav: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ){
     Scaffold(
@@ -462,6 +589,10 @@ fun BannerFormat(
             TopBanner(
                 username,
                 date,
+                list,
+                showNav,
+                onDismissNav,
+                navOnClick,
                 profileOnClick
             )
         }
@@ -508,13 +639,36 @@ fun toggle(
 }
 
 @Composable
-fun closeButton(){
-    IconButton(onClick = {}) {
-        Icon(
-            modifier = Modifier
-                .testTag("closeButtonIcon"),
-            imageVector = Icons.Default.Close,
-            contentDescription = "Close",
-            tint = MaterialTheme.colorScheme.primary)
+fun navigationDropDown(
+    list: List<NavigationOptions>,
+    expanded : Boolean,
+    onDismiss: () -> Unit
+){
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = {onDismiss()},
+        modifier = Modifier
+            .heightIn(max= 340.dp)
+            .width(180.dp)
+            .background(MaterialTheme.colorScheme.primary)
+    ){
+        list.forEach{ option ->
+            DropdownMenuItem(
+                text = {
+                    Text(
+                        option.label,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 5.dp)
+                    )
+                },
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.primary)
+                ,
+                onClick = {option.navigation()}
+            )
+        }
     }
 }

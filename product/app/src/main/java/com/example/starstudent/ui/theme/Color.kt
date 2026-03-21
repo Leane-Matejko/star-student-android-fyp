@@ -16,7 +16,7 @@ val Yellow = Color(0xFFF2EAD0)
 
 val Peach = Color(0xFFF4C9B5)
 
-val Pink = Color(0xFFD98977)
+val Pink = Color(0xFFE8B1A5)
 
 val DarkPink = Color(0xFFD95F5F)
 

@@ -10,7 +10,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
-import com.example.starstudent.core.domain.navigation.Screens
+import com.example.starstudent.core.domain.navigation.NavigationOptions
+import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.userAccounts.data.entities.UserInfo
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -21,11 +22,17 @@ import java.util.Locale
 */
 class HomepageViewModel : ViewModel(){
 
+    private val navigationFunctions = NavigationFunctions()
     val userInfo = DatabaseSingleton
         .getDatabase(
             CurrentApplication
                 .instance)
         .userInfoDao()
+
+    var showNavMenu by mutableStateOf(
+        false
+    )
+        private set
 
     var username by mutableStateOf(
         CurrentApplication
@@ -62,6 +69,16 @@ class HomepageViewModel : ViewModel(){
     )
         private set
 
+    fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
+
+        return listOf(
+           NavigationOptions("Study Centre")
+                {navigationFunctions.goToStudyCentre(navController)},
+            NavigationOptions("Profile Settings")
+                {navigationFunctions.goToProfile(navController)}
+        )
+    }
+
     fun getUser(){
         viewModelScope.launch {
             curUserInfo = userInfo.getUserInfo(
@@ -71,12 +88,29 @@ class HomepageViewModel : ViewModel(){
                     .email
                     .getEmail())!!
 
-            username = curUserInfo[0].username
+            if(curUserInfo.isNotEmpty()){
+                username = curUserInfo[0].username
+            }else {
+                username = CurrentApplication.instance.user.email.getEmail()
+                curUserInfo = listOf(
+                    (UserInfo
+                        (CurrentApplication
+                        .instance
+                        .user.email
+                        .getEmail(),
+                        "default",
+                        0,
+                        false)
+                            ))
+            }
         }
-
-        Log.d("TEST USER", username)
     }
 
+    fun showNavMenu()
+    {showNavMenu = true}
+
+    fun dismissNavMenu()
+    {showNavMenu = false }
     fun updateTime(){
         curDate = LocalDateTime
             .now()
@@ -91,7 +125,12 @@ class HomepageViewModel : ViewModel(){
 
     fun profileNav(navController: NavController){
         Log.d("TEST", "Navigating to the profile...")
-        navController.navigate(Screens.ProfileInformationScreen.route)
+        navigationFunctions.goToProfile(navController)
+    }
+
+    fun navStudyCentre(navController: NavController){
+        Log.d("TEST", "Navigating to the Study Centre...")
+        navigationFunctions.goToStudyCentre(navController)
     }
 
 }

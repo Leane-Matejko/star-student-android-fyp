@@ -13,6 +13,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.unit.dp
 import com.example.starstudent.core.domain.MainActivity
 import com.example.starstudent.core.domain.TestActivity
+import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.TopBanner
 import com.example.starstudent.core.view.uiComponents.avatarWindow
@@ -62,6 +63,7 @@ class UIComponentsTests {
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Test",
+                    onClick = {},
                     modifier = Modifier
                 )
 
@@ -75,6 +77,7 @@ class UIComponentsTests {
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Test",
+                    onClick = {},
                     modifier = Modifier
                 )
 
@@ -93,6 +96,7 @@ class UIComponentsTests {
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Test",
+                    onClick = {},
                     modifier = Modifier
                 )
 
@@ -110,6 +114,7 @@ class UIComponentsTests {
             mediumIconWidget(Icons.Filled.Star,
                 Icons.Filled.Star,
                 "Test",
+                onClick = {},
                 modifier = Modifier)
         }
 
@@ -125,6 +130,7 @@ class UIComponentsTests {
             mediumIconWidget(Icons.Filled.Star,
                 Icons.Filled.Star,
                 "Test",
+                onClick = {},
                 modifier = Modifier)
         }
 
@@ -140,7 +146,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
     }
 
@@ -149,7 +156,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
 
         composeTest.waitForIdle()
@@ -163,7 +171,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
 
         composeTest.waitForIdle()
@@ -177,7 +186,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
 
         composeTest.waitForIdle()
@@ -191,7 +201,8 @@ class UIComponentsTests {
         composeTest.setContent {
             smallProgressWidget(6,
                 10,
-                "Test")
+                "Test",
+                12)
         }
 
         composeTest.waitForIdle()
@@ -206,7 +217,7 @@ class UIComponentsTests {
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
-                "Test")
+                "Test"){}
         }
     }
 
@@ -215,12 +226,12 @@ class UIComponentsTests {
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
-                "Test")
+                "Test"){}
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("largeNavWidgetRepIcon")
+            .onNodeWithTag("largeNavWidgetRepIcon", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -229,12 +240,12 @@ class UIComponentsTests {
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
-                "Test")
+                "Test"){}
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("largeNavWidgetTitleLabel")
+            .onNodeWithTag("largeNavWidgetTitleLabel", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -245,12 +256,12 @@ class UIComponentsTests {
         composeTest.setContent {
             largeNavWidget(Icons.Filled.Star,
                 "Test",
-                "Test")
+                "Test"){}
         }
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("largeNavWidgetDescriptionLabel")
+            .onNodeWithTag("largeNavWidgetDescriptionLabel", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -391,7 +402,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -404,7 +419,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -420,7 +439,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -436,7 +459,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -452,7 +479,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 
@@ -468,7 +499,11 @@ class UIComponentsTests {
             TopBanner(
                 "testing",
                 "Wed 11 Mar",
-                {}
+                listOf(NavigationOptions(""){}),
+                showNav = false,
+                onDismissNav = {},
+                navOnClick = {},
+                profileOnClick = {}
             )
         }
 

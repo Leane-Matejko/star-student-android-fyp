@@ -1,5 +1,6 @@
 package com.example.starstudent.core.view.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -44,22 +45,30 @@ fun Homepage(navController: NavController){
 
     Background()
     BannerFormat(
-        viewModel.username,
+        username = viewModel.username,
         date = viewModel.curDate,
-        { viewModel.profileNav(navController) }
+        profileOnClick = { viewModel.profileNav(navController) },
+        list = viewModel.getNavigationMenu(navController),
+        showNav = viewModel.showNavMenu,
+        navOnClick = {viewModel.showNavMenu()},
+        onDismissNav = {viewModel.dismissNavMenu()}
     ) { padding ->
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
         ) {
             item{
-                HomepageContent(viewModel)
+                HomepageContent(viewModel, navController)
             }
         }
 
     }
 
     viewModel.viewModelScope.launch{
+
+        viewModel.updateTime()
+        delay(60000 - System.currentTimeMillis() % 60000)
+
         while(true){
             viewModel.updateTime()
             delay(60000)
@@ -69,7 +78,7 @@ fun Homepage(navController: NavController){
 }
 
 @Composable
-fun HomepageContent(viewModel: HomepageViewModel) {
+fun HomepageContent(viewModel: HomepageViewModel, navController : NavController) {
 
     val viewModel = viewModel
 
@@ -116,6 +125,7 @@ fun HomepageContent(viewModel: HomepageViewModel) {
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Sleep",
+                    onClick = {},
                     modifier = Modifier
                         .weight(1f)
                 )
@@ -123,6 +133,7 @@ fun HomepageContent(viewModel: HomepageViewModel) {
                     Icons.Filled.Star,
                     Icons.Filled.Star,
                     "Sleep",
+                    onClick = {},
                     modifier = Modifier
                         .weight(1f)
                 )
@@ -137,23 +148,25 @@ fun HomepageContent(viewModel: HomepageViewModel) {
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         )
         {
-            smallProgressWidget(9, 10, "Tasks", Modifier.weight(1f))
-            smallProgressWidget(8, 10, "Tasks", Modifier.weight(1f))
-            smallProgressWidget(7, 10, "Tasks", Modifier.weight(1f))
+            smallProgressWidget(9, 10, "Tasks",10, Modifier.weight(1f))
+            smallProgressWidget(8, 10, "Tasks", 10,Modifier.weight(1f))
+            smallProgressWidget(7, 10, "Tasks", 10,Modifier.weight(1f))
         }
 
         spacer(Modifier.height(20.dp))
 
 
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){
+            viewModel.navStudyCentre(navController)
+        }
         spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
         spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
         spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
         spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth())
+        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
 
 
     }

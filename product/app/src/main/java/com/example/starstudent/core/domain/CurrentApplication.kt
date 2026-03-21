@@ -2,6 +2,7 @@ package com.example.starstudent.core.domain
 
 import android.app.Application
 import android.content.Context
+import android.location.LocationRequest
 import android.net.ConnectivityManager
 import androidx.room.Room
 import com.example.starstudent.core.data.AppDatabase
@@ -18,6 +19,9 @@ class CurrentApplication : Application(){
     }
 
     lateinit var connectivityManager: ConnectivityManager
+        private set
+
+    lateinit var locationRequest: LocationRequest
         private set
 
     var user = User()

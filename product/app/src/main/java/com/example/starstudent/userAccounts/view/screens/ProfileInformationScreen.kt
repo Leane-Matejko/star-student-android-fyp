@@ -45,7 +45,11 @@ fun ProfileInformationScreen(navController: NavController){
     BannerFormat (
         viewModel.profileUsername,
         date = viewModel.curDate,
-        {}
+        profileOnClick = { },
+        list = viewModel.getNavigationMenu(navController),
+        showNav = viewModel.showNavMenu,
+        navOnClick = {viewModel.showNavMenu()},
+        onDismissNav = {viewModel.dismissNavMenu()}
     ){
         padding ->
         LazyColumn(
@@ -59,6 +63,10 @@ fun ProfileInformationScreen(navController: NavController){
     }
 
     viewModel.viewModelScope.launch{
+
+        viewModel.updateTime()
+        delay(60000 - System.currentTimeMillis() % 60000)
+
         while(true){
             viewModel.updateTime()
             delay(60000)
