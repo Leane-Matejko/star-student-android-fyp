@@ -1,6 +1,5 @@
 package com.example.starstudent.studySpaces.view.screens
 
-import android.icu.text.SimpleDateFormat
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,19 +8,17 @@ import androidx.navigation.NavController
 import com.example.starstudent.core.domain.BannerFunctions
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.NavigationOptions
-import com.example.starstudent.studySpaces.data.AccessPausedSessions
 import com.example.starstudent.studySpaces.data.AccessSavedLocations
 import com.example.starstudent.studySpaces.data.AccessStudySessions
-import com.example.starstudent.studySpaces.data.entities.PausedSessions
+import com.example.starstudent.studySpaces.data.RecentSessionsFormat
 import com.example.starstudent.studySpaces.data.entities.StudySessions
-import com.example.starstudent.studySpaces.domain.Timer
 import com.example.starstudent.userAccounts.data.AccessUserData
 import com.example.starstudent.studySpaces.data.entities.SavedLocations
+import com.example.starstudent.studySpaces.domain.FormatStudyCentre
 import com.example.starstudent.studySpaces.domain.LocationDetector
 import com.example.starstudent.studySpaces.domain.StudySession
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Date
 import java.util.Locale
 
 class StudyCentreViewModel : ViewModel() {
@@ -36,13 +33,14 @@ class StudyCentreViewModel : ViewModel() {
     //Study Session Variables
     private val accessSavedLocations = AccessSavedLocations()
 
-    private val accessPausedSessions = AccessPausedSessions()
-
     private val accessStudySessions = AccessStudySessions()
 
     private val accessUserData = AccessUserData()
 
     private val studySession = StudySession()
+
+    //Private Formatted Variables
+    private val formatStudyCentre = FormatStudyCentre()
 
     var locationAccess by mutableStateOf(
         accessUserData.getUserLocationAccess()
@@ -70,6 +68,13 @@ class StudyCentreViewModel : ViewModel() {
             "" ,
             0L,
             0L
+        ))
+    )
+
+    var recentStudySessionsFormatted by mutableStateOf(
+        listOf(RecentSessionsFormat(
+            "",
+            ""
         ))
     )
 
@@ -120,8 +125,6 @@ class StudyCentreViewModel : ViewModel() {
         false
     )
         private set
-
-    var pausedTime = 0L
 
     var updateLocation by mutableStateOf(
         false
@@ -264,8 +267,6 @@ class StudyCentreViewModel : ViewModel() {
         return showSessionPause
     }
 
-
-
     suspend fun updatePauseSession(){
         studySession.updatePauseSession()
         isSessionPause = studySession.getIsSessionPause()
@@ -283,7 +284,6 @@ class StudyCentreViewModel : ViewModel() {
     }
 
     suspend fun checkLocation(){
-//        var checked = false
         getSavedLocations()
         locationDetector.checkLocation(savedLocations)
         withinStudySpace = locationDetector.getWithinStudySpace()
@@ -296,50 +296,9 @@ class StudyCentreViewModel : ViewModel() {
         )
     }
 
-    suspend fun getPausedSessions(sessionId: Int) : List<PausedSessions>{
-        return accessPausedSessions.getPausedSessions(sessionId)
-    }
-
-    fun calculateTotalStudyTime(
-        sessionId: Int,
-        startTime: Long,
-        endTime: Long
-    ) : String{
-        return "%02d".format(getHours(endTime, startTime)) + " Hours, " + "%02d".format(getMinutes(endTime, startTime))+ " Minutes "
-    }
-
-    fun getHours(endTime: Long, startTime: Long) : Long{
-        val session = (endTime - startTime) - pausedTime
-        if(session >= 1){
-            return (session / (1000*60*60))
-        }
-        return 0
-    }
-
-    fun getMinutes(endTime: Long, startTime: Long) : Long{
-        val session = (endTime - startTime) - pausedTime
-        if(session >= 1){
-            return ((session / (1000*60))% 60)
-        }
-        return 0
-    }
-
-    fun convertLongToDate(longDate : Long, pattern : String) : String{
-        return SimpleDateFormat(pattern, Locale.getDefault()).format(Date(longDate))
-    }
-
-    fun getLongToDate(startTime: Long) : String{
-        return convertLongToDate(
-            startTime,
-            "EEEE d MMMM yyyy")
-    }
-
-    fun getTotalPausedTime(pausedSessionList : List<PausedSessions>){
-        pausedSessionList.forEach { option ->
-            if (option.endTime != 0L){
-                pausedTime += (option.endTime - option.startTime)
-            }
-        }
+    suspend fun updateFormattedRecentSessions(){
+        getRecentStudySessions()
+        recentStudySessionsFormatted = formatStudyCentre.formatRecentSessions(recentStudySessions)
     }
 
     fun getLocation() {

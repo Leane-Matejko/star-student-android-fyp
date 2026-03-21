@@ -40,7 +40,7 @@ interface StudySessionsDAO {
     @Query("""
         SELECT * 
         FROM study_sessions 
-        WHERE user = :user AND endTime != 0
+        WHERE user = :user AND endTime != 0 AND (endTime-startTime) > 300000
         ORDER BY startTime DESC
         LIMIT 5
         """)

@@ -242,23 +242,16 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
             viewModel.viewModelScope.launch {  viewModel.getRecentStudySessions()}
 
             //Renders the 5 most recent study sessions
-            viewModel.recentStudySessions.forEach { option ->
-
-                viewModel.viewModelScope.launch {
-                    val pausedSessions = viewModel.getPausedSessions(option.id)
-                    viewModel.getTotalPausedTime(pausedSessions)}
-
+            viewModel.recentStudySessionsFormatted.forEach { option ->
                 textField(
-                    viewModel.getLongToDate(option.startTime),
-                    viewModel.calculateTotalStudyTime(
-                        sessionId = option.id,
-                        startTime = option.startTime,
-                        endTime = option.endTime
-                    ),
+                    option.dateFormat,
+                    option.sessionTime,
                     50
                 )
             }
         }
+
+        viewModel.viewModelScope.launch {viewModel.updateFormattedRecentSessions()}
     }
 
     if(viewModel.showUpdateLocationDialog) {
@@ -299,8 +292,10 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
                 if (viewModel.withinStudySpace) {
                     viewModel.increaseSessionCountdown()
                 }
+                viewModel.updateFormattedRecentSessions()
                 delay(60000)
             } else {
+                viewModel.updateFormattedRecentSessions()
                 delay(60000)
             }
         }
