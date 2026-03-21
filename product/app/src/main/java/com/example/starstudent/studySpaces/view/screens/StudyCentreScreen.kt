@@ -45,6 +45,7 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 @Composable
@@ -249,6 +250,7 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
 
             viewModel.viewModelScope.launch {  viewModel.getRecentStudySessions()}
 
+            //Renders the 5 most recent study sessions
             viewModel.recentStudySessions.forEach { option ->
 
                 viewModel.viewModelScope.launch {
@@ -264,38 +266,6 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
                     ),
                     50
                 )
-            }
-
-            viewModel.viewModelScope.launch {
-                while(viewModel.sessionStatus && !viewModel.isSessionPause){
-                    viewModel.updateTimer()
-                    viewModel.updateStudyingStatus()
-                    viewModel.getLocation()
-                    delay(1000)
-                }
-            }
-
-            //checks location every minute
-
-            viewModel.viewModelScope.launch {
-                while(viewModel.updateLocation && viewModel.locationAccess){
-                    viewModel.getLocation()
-                    viewModel.updateLocationAccess()
-                    delay(1000)
-                }
-            }
-
-            viewModel.viewModelScope.launch {
-                while(true){
-                    viewModel.checkLocation()
-                    delay(1000)
-                }
-            }
-
-            viewModel.viewModelScope.launch {
-                if ((viewModel.sessionCountDown % 5 == 0) && !viewModel.sessionStatus) {
-                    viewModel.updateSessionStatus()
-                }
             }
         }
     }
@@ -313,22 +283,62 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
         }
     }
 
+    //Starts a new session when the session countdown hits 5 minutes and session is not currently in progress
+    viewModel.viewModelScope.launch {
+        if ((viewModel.sessionCountDown % 5 == 0) && !viewModel.sessionStatus) {
+            viewModel.updateSessionStatus()
+        }
+    }
 
+    //Only called on the page instance
     LaunchedEffect(Unit) {
-        viewModel.viewModelScope.launch {
-            while (!viewModel.showUpdateLocationDialog && viewModel.locationAccess && !viewModel.sessionStatus) {
+        /*Check to updated the session counter if
+        location menu is not open,
+        the location access has been enabled and
+        a session is not taking place.
+         */
+
+        while (isActive) {
+            if (!viewModel.showUpdateLocationDialog &&
+                viewModel.locationAccess &&
+                !viewModel.sessionStatus
+            ) {
                 viewModel.getLocation()
                 viewModel.checkLocation()
                 if (viewModel.withinStudySpace) {
                     viewModel.increaseSessionCountdown()
                 }
-
                 delay(60000)
             }
+        }
 
+        //Checked every 10 seconds, checks if the user is within a Study Space
+        while(isActive){
+            if(viewModel.locationAccess){
+                viewModel.getLocation()
+                viewModel.checkLocation()
+                delay(10000)
+            }
+        }
+
+        //checked every second during a session that has not been paused
+        while(isActive){
+            if(viewModel.sessionStatus &&
+                !viewModel.isSessionPause){
+                viewModel.updateTimer()
+                viewModel.updateStudyingStatus()
+                delay(1000)
+            }
+        }
+
+        while(isActive){
+            if(viewModel.updateLocation &&
+                viewModel.locationAccess){
+                viewModel.updateLocationAccess()
+                delay(1000)
+            }
         }
     }
-
 }
 
 
