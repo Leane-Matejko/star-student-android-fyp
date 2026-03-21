@@ -133,6 +133,8 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
 
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
 
 }
 

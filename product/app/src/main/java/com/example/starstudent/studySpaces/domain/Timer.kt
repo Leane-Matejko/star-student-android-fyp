@@ -1,11 +1,7 @@
 package com.example.starstudent.studySpaces.domain
 
 class Timer {
-
-    var curTime = 0L
-
     var pausedTime = 0L
-
     var isRunning = false
 
     var startTime = 0L
@@ -46,21 +42,10 @@ class Timer {
         return (((System.currentTimeMillis()-startTime)- totalPausedTime) / (1000)% 60)
     }
 
-//    fun getCurTime() : Long{
-//        return (System.currentTimeMillis() - startTime) - pausedTime
-//    }
-
     fun resetTimer(){
         startTime = 0L
         isRunning = false
         pausedTime = 0L
         totalPausedTime = 0L
-    }
-
-    fun getTimer(): Long{
-        if(isRunning){
-            (curTime - startTime) - totalPausedTime
-        }
-        return 0L //Timer has been stopped
     }
 }

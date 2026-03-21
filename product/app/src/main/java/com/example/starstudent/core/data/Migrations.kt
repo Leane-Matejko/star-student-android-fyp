@@ -30,3 +30,15 @@ val MIGRATION_3_4 = object : Migration(3,4){
                 ")")
     }
 }
+
+val MIGRATION_4_5 = object : Migration(4,5){
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS saved_locations (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "user TEXT NOT NULL," +
+                "label TEXT NOT NULL," +
+                "longitude REAL NOT NULL," +
+                "latitude REAL NOT NULL" +
+                ")")
+    }
+}

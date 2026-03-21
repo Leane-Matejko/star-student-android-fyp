@@ -11,10 +11,14 @@ import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.core.domain.navigation.NavigationOptions
-import com.example.starstudent.studySpaces.data.dao.PausedSessionsDAO
 import com.example.starstudent.studySpaces.data.entities.PausedSessions
 import com.example.starstudent.studySpaces.data.entities.StudySessions
 import com.example.starstudent.studySpaces.domain.Timer
+import com.example.starstudent.userAccounts.data.AccessUserData
+import com.example.starstudent.studySpaces.data.entities.SavedLocations
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.delay
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
@@ -26,12 +30,34 @@ class StudyCentreViewModel : ViewModel() {
 
     val timer = Timer()
 
+    val locationManager = LocationServices.getFusedLocationProviderClient(CurrentApplication.instance)
+
+    private val accessUserData = AccessUserData()
+
+    private val savedLocationsDAO =
+        DatabaseSingleton
+            .getDatabase(
+                CurrentApplication.instance
+            ).savedLocationsDao()
+
+    var locationAccess by mutableStateOf(
+        accessUserData.getUserLocationAccess()
+    )
+
     var sessionStatus by mutableStateOf(
         false
     )
 
+    var longitude  by mutableStateOf(
+        0.0
+    )
+
+    var latitude  by mutableStateOf(
+        0.0
+    )
+
     var timerClock by mutableStateOf(
-        "00:00"
+        "00:00:00"
     )
 
     private var showSessionPause by mutableStateOf(
@@ -48,6 +74,16 @@ class StudyCentreViewModel : ViewModel() {
             "" ,
             0L,
             0L
+        ))
+    )
+
+    var savedLocations by mutableStateOf(
+        listOf(SavedLocations(
+            1,
+            "",
+            "Default",
+            0.0,
+            0.0
         ))
     )
 
@@ -96,13 +132,118 @@ class StudyCentreViewModel : ViewModel() {
     )
         private set
 
+    var showUpdateLocationDialog by mutableStateOf(
+        false
+    )
+        private set
+
     var pausedTime = 0L
+
+    var updateLocation by mutableStateOf(
+        false
+    )
+
+    var sessionCountDown by mutableStateOf(
+        1
+    )
+
+    var newLabel by mutableStateOf(
+        ""
+    )
+
+    var withinStudySpace by mutableStateOf(
+        false
+    )
+
+    var studySpaceDetector by mutableStateOf(
+        "Not Detected"
+    )
+
+    fun showUpdateLocationDialog(){
+        if(locationAccess){
+            showUpdateLocationDialog = true
+        }
+    }
+
+    fun hideUpdateLocationDialog(){
+        showUpdateLocationDialog = false
+    }
+
+    fun updateLocationAccess(){
+        locationAccess = accessUserData.getUserLocationAccess()
+    }
+
+    fun updateLabel(id: Int, newLabel: String) {
+        savedLocations = savedLocations.map { location ->
+            if (location.id == id) {
+                location.copy(label = newLabel)
+            } else {
+                location
+            }
+        }
+    }
+    fun getUpdatedLabel(id: Int): String {
+        savedLocations.forEach { location ->
+            if (location.id == id) {
+                return location.label
+            }
+        }
+        return "Default"
+    }
+
+    suspend fun getSavedLocations(){
+        savedLocations = savedLocationsDAO.getSavedLocations(
+            getUser()
+        )
+    }
+
+    suspend fun updateSavedLocationLabel(
+        id: Int
+    ){
+
+        val newLabel = getUpdatedLabel(id)
+        if(newLabel.isNotEmpty()){
+            savedLocationsDAO.updateSavedLabel(
+                id,
+                CurrentApplication.instance.user.email.getEmail(),
+                newLabel
+            )
+            getSavedLocations()
+        }
+    }
+
+    suspend fun updateSavedLocation(
+        id: Int
+    ){
+        getLocation()
+        savedLocationsDAO.updateSavedLocation(
+            id,
+            CurrentApplication.instance.user.email.getEmail(),
+            longitude,
+            latitude
+        )
+        getSavedLocations()
+    }
+
+    fun getLocationData() : String{
+        if(locationAccess){
+            updateLocation = true
+            return "Location"
+        }
+        updateLocation = false
+        return "Location Access: Off"
+    }
 
     fun updateTimer(){
         timerClock =
             "%02d:%02d:%02d".format(
                 timer.getHours(), timer.getMinutes(), timer.getSeconds()
             )
+    }
+
+    fun increaseSessionCountdown(){
+        sessionCountDown += 1
+        Log.d("COUNTDOWN", sessionCountDown.toString())
     }
 
     fun updateTime(){
@@ -212,6 +353,31 @@ class StudyCentreViewModel : ViewModel() {
         return CurrentApplication.instance.user.email.getEmail()
     }
 
+//    var checked = false
+
+    suspend fun checkLocation(){
+        var checked = false
+        getSavedLocations()
+        for (location in savedLocations){
+            if((longitude <= (location.longitude + 0.0000350)) &&
+                (longitude >= (location.longitude - 0.0000350)) &&
+                (latitude <= (location.latitude + 0.0000350)) &&
+                (latitude >= (location.latitude - 0.0000350))
+                ){
+                checked = true
+                break
+            }
+        }
+
+        withinStudySpace = checked
+
+        studySpaceDetector = if (withinStudySpace){
+            "Study Space Detected"
+        }else{
+            "Not Detected"
+        }
+    }
+
     suspend fun getCurrentSession(): List<StudySessions>{
         return studySessionsDAO.getCurrentSession(
             getUser()
@@ -245,6 +411,7 @@ class StudyCentreViewModel : ViewModel() {
         )
 
         timer.resetTimer()
+        sessionCountDown = 1
     }
 
     suspend fun startSession(){
@@ -272,31 +439,35 @@ class StudyCentreViewModel : ViewModel() {
         startTime: Long,
         endTime: Long
     ) : String{
-        return getHours(endTime, startTime) + "  Hours, " + getMinutes(endTime, startTime)+ " Minutes "
+        return "%02d".format(getHours(endTime, startTime)) + " Hours, " + "%02d".format(getMinutes(endTime, startTime))+ " Minutes "
     }
 
-    fun getHours(endTime: Long, startTime: Long) : String{
+    fun getHours(endTime: Long, startTime: Long) : Long{
         val session = (endTime - startTime) - pausedTime
         if(session >= 1){
-            return (session / (1000*60*60)).toString()
+            return (session / (1000*60*60))
         }
-        return "0"
+        return 0
     }
 
-    fun getMinutes(endTime: Long, startTime: Long) : String{
-        val session = (endTime - startTime) - pausedTime
-        if(session >= 1){
-            return ((session / (1000*60))% 60).toString()
+    suspend fun totalPausedTime(sessionID: Int) : Long{
+        val pausedSessionList = pausedSessionsDAO.getCurrentPausedSession(sessionID)
+        if (pausedSessionList.isNotEmpty()){
+            var totalPausedTime = 0L
+            pausedSessionList.forEach { session ->
+                totalPausedTime += session.endTime - session.startTime
+            }
+            return totalPausedTime
         }
-        return "00"
+        return 0L
     }
 
-    fun getSeconds(endTime: Long, startTime: Long) : String{
+    fun getMinutes(endTime: Long, startTime: Long) : Long{
         val session = (endTime - startTime) - pausedTime
         if(session >= 1){
-            return ((session / (1000))% 60).toString()
+            return ((session / (1000*60))% 60)
         }
-        return "00"
+        return 0
     }
 
     fun convertLongToDate(longDate : Long, pattern : String) : String{
@@ -317,6 +488,19 @@ class StudyCentreViewModel : ViewModel() {
         }
     }
 
+    fun getLocation(){
+        locationManager.lastLocation
+            .addOnSuccessListener { location ->
+                if (location != null) {
+                    latitude = location.latitude
+                    longitude = location.longitude
+                }
+            }
+            .addOnFailureListener {
+                locationAccess = false
+                Log.d("GPS LAT", "Failed to get location.")
+            }
+    }
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
 
         return listOf(

@@ -11,7 +11,7 @@ class AccessUserData {
                 .instance)
         .userInfoDao()
 
-    private val userInfo = CurrentApplication
+    private var userInfo = CurrentApplication
         .instance
         .getUserInfo()
 
@@ -51,6 +51,7 @@ class AccessUserData {
                 checkIfUserExists(),
                 username
             )
+            updateInstance()
         }
     }
 
@@ -60,6 +61,7 @@ class AccessUserData {
                 checkIfUserExists(),
                 birthday
             )
+            updateInstance()
         }
     }
 
@@ -68,5 +70,11 @@ class AccessUserData {
             checkIfUserExists(),
             locationAccess
         )
+        updateInstance()
+    }
+
+    suspend fun updateInstance(){
+        CurrentApplication.instance.setUserInfo()
+        userInfo = CurrentApplication.instance.getUserInfo()
     }
 }

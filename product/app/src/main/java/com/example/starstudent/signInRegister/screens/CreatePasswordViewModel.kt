@@ -11,13 +11,11 @@ import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Password
+import com.example.starstudent.studySpaces.data.entities.SavedLocations
 import com.example.starstudent.userAccounts.data.entities.AppUserData
 import com.example.starstudent.userAccounts.data.entities.UserInfo
-import com.google.type.Date
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.Locale
+
 
 
 /* ViewModel for the create password page.
@@ -25,6 +23,12 @@ import java.util.Locale
 class CreatePasswordViewModel : ViewModel(){
 
     val password = Password()
+
+    val savedLocationsDAO =
+        DatabaseSingleton
+            .getDatabase(
+                CurrentApplication.instance
+    ).savedLocationsDao()
 
     val userEmail = CurrentApplication.instance.user.email.getEmail()
 
@@ -76,6 +80,8 @@ class CreatePasswordViewModel : ViewModel(){
 
                     CurrentApplication.instance.setUserInfo()
 
+                    setupSavedLocations()
+
                     Log.d("NEW USER ADDED", "New users added to the phone's db.")
 
                     navController.navigate(Screens.HomePageScreen.route)
@@ -86,6 +92,22 @@ class CreatePasswordViewModel : ViewModel(){
                 errorMessage = e.message.toString()
                 resetErrorWindow()
                 errorWindow = true
+            }
+        }
+    }
+
+    private suspend fun setupSavedLocations(){
+        val checkUser = savedLocationsDAO.checkUserExists(CurrentApplication.instance.user.email.getEmail())
+        if(checkUser.isEmpty()){
+            for(i in 1..5){
+                savedLocationsDAO.addInitialLocations(
+                    SavedLocations(
+                        user = CurrentApplication.instance.user.email.getEmail(),
+                        label = "Default",
+                        longitude = 0.0,
+                        latitude = 0.0
+                    )
+                )
             }
         }
     }

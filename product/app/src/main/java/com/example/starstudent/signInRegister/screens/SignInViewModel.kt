@@ -7,10 +7,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
 import com.example.starstudent.signInRegister.domain.Email
 import com.example.starstudent.signInRegister.domain.EmailOrPasswordNotCorrectException
+import com.example.starstudent.studySpaces.data.dao.SavedLocationsDAO
+import com.example.starstudent.studySpaces.data.entities.SavedLocations
 import com.example.starstudent.userAccounts.data.entities.UserInfo
 import kotlinx.coroutines.launch
 
@@ -20,6 +23,12 @@ import kotlinx.coroutines.launch
 class SignInViewModel : ViewModel() {
 
     private val email = Email()
+
+    private val savedLocationsDAO =
+        DatabaseSingleton
+            .getDatabase(
+                CurrentApplication.instance
+            ).savedLocationsDao()
 
     var currentUser by mutableStateOf(UserInfo(
         "default",
@@ -72,6 +81,7 @@ class SignInViewModel : ViewModel() {
                         Log.d("TEST", "Found. Loading homepage...")
                         CurrentApplication.instance.setUser(email.getEmail())
                         CurrentApplication.instance.setUserInfo()
+                        setupSavedLocations()
                         navigateToHomepage(navController)
                     }
                 }
@@ -87,6 +97,22 @@ class SignInViewModel : ViewModel() {
 
     private fun setUserEmail(email: Email){
         CurrentApplication.instance.setUser(email.getEmail())
+    }
+
+    private suspend fun setupSavedLocations(){
+        val checkUser = savedLocationsDAO.checkUserExists(email.getEmail())
+        if(checkUser.isEmpty()){
+            for(i in 1..5){
+                savedLocationsDAO.addInitialLocations(
+                    SavedLocations(
+                        user = email.getEmail(),
+                        label = "Default",
+                        longitude = 0.0,
+                        latitude = 0.0
+                    )
+                )
+            }
+        }
     }
 
     //Buffer for checking the password
