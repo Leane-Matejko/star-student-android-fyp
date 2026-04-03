@@ -9,6 +9,8 @@ sealed class Screens(val route: String) {
     object CreatePasswordsScreen: Screens("create_passwords")
     object ProfileInformationScreen: Screens("profile_information")
     object StudyCentreScreen: Screens("study_centre")
+    object PlannerScreen: Screens("planner")
+    object TaskListScreen: Screens("task_list")
 
     fun withArgs(vararg args: String) : String {
         return buildString {

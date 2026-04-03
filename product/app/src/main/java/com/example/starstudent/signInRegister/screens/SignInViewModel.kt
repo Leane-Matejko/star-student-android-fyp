@@ -89,6 +89,7 @@ class SignInViewModel : ViewModel() {
             } catch (e: Exception) {
                 Log.d("TEST", "Error thrown")
                 errorMessage = e.message.toString()
+                Log.d("ERROR" , errorMessage)
                 resetErrorWindow()
                 errorWindow = true
             }

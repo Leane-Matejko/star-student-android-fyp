@@ -90,6 +90,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.ui.test.junit4)
     implementation(libs.androidx.navigation.testing)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.foundation.layout)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     implementation("androidx.room:room-runtime:2.6.1")

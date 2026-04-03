@@ -9,7 +9,7 @@ object DatabaseSingleton {
     @Volatile
     private var INSTANCE: AppDatabase? = null
 
-    val migrations = MIGRATION_4_5
+    val migrations = MIGRATION_5_6
 
     fun getDatabase(context: Context): AppDatabase{
         return INSTANCE ?: synchronized(this){

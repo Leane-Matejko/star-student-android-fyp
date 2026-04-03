@@ -74,8 +74,13 @@ class HomepageViewModel : ViewModel(){
         return listOf(
            NavigationOptions("Study Centre")
                 {navigationFunctions.goToStudyCentre(navController)},
+            NavigationOptions("Planner")
+                {navigationFunctions.goToPlanner(navController)},
+            NavigationOptions("Task List")
+                {navigationFunctions.goToTaskList(navController)},
             NavigationOptions("Profile Settings")
                 {navigationFunctions.goToProfile(navController)}
+
         )
     }
 

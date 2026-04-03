@@ -42,3 +42,33 @@ val MIGRATION_4_5 = object : Migration(4,5){
                 ")")
     }
 }
+
+val MIGRATION_5_6 = object : Migration(5,6){
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS task_categories (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+            "user TEXT NOT NULL," +
+            "cateLabel TEXT NOT NULL," +
+            "labelColour TEXT NOT NULL," +
+            "isActive INTEGER NOT NULL DEFAULT 1" +
+            ")")
+
+        db.execSQL(
+            "CREATE TABLE IF NOT EXISTS tasks (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+            "cateId INTEGER NOT NULL," +
+            "taskLabel TEXT NOT NULL," +
+            "isCritical INTEGER NOT NULL DEFAULT 0," +
+            "dueDate INTEGER NOT NULL," +
+            "isComplete INTEGER NOT NULL DEFAULT 0," +
+            "completeDate INTEGER NOT NULL," +
+            "isActive INTEGER NOT NULL DEFAULT 1," +
+                    "FOREIGN KEY(cateId) REFERENCES task_categories(id)" +
+            ")"
+        )
+
+        db.execSQL(
+            "CREATE INDEX index_tasks_cateId ON tasks(cateId)"
+        )
+    }
+}
