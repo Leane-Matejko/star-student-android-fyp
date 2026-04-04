@@ -28,6 +28,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.DatePicker
@@ -59,6 +61,9 @@ import com.example.starstudent.core.view.uiComponents.simpleToggle
 import com.example.starstudent.ui.theme.LocalExtendedLabelColours
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -234,13 +239,17 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
                                 columns = GridCells.Fixed(1),
                                 verticalArrangement = Arrangement.spacedBy(10.dp)
                             ) {
+
+                                val today = System.currentTimeMillis()
+
                                 items(tasks) { task ->
 
                                     Row(
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .background(
-                                                color = MaterialTheme.colorScheme.primary,
+                                                color = if (task.dueDate >= today) {MaterialTheme.colorScheme.primary}
+                                                        else {MaterialTheme.colorScheme.secondary},
                                                 shape = RoundedCornerShape(24.dp)
                                             )
                                             .padding(6.dp),
@@ -295,7 +304,7 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
                                             Spacer(modifier = Modifier.width(10.dp))
 
                                             Icon(
-                                                imageVector = Icons.Filled.Warning,
+                                                imageVector = Icons.Filled.Star,
                                                 contentDescription = "Critical Task",
                                                 tint = MaterialTheme.colorScheme.background,
                                                 modifier = Modifier
