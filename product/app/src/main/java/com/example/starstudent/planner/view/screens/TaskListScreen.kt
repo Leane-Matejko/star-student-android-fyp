@@ -1,6 +1,9 @@
 package com.example.starstudent.planner.view.screens
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
@@ -54,8 +57,10 @@ import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 import com.example.starstudent.core.view.uiComponents.simpleToggle
 import com.example.starstudent.ui.theme.LocalExtendedLabelColours
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TaskListScreen(navController: NavController){
 
@@ -87,8 +92,21 @@ fun TaskListScreen(navController: NavController){
             }
         }
     }
+
+    viewModel.viewModelScope.launch{
+
+        viewModel.updateTime()
+        delay(60000 - System.currentTimeMillis() % 60000)
+
+        while(true){
+            viewModel.updateTime()
+            delay(60000)
+        }
+    }
 }
 
+@SuppressLint("CoroutineCreationDuringComposition")
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TaskListContent(viewModel : TaskListViewModel, navController : NavController){
 
@@ -330,6 +348,7 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NewOptionsDialog(viewModel: TaskListViewModel){
     Card(
@@ -555,6 +574,8 @@ fun AddCategoryDialog(viewModel: TaskListViewModel){
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+@SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskDialog(viewModel : TaskListViewModel){

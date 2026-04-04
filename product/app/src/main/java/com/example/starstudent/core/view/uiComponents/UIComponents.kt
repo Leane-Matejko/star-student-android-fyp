@@ -1,5 +1,7 @@
 package com.example.starstudent.core.view.uiComponents
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -62,6 +65,7 @@ import com.example.starstudent.planner.data.entities.Tasks
 import okhttp3.internal.toImmutableList
 import java.text.SimpleDateFormat
 import java.time.Instant
+import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Calendar
 import java.util.Locale
@@ -799,11 +803,15 @@ fun weekdayLabelsList(
     return items
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarGrid(
     dates: List<Date>,
     tasks: List<Tasks>,
     onClick: (Date) -> Unit,
+    prevButtonClick: () -> Unit,
+    nextButtonClick: () -> Unit,
+    monthButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -813,7 +821,7 @@ fun CalendarGrid(
 
         Row(){
 
-            IconButton(onClick = {}) {
+            IconButton(onClick = {prevButtonClick()}) {
                 Icon(
                     modifier = Modifier
                         .testTag("calendarPrevButton"),
@@ -827,7 +835,7 @@ fun CalendarGrid(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .clickable(onClick = {})
+                    .clickable(onClick = {monthButtonClick()})
             ) {
                 Text(
                     text = dates.first().formatToMonthString(),
@@ -848,7 +856,7 @@ fun CalendarGrid(
 
             Spacer(modifier = Modifier.width(20.dp))
 
-            IconButton(onClick = {}) {
+            IconButton(onClick = {nextButtonClick()}) {
                 Icon(
                     modifier = Modifier
                         .testTag("calendarPrevButton"),
@@ -870,15 +878,17 @@ fun CalendarGrid(
         }
 
         val items = remember(dates,taskDays) {
+
+            val today = LocalDate.now()
+
             weekdayLabelsList(dates).map{ item ->
                 when (item){
                    is CalendarItem.Day ->  {
                        val localDate = item.date.toInstant()
                            .atZone(ZoneId.systemDefault())
                            .toLocalDate()
-
                        item.copy(
-                           signal = taskDays.contains(localDate)
+                           signal = (taskDays.contains(localDate) || (today == localDate))
                        )
                    }
                     else -> item
@@ -915,7 +925,7 @@ fun CalendarGrid(
                             textDate = item.date,
                             signal = item.signal,
                             modifier = Modifier,
-                            onClick = { onClick(item.date) }
+                            onClick = {onClick(item.date) }
                         )
                     }
                 }
@@ -924,6 +934,7 @@ fun CalendarGrid(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarCell(
     textDate: Date,
@@ -931,6 +942,15 @@ fun CalendarCell(
     modifier: Modifier = Modifier,
     onClick: (Date) -> Unit
 ) {
+
+    val today = LocalDate.now()
+
+    val localDate = textDate.toInstant()
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate()
+
+    val isToday = (today == localDate)
+
     Box(
         modifier = modifier
             .aspectRatio(1f)
@@ -948,8 +968,10 @@ fun CalendarCell(
                     .matchParentSize()
                     .padding(4.dp)
                     .background(
-                        color = MaterialTheme.colorScheme.tertiary,
-                        shape = CircleShape
+                        color = if(isToday){MaterialTheme.colorScheme.secondary}
+                                else {MaterialTheme.colorScheme.tertiary},
+                        shape = if (isToday) { CutCornerShape(12.dp)}
+                                else {CircleShape}
                     )
             )
         }

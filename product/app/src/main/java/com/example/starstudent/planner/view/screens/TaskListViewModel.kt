@@ -1,6 +1,8 @@
 package com.example.starstudent.planner.view.screens
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TimePickerState
@@ -189,6 +191,7 @@ class TaskListViewModel : ViewModel() {
         "pink" to {colors :  ExtendedLabelColours -> colors.pink}
     )
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     fun dueDateTask() : String  {
         return formatDateTime(
@@ -200,6 +203,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getDateTime(
         date: Long,
         hour: Int,
@@ -252,6 +256,7 @@ class TaskListViewModel : ViewModel() {
         showCategoryDialog(false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun startNewTask(){
         hideNewOptionsDialog()
         resetTaskVariables(
@@ -272,6 +277,7 @@ class TaskListViewModel : ViewModel() {
         showTaskDialog(false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun startNewTaskInCategory(
         currentTaskCategory: TaskCategories
     ){
@@ -302,6 +308,7 @@ class TaskListViewModel : ViewModel() {
         showCategoryDialog(true)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun editTask(
         currentTask: Int,
         currentTaskCategory : TaskCategories,
@@ -343,6 +350,7 @@ class TaskListViewModel : ViewModel() {
         completionDate = System.currentTimeMillis()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getCompletionDate() : String{
         return if(!completeTask){
             "Not Complete yet"
@@ -360,6 +368,7 @@ class TaskListViewModel : ViewModel() {
         showCategoryColorList()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     fun resetTaskVariables(
         defaultTaskId: Int,
@@ -449,6 +458,7 @@ class TaskListViewModel : ViewModel() {
         return 600
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun formatDateTime(dateTime : Long) : String{
         return Instant.ofEpochMilli(dateTime)
             .atZone(ZoneId.systemDefault())
@@ -531,6 +541,7 @@ class TaskListViewModel : ViewModel() {
         categoryList = taskCategoriesDAO.getAllCurrentCategories(username)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getRecentMonday(): Long{
         val today = LocalDate.now()
 
@@ -548,6 +559,7 @@ class TaskListViewModel : ViewModel() {
             )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun addOrUpdateTask(){
         if(editTask){
             Log.d("TASK ACTION", "Updating existing task")
@@ -581,6 +593,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun addNewTask(){
         tasksDAO.addNewTask(
@@ -610,6 +623,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun updateExistingTask(){
         tasksDAO.updateTask(
