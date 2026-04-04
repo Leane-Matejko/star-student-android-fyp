@@ -12,39 +12,28 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.BannerFunctions
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.core.domain.navigation.NavigationOptions
+import com.example.starstudent.planner.data.AccessTaskCategories
+import com.example.starstudent.planner.data.AccessTasks
 import com.example.starstudent.planner.data.entities.TaskCategories
 import com.example.starstudent.planner.data.entities.Tasks
+import com.example.starstudent.planner.domain.CategoryTaskFormatting
 import com.example.starstudent.ui.theme.ExtendedLabelColours
 import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
 import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.text.replaceFirstChar
-import kotlin.time.Duration
 
 class TaskListViewModel : ViewModel() {
 
-    val taskCategoriesDAO =
-        DatabaseSingleton
-            .getDatabase(
-                CurrentApplication
-                    .instance)
-            .taskCategoriesDao()
+    val accessTaskCategories = AccessTaskCategories()
+    val accessTasks = AccessTasks()
 
-    val tasksDAO =
-        DatabaseSingleton
-            .getDatabase(
-                CurrentApplication
-                    .instance)
-            .tasksDao()
+    val categoryTaskFormatting = CategoryTaskFormatting()
 
     val bannerFunctions = BannerFunctions()
 
@@ -191,6 +180,38 @@ class TaskListViewModel : ViewModel() {
         "pink" to {colors :  ExtendedLabelColours -> colors.pink}
     )
 
+    //Functions for menus and Dialogs
+    fun showCategoryDialog(editCate : Boolean){
+        editCategory = editCate
+        showCategoryDialog = true
+    }
+    fun hideCategoryDialog(){
+        showCategoryDialog = false
+    }
+
+    fun showNewOptionsDialog(){
+        showNewOptionsDialog = true
+    }
+
+    fun hideNewOptionsDialog(){
+        showNewOptionsDialog = false
+    }
+
+    private fun showTaskDialog(currentTask: Boolean) {
+        editTask = currentTask
+        showTaskDialog = true
+    }
+
+    fun hideTaskDialog(){
+        showTaskDialog = false
+    }
+
+    fun showNavMenu()
+    {showNavMenu = true}
+
+    fun dismissNavMenu()
+    {showNavMenu = false}
+
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     fun dueDateTask() : String  {
@@ -209,40 +230,11 @@ class TaskListViewModel : ViewModel() {
         hour: Int,
         minute: Int
     ) : Long{
-        val zone = ZoneId.systemDefault()
-
-        val checkedDate = if (date >= 0L) {date} else {System.currentTimeMillis()}
-
-        val localDate = Instant.ofEpochMilli(checkedDate)
-                .atZone(zone)
-                .toLocalDate()
-
-        val dateTime = LocalDateTime.of(
-            localDate,
-            LocalTime.of(hour, minute)
+        return categoryTaskFormatting.getDateTime(
+            date,
+            hour,
+            minute
         )
-
-        return dateTime
-            .atZone(zone)
-            .toInstant()
-            .toEpochMilli()
-    }
-
-    fun hideCategoryDialog(){
-        showCategoryDialog = false
-    }
-
-    fun showCategoryDialog(editCate : Boolean){
-        editCategory = editCate
-        showCategoryDialog = true
-    }
-
-    fun showNewOptionsDialog(){
-        showNewOptionsDialog = true
-    }
-
-    fun hideNewOptionsDialog(){
-        showNewOptionsDialog = false
     }
 
     fun startNewCategory(){
@@ -330,13 +322,8 @@ class TaskListViewModel : ViewModel() {
         showTaskDialog(true)
     }
 
-    private fun showTaskDialog(currentTask: Boolean) {
-        editTask = currentTask
-        showTaskDialog = true
-    }
-
     fun updateTaskName(newName : String){
-        if(newName.length <= 24){
+        if(newName.length <= 20){
             updateTaskName = newName
         }
     }
@@ -357,10 +344,6 @@ class TaskListViewModel : ViewModel() {
         }else{
             "Completed: ${formatDateTime(completionDate)}"
         }
-    }
-
-    fun hideTaskDialog(){
-        showTaskDialog = false
     }
 
     fun updateTaskCategory(newTaskCategory : TaskCategories){
@@ -419,55 +402,21 @@ class TaskListViewModel : ViewModel() {
         }
     }
 
-    fun showNavMenu()
-    {showNavMenu = true}
-
-    fun dismissNavMenu()
-    {showNavMenu = false }
-
-    fun getScrollableHeight() : Int{
-        return if(categoryList.isEmpty()){
-            120
-        }else{
-            if(taskList.isEmpty()){
-                120 * categoryList.size
-            }else{
-                ((categoryList.size * 100) + (taskList.size * 70))
-            }
-        }
-    }
-
     fun getCategoryListHeight(tasksNum : Int) : Int {
-        if(tasksNum == 0){
-            return 120
-        }
-        return (100 + (tasksNum * 70))
+        return categoryTaskFormatting.getCategoryListHeight(tasksNum)
     }
 
     fun getEditCategoryDialogHeight() : Int {
-        if(editCategory){
-            return 620
-        }
-        return 520
+        return categoryTaskFormatting.getEditCategoryDialogHeight(editCategory)
     }
 
     fun getEditTaskDialogHeight() : Int {
-        if(editTask){
-            return 700
-        }
-        return 600
+        return categoryTaskFormatting.getEditTaskDialogHeight(editTask)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun formatDateTime(dateTime : Long) : String{
-        return Instant.ofEpochMilli(dateTime)
-            .atZone(ZoneId.systemDefault())
-            .format(
-                DateTimeFormatter
-                    .ofPattern(
-                        "EEE d MMM yyyy, HH:mm"
-                    )
-            )
+        return categoryTaskFormatting.formatDateTime(dateTime)
     }
 
     fun showCategoryColorList() {
@@ -496,49 +445,30 @@ class TaskListViewModel : ViewModel() {
     }
 
     fun getEditCategoryDialogLabel() : String {
-        if(editCategory){
-            return "Edit Category"
-        }
-        return "Add New Category"
+        return categoryTaskFormatting.getEditCategoryDialogLabel(editCategory)
     }
 
     fun getEditTaskDialogLabel() : String {
-        if(editTask){
-            return "Edit Task"
-        }
-        return "Add New Task"
+        return categoryTaskFormatting.getEditTaskDialogLabel(editTask)
     }
 
     fun getCategoryButtonText() : String{
-        if (editCategory){
-            return "Save Changes"
-        }
-        return "Save"
+        return categoryTaskFormatting.getCategoryButtonText(editCategory)
     }
 
     fun getTaskButtonText() : String{
-        if (editTask){
-            return "Save Changes"
-        }
-        return "Save"
+        return categoryTaskFormatting.getTaskButtonText(editTask)
     }
 
     fun getCategoryColour(colour : String, colourList : ExtendedLabelColours) : Color {
-        return when (colour) {
-            "red" -> colourList.red
-            "orange" -> colourList.orange
-            "yellow" -> colourList.yellow
-            "green" -> colourList.green
-            "blue" -> colourList.blue
-            "navy" -> colourList.navy
-            "purple" -> colourList.purple
-            "pink" -> colourList.pink
-            else -> colourList.red
-        }
+        return categoryTaskFormatting.getCategoryColour(
+            colour,
+            colourList
+        )
     }
 
     suspend fun getCategoryList(){
-        categoryList = taskCategoriesDAO.getAllCurrentCategories(username)
+        categoryList = accessTaskCategories.getCategoryList(username)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -551,21 +481,17 @@ class TaskListViewModel : ViewModel() {
     }
 
     suspend fun getTaskList(){
-        taskList = tasksDAO
-            .getAllCurrentTasksWeek(
-                username,
-//                getRecentMonday()
-                0L
-            )
+        taskList = accessTasks.getTaskList(
+            username,
+            0L
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun addOrUpdateTask(){
         if(editTask){
-            Log.d("TASK ACTION", "Updating existing task")
             updateExistingTask()
         }else{
-            Log.d("TASK ACTION", "Creating a new task")
             addNewTask()
         }
         getTaskList()
@@ -583,50 +509,47 @@ class TaskListViewModel : ViewModel() {
     }
 
     suspend fun addNewCategory(){
-        taskCategoriesDAO.addNewCategory(
-            TaskCategories(
-                user = username,
-                cateLabel = categoryName,
-                labelColour = categoryLabelColor,
-                isActive = true
-            )
+        accessTaskCategories.addNewCategory(
+            username,
+            categoryName,
+            categoryLabelColor
         )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun addNewTask(){
-        tasksDAO.addNewTask(
-            Tasks(
-                cateId = taskCategory.id,
-                taskLabel = updateTaskName,
-                isCritical = criticalTask,
-                dueDate = getDateTime(
-                    taskDatePickerState.selectedDateMillis ?: 0L,
-                    taskTimePickerState.hour,
-                    taskTimePickerState.minute
-                ),
-                isComplete = completeTask,
-                completeDate = if(completeTask){completionDate}else{0L},
-                isActive = true
-            )
+
+        accessTasks.addNewTask(
+            cateId = taskCategory.id,
+            taskLabel = updateTaskName,
+            isCritical = criticalTask,
+            dueDate = getDateTime(
+                taskDatePickerState.selectedDateMillis ?: 0L,
+                taskTimePickerState.hour,
+                taskTimePickerState.minute
+            ),
+            isComplete = completeTask,
+            completeDate = if(completeTask){completionDate}else{0L},
+            isActive = true
         )
     }
 
     suspend fun updateExistingCategory(){
 
-        taskCategoriesDAO.updateCategory(
-            id = categoryId,
-            cateLabel = categoryName,
-            labelColour = categoryLabelColor,
-            isActive = !hideCategory //Reversing the hide status as is stored as the category's active status
+        accessTaskCategories.updateExistingCategory(
+            categoryId,
+            categoryName,
+            categoryLabelColor,
+            !hideCategory
         )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun updateExistingTask(){
-        tasksDAO.updateTask(
+
+        accessTasks.updateExistingTask(
             id = taskId,
             cateId = taskCategory.id,
             taskLabel = updateTaskName,
@@ -645,19 +568,10 @@ class TaskListViewModel : ViewModel() {
         taskId: Int,
         taskComplete: Boolean
     ){
-        if(taskComplete){
-            tasksDAO.updateTaskCompletion(
-                taskId,
-                false,
-                0L
-            )
-        }else {
-            tasksDAO.updateTaskCompletion(
-                taskId,
-                true,
-                System.currentTimeMillis()
-            )
-        }
+        accessTasks.updateTaskCompletion(
+            taskId,
+            taskComplete
+        )
         getTaskList()
     }
 

@@ -244,12 +244,14 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
 
                                 items(tasks) { task ->
 
+                                    val isOverdue = task.dueDate >= today
+
                                     Row(
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .background(
-                                                color = if (task.dueDate >= today) {MaterialTheme.colorScheme.primary}
-                                                        else {MaterialTheme.colorScheme.secondary},
+                                                color = if (isOverdue) {MaterialTheme.colorScheme.primary}
+                                                        else {MaterialTheme.colorScheme.tertiary},
                                                 shape = RoundedCornerShape(24.dp)
                                             )
                                             .padding(6.dp),
@@ -285,7 +287,8 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
 
                                             Text(
                                                 text = task.taskLabel,
-                                                color = MaterialTheme.colorScheme.background,
+                                                color = if (isOverdue){MaterialTheme.colorScheme.background}
+                                                        else {MaterialTheme.colorScheme.primary},
                                                 fontWeight = FontWeight.SemiBold,
                                                 fontSize = 16.sp,
                                                 modifier = Modifier
@@ -294,7 +297,8 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
 
                                             Text(
                                                 text = "Due: ${viewModel.formatDateTime(task.dueDate)}",
-                                                color = MaterialTheme.colorScheme.background,
+                                                color = if (isOverdue){MaterialTheme.colorScheme.background}
+                                                        else {MaterialTheme.colorScheme.primary},
                                                 fontSize = 12.sp,
                                                 modifier = Modifier
                                             )

@@ -1,49 +1,34 @@
 package com.example.starstudent.planner.view.screens
 
 import android.util.Log
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.BannerFunctions
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.core.domain.navigation.NavigationOptions
+import com.example.starstudent.planner.data.AccessTasks
 import com.example.starstudent.planner.data.entities.Tasks
+import com.example.starstudent.planner.domain.CalendarFunctions
 import java.util.Calendar
 import java.util.Date
 
 class PlannerViewModel : ViewModel(){
-
-    val tasksDAO =
-        DatabaseSingleton
-            .getDatabase(
-                CurrentApplication
-                    .instance)
-            .tasksDao()
-
+    val calendarFunctions = CalendarFunctions()
+    val accessTasks = AccessTasks()
     val bannerFunctions = BannerFunctions()
-
     val navigationFunctions = NavigationFunctions()
+    val monthList = calendarFunctions.getMonthList()
+    val yearList = calendarFunctions.getYearList()
 
-    val monthList = listOf(
-        "Jan", "Feb", "Mar",
-        "Apr", "May", "June",
-        "July", "Aug", "Sep",
-        "Oct", "Nov", "Dec"
+    var showNavMenu by mutableStateOf(
+        false
     )
-
-    val thisYear = Calendar.getInstance().get(Calendar.YEAR)
-
-    val yearList = (
-            (thisYear - 1).. (thisYear + 16)
-    )
+        private set
 
     var showYearList by mutableStateOf(
         false
@@ -59,19 +44,6 @@ class PlannerViewModel : ViewModel(){
 
     var curDate by mutableStateOf(
         bannerFunctions.updateTime()
-    )
-        private set
-
-    fun toggleYearList(){
-        showYearList = !showYearList
-    }
-
-    fun updateTime(){
-        curDate = bannerFunctions.updateTime()
-    }
-
-    var showNavMenu by mutableStateOf(
-        false
     )
         private set
 
@@ -95,6 +67,14 @@ class PlannerViewModel : ViewModel(){
     )
         private set
 
+    fun updateTime(){
+        curDate = bannerFunctions.updateTime()
+    }
+
+    fun toggleYearList(){
+        showYearList = !showYearList
+    }
+
     fun showNavMenu()
     {showNavMenu = true}
 
@@ -116,11 +96,10 @@ class PlannerViewModel : ViewModel(){
     }
 
     suspend fun getTaskList(){
-        taskList = tasksDAO
-            .getAllCurrentTasksWeek(
-                username,
-                0L
-            )
+        taskList = accessTasks.getTaskList(
+            username,
+            0L
+        )
     }
 
     fun getPreviousMonth(){
@@ -142,28 +121,10 @@ class PlannerViewModel : ViewModel(){
     }
 
     fun generateMonthDates(year: Int, month: Int): List<Date> {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.YEAR, year)
-        calendar.set(Calendar.MONTH, month)
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
-
-        val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-
-        val dates = mutableListOf<Date>()
-
-        for (day in 1..daysInMonth) {
-            calendar.set(year, month, day)
-
-            calendar.set(Calendar.HOUR_OF_DAY, 0)
-            calendar.set(Calendar.MINUTE, 0)
-            calendar.set(Calendar.SECOND, 0)
-            calendar.set(Calendar.MILLISECOND, 0)
-
-            dates.add(
-                calendar.time
-            )
-        }
-        return dates
+        return calendarFunctions.generateMonthDates(
+            year,
+            month
+        )
     }
 
     fun profileNav(navController: NavController){
