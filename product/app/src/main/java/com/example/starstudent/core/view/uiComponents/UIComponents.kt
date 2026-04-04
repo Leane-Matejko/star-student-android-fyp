@@ -58,8 +58,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.core.domain.navigation.NavigationOptions
+import com.example.starstudent.planner.data.entities.Tasks
 import okhttp3.internal.toImmutableList
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneId
 import java.util.Calendar
 import java.util.Locale
 import java.util.Date
@@ -767,7 +770,7 @@ private fun getOffset(firstDay : Int) : Int{
 
 
 fun weekdayLabelsList(
-    dates: List<Pair<Date, Boolean>>
+    dates: List<Date>
 ): List<CalendarItem> {
 
     val items = mutableListOf<CalendarItem>()
@@ -779,7 +782,7 @@ fun weekdayLabelsList(
         items.add(CalendarItem.Weekday(it))
     }
 
-    val firstDay = dates.first().first.formatToWeekDay()
+    val firstDay = dates.first().formatToWeekDay()
 
     val offset = getOffset(firstDay)
 
@@ -790,7 +793,7 @@ fun weekdayLabelsList(
 
     // Actual days
     dates.forEach {
-        items.add(CalendarItem.Day(it.first, it.second))
+        items.add(CalendarItem.Day(it, false))
     }
 
     return items
@@ -798,7 +801,8 @@ fun weekdayLabelsList(
 
 @Composable
 fun CalendarGrid(
-    dates: List<Pair<Date, Boolean>>,
+    dates: List<Date>,
+    tasks: List<Tasks>,
     onClick: (Date) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -826,7 +830,7 @@ fun CalendarGrid(
                     .clickable(onClick = {})
             ) {
                 Text(
-                    text = dates.first().first.formatToMonthString(),
+                    text = dates.first().formatToMonthString(),
                     color = MaterialTheme.colorScheme.tertiary,
                     textAlign = TextAlign.Center,
                     fontSize = 32.sp,
@@ -834,7 +838,7 @@ fun CalendarGrid(
                 )
 
                 Text(
-                    text = dates.first().first.formatToYear(),
+                    text = dates.first().formatToYear(),
                     color = MaterialTheme.colorScheme.secondary,
                     textAlign = TextAlign.Center,
                     fontSize = 20.sp,
@@ -856,8 +860,30 @@ fun CalendarGrid(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        val items = remember(dates) {
-            weekdayLabelsList(dates)
+        val taskDays = remember(tasks){
+            tasks.map {it.dueDate}.map {
+                millis ->
+                Instant.ofEpochMilli(millis)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+            }.toSet()
+        }
+
+        val items = remember(dates,taskDays) {
+            weekdayLabelsList(dates).map{ item ->
+                when (item){
+                   is CalendarItem.Day ->  {
+                       val localDate = item.date.toInstant()
+                           .atZone(ZoneId.systemDefault())
+                           .toLocalDate()
+
+                       item.copy(
+                           signal = taskDays.contains(localDate)
+                       )
+                   }
+                    else -> item
+                }
+            }
         }
 
         LazyVerticalGrid(

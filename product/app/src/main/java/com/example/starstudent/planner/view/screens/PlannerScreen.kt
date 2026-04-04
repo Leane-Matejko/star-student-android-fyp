@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.starstudent.core.domain.navigation.NavigationOptions
@@ -37,6 +39,7 @@ import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.ui.theme.LocalExtendedLabelColours
+import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
 
@@ -96,12 +99,8 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        val month = Calendar.SEPTEMBER
-
-        Log.d("MONTH", month.toString())
-
         val dates = remember {
-            generateMonthDates(2026, month)
+            generateMonthDates(2026, viewModel.calendarMonth)
         }
 
         val selectedDates = remember { mutableStateOf(setOf<Date>()) }
@@ -116,9 +115,8 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
                 .padding(all = 20.dp)
         ) {
             CalendarGrid(
-                dates = dates.map { (date, _) ->
-                    date to (date in selectedDates.value)
-                },
+                dates = dates,
+                tasks = viewModel.taskList,
                 onClick = { clickedDate ->
                     selectedDates.value =
                         if (clickedDate in selectedDates.value) {
@@ -166,24 +164,32 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
 
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.getTaskList()
+    }
+
 }
 
-fun generateMonthDates(year: Int, month: Int): List<Pair<Date, Boolean>> {
+fun generateMonthDates(year: Int, month: Int): List<Date> {
     val calendar = Calendar.getInstance()
-    calendar.set(year, month, 1)
+    calendar.set(Calendar.YEAR, year)
+    calendar.set(Calendar.MONTH, month)
+    calendar.set(Calendar.DAY_OF_MONTH, 1)
 
     val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
 
-    val dates = mutableListOf<Pair<Date, Boolean>>()
+    val dates = mutableListOf<Date>()
 
     for (day in 1..daysInMonth) {
         calendar.set(year, month, day)
 
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
         dates.add(
-            Pair(
-                calendar.time,
-                true
-            )
+            calendar.time
         )
     }
 

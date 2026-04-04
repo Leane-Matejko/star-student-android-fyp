@@ -1,5 +1,6 @@
 package com.example.starstudent.planner.data.dao
 
+import androidx.compose.ui.graphics.Interval
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -47,12 +48,15 @@ interface TasksDAO {
     )
 
     @Query("""
-        SELECT tasks.id, tasks.cateId,tasks.taskLabel, tasks.isCritical, tasks.dueDate, tasks.isComplete, tasks.completeDate, tasks.isActive 
-        FROM tasks , task_categories
+        SELECT tasks.id,tasks.cateId,tasks.taskLabel, tasks.isCritical, tasks.dueDate, tasks.isComplete, tasks.completeDate, tasks.isActive 
+        FROM tasks 
+        INNER JOIN task_categories
         WHERE user = :user AND tasks.isActive = 1 AND tasks.cateId == task_categories.id
+            AND (tasks.completeDate >= :acceptableInterval) 
         ORDER BY dueDate ASC
         """)
-    suspend fun getAllCurrentTasks(
-        user: String
+    suspend fun getAllCurrentTasksWeek(
+        user: String,
+        acceptableInterval : Long
     ) :  List<Tasks>
 }

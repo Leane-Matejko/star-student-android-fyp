@@ -19,12 +19,14 @@ import com.example.starstudent.planner.data.entities.TaskCategories
 import com.example.starstudent.planner.data.entities.Tasks
 import com.example.starstudent.ui.theme.ExtendedLabelColours
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.text.replaceFirstChar
+import kotlin.time.Duration
 
 class TaskListViewModel : ViewModel() {
 
@@ -51,15 +53,6 @@ class TaskListViewModel : ViewModel() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     var taskTimePickerState = TimePickerState(0,0,true)
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    val taskDateLong = taskDatePickerState.selectedDateMillis
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    val taskHourLong = taskTimePickerState.hour
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    val taskMinuteLong = taskTimePickerState.minute
 
     var username by mutableStateOf(
         CurrentApplication
@@ -538,8 +531,21 @@ class TaskListViewModel : ViewModel() {
         categoryList = taskCategoriesDAO.getAllCurrentCategories(username)
     }
 
+    fun getRecentMonday(): Long{
+        val today = LocalDate.now()
+
+        val recentMonday = today.with(java.time.DayOfWeek.MONDAY)
+
+        return recentMonday.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+    }
+
     suspend fun getTaskList(){
-        taskList = tasksDAO.getAllCurrentTasks(username)
+        taskList = tasksDAO
+            .getAllCurrentTasksWeek(
+                username,
+//                getRecentMonday()
+                0L
+            )
     }
 
     suspend fun addOrUpdateTask(){
