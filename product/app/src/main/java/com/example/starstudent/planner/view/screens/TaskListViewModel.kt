@@ -21,7 +21,9 @@ import com.example.starstudent.planner.data.AccessTasks
 import com.example.starstudent.planner.data.entities.TaskCategories
 import com.example.starstudent.planner.data.entities.Tasks
 import com.example.starstudent.planner.domain.CategoryTaskFormatting
+import com.example.starstudent.planner.domain.TaskNotCompleteException
 import com.example.starstudent.ui.theme.ExtendedLabelColours
+import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -67,7 +69,7 @@ class TaskListViewModel : ViewModel() {
         private set
 
     var categoryList by mutableStateOf(
-        listOf<TaskCategories>(
+        listOf(
             TaskCategories(
                 id = 0,
                 user = "",
@@ -167,6 +169,14 @@ class TaskListViewModel : ViewModel() {
     var taskId by mutableStateOf(
         0
     )
+        private set
+
+    var acceptedTask = false
+
+    var errorWindow by mutableStateOf(false)
+        private set
+
+    var errorMessage by mutableStateOf("")
         private set
 
     var colorOptions = listOf(
@@ -348,6 +358,7 @@ class TaskListViewModel : ViewModel() {
 
     fun updateTaskCategory(newTaskCategory : TaskCategories){
         taskCategory = newTaskCategory
+        acceptedTask = true
         showCategoryColorList()
     }
 
@@ -385,6 +396,8 @@ class TaskListViewModel : ViewModel() {
         completeTask = defaultCompleteTask
 
         completionDate = defaultCompletionDate
+
+        acceptedTask = false
     }
 
     fun resetCategoryVariables(
@@ -471,15 +484,6 @@ class TaskListViewModel : ViewModel() {
         categoryList = accessTaskCategories.getCategoryList(username)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getRecentMonday(): Long{
-        val today = LocalDate.now()
-
-        val recentMonday = today.with(java.time.DayOfWeek.MONDAY)
-
-        return recentMonday.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
-    }
-
     suspend fun getTaskList(){
         taskList = accessTasks.getTaskList(
             username,
@@ -518,21 +522,40 @@ class TaskListViewModel : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
-    suspend fun addNewTask(){
+    suspend fun addNewTask() {
 
-        accessTasks.addNewTask(
-            cateId = taskCategory.id,
-            taskLabel = updateTaskName,
-            isCritical = criticalTask,
-            dueDate = getDateTime(
-                taskDatePickerState.selectedDateMillis ?: 0L,
-                taskTimePickerState.hour,
-                taskTimePickerState.minute
-            ),
-            isComplete = completeTask,
-            completeDate = if(completeTask){completionDate}else{0L},
-            isActive = true
-        )
+        try {
+            if (!acceptedTask || ((taskDatePickerState.selectedDateMillis ?: 0L) == 0L)) {
+                throw TaskNotCompleteException()
+            }
+
+            accessTasks.addNewTask(
+                cateId = taskCategory.id,
+                taskLabel = updateTaskName,
+                isCritical = criticalTask,
+                dueDate = getDateTime(
+                    taskDatePickerState.selectedDateMillis ?: 0L,
+                    taskTimePickerState.hour,
+                    taskTimePickerState.minute
+                ),
+                isComplete = completeTask,
+                completeDate = if (completeTask) {
+                    completionDate
+                } else {
+                    0L
+                },
+                isActive = true
+            )
+        }catch (e: Exception){
+            Log.d("TEST", "Error thrown")
+            errorMessage = e.message.toString()
+            resetErrorWindow()
+            errorWindow = true
+        }
+    }
+
+    fun resetErrorWindow(){
+        errorWindow = false
     }
 
     suspend fun updateExistingCategory(){

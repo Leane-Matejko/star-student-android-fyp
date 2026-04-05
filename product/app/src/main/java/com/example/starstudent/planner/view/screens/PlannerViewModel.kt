@@ -12,7 +12,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.starstudent.core.domain.BannerFunctions
 import com.example.starstudent.core.domain.CurrentApplication
@@ -25,8 +24,8 @@ import com.example.starstudent.planner.data.entities.Tasks
 import com.example.starstudent.planner.data.entities.TaskWithCategory
 import com.example.starstudent.planner.domain.CalendarFunctions
 import com.example.starstudent.planner.domain.CategoryTaskFormatting
+import com.example.starstudent.planner.domain.TaskNotCompleteException
 import com.example.starstudent.ui.theme.ExtendedLabelColours
-import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDate
@@ -193,6 +192,14 @@ class PlannerViewModel : ViewModel(){
     var taskId by mutableStateOf(
         0
     )
+        private set
+
+    var acceptedTask = false
+
+    var errorWindow by mutableStateOf(false)
+        private set
+
+    var errorMessage by mutableStateOf("")
         private set
 
     fun updateTime(){
@@ -396,6 +403,7 @@ class PlannerViewModel : ViewModel(){
 
     fun updateTaskCategory(newTaskCategory : TaskCategories){
         taskCategory = newTaskCategory
+        acceptedTask = true
         showCategoryColorList()
     }
 
@@ -465,6 +473,8 @@ class PlannerViewModel : ViewModel(){
         completeTask = defaultCompleteTask
 
         completionDate = defaultCompletionDate
+
+        acceptedTask = false
     }
 
     fun startNewTask(){
@@ -524,19 +534,35 @@ class PlannerViewModel : ViewModel(){
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun addNewTask(){
 
-        accessTasks.addNewTask(
-            cateId = taskCategory.id,
-            taskLabel = updateTaskName,
-            isCritical = criticalTask,
-            dueDate = getDateTime(
-                taskDatePickerState.selectedDateMillis ?: 0L,
-                taskTimePickerState.hour,
-                taskTimePickerState.minute
-            ),
-            isComplete = completeTask,
-            completeDate = if(completeTask){completionDate}else{0L},
-            isActive = true
-        )
+
+        try {
+            if (!acceptedTask || ((taskDatePickerState.selectedDateMillis ?: 0L) == 0L)) {
+                throw TaskNotCompleteException()
+            }
+
+            accessTasks.addNewTask(
+                cateId = taskCategory.id,
+                taskLabel = updateTaskName,
+                isCritical = criticalTask,
+                dueDate = getDateTime(
+                    taskDatePickerState.selectedDateMillis ?: 0L,
+                    taskTimePickerState.hour,
+                    taskTimePickerState.minute
+                ),
+                isComplete = completeTask,
+                completeDate = if (completeTask) {
+                    completionDate
+                } else {
+                    0L
+                },
+                isActive = true
+            )
+        }catch (e: Exception){
+            Log.d("TEST", "Error thrown")
+            errorMessage = e.message.toString()
+            resetErrorWindow()
+            errorWindow = true
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -675,6 +701,10 @@ class PlannerViewModel : ViewModel(){
     fun navTaskList(navController: NavController){
         Log.d("TEST", "Navigating to the Task List...")
         navigationFunctions.goToTaskList(navController)
+    }
+
+    fun resetErrorWindow(){
+        errorWindow = false
     }
 
 }

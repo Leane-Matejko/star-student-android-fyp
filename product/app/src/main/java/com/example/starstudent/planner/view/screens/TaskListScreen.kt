@@ -3,6 +3,7 @@ package com.example.starstudent.planner.view.screens
 import android.annotation.SuppressLint
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -42,9 +43,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimeInput
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -70,6 +73,7 @@ import java.time.ZoneId
 fun TaskListScreen(navController: NavController){
 
     val viewModel = viewModel<TaskListViewModel>()
+    val context = LocalContext.current
 
     BannerFormatAndFloatingButtons(
         username = viewModel.username,
@@ -106,6 +110,18 @@ fun TaskListScreen(navController: NavController){
         while(true){
             viewModel.updateTime()
             delay(60000)
+        }
+    }
+
+    //Error window pop-up
+    LaunchedEffect(viewModel.errorWindow) {
+        if (viewModel.errorWindow) {
+            Toast.makeText(
+                context,
+                viewModel.errorMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+            viewModel.resetErrorWindow()
         }
     }
 }
