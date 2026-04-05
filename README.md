@@ -23,6 +23,7 @@
 - [Sign In and Register](#sign-in-and-register)
 - [Profile Settings](#user-profile)
 - [Study Centre](#study-centre)
+- [Planner and Task List](#planner-and-task-list)
 
 #### Sign In and Register
 - Register Account (New User)
@@ -178,3 +179,126 @@
         <li>Study Sessions must be over 5 minutes to be shown.</li>
     </ul>
     </div>
+
+### Planner and Task List
+
+- Planner - Calendar View
+    
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/Planner_Page.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/CalendarMonthNavigation.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Calender view of all tasks</li>
+        <li>Loads to the current month</li>
+        <li>Indicator for the current day (diamond) and days with tasks due (circle)</li>
+        <li>Click the month and year at the top to open the selection window </li>
+        <li>Options to add tasks to day with or without tasks</li>
+    </ul>
+    </div>
+
+- Calendar Navigation
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/CalendarMonthNavigation.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/CalendarMonthYearSelection.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Navigation possible via the next and previous buttons or clicking on the month and selecting an option</li>
+        <li>Possible to select the month or year</li>
+        <li>Months can be selected via buttons and the year via a dropdown</li>
+        <li>Dismiss the window by clicking outside</li>
+    </ul>
+    </div>
+
+- Planner - Navigation to Task List
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/Navigation_TaskList.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Navigation to the Task List view, separated into categories.</li>
+    </ul>
+    </div>
+
+- Planner - Task Catergories
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/PlannerMainCategories.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Shows current tasks in a managble catergories: overdue, weekly, today and this week</li>
+        <li>There is an indicator on the widget for the total number of tasks and of which that are critical</li>
+    </ul>
+    </div>
+
+- Planner - Task Catergories (Examples)
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/OverdueTasks.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/MonthTaskList.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Examples of the task categories list. Sorted by due dates.</li>
+        <li>Overdue tasks are highlighted, and ciritcal tasks have a star indicator.</li>
+    </ul>
+    </div>
+
+- Task List View
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/TaskListView.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/TaskOptionHighlighted.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Shows tasks into their categories, sorted by due date.</li>
+        <li>Overdue tasks are highlighted, and ciritcal tasks have a star indicator.</li>
+        <li>Categories and tasks can be edited by clicking on the badge</li>
+        <li>Tasks can be marked off using the toggle on the left side</li>
+        <li>Quick add tasks with the add button on the side of the category or with the add button on the bottom right hand corner</li>
+    </ul>
+    </div>
+
+- Task List View
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/Add_Task_Options.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Window to add a new category or task</li>
+    </ul>
+    </div>
+
+- Task List - Add New Category
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/AddNewCategory.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/EditCategory.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Window to add a new category</li>
+        <li>Shows a preview of with the category badge renders to</li>
+        <li>Colour options of red, orange, yellow, green, blue, navy, purple, pink (Adaptive to the light and dark themes)</li>
+        <li>Badges can be left to their default and edtted later.</li>
+        <li>When in edit mode, categories can be hidden</li>
+    </ul>
+    </div>
+
+- Task List - Task Item
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/TasksItemTaskList.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Tasks are shown under each category</li>
+        <li>Each task shows the label, due date, critical status and toggle for the complete status.</li>
+        <li>Tasks are edittable by clicking on the widget</li>
+    </ul>
+    </div>
+
+- Task List - Add New Task
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/AddNewTaskCateLabel.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/AddNewTaskDateTime.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/AddNewTaskCritical.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Options to select the category, label, date, time and critical status</li>
+        <li>A category must be selected, otherwise and error is thrown</li>
+        <li>Date and time is set to the current date and time as a default</li>
+    </ul>
+    </div>
+
+- Task List - Edit Task
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/EditTasksCategoryLabel.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/EditTaskCriticalComplete.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Options to change the category, label, date, time and critical status and complete a task</li>
+        <li>A All currently saved values are loaded into each field</li>
+        <li>If the task is complete, the completion date set to the current time</li>
+    </ul>
+    </div>
+

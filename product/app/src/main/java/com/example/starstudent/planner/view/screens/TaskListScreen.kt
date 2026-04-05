@@ -260,7 +260,7 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
 
                                 items(tasks) { task ->
 
-                                    val isOverdue = task.dueDate >= today
+                                    val isOverdue = task.dueDate >= today || !task.isComplete
 
                                     Row(
                                         modifier = Modifier
