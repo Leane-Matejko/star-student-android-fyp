@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -61,11 +63,13 @@ import com.example.starstudent.core.view.uiComponents.CalendarGrid
 import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
+import com.example.starstudent.core.view.uiComponents.simpleToggle
 import com.example.starstudent.ui.theme.LocalExtendedLabelColours
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
+import kotlin.random.Random
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -118,8 +122,6 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
 
     val viewModel = viewModel
 
-    val colors = LocalExtendedLabelColours.current
-
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -140,7 +142,7 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
             viewModel.generateMonthDates(viewModel.calendarYear, viewModel.calendarMonth)
         }
 
-        val selectedDates = remember(dates) { mutableStateOf(setOf<Date>()) }
+//        val selectedDates = remember(dates) { mutableStateOf(setOf<Date>()) }
 
         Column(
             modifier = Modifier
@@ -155,12 +157,15 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
                 dates = dates,
                 tasks = viewModel.taskList,
                 onClick = { clickedDate ->
-                    selectedDates.value =
-                        if (clickedDate in selectedDates.value) {
-                            selectedDates.value - clickedDate
-                        } else {
-                            selectedDates.value + clickedDate
-                        }
+                    viewModel.setNewTaskDate(clickedDate)
+                    viewModel.viewModelScope.launch {
+                        viewModel.getSelectDayTaskList(
+                            viewModel.getDayStart(clickedDate),
+                            viewModel.getDayEnd(clickedDate)
+                        )
+                    }
+                    viewModel.updateTaskListType(viewModel.formatDateTime(clickedDate.toInstant().toEpochMilli()))
+                    viewModel.showSeeTasksDialog(clickedDate.toInstant().toEpochMilli())
                 },
                 prevButtonClick = {viewModel.getPreviousMonth()},
                 nextButtonClick = {viewModel.getNextMonth()},
@@ -186,28 +191,66 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
             "Overdue",
             "Placeholder",
             Modifier.fillMaxWidth()
-        ){ }
+        ){
+            viewModel.viewModelScope.launch {
+                viewModel.getSelectDayTaskList(
+                    viewModel.getDayStart(0L),
+                    viewModel.getDayEnd(System.currentTimeMillis())
+                )
+
+                viewModel.updateTaskListType("overdue")
+                viewModel.showSeeTasksDialog(System.currentTimeMillis())
+            }
+        }
 
         largeNavWidget(
             Icons.Filled.DateRange,
             "Today",
             "Placeholder",
             Modifier.fillMaxWidth()
-        ){ }
+        ){
+            viewModel.viewModelScope.launch {
+                viewModel.getSelectDayTaskList(
+                    viewModel.getDayStart(System.currentTimeMillis()),
+                    viewModel.getDayEnd(System.currentTimeMillis())
+                )
+
+                viewModel.updateTaskListType("today")
+                viewModel.showSeeTasksDialog(System.currentTimeMillis())
+            }
+        }
 
         largeNavWidget(
             Icons.Filled.DateRange,
             "This Week",
             "Placeholder",
             Modifier.fillMaxWidth()
-        ){ }
+        ){ viewModel.viewModelScope.launch {
+                viewModel.getSelectDayTaskList(
+                    viewModel.getWeekStart(),
+                    viewModel.getWeekEnd()
+                )
+                viewModel.updateTaskListType("week")
+                viewModel.showSeeTasksDialog(System.currentTimeMillis())
+            }
+        }
 
         largeNavWidget(
             Icons.Filled.DateRange,
             "This Month",
             "Placeholder",
             Modifier.fillMaxWidth()
-        ){ }
+        ){
+            viewModel.viewModelScope.launch {
+                viewModel.getSelectDayTaskList(
+                    viewModel.getMonthStart(),
+                    viewModel.getMonthEnd()
+                )
+
+                viewModel.updateTaskListType("month")
+                viewModel.showSeeTasksDialog(System.currentTimeMillis())
+            }
+        }
 
     }
 
@@ -220,6 +263,14 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
             onDismissRequest = { viewModel.hideSelectMonthDialog() }
         ){
             SelectMonthDialog(viewModel)
+        }
+    }
+
+    if(viewModel.showSeeTasksDialog){
+        Dialog(
+            onDismissRequest = { viewModel.hideSeeTasksDialog() }
+        ){
+            SeeTasksDialog(viewModel)
         }
     }
 }
@@ -352,6 +403,178 @@ fun SelectMonthDialog(viewModel: PlannerViewModel){
                         )
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun SeeTasksDialog(viewModel: PlannerViewModel){
+
+    val colors = LocalExtendedLabelColours.current
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(viewModel.getSelectedTaskListHeight().dp)
+            .padding(10.dp)
+    ) {
+
+        val scrollState = rememberScrollState()
+
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
+                .padding(20.dp, 20.dp)
+        ) {
+            Text(
+                text = viewModel.getTaskListTitle(),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+
+            if(viewModel.selectedDayTaskList.isEmpty()){
+                Text(
+                    text = "No tasks found",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                button(
+                    "Add New Task",
+                    3
+                ) { }
+            }else{
+
+                val today = System.currentTimeMillis()
+
+                viewModel.selectedDayTaskList.forEach { task ->
+
+                    val isOverdue = task.dueDate >= today
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                color = if (isOverdue) {MaterialTheme.colorScheme.primary}
+                                else {MaterialTheme.colorScheme.tertiary},
+                                shape = RoundedCornerShape(24.dp)
+                            )
+                            .padding(6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+
+                    ) {
+                        simpleToggle(
+                            0.6f,
+                            task.isComplete,
+                        ) {
+//                            viewModel.viewModelScope.launch {
+//                                viewModel.updateTaskCompletion(
+//                                    task.id,
+//                                    task.isComplete
+//                                ) }
+                        }
+
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .clickable(onClick = {
+//                                    viewModel.editTask(
+//                                        task.id,
+//                                        category,
+//                                        task.taskLabel,
+//                                        task.dueDate,
+//                                        task.isCritical,
+//                                        task.isComplete,
+//                                        task.completeDate
+//                                    )
+                                })
+                                .weight(1f)
+
+                        ) {
+
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .background(
+                                        color = viewModel.getCategoryColour(task.taskCategoryLabelColour, colors),
+                                        shape = RoundedCornerShape(24.dp),
+                                    )
+                                    .padding(start = 4.dp, end = 4.dp, top = 2.dp, bottom = 2.dp)
+                                    .width(200.dp)
+//                                    .weight(1f)
+                            ){
+                                Text(
+                                    text = task.taskCategoryLabel,
+                                    color = MaterialTheme.colorScheme.surface,
+                                    fontWeight = FontWeight.SemiBold,
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 8.sp,
+//                                    modifier = Modifier
+//                                        .padding(2.dp)
+                                )
+
+                            }
+
+                            Text(
+                                text = task.taskLabel,
+                                color = if (isOverdue){MaterialTheme.colorScheme.background}
+                                else {MaterialTheme.colorScheme.primary},
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 14.sp,
+                                modifier = Modifier
+                                    .padding(2.dp)
+                            )
+
+                            Text(
+                                text = "Due: ${viewModel.formatDateTime(task.dueDate, "EEE d MMM yy")}",
+                                color = if (isOverdue){MaterialTheme.colorScheme.background}
+                                else {MaterialTheme.colorScheme.primary},
+                                fontSize = 12.sp,
+                                modifier = Modifier
+                            )
+                        }
+
+                        if (task.isCritical) {
+                            Spacer(modifier = Modifier.width(10.dp))
+
+                            Icon(
+                                imageVector = Icons.Filled.Star,
+                                contentDescription = "Critical Task",
+                                tint = if (isOverdue){MaterialTheme.colorScheme.background}
+                                else {MaterialTheme.colorScheme.primary},
+                                modifier = Modifier
+                                    .size(20.dp)
+                                    .weight(0.2f)
+                            )
+                        }else{
+                            Icon(
+                                imageVector = Icons.Filled.Star,
+                                contentDescription = "Critical Task",
+                                tint = if (isOverdue){MaterialTheme.colorScheme.primary}
+                                else {MaterialTheme.colorScheme.tertiary},
+                                modifier = Modifier
+                                    .size(20.dp)
+                                    .weight(0.2f)
+                            )
+                        }
+                    }
+
+                }
+
+                button(
+                    "Add New Task",
+                    3
+                ) { }
             }
         }
     }

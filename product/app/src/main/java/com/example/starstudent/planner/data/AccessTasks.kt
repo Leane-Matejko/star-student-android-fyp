@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
+import com.example.starstudent.planner.data.entities.TaskWithCategory
 import com.example.starstudent.planner.data.entities.Tasks
 
 class AccessTasks {
@@ -90,5 +91,19 @@ class AccessTasks {
             isComplete,
             completeDate
         )
+    }
+
+    suspend fun getTasksWithCategories(
+        username : String,
+        intervalStart: Long,
+        intervalEnd: Long
+    ) : List<TaskWithCategory>{
+
+        return tasksDAO.getAllCurrentTasksForInterval(
+            username,
+            intervalStart,
+            intervalEnd
+        )
+
     }
 }

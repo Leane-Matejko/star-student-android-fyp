@@ -9,6 +9,7 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Date
 
 class CategoryTaskFormatting {
 
@@ -61,6 +62,18 @@ class CategoryTaskFormatting {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
+    fun formatDateTime(dateTime : Long, pattern : String) : String{
+        return Instant.ofEpochMilli(dateTime)
+            .atZone(ZoneId.systemDefault())
+            .format(
+                DateTimeFormatter
+                    .ofPattern(
+                        pattern
+                    )
+            )
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getDateTime(
         date: Long,
         hour: Int,
@@ -108,6 +121,53 @@ class CategoryTaskFormatting {
             return 700
         }
         return 600
+    }
+
+    fun getSelectedTaskListHeight(
+        taskListNum : Int
+    ) : Int {
+        return if (taskListNum == 0){
+            220
+        } else{
+            (160 + (taskListNum * 160))
+        }
+    }
+
+    fun getTaskTitle(key : String) : String{
+        return when(key) {
+            "overdue" -> "Overdue"
+            "today" -> "Today"
+            "week" -> "This Week"
+            "month" -> "This Month"
+            else -> "Tasks: $key"
+        }
+    }
+
+    fun dateIntToLong(
+        date : Date,
+        hour : Int,
+        minute: Int
+    ) : Long{
+        return date
+            .toInstant()
+            .atZone(ZoneId.systemDefault())
+            .toLocalDate()
+            .atTime(hour, minute)
+            .atZone(ZoneId.systemDefault())
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    fun getDayStart(
+        day : Date
+    ) : Long {
+        return dateIntToLong(day, 0,0)
+    }
+
+    fun getDayEnd(
+        day : Date
+    ) : Long {
+        return dateIntToLong(day, 23,59)
     }
 
     fun getCategoryColour(colour : String, colourList : ExtendedLabelColours) : Color {

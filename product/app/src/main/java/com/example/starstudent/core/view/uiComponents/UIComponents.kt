@@ -925,7 +925,7 @@ fun CalendarGrid(
                             textDate = item.date,
                             signal = item.signal,
                             modifier = Modifier,
-                            onClick = {onClick(item.date) }
+                            onClick = {onClick(item.date)}
                         )
                     }
                 }
