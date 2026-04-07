@@ -19,7 +19,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -34,8 +33,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -47,11 +44,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.button
-import com.example.starstudent.planner.view.screens.PlannerViewModel
-import com.example.starstudent.planner.view.screens.SelectMonthDialog
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.serialization.builtins.ArraySerializer
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -59,7 +52,6 @@ import java.time.ZoneId
 @Composable
 fun HistoryStudySessionsScreen(navController: NavController) {
     val viewModel = viewModel<HistoryStudySessionsViewModel>()
-    val context = LocalContext.current
 
     BannerFormat(
         username = viewModel.username,
@@ -217,9 +209,7 @@ fun HistoryStudySessionsContent(
                             }
 
                             IconButton(onClick = {
-                                viewModel.viewModelScope.launch {
-                                    viewModel.deleteStudySession(session.id)
-                                }
+                                viewModel.showDeleteSessionDialog(session)
                             }) {
                                 Icon(
                                     modifier = Modifier
@@ -245,6 +235,14 @@ fun HistoryStudySessionsContent(
             onDismissRequest = { viewModel.hideSelectMonthDialog() }
         ){
             SelectMonthDialog(viewModel)
+        }
+    }
+
+    if(viewModel.showDeleteSessionDialog){
+        Dialog(
+            onDismissRequest = { viewModel.hideDeleteSessionDialog() }
+        ){
+            DeleteSessionDialog(viewModel)
         }
     }
 
@@ -380,6 +378,88 @@ fun SelectMonthDialog(viewModel: HistoryStudySessionsViewModel){
                             color = MaterialTheme.colorScheme.background
                         )
                     }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun DeleteSessionDialog(viewModel: HistoryStudySessionsViewModel) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+            .padding(10.dp)
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp, 20.dp)
+        ) {
+
+            Text(
+                text = "Delete session?",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = MaterialTheme.colorScheme.primary,
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .padding(start = 10.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+
+                ) {
+
+                    Text(
+                        text = "Start Time : ${
+                            viewModel.getFormattedDate(
+                                viewModel.deleteSession.startTime,
+                                "EEE d MMM, HH:mm"
+                            )
+                        }",
+                        color = MaterialTheme.colorScheme.background,
+                        fontSize = 14.sp
+                    )
+
+                    Text(
+                        text = "Duration: ${
+                            viewModel.getFormattedDuration(
+                                viewModel.deleteSession.duration.toInt()
+                            )
+                        }",
+                        color = MaterialTheme.colorScheme.background,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 10.sp
+                    )
+                }
+
+            }
+
+            button(
+                "Delete",
+                5
+            ) {
+                viewModel.viewModelScope.launch {
+                    viewModel.deleteStudySession()
                 }
             }
         }

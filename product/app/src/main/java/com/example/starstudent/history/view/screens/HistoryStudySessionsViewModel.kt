@@ -101,6 +101,21 @@ class HistoryStudySessionsViewModel : ViewModel() {
     )
         private set
 
+    var showDeleteSessionDialog by mutableStateOf(
+        false
+    )
+        private set
+
+    var deleteSession by mutableStateOf(
+        StudySessionDuration(
+            0,
+            "",
+            0L,
+            0
+        )
+    )
+        private set
+
     fun showSelectMonthDialog()
     {showSelectMonthDialog = true}
 
@@ -185,24 +200,19 @@ class HistoryStudySessionsViewModel : ViewModel() {
         Log.d("SESSION LIST", sessionList.toString())
     }
 
-    suspend fun deleteStudySession(
-        id : Int
-    ){
-        accessStudySessions.deleteSession(id)
-        accessPausedSessions.deletePausedSessions(id)
-        sessionList = accessStudySessions.getRecentStudySessionsAll(userId)
-        filteredSessionList = getUpdateSessionListSelection()
-        sessionDurationList = accessStudySessions.getRecentSessionsWithDuration(userId)
+    suspend fun deleteStudySession(){
+        if(deleteSession.id != 0) {
+            accessStudySessions.deleteSession(deleteSession.id)
+            accessPausedSessions.deletePausedSessions(deleteSession.id)
+            hideDeleteSessionDialog()
+            sessionList = accessStudySessions.getRecentStudySessionsAll(userId)
+            filteredSessionList = getUpdateSessionListSelection()
+            sessionDurationList = accessStudySessions.getRecentSessionsWithDuration(userId)
+        }
     }
 
     fun getFormattedDate(
         date : LocalDate
-    ) : String{
-        return categoryTaskFormatting.formatDateTime(date, "EEE d MMM")
-    }
-
-    fun getFormattedDate(
-        date : Long
     ) : String{
         return categoryTaskFormatting.formatDateTime(date, "EEE d MMM")
     }
@@ -218,6 +228,21 @@ class HistoryStudySessionsViewModel : ViewModel() {
         date : Long
     ) : String{
         return categoryTaskFormatting.formatDateTime(date, "MMMM yyyy")
+    }
+
+    fun showDeleteSessionDialog(session : StudySessionDuration){
+        deleteSession = session
+        showDeleteSessionDialog = true
+    }
+
+    fun hideDeleteSessionDialog(){
+        deleteSession = StudySessionDuration(
+            0,
+            "",
+            0L,
+            0
+        )
+        showDeleteSessionDialog = false
     }
 
     fun profileNav(navController: NavController){
