@@ -2,6 +2,7 @@ package com.example.starstudent.studySpaces.data
 
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
+import com.example.starstudent.studySpaces.data.entities.StudySessionDuration
 import com.example.starstudent.studySpaces.data.entities.StudySessions
 
 class AccessStudySessions {
@@ -51,5 +52,27 @@ class AccessStudySessions {
         return studySessionsDAO.getRecentSessions(
             user
         )
+    }
+
+    suspend fun getRecentStudySessionsAll(
+        user: String
+    ): List<StudySessions>{
+        return studySessionsDAO.getRecentSessionsAll(
+            user
+        )
+    }
+
+    suspend fun getRecentSessionsWithDuration(
+        user: String
+    ): List<StudySessionDuration>{
+        return studySessionsDAO.getRecentSessionsWithDuration(
+            user
+        )
+    }
+
+    suspend fun deleteSession(
+        id : Int
+    ){
+        studySessionsDAO.deleteSession(id)
     }
 }

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.example.starstudent.studySpaces.data.entities.StudySessionDuration
 import com.example.starstudent.studySpaces.data.entities.StudySessions
 import com.example.starstudent.userAccounts.data.entities.AppUserData
 import java.sql.Time
@@ -47,4 +48,42 @@ interface StudySessionsDAO {
     suspend fun getRecentSessions(
         user: String
     ) :  List<StudySessions>
+
+    @Query("""
+        SELECT * 
+        FROM study_sessions 
+        WHERE user = :user AND endTime != 0
+        ORDER BY startTime ASC
+        """)
+    suspend fun getRecentSessionsAll(
+        user: String
+    ) :  List<StudySessions>
+
+    @Query("""
+        SELECT 
+            study.id AS id, 
+            study.user AS user, 
+            study.startTime AS startTime, 
+            (study.endTime - study.startTime - IFNULL(SUM(paused.endTime - paused.endTime), 0)) AS duration
+        FROM study_sessions study
+        LEFT JOIN paused_sessions paused
+        ON study.id == paused.sessionId
+        WHERE study.user = :user
+        GROUP BY study.id
+        ORDER BY study.startTime
+    """)
+    suspend fun getRecentSessionsWithDuration(
+        user : String
+    ): List<StudySessionDuration>
+
+    @Query("""
+        DELETE  
+        FROM study_sessions 
+        WHERE id = :id
+        """)
+    suspend fun deleteSession(
+        id: Int
+    )
+
+
 }

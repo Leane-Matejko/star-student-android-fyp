@@ -23,4 +23,12 @@ class NavigationFunctions {
     fun goToTaskList(navController: NavController){
         navController.navigate(Screens.TaskListScreen.route)
     }
+
+    fun goToHistory(navController: NavController){
+        navController.navigate(Screens.HistoryScreen.route)
+    }
+
+    fun goToHistoryStudySessions(navController: NavController){
+        navController.navigate(Screens.HistoryStudySessionsScreen.route)
+    }
 }

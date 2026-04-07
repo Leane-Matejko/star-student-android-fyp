@@ -118,7 +118,9 @@ class ProfileInformationViewModel() : ViewModel(){
             NavigationOptions("Planner")
                 { navigationFunctions.goToPlanner(navController) },
             NavigationOptions("Task List")
-            { navigationFunctions.goToTaskList(navController) }
+            { navigationFunctions.goToTaskList(navController) },
+            NavigationOptions("History")
+            {navigationFunctions.goToHistory(navController)},
         )
     }
 

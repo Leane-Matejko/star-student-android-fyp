@@ -50,4 +50,10 @@ class AccessPausedSessions {
     ) : List<PausedSessions>{
         return pausedSessionsDAO.getRecentSessions(sessionId)
     }
+
+    suspend fun deletePausedSessions(
+        sessionId: Int
+    ){
+        pausedSessionsDAO.deleteSession(sessionId)
+    }
 }
