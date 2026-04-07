@@ -252,7 +252,27 @@
     <div style="display:flex; align-items:center; gap:10px;">
     <img src="readmeImages/Add_Task_Options.png" alt="LocationDetectorNotDetected" width="25%"/>
     <ul>
-        <li>Window to add a new category or task</li>
+        <li>Window to add a new category or task or readd a hidden category</li>
+    </ul>
+    </div>
+
+- Task List - Readding Hidden Categories
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/ReaddHiddenTaskList.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Hidden categories can be readded to the task list view via the add menu</li>
+        <li>Click the plus button on left side to readd the category</li>
+    </ul>
+    </div>
+
+- Planner - Example of hidden categories reflected on the calendar view
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/hiddencategorycalendar.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/readdhiddencategorycalendar.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Calendar with a hidden category [Left], Readded category [Right]</li>
+        <li>Tasks will reflect the hidden status of their categories</li>
+        <li>Hidden tasks will not be included on the calendar or the dated widgets</li>
     </ul>
     </div>
 
