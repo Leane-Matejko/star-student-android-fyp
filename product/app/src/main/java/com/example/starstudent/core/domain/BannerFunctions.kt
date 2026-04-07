@@ -33,6 +33,10 @@ class BannerFunctions {
         return listOf(
             NavigationOptions("Homepage")
             {navigationFunctions.goToHomepage(navController)},
+            NavigationOptions("Planner")
+            {navigationFunctions.goToPlanner(navController)},
+            NavigationOptions("Task List")
+            {navigationFunctions.goToTaskList(navController)},
             NavigationOptions("Profile Settings")
             {navigationFunctions.goToProfile(navController)}
         )

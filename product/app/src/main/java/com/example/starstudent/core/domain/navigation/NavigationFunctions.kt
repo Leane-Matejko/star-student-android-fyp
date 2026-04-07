@@ -15,4 +15,12 @@ class NavigationFunctions {
     fun goToStudyCentre(navController: NavController){
         navController.navigate(Screens.StudyCentreScreen.route)
     }
+
+    fun goToPlanner(navController: NavController){
+        navController.navigate(Screens.PlannerScreen.route)
+    }
+
+    fun goToTaskList(navController: NavController){
+        navController.navigate(Screens.TaskListScreen.route)
+    }
 }

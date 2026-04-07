@@ -29,3 +29,24 @@ val LightPink = Color(0xFFEBBDBD)
 val Purple = Color(0xFF5B4F75)
 val OffWhite = Color(0xFFFFE0CC)
 val PalePink = Color(0xFFED9A91)
+
+//light Theme colours
+val light_red = Color(0xFFFB384D)
+val light_orange = Color(0xFFF78C59)
+val light_yellow = Color(0xFFF7BF59)
+val light_green = Color(0xFF82E469)
+val light_blue = Color(0xFFA1E6DD)
+val light_navy = Color(0xFF2B54C1)
+val light_purple = Color(0xFF8832C9)
+val light_pink = Color(0xFFE88AC1)
+
+//dark Theme colours
+val dark_red = Color(0xFFA22430)
+val dark_orange = Color(0xFFBC6A44)
+val dark_yellow = Color(0xFFD9A84E)
+val dark_green = Color(0xFF44BD82)
+val dark_blue = Color(0xFF8CC8C1)
+val dark_navy = Color(0xFF1E3A89)
+val dark_purple = Color(0xFF60248F)
+val dark_pink = Color(0xFFF45F8E)
+

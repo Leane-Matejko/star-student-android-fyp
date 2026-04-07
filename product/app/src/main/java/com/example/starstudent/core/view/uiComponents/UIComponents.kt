@@ -1,5 +1,7 @@
 package com.example.starstudent.core.view.uiComponents
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,11 +18,18 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -31,23 +40,36 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.starstudent.core.domain.navigation.NavigationOptions
+import com.example.starstudent.planner.data.entities.Tasks
+import okhttp3.internal.toImmutableList
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.util.Calendar
+import java.util.Locale
+import java.util.Date
 
 /* UI component for backgrounds.
 */
@@ -624,7 +646,7 @@ fun toggle(
 
         Spacer(modifier = Modifier.height(6.dp))
 
-        androidx.compose.material3.Switch(
+        Switch(
             checked = isChecked,
             onCheckedChange = {onChange()},
             colors = SwitchDefaults.colors(
@@ -636,6 +658,26 @@ fun toggle(
             )
         )
     }
+}
+
+@Composable
+fun simpleToggle(
+    scale : Float,
+    isChecked : Boolean,
+    onChange: () -> Unit
+){
+    Switch(
+        checked = isChecked,
+        onCheckedChange = {onChange()},
+        colors = SwitchDefaults.colors(
+            checkedThumbColor = MaterialTheme.colorScheme.background,
+            checkedTrackColor = MaterialTheme.colorScheme.secondary,
+            uncheckedThumbColor = MaterialTheme.colorScheme.background,
+            uncheckedTrackColor = MaterialTheme.colorScheme.primary
+
+        ),
+        modifier = Modifier.scale(scale)
+    )
 }
 
 @Composable
@@ -670,5 +712,322 @@ fun navigationDropDown(
                 onClick = {option.navigation()}
             )
         }
+    }
+}
+
+sealed class CalendarItem {
+    data class Weekday(val day: Int) : CalendarItem()
+    object Empty : CalendarItem()
+    data class Day(val date: Date, val signal: Boolean) : CalendarItem()
+}
+
+fun getWeekDays(): List<Int> {
+    val lista = (1..7).toList()
+    return ((lista.drop(1) + lista.take(1)).toImmutableList())
+}
+
+private fun Int.getDayOfWeek3Letters(): String? = Calendar.getInstance().apply {
+    set(Calendar.DAY_OF_WEEK, this@getDayOfWeek3Letters)
+}.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault())
+
+private fun Int.getFormattedMonth(): String? = Calendar.getInstance().apply {
+    set(Calendar.MONTH, this@getFormattedMonth)
+}.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+
+private fun Date.formatToYear(): String = SimpleDateFormat("yyyy", Locale.getDefault()).format(this)
+
+
+fun Date.formatToMonthString(): String = SimpleDateFormat("MMMM", Locale.getDefault()).format(this)
+
+private fun Date.formatToCalendarDate() : String = SimpleDateFormat("d", Locale.getDefault()).format(this)
+
+@Composable
+fun WeekdayCell(
+    weekday: Int,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .aspectRatio(1f)
+            .padding(2.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        weekday.getDayOfWeek3Letters()?.let {
+            Text(
+                text = it,
+                color = MaterialTheme.colorScheme.secondary
+            )
+        }
+    }
+}
+
+
+fun Date.formatToWeekDay(): Int {
+    val calendar = Calendar.getInstance()
+    calendar.time = this
+    return calendar.get(Calendar.DAY_OF_WEEK)
+}
+
+private fun getOffset(firstDay : Int) : Int{
+    return (firstDay + 5) % 7
+}
+
+
+fun weekdayLabelsList(
+    dates: List<Date>
+): List<CalendarItem> {
+
+    val items = mutableListOf<CalendarItem>()
+
+    val weekdays = getWeekDays()
+
+    // Header
+    weekdays.forEach {
+        items.add(CalendarItem.Weekday(it))
+    }
+
+    val firstDay = dates.first().formatToWeekDay()
+
+    val offset = getOffset(firstDay)
+
+    // Empty cells
+    repeat(offset.coerceAtLeast(0)) {
+        items.add(CalendarItem.Empty)
+    }
+
+    // Actual days
+    dates.forEach {
+        items.add(CalendarItem.Day(it, false))
+    }
+
+    return items
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun CalendarGrid(
+    dates: List<Date>,
+    tasks: List<Tasks>,
+    onClick: (Date) -> Unit,
+    prevButtonClick: () -> Unit,
+    nextButtonClick: () -> Unit,
+    monthButtonClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Row(){
+
+            IconButton(onClick = {prevButtonClick()}) {
+                Icon(
+                    modifier = Modifier
+                        .testTag("calendarPrevButton"),
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                    contentDescription = "Menu",
+                    tint = MaterialTheme.colorScheme.secondary)
+            }
+
+            Spacer(modifier = Modifier.width(20.dp))
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .clickable(onClick = {monthButtonClick()})
+            ) {
+                Text(
+                    text = dates.first().formatToMonthString(),
+                    color = MaterialTheme.colorScheme.tertiary,
+                    textAlign = TextAlign.Center,
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Text(
+                    text = dates.first().formatToYear(),
+                    color = MaterialTheme.colorScheme.secondary,
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Spacer(modifier = Modifier.width(20.dp))
+
+            IconButton(onClick = {nextButtonClick()}) {
+                Icon(
+                    modifier = Modifier
+                        .testTag("calendarPrevButton"),
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = "Menu",
+                    tint = MaterialTheme.colorScheme.secondary)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        val taskDays = remember(tasks){
+            tasks.map {it.dueDate}.map {
+                millis ->
+                Instant.ofEpochMilli(millis)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+            }.toSet()
+        }
+
+        val items = remember(dates,taskDays) {
+
+            val today = LocalDate.now()
+
+            weekdayLabelsList(dates).map{ item ->
+                when (item){
+                   is CalendarItem.Day ->  {
+                       val localDate = item.date.toInstant()
+                           .atZone(ZoneId.systemDefault())
+                           .toLocalDate()
+                       item.copy(
+                           signal = (taskDays.contains(localDate) || (today == localDate))
+                       )
+                   }
+                    else -> item
+                }
+            }
+        }
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(7),
+            userScrollEnabled = false,
+            modifier = modifier,
+            horizontalArrangement = Arrangement.spacedBy(2.dp),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+
+            items(items.size) { index ->
+                when (val item = items[index]) {
+
+                    is CalendarItem.Weekday -> {
+                        WeekdayCell(
+                            weekday = item.day,
+                            modifier = Modifier.aspectRatio(1f)
+                        )
+                    }
+
+                    CalendarItem.Empty -> {
+                        Spacer(
+                            modifier = Modifier.aspectRatio(1f)
+                        )
+                    }
+
+                    is CalendarItem.Day -> {
+                        CalendarCell(
+                            textDate = item.date,
+                            signal = item.signal,
+                            modifier = Modifier,
+                            onClick = {onClick(item.date)}
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun CalendarCell(
+    textDate: Date,
+    signal: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: (Date) -> Unit
+) {
+
+    val today = LocalDate.now()
+
+    val localDate = textDate.toInstant()
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate()
+
+    val isToday = (today == localDate)
+
+    Box(
+        modifier = modifier
+            .aspectRatio(1f)
+            .padding(2.dp)
+            .background(
+                color = MaterialTheme.colorScheme.onPrimary,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .clickable { onClick(textDate) }
+    ) {
+
+        if (signal) {
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .padding(4.dp)
+                    .background(
+                        color = if(isToday){MaterialTheme.colorScheme.secondary}
+                                else {MaterialTheme.colorScheme.tertiary},
+                        shape = if (isToday) { CutCornerShape(12.dp)}
+                                else {CircleShape}
+                    )
+            )
+        }
+
+        Text(
+            text = textDate.formatToCalendarDate(),
+            modifier = Modifier.align(Alignment.Center),
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
+}
+
+@Composable
+fun BannerFormatAndFloatingButtons(
+        username : String,
+        date: String,
+        profileOnClick : () -> Unit,
+        list: List<NavigationOptions>,
+        showNav: Boolean,
+        navOnClick: () -> Unit,
+        onDismissNav: () -> Unit,
+        floatingAddOnClick: () -> Unit,
+        content: @Composable (PaddingValues) -> Unit
+){
+    Scaffold(
+        topBar = {
+            TopBanner(
+                username,
+                date,
+                list,
+                showNav,
+                onDismissNav,
+                navOnClick,
+                profileOnClick
+            )
+        },
+        floatingActionButton = {
+            IconButton(
+                modifier = Modifier
+                    .background(
+                        color = MaterialTheme.colorScheme.primary,
+                        shape = CircleShape
+                    )
+                    .size(80.dp)
+                    .padding(20.dp),
+                onClick = floatingAddOnClick) {
+                Icon(
+                    modifier = Modifier
+                        .size(60.dp)
+                        .testTag("staticButton"),
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Menu",
+                    tint = MaterialTheme.colorScheme.background)
+            }
+        }
+    ) {
+            padding -> content(padding)
     }
 }

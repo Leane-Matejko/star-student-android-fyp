@@ -114,7 +114,11 @@ class ProfileInformationViewModel() : ViewModel(){
             NavigationOptions("Homepage")
                 { navigationFunctions.goToHomepage(navController) },
             NavigationOptions("Study Centre")
-                { navigationFunctions.goToStudyCentre(navController) }
+                { navigationFunctions.goToStudyCentre(navController) },
+            NavigationOptions("Planner")
+                { navigationFunctions.goToPlanner(navController) },
+            NavigationOptions("Task List")
+            { navigationFunctions.goToTaskList(navController) }
         )
     }
 

@@ -9,6 +9,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 
 
@@ -29,7 +30,19 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Peach,
     onTertiary = White01,
     background = White01,
-    onBackground = DarkPink
+    onBackground = DarkPink,
+    surface = White01
+)
+
+private val lightLabelColorScheme = ExtendedLabelColours(
+    red = light_red,
+    orange = light_orange,
+    yellow = light_yellow,
+    green = light_green,
+    blue = light_blue,
+    navy = light_navy,
+    purple = light_purple,
+    pink = light_pink,
 )
 
 private val DarkColorScheme  = darkColorScheme(
@@ -40,7 +53,19 @@ private val DarkColorScheme  = darkColorScheme(
     tertiary = DarkPink,
     onTertiary = White01,
     background = Purple,
-    onBackground = White01
+    onBackground = White01,
+    surface = White01
+)
+
+private val darkLabelColorScheme = ExtendedLabelColours(
+    red = dark_red,
+    orange = dark_orange,
+    yellow = dark_yellow,
+    green = dark_green,
+    blue = dark_blue,
+    navy = dark_navy,
+    purple = dark_purple,
+    pink = dark_pink,
 )
 
 @Composable
@@ -60,9 +85,15 @@ fun StarStudentTheme(
         else -> LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    val extendedColours = if(darkTheme){darkLabelColorScheme} else {lightLabelColorScheme}
+
+    CompositionLocalProvider(
+        LocalExtendedLabelColours provides extendedColours
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }

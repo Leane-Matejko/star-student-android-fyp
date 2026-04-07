@@ -7,6 +7,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.starstudent.signInRegister.screens.AddEmailScreen
 import com.example.starstudent.signInRegister.screens.CreatePasswordScreen
 import com.example.starstudent.core.view.screens.Homepage
+import com.example.starstudent.planner.view.screens.PlannerScreen
+import com.example.starstudent.planner.view.screens.TaskListScreen
 import com.example.starstudent.signInRegister.screens.SignInRegisterScreen
 import com.example.starstudent.signInRegister.screens.SignInScreen
 import com.example.starstudent.signInRegister.screens.VerifyEmailScreen
@@ -56,6 +58,15 @@ fun Navigation() {
         //Redirect to the study centre
         composable(route = Screens.StudyCentreScreen.route) {
             StudyCentreScreen(navController = navController)
+        }
+
+        //Redirect to the study centre
+        composable(route = Screens.PlannerScreen.route) {
+            PlannerScreen(navController = navController)
+        }
+
+        composable(route = Screens.TaskListScreen.route) {
+            TaskListScreen(navController = navController)
         }
 
     }
