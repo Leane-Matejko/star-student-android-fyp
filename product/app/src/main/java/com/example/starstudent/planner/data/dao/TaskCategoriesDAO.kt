@@ -25,12 +25,31 @@ interface TaskCategoriesDAO {
     )
 
     @Query("""
+        UPDATE task_categories
+        SET isActive = 1
+        WHERE id = :id
+    """)
+    suspend fun addHiddenCategory(
+        id: Int
+    )
+
+    @Query("""
         SELECT * 
         FROM task_categories 
         WHERE user = :user AND isActive = 1
         ORDER BY cateLabel ASC
         """)
     suspend fun getAllCurrentCategories(
+        user: String
+    ) :  List<TaskCategories>
+
+    @Query("""
+        SELECT * 
+        FROM task_categories 
+        WHERE user = :user AND isActive = 0
+        ORDER BY cateLabel ASC
+        """)
+    suspend fun getHiddenCategories(
         user: String
     ) :  List<TaskCategories>
 

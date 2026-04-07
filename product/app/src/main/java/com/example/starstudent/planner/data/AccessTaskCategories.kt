@@ -47,4 +47,20 @@ class AccessTaskCategories {
             isActive = categoryActive
         )
     }
+
+    suspend fun getHiddenCategories(
+        username: String
+    ) : List<TaskCategories>{
+        return taskCategoriesDAO.getHiddenCategories(
+            username
+        )
+    }
+
+    suspend fun addHiddenCategory(
+        cateId : Int
+    ){
+        taskCategoriesDAO.addHiddenCategory(
+            cateId
+        )
+    }
 }

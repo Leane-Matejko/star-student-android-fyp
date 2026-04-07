@@ -106,4 +106,20 @@ class AccessTasks {
         )
 
     }
+
+    suspend fun hideTasks(
+        cateId: Int
+    ){
+        tasksDAO.hideTasks(
+            cateId
+        )
+    }
+
+    suspend fun showTasks(
+        cateId: Int
+    ){
+        tasksDAO.showTasks(
+            cateId
+        )
+    }
 }

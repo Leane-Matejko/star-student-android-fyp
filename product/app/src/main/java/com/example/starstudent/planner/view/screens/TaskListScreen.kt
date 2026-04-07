@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -371,9 +372,18 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
         }
     }
 
+    if(viewModel.showHiddenCategoryDialog){
+        Dialog(onDismissRequest = {
+            viewModel.hideHiddenCategoryDialog()
+        }){
+            HiddenCategoriesDialog(viewModel)
+        }
+    }
+
     viewModel.viewModelScope.launch {
         viewModel.getCategoryList()
         viewModel.getTaskList()
+        viewModel.getHiddenCategories()
     }
 }
 
@@ -383,8 +393,8 @@ fun NewOptionsDialog(viewModel: TaskListViewModel){
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
-            .padding(20.dp)
+            .height(380.dp)
+            .padding(16.dp)
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -413,6 +423,19 @@ fun NewOptionsDialog(viewModel: TaskListViewModel){
                     "New Task",
                     4
                 ) { viewModel.startNewTask()}
+
+                Column(
+                    modifier = Modifier
+                        .background(
+                            color = MaterialTheme.colorScheme.tertiary,
+                            shape = RoundedCornerShape(24.dp)
+                        )
+                ) {
+                    button(
+                        "Hidden Categories",
+                        5
+                    ) { viewModel.showHiddenCategoryDialog()}
+                }
             }
         }
     }
@@ -839,4 +862,98 @@ fun TaskDialog(viewModel : TaskListViewModel){
         }
     }
 
+}
+
+@Composable
+fun HiddenCategoriesDialog(viewModel: TaskListViewModel){
+
+    val colors = LocalExtendedLabelColours.current
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+    ) {
+        val scrollState = rememberScrollState()
+
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
+                .padding(20.dp, 10.dp)
+        ) {
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = "Hidden Categories",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+
+            if(viewModel.hiddenCategoryList.isEmpty()){
+                Text(
+                    text = "No hidden categories found",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }else{
+                viewModel.hiddenCategoryList.forEach { category ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = RoundedCornerShape(24.dp)
+                            )
+                            .padding(6.dp)
+                        ,
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        IconButton(onClick = {
+                            viewModel.viewModelScope.launch {
+                                viewModel.addHiddenCategory(category.id)
+                            }
+                        }) {
+                            Icon(
+                                modifier = Modifier
+                                    .testTag("editLabelColourButton"),
+                                imageVector = Icons.Filled.Add,
+                                contentDescription = "Menu",
+                                tint = MaterialTheme.colorScheme.secondary)
+                        }
+
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .background(
+                                    color = viewModel.getCategoryColour(category.labelColour, colors),
+                                    shape = RoundedCornerShape(24.dp),
+                                )
+                                .padding(start = 4.dp, end = 4.dp, top = 2.dp, bottom = 2.dp)
+                                .width(200.dp)
+                        ){
+                            Text(
+                                text = category.cateLabel,
+                                color = MaterialTheme.colorScheme.surface,
+                                fontWeight = FontWeight.SemiBold,
+                                textAlign = TextAlign.Center,
+                                fontSize = 8.sp
+                            )
+
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
 }

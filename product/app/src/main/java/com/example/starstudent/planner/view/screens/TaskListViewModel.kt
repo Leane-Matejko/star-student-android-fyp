@@ -23,9 +23,7 @@ import com.example.starstudent.planner.data.entities.Tasks
 import com.example.starstudent.planner.domain.CategoryTaskFormatting
 import com.example.starstudent.planner.domain.TaskNotCompleteException
 import com.example.starstudent.ui.theme.ExtendedLabelColours
-import java.time.DayOfWeek
 import java.time.Instant
-import java.time.LocalDate
 import java.time.ZoneId
 import java.util.Locale
 import kotlin.text.replaceFirstChar
@@ -177,6 +175,16 @@ class TaskListViewModel : ViewModel() {
         private set
 
     var errorMessage by mutableStateOf("")
+        private set
+
+    var showHiddenCategoryDialog by mutableStateOf(
+        false
+    )
+        private set
+
+    var hiddenCategoryList by mutableStateOf(
+        listOf<TaskCategories>()
+    )
         private set
 
     var colorOptions = listOf(
@@ -410,6 +418,7 @@ class TaskListViewModel : ViewModel() {
         categoryId = defaultId
         categoryName = defaultName
         labelCategory = defaultLabelColor.replaceFirstChar { it.uppercase() }
+        categoryLabelColor = defaultLabelColor
         if(editCategory){
             hideCategory = defaultHide
         }
@@ -480,6 +489,14 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    fun showHiddenCategoryDialog(){
+        showHiddenCategoryDialog = true
+    }
+
+    fun hideHiddenCategoryDialog(){
+        showHiddenCategoryDialog = false
+    }
+
     suspend fun getCategoryList(){
         categoryList = accessTaskCategories.getCategoryList(username)
     }
@@ -491,15 +508,28 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun addOrUpdateTask(){
         if(editTask){
             updateExistingTask()
+            getTaskList()
+            hideTaskDialog()
         }else{
-            addNewTask()
+            try {
+                if (!acceptedTask || ((taskDatePickerState.selectedDateMillis ?: 0L) == 0L)) {
+                    throw TaskNotCompleteException()
+                }
+                addNewTask()
+                getTaskList()
+                hideTaskDialog()
+            }catch (e: Exception){
+                Log.d("TEST", "Error thrown")
+                errorMessage = e.message.toString()
+                resetErrorWindow()
+                errorWindow = true
+            }
         }
-        getTaskList()
-        hideTaskDialog()
     }
 
     suspend fun addOrUpdateCategory(){
@@ -523,35 +553,23 @@ class TaskListViewModel : ViewModel() {
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun addNewTask() {
-
-        try {
-            if (!acceptedTask || ((taskDatePickerState.selectedDateMillis ?: 0L) == 0L)) {
-                throw TaskNotCompleteException()
-            }
-
-            accessTasks.addNewTask(
-                cateId = taskCategory.id,
-                taskLabel = updateTaskName,
-                isCritical = criticalTask,
-                dueDate = getDateTime(
-                    taskDatePickerState.selectedDateMillis ?: 0L,
-                    taskTimePickerState.hour,
-                    taskTimePickerState.minute
-                ),
-                isComplete = completeTask,
-                completeDate = if (completeTask) {
-                    completionDate
-                } else {
-                    0L
-                },
-                isActive = true
-            )
-        }catch (e: Exception){
-            Log.d("TEST", "Error thrown")
-            errorMessage = e.message.toString()
-            resetErrorWindow()
-            errorWindow = true
-        }
+        accessTasks.addNewTask(
+            cateId = taskCategory.id,
+            taskLabel = updateTaskName,
+            isCritical = criticalTask,
+            dueDate = getDateTime(
+                taskDatePickerState.selectedDateMillis ?: 0L,
+                taskTimePickerState.hour,
+                taskTimePickerState.minute
+            ),
+            isComplete = completeTask,
+            completeDate = if (completeTask) {
+                completionDate
+            } else {
+                0L
+            },
+            isActive = true
+        )
     }
 
     fun resetErrorWindow(){
@@ -560,12 +578,19 @@ class TaskListViewModel : ViewModel() {
 
     suspend fun updateExistingCategory(){
 
+        val hideStatus = !hideCategory
+
         accessTaskCategories.updateExistingCategory(
             categoryId,
             categoryName,
             categoryLabelColor,
-            !hideCategory
+            hideStatus
         )
+        if(!hideStatus){
+            hideTasks(categoryId)
+        }else{
+            showTasks(categoryId)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -596,6 +621,38 @@ class TaskListViewModel : ViewModel() {
             taskComplete
         )
         getTaskList()
+    }
+
+    suspend fun getHiddenCategories(){
+        hiddenCategoryList = accessTaskCategories.getHiddenCategories(
+            username
+        )
+    }
+
+    suspend fun hideTasks(
+        cateId : Int
+    ){
+        accessTasks.hideTasks(
+            cateId
+        )
+    }
+
+    suspend fun showTasks(
+        cateId : Int
+    ){
+        accessTasks.showTasks(
+            cateId
+        )
+    }
+
+    suspend fun addHiddenCategory(
+        cateId : Int
+    ){
+        accessTaskCategories.addHiddenCategory(
+            cateId
+        )
+        showTasks(cateId)
+        getHiddenCategories()
     }
 
     fun profileNav(navController: NavController){

@@ -49,6 +49,26 @@ interface TasksDAO {
     )
 
     @Query("""
+        UPDATE tasks
+        SET 
+            isActive = 0
+        WHERE cateId = :cateId
+    """)
+    suspend fun hideTasks(
+        cateId: Int
+    )
+
+    @Query("""
+        UPDATE tasks
+        SET 
+            isActive = 1
+        WHERE cateId = :cateId
+    """)
+    suspend fun showTasks(
+        cateId: Int
+    )
+
+    @Query("""
         SELECT tasks.id,tasks.cateId,tasks.taskLabel, tasks.isCritical, tasks.dueDate, tasks.isComplete, tasks.completeDate, tasks.isActive 
         FROM tasks 
         INNER JOIN task_categories

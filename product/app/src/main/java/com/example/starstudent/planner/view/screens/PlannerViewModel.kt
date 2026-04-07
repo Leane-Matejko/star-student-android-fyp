@@ -519,50 +519,51 @@ class PlannerViewModel : ViewModel(){
         showAddOrEditTaskDialog(true)
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun addOrUpdateTask(){
         if(editTask){
             updateExistingTask()
+            getTaskList()
+            hideAddOrEditTaskDialog()
         }else{
-            addNewTask()
+            try {
+                if (!acceptedTask || ((taskDatePickerState.selectedDateMillis ?: 0L) == 0L)) {
+                    throw TaskNotCompleteException()
+                }
+                addNewTask()
+                getTaskList()
+                hideAddOrEditTaskDialog()
+            }catch (e: Exception){
+                Log.d("TEST", "Error thrown")
+                errorMessage = e.message.toString()
+                resetErrorWindow()
+                errorWindow = true
+            }
         }
-        getTaskList()
-        hideAddOrEditTaskDialog()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun addNewTask(){
-
-
-        try {
-            if (!acceptedTask || ((taskDatePickerState.selectedDateMillis ?: 0L) == 0L)) {
-                throw TaskNotCompleteException()
-            }
-
-            accessTasks.addNewTask(
-                cateId = taskCategory.id,
-                taskLabel = updateTaskName,
-                isCritical = criticalTask,
-                dueDate = getDateTime(
-                    taskDatePickerState.selectedDateMillis ?: 0L,
-                    taskTimePickerState.hour,
-                    taskTimePickerState.minute
-                ),
-                isComplete = completeTask,
-                completeDate = if (completeTask) {
-                    completionDate
-                } else {
-                    0L
-                },
-                isActive = true
-            )
-        }catch (e: Exception){
-            Log.d("TEST", "Error thrown")
-            errorMessage = e.message.toString()
-            resetErrorWindow()
-            errorWindow = true
-        }
+        accessTasks.addNewTask(
+            cateId = taskCategory.id,
+            taskLabel = updateTaskName,
+            isCritical = criticalTask,
+            dueDate = getDateTime(
+                taskDatePickerState.selectedDateMillis ?: 0L,
+                taskTimePickerState.hour,
+                taskTimePickerState.minute
+            ),
+            isComplete = completeTask,
+            completeDate = if (completeTask) {
+                completionDate
+            } else {
+                0L
+            },
+            isActive = true
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
