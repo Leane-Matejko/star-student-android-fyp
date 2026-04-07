@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -142,7 +143,7 @@ fun HistoryStudySessionsContent(
 
             if(viewModel.filteredSessionList.isEmpty()){
                 Text(
-                    text = "No tasks found",
+                    text = "No sessions found",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
@@ -389,7 +390,7 @@ fun DeleteSessionDialog(viewModel: HistoryStudySessionsViewModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .height(360.dp)
             .padding(10.dp)
     ) {
         Column(
@@ -453,6 +454,23 @@ fun DeleteSessionDialog(viewModel: HistoryStudySessionsViewModel) {
                 }
 
             }
+
+            Icon(
+                Icons.Filled.Warning,
+                contentDescription = "Delete Warning",
+                modifier = Modifier.size(24.dp),
+                tint = MaterialTheme.colorScheme.secondary,
+            )
+
+            Text(
+                text = "Deleting a session is a permanent action",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
 
             button(
                 "Delete",
