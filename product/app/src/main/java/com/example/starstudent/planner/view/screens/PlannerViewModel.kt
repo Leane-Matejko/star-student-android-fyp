@@ -694,6 +694,8 @@ class PlannerViewModel : ViewModel(){
             { navigationFunctions.goToStudyCentre(navController) },
             NavigationOptions("Task List")
             { navigationFunctions.goToTaskList(navController) },
+            NavigationOptions("History")
+            {navigationFunctions.goToHistory(navController)},
             NavigationOptions("Profile Settings")
             { navigationFunctions.goToProfile(navController) }
         )

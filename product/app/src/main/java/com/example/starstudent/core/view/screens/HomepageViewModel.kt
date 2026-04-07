@@ -78,8 +78,11 @@ class HomepageViewModel : ViewModel(){
                 {navigationFunctions.goToPlanner(navController)},
             NavigationOptions("Task List")
                 {navigationFunctions.goToTaskList(navController)},
+            NavigationOptions("History")
+                {navigationFunctions.goToHistory(navController)},
             NavigationOptions("Profile Settings")
-                {navigationFunctions.goToProfile(navController)}
+                {navigationFunctions.goToProfile(navController)},
+
 
         )
     }

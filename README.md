@@ -24,6 +24,7 @@
 - [Profile Settings](#user-profile)
 - [Study Centre](#study-centre)
 - [Planner and Task List](#planner-and-task-list)
+- [History](#history)
 
 #### Sign In and Register
 - Register Account (New User)
@@ -322,3 +323,51 @@
     </ul>
     </div>
 
+### History
+- History Page
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/HistoryPage.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Shows a database of saved results</li>
+        <li>Currently only interacts with study sessions</li>
+    </ul>
+    </div>
+- History Page - Study Sessions
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/HistoryStudySessions.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>All study sessions completed within the select month are show</li>
+        <li>Current month is set to the default</li>
+        <li>Each session will show its start date and time, and the total duration of the session (minus any paused breaks)</li>
+        <li>There is an option to delete any sessions</li>
+        <li>All sessions are shown here (even if they are less than 5 minutes)</li>
+        <li>This is a sub page of the history page and cannot be accessed via the navigation menu</li>
+    </ul>
+    </div>
+- History Page - Month/Year Selection
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/MonthYearSelector.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Options to change the selected month and year</li>
+        <li>A Once selected, click out of the window to return to the session history page</li>
+    </ul>
+    </div>
+
+- History Page - No sessions found
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/NoSessionsFound.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>If there are no sessions found within a specific month, the message "No sessions found" will be shown</li>
+    </ul>
+    </div>
+
+- History Page - Delete Session
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/DeleteSession.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <ul>
+        <li>Session deleteion is permanent and cannot be recovered, so additional window to confirm the action has been added</li>
+        <li>The information about the session is shown in the example</li>
+        <li>Once delete is pressed, the session and all paused sesssions are deleted</li>
+        <li>Dismiss the window to avoid deleting a session</li>
+    </ul>
+    </div>

@@ -43,4 +43,13 @@ interface PausedSessionsDAO {
     suspend fun getRecentSessions(
         sessionId: Int
     ) :  List<PausedSessions>
+
+    @Query("""
+        DELETE  
+        FROM paused_sessions 
+        WHERE sessionId = :sessionId
+        """)
+    suspend fun deleteSession(
+        sessionId: Int
+    )
 }

@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import com.example.starstudent.ui.theme.ExtendedLabelColours
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
@@ -71,6 +72,12 @@ class CategoryTaskFormatting {
                         pattern
                     )
             )
+    }
+
+    fun formatDateTime(dateTime : LocalDate, pattern : String) : String{
+        return dateTime.format(
+            DateTimeFormatter.ofPattern(pattern)
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -156,6 +163,12 @@ class CategoryTaskFormatting {
             .atZone(ZoneId.systemDefault())
             .toInstant()
             .toEpochMilli()
+    }
+
+    fun formatDuration(
+        duration : Int,
+    ) : String{
+        return "${duration/(1000*60*60)}h : ${((duration / (1000*60))% 60)}m"
     }
 
     fun getDayStart(

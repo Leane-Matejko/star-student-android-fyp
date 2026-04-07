@@ -153,8 +153,6 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
             viewModel.generateMonthDates(viewModel.calendarYear, viewModel.calendarMonth)
         }
 
-//        val selectedDates = remember(dates) { mutableStateOf(setOf<Date>()) }
-
         Column(
             modifier = Modifier
                 .height(400.dp)
@@ -560,9 +558,7 @@ fun SeeTasksDialog(viewModel: PlannerViewModel){
                                     color = MaterialTheme.colorScheme.surface,
                                     fontWeight = FontWeight.SemiBold,
                                     textAlign = TextAlign.Center,
-                                    fontSize = 8.sp,
-//                                    modifier = Modifier
-//                                        .padding(2.dp)
+                                    fontSize = 8.sp
                                 )
 
                             }
