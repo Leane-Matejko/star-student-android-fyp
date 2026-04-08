@@ -122,4 +122,24 @@ interface TasksDAO {
         intervalStart: Long,
         intervalEnd: Long
     ) :  List<TaskWithCategory>
+
+    @Query("""
+        SELECT tasks.id,
+                tasks.cateId,
+                task_categories.cateLabel AS taskCategoryLabel,
+                task_categories.labelColour AS taskCategoryLabelColour,
+                tasks.taskLabel,tasks.isCritical, 
+                tasks.dueDate, 
+                tasks.isComplete,
+                tasks.completeDate, 
+                tasks.isActive 
+        FROM tasks 
+        INNER JOIN task_categories 
+        ON tasks.cateId = task_categories.id
+        WHERE task_categories.user = :user AND tasks.isActive = 1 
+        ORDER BY dueDate ASC
+        """)
+    suspend fun getAllCurrentTasks(
+        user: String
+    ) :  List<TaskWithCategory>
 }

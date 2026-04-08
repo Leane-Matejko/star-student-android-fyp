@@ -89,6 +89,7 @@ fun Homepage(navController: NavController){
 
     LaunchedEffect(Unit) {
         viewModel.updateTasksList()
+        viewModel.getAllCurrentTasks()
     }
 
 }

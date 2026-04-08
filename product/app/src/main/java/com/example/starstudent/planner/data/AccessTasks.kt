@@ -132,4 +132,10 @@ class AccessTasks {
             recentMonday
         )
     }
+
+    suspend fun getAllCurrentTasks(
+        user: String
+    ): List<TaskWithCategory>{
+        return tasksDAO.getAllCurrentTasks(user)
+    }
 }

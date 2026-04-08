@@ -52,6 +52,13 @@ class TaskListViewModel : ViewModel() {
             .username)
         private set
 
+    private var userId by mutableStateOf(
+        CurrentApplication
+            .instance
+            .getUserInfo()
+            .id
+    )
+
     var curDate by mutableStateOf(
         bannerFunctions.updateTime()
     )
@@ -498,12 +505,12 @@ class TaskListViewModel : ViewModel() {
     }
 
     suspend fun getCategoryList(){
-        categoryList = accessTaskCategories.getCategoryList(username)
+        categoryList = accessTaskCategories.getCategoryList(userId)
     }
 
     suspend fun getTaskList(){
         taskList = accessTasks.getTaskList(
-            username,
+            userId,
             0L
         )
     }
@@ -544,7 +551,7 @@ class TaskListViewModel : ViewModel() {
 
     suspend fun addNewCategory(){
         accessTaskCategories.addNewCategory(
-            username,
+            userId,
             categoryName,
             categoryLabelColor
         )
@@ -625,7 +632,7 @@ class TaskListViewModel : ViewModel() {
 
     suspend fun getHiddenCategories(){
         hiddenCategoryList = accessTaskCategories.getHiddenCategories(
-            username
+            userId
         )
     }
 

@@ -66,6 +66,13 @@ class PlannerViewModel : ViewModel(){
             .username)
         private set
 
+    private var userId by mutableStateOf(
+        CurrentApplication
+            .instance
+            .getUserInfo()
+            .id
+    )
+
     var curDate by mutableStateOf(
         bannerFunctions.updateTime()
     )
@@ -123,7 +130,7 @@ class PlannerViewModel : ViewModel(){
 
     var taskCategory by mutableStateOf(
         TaskCategories(
-            user = username,
+            user = userId,
             cateLabel = "Pick a Category",
             labelColour = "red",
             isActive = true
@@ -331,7 +338,7 @@ class PlannerViewModel : ViewModel(){
 
     suspend fun getTaskList(){
         taskList = accessTasks.getTaskList(
-            username,
+            userId,
             0L
         )
     }
@@ -408,7 +415,7 @@ class PlannerViewModel : ViewModel(){
     }
 
     suspend fun getCategoryList(){
-        categoryList = accessTaskCategories.getCategoryList(username)
+        categoryList = accessTaskCategories.getCategoryList(userId)
     }
 
     fun updateTaskName(newName : String){
@@ -482,7 +489,7 @@ class PlannerViewModel : ViewModel(){
         resetTaskVariables(
             0,
             TaskCategories(
-                user = username,
+                user = userId,
                 cateLabel = "Pick a Category",
                 labelColour = "red",
                 isActive = true
@@ -590,7 +597,7 @@ class PlannerViewModel : ViewModel(){
     )  : TaskCategories{
         return categoryList.find{it.id == cateId} ?:
         TaskCategories(
-            user = username,
+            user = userId,
             cateLabel = "Pick a Category",
             labelColour = "red",
             isActive = true
@@ -665,7 +672,7 @@ class PlannerViewModel : ViewModel(){
         intervalEnd: Long
     ){
         selectedDayTaskList = accessTasks.getTasksWithCategories(
-            username,
+            userId,
             intervalStart,
             intervalEnd
         )

@@ -13,6 +13,7 @@ import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.planner.data.AccessTasks
+import com.example.starstudent.planner.data.entities.TaskWithCategory
 import com.example.starstudent.userAccounts.data.entities.UserInfo
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
@@ -53,6 +54,14 @@ class HomepageViewModel : ViewModel() {
     )
         private set
 
+    var userId by mutableStateOf(
+        CurrentApplication
+            .instance
+            .getUserInfo()
+            .id
+    )
+        private set
+
     var curUserInfo: List<UserInfo> by mutableStateOf(
         listOf(
             (UserInfo
@@ -80,6 +89,11 @@ class HomepageViewModel : ViewModel() {
                         Locale.getDefault()
                     )
             )
+    )
+        private set
+
+    var tasksList by mutableStateOf(
+        listOf<TaskWithCategory>()
     )
         private set
 
@@ -163,8 +177,12 @@ class HomepageViewModel : ViewModel() {
 
     suspend fun updateTasksList(){
         accessTasks.hideCompletedTasks(
-            username,
+            userId,
             getRecentMonday())
+    }
+
+    suspend fun getAllCurrentTasks(){
+        tasksList = accessTasks.getAllCurrentTasks(userId)
     }
 
 
