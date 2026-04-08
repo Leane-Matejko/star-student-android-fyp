@@ -197,22 +197,30 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
             smallProgressWidget(
                 12,
                 16,
-                "All Tasks",
-                12
-            )
-
-            smallProgressWidget(
-                12,
-                16,
-                "This Week",
-                10
-            )
-
-            smallProgressWidget(
-                12,
-                16,
                 "Overdue",
-                12
+                12,
+                {
+                }
+            )
+
+            smallProgressWidget(
+                12,
+                16,
+                "Week",
+                10,
+                {
+
+                }
+            )
+
+            smallProgressWidget(
+                12,
+                16,
+                "All",
+                12,
+                {
+
+                }
             )
 
         }

@@ -155,7 +155,18 @@ fun smallProgressWidget(
     numTasks: Int,
     label: String,
     textSize:Int,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier){
+
+    var safeTasks = 1
+
+    safeTasks = if (numTasks == 0){
+        1
+    }else{
+        numTasks
+    }
+
+
     Box(
         modifier = modifier
             .aspectRatio(1f)
@@ -163,15 +174,16 @@ fun smallProgressWidget(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(24.dp)
             )
-            .testTag("smallProgressWidgetBackground"),
+            .testTag("smallProgressWidgetBackground")
+            .clickable(onClick = onClick),
     ){
         CircularProgressIndicator(
-            progress = numCompleteTasks / numTasks.toFloat(),
+            progress = numCompleteTasks / safeTasks.toFloat(),
             modifier = Modifier.size(80.dp)
                 .align(Alignment.Center)
                 .testTag("smallProgressWidgetProgressBar"),
-            color = MaterialTheme.colorScheme.background,
-            trackColor = MaterialTheme.colorScheme.tertiary,
+            color = MaterialTheme.colorScheme.tertiary,
+            trackColor = MaterialTheme.colorScheme.background,
             strokeWidth = 10.dp,
         )
 

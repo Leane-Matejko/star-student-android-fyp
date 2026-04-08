@@ -144,10 +144,14 @@ class UIComponentsTests {
     @Test
     fun testSmallProgressWidgetExists(){
         composeTest.setContent {
-            smallProgressWidget(6,
+            smallProgressWidget(
+                6,
                 10,
                 "Test",
-                12)
+                12,
+                onClick = {},
+                modifier = Modifier
+            )
         }
     }
 
@@ -157,7 +161,10 @@ class UIComponentsTests {
             smallProgressWidget(6,
                 10,
                 "Test",
-                12)
+                12,
+                onClick = {},
+                modifier = Modifier
+            )
         }
 
         composeTest.waitForIdle()
@@ -172,7 +179,10 @@ class UIComponentsTests {
             smallProgressWidget(6,
                 10,
                 "Test",
-                12)
+                12,
+                onClick = {},
+                modifier = Modifier
+            )
         }
 
         composeTest.waitForIdle()
@@ -187,7 +197,10 @@ class UIComponentsTests {
             smallProgressWidget(6,
                 10,
                 "Test",
-                12)
+                12,
+                onClick = {},
+                modifier = Modifier
+            )
         }
 
         composeTest.waitForIdle()
@@ -202,7 +215,10 @@ class UIComponentsTests {
             smallProgressWidget(6,
                 10,
                 "Test",
-                12)
+                12,
+                onClick = {},
+                modifier = Modifier
+            )
         }
 
         composeTest.waitForIdle()
