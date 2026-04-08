@@ -20,13 +20,14 @@ import java.util.Locale
 
 /* ViewModel for the homepage.
 */
-class HomepageViewModel : ViewModel(){
+class HomepageViewModel : ViewModel() {
 
     private val navigationFunctions = NavigationFunctions()
     val userInfo = DatabaseSingleton
         .getDatabase(
             CurrentApplication
-                .instance)
+                .instance
+        )
         .userInfoDao()
 
     var showNavMenu by mutableStateOf(
@@ -38,19 +39,22 @@ class HomepageViewModel : ViewModel(){
         CurrentApplication
             .instance
             .getUserInfo()
-            .username)
+            .username
+    )
         private set
 
     var curUserInfo: List<UserInfo> by mutableStateOf(
         listOf(
             (UserInfo
-                (CurrentApplication
+                (
+                CurrentApplication
                     .instance
                     .user.email
                     .getEmail(),
                 "default",
                 0,
-                false)
+                false
+            )
                     )
         )
     )
@@ -69,57 +73,64 @@ class HomepageViewModel : ViewModel(){
     )
         private set
 
-    fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
+    fun getNavigationMenu(navController: NavController): List<NavigationOptions> {
 
         return listOf(
-           NavigationOptions("Study Centre")
-                {navigationFunctions.goToStudyCentre(navController)},
+            NavigationOptions("Study Centre")
+            { navigationFunctions.goToStudyCentre(navController) },
             NavigationOptions("Planner")
-                {navigationFunctions.goToPlanner(navController)},
+            { navigationFunctions.goToPlanner(navController) },
             NavigationOptions("Task List")
-                {navigationFunctions.goToTaskList(navController)},
+            { navigationFunctions.goToTaskList(navController) },
             NavigationOptions("History")
-                {navigationFunctions.goToHistory(navController)},
+            { navigationFunctions.goToHistory(navController) },
             NavigationOptions("Profile Settings")
-                {navigationFunctions.goToProfile(navController)},
+            { navigationFunctions.goToProfile(navController) },
 
 
-        )
+            )
     }
 
-    fun getUser(){
+    fun getUser() {
         viewModelScope.launch {
             curUserInfo = userInfo.getUserInfo(
                 CurrentApplication
                     .instance
                     .user
                     .email
-                    .getEmail())!!
+                    .getEmail()
+            )!!
 
-            if(curUserInfo.isNotEmpty()){
+            if (curUserInfo.isNotEmpty()) {
                 username = curUserInfo[0].username
-            }else {
+            } else {
                 username = CurrentApplication.instance.user.email.getEmail()
                 curUserInfo = listOf(
                     (UserInfo
-                        (CurrentApplication
-                        .instance
-                        .user.email
-                        .getEmail(),
+                        (
+                        CurrentApplication
+                            .instance
+                            .user.email
+                            .getEmail(),
                         "default",
                         0,
-                        false)
-                            ))
+                        false
+                    )
+                            )
+                )
             }
         }
     }
 
-    fun showNavMenu()
-    {showNavMenu = true}
+    fun showNavMenu() {
+        showNavMenu = true
+    }
 
-    fun dismissNavMenu()
-    {showNavMenu = false }
-    fun updateTime(){
+    fun dismissNavMenu() {
+        showNavMenu = false
+    }
+
+    fun updateTime() {
         curDate = LocalDateTime
             .now()
             .format(
@@ -131,14 +142,28 @@ class HomepageViewModel : ViewModel(){
             )
     }
 
-    fun profileNav(navController: NavController){
+    fun profileNav(navController: NavController) {
         Log.d("TEST", "Navigating to the profile...")
         navigationFunctions.goToProfile(navController)
     }
 
-    fun navStudyCentre(navController: NavController){
+    fun navStudyCentre(navController: NavController) {
         Log.d("TEST", "Navigating to the Study Centre...")
         navigationFunctions.goToStudyCentre(navController)
     }
 
+    fun navPlanner(navController: NavController) {
+        Log.d("TEST", "Navigating to the Planner...")
+        navigationFunctions.goToPlanner(navController)
+    }
+
+    fun navTaskList(navController: NavController) {
+        Log.d("TEST", "Navigating to the Task List...")
+        navigationFunctions.goToTaskList(navController)
+    }
+
+    fun navHistory(navController: NavController) {
+        Log.d("TEST", "Navigating to the History...")
+        navigationFunctions.goToHistory(navController)
+    }
 }

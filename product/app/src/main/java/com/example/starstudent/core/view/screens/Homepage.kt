@@ -1,6 +1,7 @@
 package com.example.starstudent.core.view.screens
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,12 +12,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,6 +37,7 @@ import androidx.navigation.NavController
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
+import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
@@ -80,16 +91,14 @@ fun Homepage(navController: NavController){
 @Composable
 fun HomepageContent(viewModel: HomepageViewModel, navController : NavController) {
 
-    val viewModel = viewModel
-
     Spacer(
         modifier = Modifier
             .testTag("HomepageScreen")
     )
     Column(
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.Companion.CenterHorizontally,
-        modifier = Modifier.Companion
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
             .fillMaxWidth()
             .padding(30.dp)
     ) {
@@ -109,7 +118,7 @@ fun HomepageContent(viewModel: HomepageViewModel, navController : NavController)
 
             ) {
             avatarWindow(
-                "Placeholder Text",
+                viewModel.username,
                 modifier = Modifier
                     .weight(1f)
             )
@@ -124,16 +133,20 @@ fun HomepageContent(viewModel: HomepageViewModel, navController : NavController)
                 mediumIconWidget(
                     Icons.Filled.Star,
                     Icons.Filled.Star,
-                    "Sleep",
-                    onClick = {},
+                    "Study",
+                    onClick = {
+
+                    },
                     modifier = Modifier
                         .weight(1f)
                 )
                 mediumIconWidget(
-                    Icons.Filled.Star,
+                    Icons.Filled.Notifications,
                     Icons.Filled.Star,
                     "Sleep",
-                    onClick = {},
+                    onClick = {
+
+                    },
                     modifier = Modifier
                         .weight(1f)
                 )
@@ -142,32 +155,132 @@ fun HomepageContent(viewModel: HomepageViewModel, navController : NavController)
 
         spacer(Modifier.height(20.dp))
 
+        Text(
+            text = "Tasks",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
         Row(
             Modifier
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         )
         {
-            smallProgressWidget(9, 10, "Tasks",10, Modifier.weight(1f))
-            smallProgressWidget(8, 10, "Tasks", 10,Modifier.weight(1f))
-            smallProgressWidget(7, 10, "Tasks", 10,Modifier.weight(1f))
+            smallProgressWidget(
+                9,
+                12,
+                "Overdue",
+                12,
+                Modifier.weight(1f)
+            )
+            smallProgressWidget(
+                8,
+                12,
+                "Weekly",
+                12,
+                Modifier.weight(1f)
+            )
+
+            smallProgressWidget(
+                7,
+                12,
+                "All",
+                12,
+                Modifier.weight(1f))
         }
 
         spacer(Modifier.height(20.dp))
 
+        Text(
+            text = "Navigation",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.primary
+        )
 
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){
-            viewModel.navStudyCentre(navController)
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            largeNavWidget(
+                Icons.Filled.Star,
+                "Study Centre",
+                "Study Spaces and Sessions",
+                Modifier.fillMaxWidth()
+            ) {
+                viewModel.navStudyCentre(navController)
+            }
+
+            largeNavWidget(
+                Icons.Filled.DateRange,
+                "Planner",
+                "Planner and Task Management",
+                Modifier.fillMaxWidth()
+            ) {
+                viewModel.navPlanner(navController)
+            }
+
+            largeNavWidget(
+                Icons.Filled.Menu,
+                "Task List",
+                "Categorised Tasks",
+                Modifier.fillMaxWidth()
+            ) {
+                viewModel.navTaskList(navController)
+            }
+
+            largeNavWidget(
+                Icons.Filled.Search,
+                "History",
+                "Session History Management",
+                Modifier.fillMaxWidth()
+            ) {
+                viewModel.navHistory(navController)
+            }
+
+            largeNavWidget(
+                Icons.Filled.Face,
+                "Profile Settings",
+                "Personal app settings",
+                Modifier.fillMaxWidth()
+            ) {
+                viewModel.profileNav(navController)
+            }
         }
-        spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
-        spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
-        spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
-        spacer(Modifier.height(10.dp))
-        largeNavWidget(Icons.Filled.Star, "Study Centre", "Testing", Modifier.fillMaxWidth()){}
 
+        Spacer(modifier = Modifier.height(16.dp))
 
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .clickable(onClick = {
+
+                })
+        ) {
+            Icon(
+                Icons.Filled.Create,
+                contentDescription = "CustomiseHomepage",
+                modifier = Modifier,
+                tint = MaterialTheme.colorScheme.primary
+            )
+
+            Spacer(modifier = Modifier.width(6.dp))
+
+            Text(
+                text = "Customise Homepage",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
     }
 }

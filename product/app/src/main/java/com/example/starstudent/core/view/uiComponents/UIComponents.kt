@@ -29,7 +29,6 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -40,7 +39,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -130,7 +128,7 @@ fun mediumIconWidget(
                     modifier = Modifier
                         .size(36.dp)
                         .testTag("mediumIconWidgetRepIcon"),
-                    tint = MaterialTheme.colorScheme.background
+                    tint = MaterialTheme.colorScheme.tertiary
 
                 )
             }
@@ -144,7 +142,7 @@ fun mediumIconWidget(
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.secondary
             )
         }
 }
@@ -177,12 +175,16 @@ fun smallProgressWidget(
             strokeWidth = 10.dp,
         )
 
-        Column(modifier = Modifier.align(Alignment.Center)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.align(Alignment.Center
+            )
             .padding(top = 6.dp)) {
             Text(
                 text = label,
                 color = MaterialTheme.colorScheme.background,
                 fontSize = textSize.sp,
+                fontWeight = FontWeight.SemiBold,
                 modifier = Modifier
                     .testTag("smallProgressWidgetNameLabel")
             )

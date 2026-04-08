@@ -493,7 +493,8 @@ fun SeeTasksDialog(viewModel: PlannerViewModel){
 
                 viewModel.selectedDayTaskList.forEach { task ->
 
-                    val isOverdue = task.dueDate >= today || !task.isComplete
+
+                    val isOverdue = !((task.dueDate <= today) && (!task.isComplete))
 
                     Row(
                         modifier = Modifier
