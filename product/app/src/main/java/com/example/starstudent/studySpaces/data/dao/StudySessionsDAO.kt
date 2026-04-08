@@ -60,6 +60,17 @@ interface StudySessionsDAO {
     ) :  List<StudySessions>
 
     @Query("""
+        SELECT * 
+        FROM study_sessions 
+        WHERE user = :user AND endTime = 0
+        ORDER BY startTime DESC
+        LIMIT 1
+        """)
+    suspend fun getMostRecentActiveSessions(
+        user: String
+    ) :  List<StudySessions>
+
+    @Query("""
         SELECT 
             study.id AS id, 
             study.user AS user, 

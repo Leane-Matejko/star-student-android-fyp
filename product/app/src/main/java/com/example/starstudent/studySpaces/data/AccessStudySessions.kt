@@ -62,6 +62,14 @@ class AccessStudySessions {
         )
     }
 
+    suspend fun getMostRecentActiveSessions(
+        user: String
+    ) : List<StudySessions>{
+        return studySessionsDAO.getMostRecentActiveSessions(
+            user
+        )
+    }
+
     suspend fun getRecentSessionsWithDuration(
         user: String
     ): List<StudySessionDuration>{

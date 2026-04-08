@@ -2,17 +2,24 @@ package com.example.starstudent.studySpaces.view.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,14 +34,17 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.starstudent.core.view.screens.HomepageViewModel
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
+import com.example.starstudent.core.view.uiComponents.simpleToggle
 import com.example.starstudent.core.view.uiComponents.smallAvatarWindow
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.textField
 import com.example.starstudent.core.view.uiComponents.varLargeNavWidget
+import com.example.starstudent.ui.theme.LocalExtendedLabelColours
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -157,9 +167,11 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
                 largeNavWidget(
                     Icons.Filled.Star,
                     "Session Goals",
-                    "Placeholder",
+                    "Tasks to Complete",
                     Modifier.fillMaxWidth()
-                ){ }
+                ){
+                    viewModel.showTasksDialog("all")
+                }
 
                 if(viewModel.showPauseButton()){
                     button(
@@ -195,31 +207,32 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
         ) {
 
             smallProgressWidget(
-                12,
-                16,
+                viewModel.overdueToDo,
+                viewModel.overdueTaskList.size,
                 "Overdue",
                 12,
                 {
+                    viewModel.showTasksDialog("overdue")
                 }
             )
 
             smallProgressWidget(
-                12,
-                16,
-                "Week",
+                viewModel.weekToDo,
+                viewModel.weekTaskList.size,
+                "Weekly",
                 10,
                 {
-
+                    viewModel.showTasksDialog("weekly")
                 }
             )
 
             smallProgressWidget(
-                12,
-                16,
+                viewModel.allToDo,
+                viewModel.allTaskList.size,
                 "All",
                 12,
                 {
-
+                    viewModel.showTasksDialog("all")
                 }
             )
 
@@ -346,6 +359,18 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
             }
         }
     }
+
+    LaunchedEffect(Unit) {
+        viewModel.getAllCurrentTasks()
+    }
+
+    if(viewModel.showTasksDialog){
+        Dialog(
+            onDismissRequest = {viewModel.hideTasksDialog()}
+        ) {
+            TasksDialog(viewModel)
+        }
+    }
 }
 
 
@@ -445,5 +470,185 @@ fun SavedLocationDialogContents(viewModel: StudyCentreViewModel){
             }
         }
     }
+}
 
+@Composable
+fun TasksDialog(viewModel: StudyCentreViewModel){
+    val colors = LocalExtendedLabelColours.current
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+    ) {
+
+        val scrollState = rememberScrollState()
+
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
+                .padding(20.dp, 20.dp)
+        ) {
+            Text(
+                text = "${viewModel.tasksType.replaceFirstChar { it.uppercase() }} Tasks",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            if(viewModel.currentTaskList.isEmpty()){
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Icon(
+                        Icons.Filled.Done,
+                        contentDescription = "CompleteTasks",
+                        modifier = Modifier,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+
+                    Text(
+                        text = "Done",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }else{
+
+                val today = System.currentTimeMillis()
+
+                viewModel.currentTaskList.forEach { task ->
+
+                    val isOverdue = !((task.dueDate <= today) && (!task.isComplete))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                color = if (isOverdue) {MaterialTheme.colorScheme.primary}
+                                else {MaterialTheme.colorScheme.tertiary},
+                                shape = RoundedCornerShape(24.dp)
+                            )
+                            .padding(6.dp)
+                        ,
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+
+                    ) {
+                        simpleToggle(
+                            0.6f,
+                            task.isComplete,
+                        ) {
+                            viewModel.viewModelScope.launch {
+                                viewModel.updateTaskCompletion(
+                                    task.id,
+                                    task.isComplete
+                                )
+                            }
+                        }
+
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .weight(1f)
+
+                        ) {
+
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .background(
+                                        color = viewModel.getCategoryColour(
+                                            task.taskCategoryLabelColour,
+                                            colors
+                                        ),
+                                        shape = RoundedCornerShape(24.dp),
+                                    )
+                                    .padding(start = 4.dp, end = 4.dp, top = 2.dp, bottom = 2.dp)
+                                    .width(200.dp)
+                            ) {
+                                Text(
+                                    text = task.taskCategoryLabel,
+                                    color = MaterialTheme.colorScheme.surface,
+                                    fontWeight = FontWeight.SemiBold,
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 8.sp
+                                )
+
+                            }
+
+                            Text(
+                                text = task.taskLabel,
+                                color = if (isOverdue) {
+                                    MaterialTheme.colorScheme.background
+                                } else {
+                                    MaterialTheme.colorScheme.primary
+                                },
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 14.sp,
+                                modifier = Modifier
+                                    .padding(2.dp)
+                            )
+
+                            Text(
+                                text = "Due: ${
+                                    viewModel.formatDateTime(
+                                        task.dueDate,
+                                        "EEE d MMM yy"
+                                    )
+                                }",
+                                color = if (isOverdue) {
+                                    MaterialTheme.colorScheme.background
+                                } else {
+                                    MaterialTheme.colorScheme.primary
+                                },
+                                fontSize = 12.sp,
+                                modifier = Modifier
+                            )
+                        }
+
+                        if (task.isCritical) {
+                            Spacer(modifier = Modifier.width(10.dp))
+
+                            Icon(
+                                imageVector = Icons.Filled.Star,
+                                contentDescription = "Critical Task",
+                                tint = if (isOverdue) {
+                                    MaterialTheme.colorScheme.background
+                                } else {
+                                    MaterialTheme.colorScheme.primary
+                                },
+                                modifier = Modifier
+                                    .size(20.dp)
+                                    .weight(0.2f)
+                            )
+                        } else {
+                            Icon(
+                                imageVector = Icons.Filled.Star,
+                                contentDescription = "Critical Task",
+                                tint = if (isOverdue) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.tertiary
+                                },
+                                modifier = Modifier
+                                    .size(20.dp)
+                                    .weight(0.2f)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
