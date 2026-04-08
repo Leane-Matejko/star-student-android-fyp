@@ -87,8 +87,8 @@ fun Background() {
 
 @Composable
 fun mediumIconWidget(
-    quanIcon: ImageVector,
     repIcon: ImageVector,
+    quanIcon: ImageVector,
     label: String,
     onClick: () -> Unit,
     modifier: Modifier)
@@ -111,24 +111,24 @@ fun mediumIconWidget(
             )
             {
                 Icon(
-                    imageVector = quanIcon,
-                    contentDescription = "Quantify Icon",
-                    modifier = Modifier
-                        .size(36.dp)
-                        .testTag("mediumIconWidgetQuanIcon"),
-                    tint = MaterialTheme.colorScheme.background
-
-                )
-
-                Spacer(modifier = Modifier.width(5.dp))
-
-                Icon(
                     imageVector = repIcon,
                     contentDescription = "Representation Icon",
                     modifier = Modifier
                         .size(36.dp)
                         .testTag("mediumIconWidgetRepIcon"),
                     tint = MaterialTheme.colorScheme.tertiary
+
+                )
+
+                Spacer(modifier = Modifier.width(5.dp))
+
+                Icon(
+                    imageVector = quanIcon,
+                    contentDescription = "Quantify Icon",
+                    modifier = Modifier
+                        .size(36.dp)
+                        .testTag("mediumIconWidgetQuanIcon"),
+                    tint = MaterialTheme.colorScheme.background
 
                 )
             }
@@ -146,6 +146,67 @@ fun mediumIconWidget(
             )
         }
 }
+
+@Composable
+fun mediumIconWidget(
+    repIcon: ImageVector,
+    quanIcon: ImageVector,
+    label: String,
+    modifier: Modifier)
+{
+    Column(
+        modifier = modifier
+            .aspectRatio(1f)
+            .background(
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(36.dp)
+            )
+            .padding(start = 20.dp,end = 20.dp, top = 36.dp, bottom = 10.dp)
+            .testTag("mediumIconWidgetBackground"),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.Center
+        )
+        {
+            Icon(
+                imageVector = repIcon,
+                contentDescription = "Representation Icon",
+                modifier = Modifier
+                    .size(36.dp)
+                    .testTag("mediumIconWidgetRepIcon"),
+                tint = MaterialTheme.colorScheme.tertiary
+
+            )
+
+            Spacer(modifier = Modifier.width(5.dp))
+
+            Icon(
+                imageVector = quanIcon,
+                contentDescription = "Quantify Icon",
+                modifier = Modifier
+                    .size(36.dp)
+                    .testTag("mediumIconWidgetQuanIcon"),
+                tint = MaterialTheme.colorScheme.background
+
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(text = label,
+            modifier = Modifier
+                .size(100.dp)
+                .testTag("mediumIconWidgetText"),
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.secondary
+        )
+    }
+}
+
 
 /* UI component for a small progress widget.
 */

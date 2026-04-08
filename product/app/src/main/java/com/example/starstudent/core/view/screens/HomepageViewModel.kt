@@ -2,6 +2,8 @@ package com.example.starstudent.core.view.screens
 
 
 import android.util.Log
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -17,6 +19,8 @@ import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.planner.data.AccessTasks
 import com.example.starstudent.planner.data.entities.TaskWithCategory
 import com.example.starstudent.planner.domain.CategoryTaskFormatting
+import com.example.starstudent.studySpaces.data.AccessStudySessions
+import com.example.starstudent.studySpaces.data.entities.StudySessionDuration
 import com.example.starstudent.ui.theme.ExtendedLabelColours
 import com.example.starstudent.userAccounts.data.entities.UserInfo
 import kotlinx.coroutines.launch
@@ -41,6 +45,7 @@ class HomepageViewModel : ViewModel() {
     private val categoryTaskFormatting = CategoryTaskFormatting()
 
     private val accessTasks = AccessTasks()
+    private val accessStudySessions = AccessStudySessions()
 
     val userInfo = DatabaseSingleton
         .getDatabase(
@@ -147,6 +152,31 @@ class HomepageViewModel : ViewModel() {
 
     var currentTaskList by mutableStateOf(
         listOf<TaskWithCategory>()
+    )
+        private set
+
+    var totalSessionList by mutableStateOf(
+        listOf<StudySessionDuration>()
+    )
+        private set
+
+    var previousWeekSessionsList by mutableStateOf(
+        listOf<StudySessionDuration>()
+    )
+        private set
+
+    var currentWeekSessionsList by mutableStateOf(
+        listOf<StudySessionDuration>()
+    )
+        private set
+
+    var studyComparison by mutableStateOf(
+        "default"
+    )
+        private set
+
+    var studyComparisonIcon by mutableStateOf(
+        Icons.Rounded.Menu
     )
         private set
 
@@ -287,6 +317,44 @@ class HomepageViewModel : ViewModel() {
             date,
             pattern
         )
+    }
+
+    fun getCurrentWeek() : Pair<Long, Long>{
+        return Pair(formatHomepage.getRecentMonday(),
+            formatHomepage.getEndOfWeek()
+        )
+    }
+
+    fun getPreviousWeek() : Pair<Long, Long>{
+        return Pair(formatHomepage.getPreviousMonday(),
+            formatHomepage.getPreviousEndOfWeek()
+        )
+    }
+
+    fun resetStudySession(){
+        val previousWeek = getPreviousWeek()
+        val currentWeek = getCurrentWeek()
+
+        previousWeekSessionsList = totalSessionList.filter {
+            it.startTime >= previousWeek.first &&
+                    it.startTime <= previousWeek.second }
+
+        currentWeekSessionsList = totalSessionList.filter {
+            it.startTime >= currentWeek.first &&
+                    it.startTime <= currentWeek.second }
+    }
+
+    fun getStudyComparison(){
+        studyComparisonIcon = formatHomepage.compareStudySessions(
+            previousWeekSessionsList,
+            currentWeekSessionsList
+        )
+    }
+
+    suspend fun getSessionList(){
+        totalSessionList = accessStudySessions.getRecentSessionsWithDuration(userId)
+        resetStudySession()
+        getStudyComparison()
     }
 
     suspend fun updateTasksList(){

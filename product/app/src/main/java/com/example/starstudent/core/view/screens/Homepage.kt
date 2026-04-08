@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
@@ -35,7 +36,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -48,7 +48,6 @@ import androidx.navigation.NavController
 import com.example.starstudent.core.view.uiComponents.Background
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
-import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.simpleToggle
@@ -146,21 +145,15 @@ fun HomepageContent(viewModel: HomepageViewModel, navController : NavController)
 
                 mediumIconWidget(
                     Icons.Filled.Star,
-                    Icons.Filled.Star,
+                    viewModel.studyComparisonIcon,
                     "Study",
-                    onClick = {
-
-                    },
                     modifier = Modifier
                         .weight(1f)
                 )
                 mediumIconWidget(
                     Icons.Filled.Notifications,
-                    Icons.Filled.Star,
+                    Icons.Filled.KeyboardArrowUp,
                     "Sleep",
-                    onClick = {
-
-                    },
                     modifier = Modifier
                         .weight(1f)
                 )
@@ -312,6 +305,7 @@ fun HomepageContent(viewModel: HomepageViewModel, navController : NavController)
             viewModel.updateTasksList()
         }
         viewModel.getAllCurrentTasks()
+        viewModel.getSessionList()
     }
 
     if (viewModel.showTasksDialog){
