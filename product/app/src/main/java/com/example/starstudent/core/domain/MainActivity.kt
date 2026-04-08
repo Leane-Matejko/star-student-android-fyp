@@ -13,8 +13,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.motion.widget.Debug.getLocation
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.starstudent.core.domain.location.LocationPermissions
 import com.example.starstudent.core.domain.navigation.Navigation
+import com.example.starstudent.core.view.screens.ApplicationViewModel
 import com.example.starstudent.ui.theme.StarStudentTheme
 
 
@@ -25,8 +27,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
          setContent{
-             StarStudentTheme() {
-                 Navigation()
+             val applicationViewModel: ApplicationViewModel = viewModel()
+
+             StarStudentTheme(
+                theme = applicationViewModel.themeMode
+             ) {
+                 Navigation(applicationViewModel)
              }
         }
         enableEdgeToEdge()
@@ -44,13 +50,5 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    StarStudentTheme {
-        Greeting("Android")
-    }
 }
 

@@ -14,15 +14,21 @@ import androidx.navigation.NavController
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.FormatHomepage
+import com.example.starstudent.core.domain.Themes
 import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.domain.navigation.NavigationFunctions
+import com.example.starstudent.customisation.data.entities.HomepageSettings
+import com.example.starstudent.customisation.domain.AccessHomepageSettings
 import com.example.starstudent.planner.data.AccessTasks
 import com.example.starstudent.planner.data.entities.TaskWithCategory
 import com.example.starstudent.planner.domain.CategoryTaskFormatting
 import com.example.starstudent.studySpaces.data.AccessStudySessions
 import com.example.starstudent.studySpaces.data.entities.StudySessionDuration
 import com.example.starstudent.ui.theme.ExtendedLabelColours
+import com.example.starstudent.userAccounts.data.AccessUserTheme
 import com.example.starstudent.userAccounts.data.entities.UserInfo
+import com.example.starstudent.userAccounts.data.entities.UserTheme
+import com.example.starstudent.userAccounts.domain.FormatProfile
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -46,6 +52,10 @@ class HomepageViewModel : ViewModel() {
 
     private val accessTasks = AccessTasks()
     private val accessStudySessions = AccessStudySessions()
+    private val accessUserTheme = AccessUserTheme()
+    private val accessHomepageSettings = AccessHomepageSettings()
+
+    val formatProfile = FormatProfile()
 
     val userInfo = DatabaseSingleton
         .getDatabase(
@@ -170,13 +180,31 @@ class HomepageViewModel : ViewModel() {
     )
         private set
 
-    var studyComparison by mutableStateOf(
-        "default"
+    var studyComparisonIcon by mutableStateOf(
+        Icons.Rounded.Menu
     )
         private set
 
-    var studyComparisonIcon by mutableStateOf(
-        Icons.Rounded.Menu
+    var showHomepageCustomisationDialog by mutableStateOf(
+        false
+    )
+        private set
+
+    var homepageSettings by mutableStateOf(
+        HomepageSettings(
+            userId,
+            avatarWindow = true,
+            studyProgress = true,
+            sleepProgress = true,
+            overdueTasks = true,
+            weeklyTasks = true,
+            allTasks = true,
+            studyCentreNav = true,
+            plannerNav = true,
+            taskListNav = true,
+            historyNav = true,
+            profileNav = true,
+        )
     )
         private set
 
@@ -351,10 +379,38 @@ class HomepageViewModel : ViewModel() {
         )
     }
 
+    fun showHomepageCustomisationDialog(){
+        showHomepageCustomisationDialog = true
+    }
+
+    fun hideHomepageCustomisationDialog(){
+        showHomepageCustomisationDialog = false
+    }
+
     suspend fun getSessionList(){
         totalSessionList = accessStudySessions.getRecentSessionsWithDuration(userId)
         resetStudySession()
         getStudyComparison()
+    }
+
+    fun getThemeColor(
+        currentTheme: String
+    ) : Themes{
+        return formatProfile.getThemeFromString(currentTheme)
+    }
+
+    suspend fun getCurrentTheme() : String{
+        return accessUserTheme.getUserTheme(
+            userId
+        )
+    }
+
+    suspend fun updateTheme(
+        applicationViewModel: ApplicationViewModel
+    ) {
+        val currentTheme = getCurrentTheme()
+        val theme = getThemeColor(currentTheme)
+        applicationViewModel.setTheme(theme)
     }
 
     suspend fun updateTasksList(){
@@ -379,6 +435,101 @@ class HomepageViewModel : ViewModel() {
         getAllCurrentTasks()
         resetTasksLists()
     }
+
+    suspend fun getHomepageSettings(){
+        homepageSettings = accessHomepageSettings.getHomepageSettings(userId)
+    }
+
+    suspend fun updateAvatarWindow(){
+        accessHomepageSettings.updateAvatarWindow(
+            userId,
+            !homepageSettings.avatarWindow
+        )
+        getHomepageSettings()
+    }
+
+    suspend fun updateStudyProgress(){
+        accessHomepageSettings.updateStudyProgress(
+            userId,
+            !homepageSettings.studyProgress
+        )
+        getHomepageSettings()
+    }
+
+    suspend fun updateSleepProgress(){
+        accessHomepageSettings.updateSleepProgress(
+            userId,
+            !homepageSettings.sleepProgress
+        )
+        getHomepageSettings()
+    }
+
+
+    suspend fun updateOverdueTasks(){
+        accessHomepageSettings.updateOverdueTasks(
+            userId,
+            !homepageSettings.overdueTasks
+        )
+        getHomepageSettings()
+    }
+
+
+    suspend fun updateWeeklyTasks(){
+        accessHomepageSettings.updateWeeklyTasks(
+            userId,
+            !homepageSettings.weeklyTasks
+        )
+        getHomepageSettings()
+    }
+
+    suspend fun updateAllTasks(){
+        accessHomepageSettings.updateAllTasks(
+            userId,
+            !homepageSettings.allTasks
+        )
+        getHomepageSettings()
+    }
+
+    suspend fun updateStudyCentreNav(){
+        accessHomepageSettings.updateStudyCentreNav(
+            userId,
+            !homepageSettings.studyCentreNav
+        )
+        getHomepageSettings()
+    }
+
+    suspend fun updatePlannerNav(){
+        accessHomepageSettings.updatePlannerNav(
+            userId,
+            !homepageSettings.plannerNav
+        )
+        getHomepageSettings()
+    }
+
+    suspend fun updateTaskListNav(){
+        accessHomepageSettings.updateTaskListNav(
+            userId,
+            !homepageSettings.taskListNav
+        )
+        getHomepageSettings()
+    }
+
+    suspend fun updateHistoryNav(){
+        accessHomepageSettings.updateHistoryNav(
+            userId,
+            !homepageSettings.historyNav
+        )
+        getHomepageSettings()
+    }
+
+    suspend fun updateProfileNav(){
+        accessHomepageSettings.updateProfileNav(
+            userId,
+            !homepageSettings.profileNav
+        )
+        getHomepageSettings()
+    }
+
 
 
 

@@ -1,6 +1,8 @@
 package com.example.starstudent.userAccounts.domain
 
 import android.icu.text.SimpleDateFormat
+import android.security.identity.AuthenticationKeyMetadata
+import com.example.starstudent.core.domain.Themes
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -9,6 +11,13 @@ import java.util.Date
 import java.util.Locale
 
 class FormatProfile {
+
+    val themeOptions = listOf(
+            "system",
+            "light",
+            "dark",
+            "strawberry"
+            )
 
     fun profileLocationAccessFormatted(
         locationAccess : Boolean
@@ -106,5 +115,15 @@ class FormatProfile {
             .atStartOfDay(ZoneId.systemDefault())
             .toInstant()
             .toEpochMilli()
+    }
+
+    fun getThemeFromString (themeKey : String) : Themes{
+        return when(themeKey){
+            "system" -> Themes.SYSTEM
+            "light" -> Themes.LIGHT
+            "dark" -> Themes.DARK
+            "strawberry" -> Themes.STRAWBERRY
+            else -> Themes.SYSTEM
+        }
     }
 }

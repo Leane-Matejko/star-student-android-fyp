@@ -11,6 +11,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
+import com.example.starstudent.core.domain.Themes
 
 
 /* Other default colors to override
@@ -68,24 +69,62 @@ private val darkLabelColorScheme = ExtendedLabelColours(
     pink = dark_pink,
 )
 
+private val StrawberryColorScheme = lightColorScheme(
+    primary = strawberry_primary,
+    onPrimary = strawberry_onPrimary,
+    secondary = strawberry_secondary,
+    onSecondary = strawberry_onSecondary,
+    tertiary = strawberry_tertiary,
+    onTertiary = strawberry_onTertiary,
+    background = strawberry_background,
+    onBackground = strawberry_onBackground,
+    surface = White01
+)
+
+private val strawberryLabelColorScheme = ExtendedLabelColours(
+    red = strawberry_red,
+    orange = strawberry_orange,
+    yellow = strawberry_yellow,
+    green = strawberry_green,
+    blue = strawberry_blue,
+    navy = strawberry_navy,
+    purple = strawberry_purple,
+    pink = strawberry_pink,
+)
+
 @Composable
 fun StarStudentTheme(
+    theme : Themes,
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+    val context = LocalContext.current
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+    val colorScheme = when (theme){
+        Themes.SYSTEM -> {
+            when {
+                dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                    if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+                }
+
+                darkTheme -> DarkColorScheme
+                else -> LightColorScheme
+            }
+        }
+        Themes.DARK -> DarkColorScheme
+        Themes.LIGHT -> LightColorScheme
+        Themes.STRAWBERRY -> StrawberryColorScheme
     }
 
-    val extendedColours = if(darkTheme){darkLabelColorScheme} else {lightLabelColorScheme}
+    val extendedColours =
+        when(theme){
+            Themes.SYSTEM -> if(darkTheme){darkLabelColorScheme}else{lightLabelColorScheme}
+            Themes.LIGHT -> lightLabelColorScheme
+            Themes.DARK -> darkLabelColorScheme
+            Themes.STRAWBERRY -> strawberryLabelColorScheme
+        }
 
     CompositionLocalProvider(
         LocalExtendedLabelColours provides extendedColours

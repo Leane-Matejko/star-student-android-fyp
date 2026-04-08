@@ -72,3 +72,31 @@ val MIGRATION_5_6 = object : Migration(5,6){
         )
     }
 }
+
+val MIGRATION_6_7 = object : Migration(6,7){
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS user_theme (" +
+                "id TEXT PRIMARY KEY NOT NULL," +
+                "theme TEXT NOT NULL" +
+                ")")
+    }
+}
+
+val MIGRATION_7_8 = object : Migration(7,8){
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS homepage_settings (" +
+                "id TEXT PRIMARY KEY NOT NULL," +
+                "avatarWindow INTEGER NOT NULL DEFAULT 1," +
+                "studyProgress INTEGER NOT NULL DEFAULT 1," +
+                "sleepProgress INTEGER NOT NULL DEFAULT 1," +
+                "overdueTasks INTEGER NOT NULL DEFAULT 1," +
+                "weeklyTasks INTEGER NOT NULL DEFAULT 1," +
+                "allTasks INTEGER NOT NULL DEFAULT 1," +
+                "studyCentreNav INTEGER NOT NULL DEFAULT 1," +
+                "plannerNav INTEGER NOT NULL DEFAULT 1," +
+                "taskListNav INTEGER NOT NULL DEFAULT 1," +
+                "historyNav INTEGER NOT NULL DEFAULT 1," +
+                "profileNav INTEGER NOT NULL DEFAULT 1" +
+                ")")
+    }
+}

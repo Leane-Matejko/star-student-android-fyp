@@ -1,14 +1,19 @@
 package com.example.starstudent.userAccounts.view.screens
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.starstudent.core.domain.CurrentApplication
+import com.example.starstudent.core.domain.Themes
 import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.domain.navigation.NavigationFunctions
+import com.example.starstudent.core.view.screens.ApplicationViewModel
 import com.example.starstudent.userAccounts.data.AccessUserData
+import com.example.starstudent.userAccounts.data.AccessUserTheme
 import com.example.starstudent.userAccounts.domain.FormatProfile
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -19,9 +24,13 @@ class ProfileInformationViewModel() : ViewModel(){
 
     val accessUserData = AccessUserData()
 
+    val accessUserTheme = AccessUserTheme()
+
     val formatProfile = FormatProfile()
 
     private val navigationFunctions = NavigationFunctions()
+
+    val themeOptions = formatProfile.themeOptions
 
     var showNavMenu by mutableStateOf(
         false
@@ -93,6 +102,8 @@ class ProfileInformationViewModel() : ViewModel(){
     )
         private set
 
+    var userId = CurrentApplication.instance.user.email.getEmail()
+
     var curDate by mutableStateOf(
         LocalDateTime
             .now()
@@ -103,6 +114,16 @@ class ProfileInformationViewModel() : ViewModel(){
                         Locale.getDefault()
                     )
             )
+    )
+        private set
+
+    var currentTheme by mutableStateOf(
+        "system"
+    )
+        private set
+
+    var showThemeOptions by mutableStateOf(
+        false
     )
         private set
 
@@ -217,6 +238,14 @@ class ProfileInformationViewModel() : ViewModel(){
         profileLocationAccess = updateLocationAccess
     }
 
+    fun showThemeOptions(){
+        showThemeOptions = true
+    }
+
+    fun hideThemeOptions(){
+        showThemeOptions = false
+    }
+
     fun saveChanges(){
 
         viewModelScope.launch {
@@ -240,5 +269,39 @@ class ProfileInformationViewModel() : ViewModel(){
             closeDialog()
             //possible check to see if the db updated before closing
         }
+    }
+
+//    fun setNewTheme(
+//        newTheme : String
+//    ){
+//        currentTheme = newTheme
+//    }
+
+    suspend fun updateTheme(
+        themeKey: String,
+        applicationViewModel: ApplicationViewModel
+                    ){
+        currentTheme = themeKey
+        val theme = getThemeColor()
+        applicationViewModel.setTheme(theme)
+        updateCurrentTheme()
+        hideThemeOptions()
+    }
+
+    fun getThemeColor() : Themes{
+        return formatProfile.getThemeFromString(currentTheme)
+    }
+
+    suspend fun getCurrentTheme(){
+        currentTheme = accessUserTheme.getUserTheme(
+            userId
+        )
+    }
+
+    suspend fun updateCurrentTheme(){
+        accessUserTheme.updateUserTheme(
+            userId,
+            currentTheme
+        )
     }
 }
