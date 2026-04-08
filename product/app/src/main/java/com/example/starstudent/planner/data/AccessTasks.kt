@@ -122,4 +122,14 @@ class AccessTasks {
             cateId
         )
     }
+
+    suspend fun hideCompletedTasks(
+        user : String,
+        recentMonday : Long
+    ){
+        tasksDAO.hideCompletedTasks(
+            user,
+            recentMonday
+        )
+    }
 }

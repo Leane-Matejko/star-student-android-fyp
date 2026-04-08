@@ -62,10 +62,28 @@ interface TasksDAO {
         UPDATE tasks
         SET 
             isActive = 1
-        WHERE cateId = :cateId
+        WHERE cateId = :cateId AND isComplete = 0
     """)
     suspend fun showTasks(
         cateId: Int
+    )
+
+    @Query("""
+        UPDATE tasks
+        SET 
+            isActive = 0
+        WHERE id IN (
+            SELECT tasks.id
+            FROM tasks
+            INNER JOIN task_categories cate
+            ON tasks.cateId = cate.id 
+            WHERE cate.user = :user AND tasks.isComplete = 1 AND tasks.completeDate < :recentMonday
+        
+        )
+    """)
+    suspend fun hideCompletedTasks(
+        user: String,
+        recentMonday : Long
     )
 
     @Query("""

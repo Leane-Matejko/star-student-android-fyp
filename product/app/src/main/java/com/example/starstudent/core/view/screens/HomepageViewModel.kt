@@ -12,10 +12,17 @@ import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.core.domain.navigation.NavigationFunctions
+import com.example.starstudent.planner.data.AccessTasks
 import com.example.starstudent.userAccounts.data.entities.UserInfo
 import kotlinx.coroutines.launch
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.temporal.Temporal
+import java.time.temporal.TemporalAdjuster
+import java.time.temporal.TemporalAdjusters
 import java.util.Locale
 
 /* ViewModel for the homepage.
@@ -23,6 +30,9 @@ import java.util.Locale
 class HomepageViewModel : ViewModel() {
 
     private val navigationFunctions = NavigationFunctions()
+
+    private val accessTasks = AccessTasks()
+
     val userInfo = DatabaseSingleton
         .getDatabase(
             CurrentApplication
@@ -141,6 +151,24 @@ class HomepageViewModel : ViewModel() {
                     )
             )
     }
+
+    fun getRecentMonday() : Long{
+        return LocalDate
+            .now()
+            .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+            .atStartOfDay(ZoneId.systemDefault())
+            .toInstant()
+            .toEpochMilli()
+    }
+
+    suspend fun updateTasksList(){
+        accessTasks.hideCompletedTasks(
+            username,
+            getRecentMonday())
+    }
+
+
+
 
     fun profileNav(navController: NavController) {
         Log.d("TEST", "Navigating to the profile...")
