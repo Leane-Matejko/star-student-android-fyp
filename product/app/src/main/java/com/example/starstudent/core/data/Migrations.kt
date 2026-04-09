@@ -1,38 +1,47 @@
 package com.example.starstudent.core.data
 
+import android.util.Log
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-val MIGRATION_1_2 = object : Migration(1,2){
+val MIGRATION_2_3 = object : Migration(2,3){
+
     override fun migrate(db: SupportSQLiteDatabase) {
+        Log.d("MIGRATION", "Running MIGRATION 2 → 3")
         db.execSQL("ALTER TABLE user_info ADD COLUMN locationAccess INTEGER NOT NULL DEFAULT 0")
+        Log.d("MIGRATION", "Finished MIGRATION 2 → 3")
     }
 }
 
-val MIGRATION_2_3 = object : Migration(2,3){
+val MIGRATION_3_4 = object : Migration(3,4){
     override fun migrate(db: SupportSQLiteDatabase) {
+        Log.d("MIGRATION", "Running MIGRATION 3 → 4")
         db.execSQL("CREATE TABLE IF NOT EXISTS study_sessions (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "user TEXT NOT NULL," +
                 "startTime INTEGER NOT NULL," +
                 "endTime INTEGER NOT NULL" +
                 ")")
+        Log.d("MIGRATION", "Finished MIGRATION 3 → 4")
     }
 }
 
-val MIGRATION_3_4 = object : Migration(3,4){
+val MIGRATION_4_5 = object : Migration(4,5){
     override fun migrate(db: SupportSQLiteDatabase) {
+        Log.d("MIGRATION", "Running MIGRATION 4 → 5")
         db.execSQL("CREATE TABLE IF NOT EXISTS paused_sessions (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "sessionId INTEGER NOT NULL," +
                 "startTime INTEGER NOT NULL," +
                 "endTime INTEGER NOT NULL" +
                 ")")
+        Log.d("MIGRATION", "Finished MIGRATION 4 → 5")
     }
 }
 
-val MIGRATION_4_5 = object : Migration(4,5){
+val MIGRATION_5_6 = object : Migration(5,6){
     override fun migrate(db: SupportSQLiteDatabase) {
+        Log.d("MIGRATION", "Running MIGRATION 5 → 6")
         db.execSQL("CREATE TABLE IF NOT EXISTS saved_locations (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "user TEXT NOT NULL," +
@@ -40,11 +49,13 @@ val MIGRATION_4_5 = object : Migration(4,5){
                 "longitude REAL NOT NULL," +
                 "latitude REAL NOT NULL" +
                 ")")
+        Log.d("MIGRATION", "Finished MIGRATION 5 → 6")
     }
 }
 
-val MIGRATION_5_6 = object : Migration(5,6){
+val MIGRATION_6_7 = object : Migration(6,7){
     override fun migrate(db: SupportSQLiteDatabase) {
+        Log.d("MIGRATION", "Running MIGRATION 6 → 7")
         db.execSQL("CREATE TABLE IF NOT EXISTS task_categories (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
             "user TEXT NOT NULL," +
@@ -61,7 +72,7 @@ val MIGRATION_5_6 = object : Migration(5,6){
             "isCritical INTEGER NOT NULL DEFAULT 0," +
             "dueDate INTEGER NOT NULL," +
             "isComplete INTEGER NOT NULL DEFAULT 0," +
-            "completeDate INTEGER NOT NULL," +
+            "completeDate INTEGER NOT NULL DEFAULT 0," +
             "isActive INTEGER NOT NULL DEFAULT 1," +
                     "FOREIGN KEY(cateId) REFERENCES task_categories(id)" +
             ")"
@@ -70,20 +81,24 @@ val MIGRATION_5_6 = object : Migration(5,6){
         db.execSQL(
             "CREATE INDEX index_tasks_cateId ON tasks(cateId)"
         )
-    }
-}
-
-val MIGRATION_6_7 = object : Migration(6,7){
-    override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS user_theme (" +
-                "id TEXT PRIMARY KEY NOT NULL," +
-                "theme TEXT NOT NULL" +
-                ")")
+        Log.d("MIGRATION", "Finished MIGRATION 6 → 7")
     }
 }
 
 val MIGRATION_7_8 = object : Migration(7,8){
     override fun migrate(db: SupportSQLiteDatabase) {
+        Log.d("MIGRATION", "Running MIGRATION 7 → 8")
+        db.execSQL("CREATE TABLE IF NOT EXISTS user_theme (" +
+                "id TEXT PRIMARY KEY NOT NULL," +
+                "theme TEXT NOT NULL" +
+                ")")
+        Log.d("MIGRATION", "Finished MIGRATION 7 → 8")
+    }
+}
+
+val MIGRATION_8_9 = object : Migration(8,9){
+    override fun migrate(db: SupportSQLiteDatabase) {
+        Log.d("MIGRATION", "Running MIGRATION 8 → 9")
         db.execSQL("CREATE TABLE IF NOT EXISTS homepage_settings (" +
                 "id TEXT PRIMARY KEY NOT NULL," +
                 "avatarWindow INTEGER NOT NULL DEFAULT 1," +
@@ -98,5 +113,6 @@ val MIGRATION_7_8 = object : Migration(7,8){
                 "historyNav INTEGER NOT NULL DEFAULT 1," +
                 "profileNav INTEGER NOT NULL DEFAULT 1" +
                 ")")
+        Log.d("MIGRATION", "Finished MIGRATION 8 → 9")
     }
 }

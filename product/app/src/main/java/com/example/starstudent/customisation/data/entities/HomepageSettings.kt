@@ -21,18 +21,3 @@ data class HomepageSettings(
     val historyNav : Boolean,
     val profileNav : Boolean,
 )
-
-
-
-
-//@Entity(tableName = "task_categories")
-//data class TaskCategories(
-//    @PrimaryKey(
-//        autoGenerate = true
-//    )
-//    val id: Int = 0,
-//    val user : String,
-//    val cateLabel: String,
-//    val labelColour: String,
-//    val isActive : Boolean
-//)

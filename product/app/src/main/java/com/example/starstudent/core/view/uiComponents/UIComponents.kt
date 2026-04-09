@@ -438,7 +438,6 @@ fun smallAvatarWindow(
                 ))
             .height(150.dp)
             .fillMaxWidth()
-//            .width(160.dp)
             .padding(5.dp, 2.dp)
             .testTag("avatarWindowBackground")
 

@@ -33,7 +33,7 @@ import com.example.starstudent.userAccounts.data.entities.UserTheme
         UserTheme::class,
         HomepageSettings::class
                ],
-    version = 8,
+    version = 9,
     exportSchema = false
 )
 

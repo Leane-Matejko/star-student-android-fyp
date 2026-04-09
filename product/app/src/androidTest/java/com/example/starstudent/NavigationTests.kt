@@ -6,6 +6,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import com.example.starstudent.core.domain.navigation.Navigation
 import com.example.starstudent.core.domain.navigation.Screens
+import com.example.starstudent.core.view.screens.ApplicationViewModel
 import com.example.starstudent.ui.theme.StarStudentTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
@@ -21,8 +22,9 @@ class NavigationTests {
 
     @Test
     fun navigationExists() {
+        val applicationViewModel = ApplicationViewModel()
         composeTest.setContent {
-            Navigation()
+            Navigation(applicationViewModel)
         }
     }
 
@@ -114,7 +116,7 @@ class NavigationTests {
     @Test
     fun startDestinationCorrect(){
         composeTest.setContent{
-            Navigation()
+            Navigation(applicationViewModel = ApplicationViewModel())
         }
 
         composeTest
@@ -125,7 +127,7 @@ class NavigationTests {
     @Test
     fun navigateToSignInCorrect(){
         composeTest.setContent{
-            Navigation()
+            Navigation(applicationViewModel = ApplicationViewModel())
         }
 
         composeTest.onNodeWithTag("button1")
@@ -139,7 +141,7 @@ class NavigationTests {
     @Test
     fun navigateSignInToHomepageCorrect(){
         composeTest.setContent{
-            Navigation()
+            Navigation(applicationViewModel = ApplicationViewModel())
         }
 
         composeTest.onNodeWithTag("button1")
@@ -164,7 +166,7 @@ class NavigationTests {
     @Test
     fun navigateSignInRegisterToAddEmailCorrect(){
         composeTest.setContent{
-            Navigation()
+            Navigation(applicationViewModel = ApplicationViewModel())
         }
 
         composeTest.onNodeWithTag("button2")

@@ -104,7 +104,7 @@ class UIComponentsTests {
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("mediumIconWidgetQuanIcon")
+            .onNodeWithTag("mediumIconWidgetQuanIcon", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -120,7 +120,7 @@ class UIComponentsTests {
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("mediumIconWidgetRepIcon")
+            .onNodeWithTag("mediumIconWidgetRepIcon", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -136,7 +136,7 @@ class UIComponentsTests {
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("mediumIconWidgetText")
+            .onNodeWithTag("mediumIconWidgetText", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -205,7 +205,7 @@ class UIComponentsTests {
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("smallProgressWidgetNameLabel")
+            .onNodeWithTag("smallProgressWidgetNameLabel", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
@@ -223,7 +223,7 @@ class UIComponentsTests {
 
         composeTest.waitForIdle()
         composeTest
-            .onNodeWithTag("smallProgressWidgetTaskLabel")
+            .onNodeWithTag("smallProgressWidgetTaskLabel", useUnmergedTree = true)
             .assertIsDisplayed()
     }
 
