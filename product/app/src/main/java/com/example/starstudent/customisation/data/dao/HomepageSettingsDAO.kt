@@ -6,18 +6,22 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.starstudent.customisation.data.entities.HomepageSettings
 
+//Data access object for the homepage customisation settings
 @Dao
 interface HomepageSettingsDAO {
 
+    //Insert new user with default values
     @Insert(onConflict =  OnConflictStrategy.REPLACE)
     suspend fun addNewUser(newUser: HomepageSettings)
 
+    //Return list of user's information
     @Query("" +
             "SELECT * " +
             "FROM homepage_settings " +
             "WHERE id = :user")
     suspend fun getUserInfo(user: String) :  List<HomepageSettings>?
 
+    //Return list of user's homepage settings
     @Query("" +
             "SELECT * " +
             "FROM homepage_settings " +
@@ -25,6 +29,7 @@ interface HomepageSettingsDAO {
     )
     suspend fun getHomepageSettings(user: String) :  HomepageSettings
 
+    //Updates the visibility of the avatar window widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET avatarWindow = :showStatus " +
@@ -34,6 +39,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the study progress widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET studyProgress = :showStatus " +
@@ -43,6 +49,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the sleep progress widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET sleepProgress = :showStatus " +
@@ -52,6 +59,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the overdue tasks widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET overdueTasks = :showStatus " +
@@ -61,6 +69,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the weekly tasks widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET weeklyTasks = :showStatus " +
@@ -70,6 +79,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the all tasks widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET allTasks = :showStatus " +
@@ -79,7 +89,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
-
+    //Updates the visibility of the study centre navigation widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET studyCentreNav = :showStatus " +
@@ -89,6 +99,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the planner navigation widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET plannerNav = :showStatus " +
@@ -98,6 +109,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the task list widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET taskListNav = :showStatus " +
@@ -107,6 +119,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the history navigation widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET historyNav = :showStatus " +
@@ -116,6 +129,7 @@ interface HomepageSettingsDAO {
         showStatus : Boolean
     )
 
+    //Updates the visibility of the profile navigation widget
     @Query("" +
             "UPDATE homepage_settings " +
             "SET profileNav = :showStatus " +

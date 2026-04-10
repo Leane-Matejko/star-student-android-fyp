@@ -3,6 +3,7 @@ package com.example.starstudent.customisation.data.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+//Stores the users homepage customisation settings
 @Entity(tableName = "homepage_settings")
 data class HomepageSettings(
     @PrimaryKey(
