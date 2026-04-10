@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
 
+//Stores user's profile information
 @Entity(tableName = "user_info")
 data class UserInfo(
     @PrimaryKey(

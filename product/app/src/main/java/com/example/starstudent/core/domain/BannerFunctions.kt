@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class BannerFunctions {
-
     private val navigationFunctions = NavigationFunctions()
 
+    //Updates the time string on the banner
     fun updateTime() : String{
         return LocalDateTime
             .now()
@@ -24,11 +24,13 @@ class BannerFunctions {
             )
     }
 
+    //Navigates to the user profile
     fun profileNav(navController: NavController){
         Log.d("Navigation Functions", "Navigating to the profile...")
         navigationFunctions.goToProfile(navController)
     }
 
+    //Produces options for a navigation menu
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
         return listOf(
             NavigationOptions("Homepage")

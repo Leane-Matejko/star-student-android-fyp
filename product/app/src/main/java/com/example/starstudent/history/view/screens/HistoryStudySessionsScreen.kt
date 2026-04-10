@@ -50,6 +50,8 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 
+
+//Study session history banner and scrollable region for the study session history content
 @Composable
 fun HistoryStudySessionsScreen(navController: NavController) {
     val viewModel = viewModel<HistoryStudySessionsViewModel>()
@@ -80,6 +82,7 @@ fun HistoryStudySessionsScreen(navController: NavController) {
     }
 }
 
+//Content of the study session history page
 @Composable
 fun HistoryStudySessionsContent(
     viewModel: HistoryStudySessionsViewModel,
@@ -253,6 +256,7 @@ fun HistoryStudySessionsContent(
     }
 }
 
+//Shows options for selecting the month or year of session to view
 @Composable
 fun SelectMonthDialog(viewModel: HistoryStudySessionsViewModel){
     Card(
@@ -385,6 +389,8 @@ fun SelectMonthDialog(viewModel: HistoryStudySessionsViewModel){
     }
 }
 
+
+//Warning dialog shown before deleting a session
 @Composable
 fun DeleteSessionDialog(viewModel: HistoryStudySessionsViewModel) {
     Card(

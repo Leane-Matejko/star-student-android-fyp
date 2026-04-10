@@ -25,6 +25,7 @@
 - [Study Centre](#study-centre)
 - [Planner and Task List](#planner-and-task-list)
 - [History](#history)
+- [Homepage Customisation and Function](#homepage-customisation-and-functions)
 
 #### Sign In and Register
 - Register Account (New User)
@@ -41,7 +42,7 @@
 - Navigate the Homepage
 
 
-    <img src="readmeImages/homepage.png" alt="Homepage" width="25%"/>
+    <img src="readmeImages/homepage_new.png" alt="Homepage_new" width="25%"/>
 
 - Light and Dark mode (Based on your device setting) 
 
@@ -53,7 +54,8 @@
 #### Profile Settings
 - Homepage Reformated
 
-    <div style="display:flex; align-items:center; gap:5px;"><img src="readmeImages/image-2.png" alt="Original Homepage" width="25%"/> > <img src="readmeImages/homepage.png" alt="Current Homepage" width="25%"/>
+    <div style="display:flex; align-items:center; gap:5px;"><img src="readmeImages/image-2.png" alt="Original Homepage" width="25%"/> > <img src="readmeImages/homepage.png" alt="Current Homepage" width="25%"/> >
+    <img src="readmeImages/homepage_new.png" alt="Current Homepage" width="25%"/>
     <ul>
         <li>Widgets have been restructed for clearer results</li>
         <li>Scrolling possible</li>
@@ -135,6 +137,15 @@
 
     </ul>
     </div>
+
+- **UPDATED** Study Space Detector
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/StudySpaceDetector.png" alt="StudySpaceDetector" width="25%"/>
+    <ul>
+        <li>Icon on the Study Space detector now updated to show if the user is within a study space.</li>
+
+    </ul>
+    </div>
 - Study Session Window (No Sessions)
     
     <div style="display:flex; align-items:center; gap:10px;">
@@ -147,7 +158,7 @@
 - Study Session Window (Current Sessions Active)
     
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/StudySessionWindowActiveSession.png" alt="AvatarSettings" width="25%"/>
+    <img src="readmeImages/StudySessionWindowActiveSession.png" alt="StudySessionWindowActiveSession" width="25%"/>
     <ul>
         <li>Timer reflects total study time, formatted HH:mm:ss.</li>
         <li>Options to pause.</li>
@@ -162,12 +173,23 @@
     </ul>
     </div>
 
-- Study Session Tasks (Placeholder)
+- **UPDATED** Study Session Window
     
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/StudySessionTasks.png" alt="StudySessionTasks" width="25%"/>
+    <img src="readmeImages/StudySessionCentreUpdated.png" alt="StudySessionCentreUpdated" width="25%"/>
+    <img src="readmeImages/StudySessionTaskList.png" alt="StudySessionTaskList" width="25%"/>
     <ul>
-        <li>Placeholder for user tasks.</li>
+        <li>Study Session window allows for a complete task list to shown for the session goals.</li>
+    </ul>
+    </div>
+
+- Study Session Tasks
+    
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/TaskOptions.png" alt="TaskOptions" width="25%"/>
+    <ul>
+        <li>Shows options for tasks  that are overdue, due for this week, or the complete list.</li>
+        <li>Tasks can be marked as complete here</li>
     </ul>
     </div>
 
@@ -186,8 +208,8 @@
 - Planner - Calendar View
     
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/Planner_Page.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/CalendarMonthNavigation.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/Planner_Page.png" alt="Planner_Page" width="25%"/>
+    <img src="readmeImages/CalendarMonthNavigation.png" alt="CalendarMonthNavigation" width="25%"/>
     <ul>
         <li>Calender view of all tasks</li>
         <li>Loads to the current month</li>
@@ -199,8 +221,8 @@
 
 - Calendar Navigation
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/CalendarMonthNavigation.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/CalendarMonthYearSelection.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/CalendarMonthNavigation.png" alt="CalendarMonthNavigation" width="25%"/>
+    <img src="readmeImages/CalendarMonthYearSelection.png" alt="CalendarMonthYearSelection" width="25%"/>
     <ul>
         <li>Navigation possible via the next and previous buttons or clicking on the month and selecting an option</li>
         <li>Possible to select the month or year</li>
@@ -211,7 +233,7 @@
 
 - Planner - Navigation to Task List
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/Navigation_TaskList.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/Navigation_TaskList.png" alt="Navigation_TaskList" width="25%"/>
     <ul>
         <li>Navigation to the Task List view, separated into categories.</li>
     </ul>
@@ -219,7 +241,7 @@
 
 - Planner - Task Catergories
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/PlannerMainCategories.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/PlannerMainCategories.png" alt="PlannerMainCategories" width="25%"/>
     <ul>
         <li>Shows current tasks in a managble catergories: overdue, weekly, today and this week</li>
         <li>There is an indicator on the widget for the total number of tasks and of which that are critical</li>
@@ -228,8 +250,8 @@
 
 - Planner - Task Catergories (Examples)
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/OverdueTasks.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/MonthTaskList.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/OverdueTasks.png" alt="OverdueTasks" width="25%"/>
+    <img src="readmeImages/MonthTaskList.png" alt="MonthTaskList" width="25%"/>
     <ul>
         <li>Examples of the task categories list. Sorted by due dates.</li>
         <li>Overdue tasks are highlighted, and ciritcal tasks have a star indicator.</li>
@@ -238,8 +260,8 @@
 
 - Task List View
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/TaskListView.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/TaskOptionHighlighted.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/TaskListView.png" alt="TaskListView" width="25%"/>
+    <img src="readmeImages/TaskOptionHighlighted.png" alt="TaskOptionHighlighted" width="25%"/>
     <ul>
         <li>Shows tasks into their categories, sorted by due date.</li>
         <li>Overdue tasks are highlighted, and ciritcal tasks have a star indicator.</li>
@@ -251,7 +273,7 @@
 
 - Task List View
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/Add_Task_Options.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/Add_Task_Options.png" alt="Add_Task_Options" width="25%"/>
     <ul>
         <li>Window to add a new category or task or readd a hidden category</li>
     </ul>
@@ -259,7 +281,7 @@
 
 - Task List - Readding Hidden Categories
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/ReaddHiddenTaskList.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/ReaddHiddenTaskList.png" alt="ReaddHiddenTaskList" width="25%"/>
     <ul>
         <li>Hidden categories can be readded to the task list view via the add menu</li>
         <li>Click the plus button on left side to readd the category</li>
@@ -268,8 +290,8 @@
 
 - Planner - Example of hidden categories reflected on the calendar view
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/hiddencategorycalendar.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/readdhiddencategorycalendar.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/hiddencategorycalendar.png" alt="hiddencategorycalendar" width="25%"/>
+    <img src="readmeImages/readdhiddencategorycalendar.png" alt="readdhiddencategorycalendar" width="25%"/>
     <ul>
         <li>Calendar with a hidden category [Left], Readded category [Right]</li>
         <li>Tasks will reflect the hidden status of their categories</li>
@@ -279,8 +301,8 @@
 
 - Task List - Add New Category
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/AddNewCategory.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/EditCategory.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/AddNewCategory.png" alt="AddNewCategory" width="25%"/>
+    <img src="readmeImages/EditCategory.png" alt="EditCategory" width="25%"/>
     <ul>
         <li>Window to add a new category</li>
         <li>Shows a preview of with the category badge renders to</li>
@@ -292,7 +314,7 @@
 
 - Task List - Task Item
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/TasksItemTaskList.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/TasksItemTaskList.png" alt="TasksItemTaskList" width="25%"/>
     <ul>
         <li>Tasks are shown under each category</li>
         <li>Each task shows the label, due date, critical status and toggle for the complete status.</li>
@@ -302,9 +324,9 @@
 
 - Task List - Add New Task
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/AddNewTaskCateLabel.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/AddNewTaskDateTime.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/AddNewTaskCritical.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/AddNewTaskCateLabel.png" alt="AddNewTaskCateLabel" width="25%"/>
+    <img src="readmeImages/AddNewTaskDateTime.png" alt="AddNewTaskDateTime" width="25%"/>
+    <img src="readmeImages/AddNewTaskCritical.png" alt="AddNewTaskCritical" width="25%"/>
     <ul>
         <li>Options to select the category, label, date, time and critical status</li>
         <li>A category must be selected, otherwise and error is thrown</li>
@@ -314,8 +336,8 @@
 
 - Task List - Edit Task
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/EditTasksCategoryLabel.png" alt="LocationDetectorNotDetected" width="25%"/>
-    <img src="readmeImages/EditTaskCriticalComplete.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/EditTasksCategoryLabel.png" alt="EditTasksCategoryLabel" width="25%"/>
+    <img src="readmeImages/EditTaskCriticalComplete.png" alt="EditTaskCriticalComplete" width="25%"/>
     <ul>
         <li>Options to change the category, label, date, time and critical status and complete a task</li>
         <li>A All currently saved values are loaded into each field</li>
@@ -326,7 +348,7 @@
 ### History
 - History Page
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/HistoryPage.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/HistoryPage.png" alt="HistoryPage" width="25%"/>
     <ul>
         <li>Shows a database of saved results</li>
         <li>Currently only interacts with study sessions</li>
@@ -334,7 +356,7 @@
     </div>
 - History Page - Study Sessions
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/HistoryStudySessions.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/HistoryStudySessions.png" alt="HistoryStudySessions" width="25%"/>
     <ul>
         <li>All study sessions completed within the select month are show</li>
         <li>Current month is set to the default</li>
@@ -346,7 +368,7 @@
     </div>
 - History Page - Month/Year Selection
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/MonthYearSelector.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/MonthYearSelector.png" alt="MonthYearSelector" width="25%"/>
     <ul>
         <li>Options to change the selected month and year</li>
         <li>A Once selected, click out of the window to return to the session history page</li>
@@ -355,7 +377,7 @@
 
 - History Page - No sessions found
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/NoSessionsFound.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/NoSessionsFound.png" alt="NoSessionsFound" width="25%"/>
     <ul>
         <li>If there are no sessions found within a specific month, the message "No sessions found" will be shown</li>
     </ul>
@@ -363,11 +385,82 @@
 
 - History Page - Delete Session
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/DeleteSession.png" alt="LocationDetectorNotDetected" width="25%"/>
+    <img src="readmeImages/DeleteSession.png" alt="DeleteSession" width="25%"/>
     <ul>
         <li>Session deleteion is permanent and cannot be recovered, so additional window to confirm the action has been added</li>
         <li>The information about the session is shown in the example</li>
         <li>Once delete is pressed, the session and all paused sesssions are deleted</li>
         <li>Dismiss the window to avoid deleting a session</li>
+    </ul>
+    </div>
+
+### Homepage Customisation and Functions
+
+- New Themes
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/NewThemeOptions.png" alt="NewThemeOptions" width="25%"/>
+    <ul>
+        <li>Users can pick from a number of custom themes that are loaded once logged in</li>
+    </ul>
+    </div>
+
+- Set themes and theme options
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/SetThemeOptions.png" alt="DeleteSession" width="25%"/>
+    <img src="readmeImages/ThemeOptions.png" alt="ThemeOptions" width="25%"/>
+    <ul>
+        <li>Users can set theme theme to the options shown in the dropdown menu.</li>
+        <li>The 'System' dynamic option reflects the user's phone settings</li>
+        <li>All other theme persist statically</li>
+    </ul>
+    </div>
+
+
+- Homepage Customisation Options
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/CustomiseHomepageOptions.png" alt="CustomiseHomepageOptions" width="25%"/>
+    <img src="readmeImages/HomepageCustomisationOptions.png" alt="HomepageCustomisationOptions" width="25%"/>
+    <ul>
+        <li>There are options to choose the specific widget and navigation options that are applicable to the user.</li>
+        <li>Open the customise homepage window and toggle the wanted features.</li>
+    </ul>
+    </div>
+
+- Adaptive Layout
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/UpdatedHomepageSettings.png" alt="UpdatedHomepageSettings" width="25%"/>
+    <img src="readmeImages/HomepageNoWidgetsNoTasks.png" alt="HomepageNoWidgetsNoTasks" width="25%"/>
+    <img src="readmeImages/HomepageRemoveAllOptions.png" alt="HomepageRemoveAllOptions" width="25%"/>
+    <ul>
+        <li>Session deleteion is permanent and cannot be recovered, so additional window to confirm the action has been added</li>
+        <li>The information about the session is shown in the example</li>
+        <li>Once delete is pressed, the session and all paused sesssions are deleted</li>
+        <li>Dismiss the window to avoid deleting a session</li>
+    </ul>
+    </div>
+
+- Homepage Study Widget
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/HomepageAvatarStudyWidget.png" alt="HomepageAvatarStudyWidget" width="25%"/>
+    <ul>
+        <li>Show study hours progress (number of total study hours) that week compare to the previous week.</li>
+        <li>The avatar window and the study widget is currently a placeholder for future features.</li>
+    </ul>
+    </div>
+
+- Homepage Tasks
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/HomepageTasks.png" alt="HomepageTasks" width="25%"/>
+    <ul>
+        <li>Shows tasks that are overdue, due in the current week or all tasks.</li>
+        <li>Tasks can be marked as complete here</li>
+    </ul>
+    </div>
+
+- Homepage Tasks
+    <div style="display:flex; align-items:center; gap:10px;">
+    <img src="readmeImages/HomepageNavigationOptions.png" alt="HomepageNavigationOptions" width="25%"/>
+    <ul>
+        <li>Provides navigation options to the main features of the app</li>
     </ul>
     </div>

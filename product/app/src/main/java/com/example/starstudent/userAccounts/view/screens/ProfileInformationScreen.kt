@@ -11,10 +11,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Card
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -26,19 +33,23 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.starstudent.core.view.screens.ApplicationViewModel
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 import com.example.starstudent.core.view.uiComponents.numInputField
-import com.example.starstudent.core.view.uiComponents.spacer
 import com.example.starstudent.core.view.uiComponents.textField
 import com.example.starstudent.core.view.uiComponents.toggle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+//Profile settings banner and scrollable region for the profile settings content
 @Composable
-fun ProfileInformationScreen(navController: NavController){
+fun ProfileInformationScreen(
+    navController: NavController,
+    applicationViewModel: ApplicationViewModel
+){
 
     val viewModel = viewModel<ProfileInformationViewModel>()
 
@@ -57,7 +68,9 @@ fun ProfileInformationScreen(navController: NavController){
                 .padding(padding)
         ) {
             item{
-                ProfileInformationContent(navController, viewModel)
+                ProfileInformationContent(
+                    viewModel,
+                    applicationViewModel)
             }
         }
     }
@@ -72,12 +85,18 @@ fun ProfileInformationScreen(navController: NavController){
             delay(60000)
         }
     }
+
+    LaunchedEffect(Unit) {
+        viewModel.getCurrentTheme()
+    }
 }
 
 
-
+//Content for profile settings
 @Composable
-fun ProfileInformationContent(navController: NavController, viewModel: ProfileInformationViewModel) {
+fun ProfileInformationContent(
+    viewModel: ProfileInformationViewModel,
+    applicationViewModel: ApplicationViewModel) {
 
     Column{
 
@@ -139,7 +158,7 @@ fun ProfileInformationContent(navController: NavController, viewModel: ProfileIn
 
                     textField(
                         "Birthday",
-                        viewModel.profileBirthday.toString(),
+                        viewModel.profileBirthday,
                         50
                     )
 
@@ -168,6 +187,108 @@ fun ProfileInformationContent(navController: NavController, viewModel: ProfileIn
             }
 
             Spacer(modifier = Modifier.height(10.dp))
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp, 10.dp)
+            ) {
+                Text(
+                    text = "Theme Settings",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                Column(
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier
+                        .background(
+                            color = MaterialTheme.colorScheme.primary,
+                            shape = RoundedCornerShape(24.dp)
+                        )
+                        .height(100.dp)
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Current Theme",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+
+                        Text(
+                            text = viewModel.currentTheme.replaceFirstChar { it.uppercase() },
+                            fontSize = 26.sp,
+                            color = MaterialTheme.colorScheme.background,
+                            modifier = Modifier
+                                .weight(1f)
+                        )
+
+                        IconButton(
+                            onClick = {
+                                viewModel.showThemeOptions()
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                        ) {
+                            Icon(
+                                Icons.Filled.Create,
+                                contentDescription = "CustomiseHomepage",
+                                modifier = Modifier,
+                                tint = MaterialTheme.colorScheme.tertiary
+                            )
+                        }
+
+                        DropdownMenu(
+                            expanded = viewModel.showThemeOptions,
+                            shape = RoundedCornerShape(20.dp),
+                            onDismissRequest = {
+                                viewModel.hideThemeOptions()
+                            }
+                        ) {
+
+                            viewModel.themeOptions.forEach { option ->
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            option.replaceFirstChar { it.uppercase() },
+                                            color = MaterialTheme.colorScheme.background,
+                                            textAlign = TextAlign.Center,
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(vertical = 5.dp)
+                                        )
+                                    },
+                                    modifier = Modifier
+                                        .background(MaterialTheme.colorScheme.primary),
+                                    onClick = {
+                                        viewModel.viewModelScope.launch {
+                                            viewModel.updateTheme(
+                                                option,
+                                                applicationViewModel
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
 
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -228,6 +349,8 @@ fun ProfileInformationContent(navController: NavController, viewModel: ProfileIn
 
 }
 
+
+//Dialog for user profile settings
 @Composable
 fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
     Card(
@@ -282,7 +405,7 @@ fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
 
                 numInputField(
                     "Day",
-                    viewModel.updateDD.toString(),
+                    viewModel.updateDD,
                     4,
                     KeyboardType.Number
                 ) {
@@ -298,7 +421,7 @@ fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
 
                 numInputField(
                     "Month",
-                    viewModel.updateMM.toString(),
+                    viewModel.updateMM,
                     5,
                     KeyboardType.Number
                 ) {
@@ -314,7 +437,7 @@ fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
 
                 numInputField(
                     "Year",
-                    viewModel.updateYYYY.toString(),
+                    viewModel.updateYYYY,
                     6,
                     KeyboardType.Number
                 ) {
@@ -342,8 +465,6 @@ fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
             ) {
                 viewModel.saveChanges()
             }
-
         }
     }
-
 }

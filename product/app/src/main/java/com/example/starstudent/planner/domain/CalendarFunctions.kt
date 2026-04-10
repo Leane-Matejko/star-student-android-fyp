@@ -8,6 +8,7 @@ class CalendarFunctions {
 
     val thisYear = Calendar.getInstance().get(Calendar.YEAR)
 
+    //Return list of months
     fun getMonthList() : List<String>{
         return listOf(
             "Jan", "Feb", "Mar",
@@ -17,10 +18,12 @@ class CalendarFunctions {
         )
     }
 
+    //Return range of year options
     fun getYearList() : IntRange{
         return ((thisYear - 1).. (thisYear + 16))
     }
 
+    //Return a list of dates for a chosen month and year
     fun generateMonthDates(year: Int, month: Int): List<Date> {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.YEAR, year)

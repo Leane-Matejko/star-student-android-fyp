@@ -69,6 +69,7 @@ import com.example.starstudent.ui.theme.LocalExtendedLabelColours
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+//Planner banner and scrollable region for the planner content
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PlannerScreen(navController: NavController){
@@ -126,7 +127,7 @@ fun PlannerScreen(navController: NavController){
     }
 }
 
-
+//Content of the planner
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
@@ -306,6 +307,8 @@ fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
     }
 }
 
+
+//Dialog for the select month and year window
 @Composable
 fun SelectMonthDialog(viewModel: PlannerViewModel){
     Card(
@@ -438,6 +441,7 @@ fun SelectMonthDialog(viewModel: PlannerViewModel){
     }
 }
 
+//Dialog for showing the selected tasks window
 @Composable
 fun SeeTasksDialog(viewModel: PlannerViewModel){
 
@@ -493,7 +497,8 @@ fun SeeTasksDialog(viewModel: PlannerViewModel){
 
                 viewModel.selectedDayTaskList.forEach { task ->
 
-                    val isOverdue = task.dueDate >= today || !task.isComplete
+
+                    val isOverdue = !((task.dueDate <= today) && (!task.isComplete))
 
                     Row(
                         modifier = Modifier
@@ -618,7 +623,7 @@ fun SeeTasksDialog(viewModel: PlannerViewModel){
     }
 }
 
-
+//Dialog to add or update a task
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddOrUpdateTaskDialog(viewModel: PlannerViewModel){

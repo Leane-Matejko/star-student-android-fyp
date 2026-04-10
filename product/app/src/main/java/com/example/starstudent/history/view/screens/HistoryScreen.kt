@@ -10,9 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Create
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +30,8 @@ import com.example.starstudent.core.view.uiComponents.largeNavWidget
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+
+//History banner and scrollable region for the history content
 @Composable
 fun HistoryScreen(navController: NavController){
     val viewModel = viewModel<HistoryViewModel>()
@@ -87,6 +87,7 @@ fun HistoryScreen(navController: NavController){
     }
 }
 
+//Content of the history page
 @Composable
 fun HistoryContent(viewModel: HistoryViewModel, navController: NavController){
     Column(

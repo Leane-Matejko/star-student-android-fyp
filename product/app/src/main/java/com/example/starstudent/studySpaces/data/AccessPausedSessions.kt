@@ -13,6 +13,7 @@ class AccessPausedSessions {
                 .instance)
         .pausedSessionsDao()
 
+    //Insert a new paused session
     suspend fun startPauseSession(
         currentSession: List<StudySessions>,
         currentDateTime: Long){
@@ -25,6 +26,7 @@ class AccessPausedSessions {
         )
     }
 
+    //Update the end time of a paused session
     suspend fun endPauseSession(
         currentPausedSession: List<PausedSessions>,
         currentDateTime: Long
@@ -37,6 +39,7 @@ class AccessPausedSessions {
         )
     }
 
+    //Return list of the current paused session
     suspend fun getCurrentPausedSession(
         currentSession: List<StudySessions>
     ): List<PausedSessions>{
@@ -45,12 +48,14 @@ class AccessPausedSessions {
         )
     }
 
+    //Return list of paused sessions
     suspend fun getPausedSessions(
         sessionId: Int
     ) : List<PausedSessions>{
         return pausedSessionsDAO.getRecentSessions(sessionId)
     }
 
+    //Delete all paused sessions for a study session
     suspend fun deletePausedSessions(
         sessionId: Int
     ){

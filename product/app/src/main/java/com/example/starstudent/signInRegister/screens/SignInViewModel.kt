@@ -10,11 +10,16 @@ import androidx.navigation.NavController
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.core.domain.navigation.Screens
+import com.example.starstudent.customisation.data.entities.HomepageSettings
+import com.example.starstudent.customisation.domain.AccessHomepageSettings
 import com.example.starstudent.signInRegister.domain.Email
 import com.example.starstudent.signInRegister.domain.EmailOrPasswordNotCorrectException
 import com.example.starstudent.studySpaces.data.dao.SavedLocationsDAO
 import com.example.starstudent.studySpaces.data.entities.SavedLocations
+import com.example.starstudent.userAccounts.data.AccessUserTheme
+import com.example.starstudent.userAccounts.data.dao.UserThemeDAO
 import com.example.starstudent.userAccounts.data.entities.UserInfo
+import com.example.starstudent.userAccounts.data.entities.UserTheme
 import kotlinx.coroutines.launch
 
 
@@ -29,6 +34,9 @@ class SignInViewModel : ViewModel() {
             .getDatabase(
                 CurrentApplication.instance
             ).savedLocationsDao()
+
+    private val accessUserTheme = AccessUserTheme()
+    val accessHomepageSettings = AccessHomepageSettings()
 
     var currentUser by mutableStateOf(UserInfo(
         "default",
@@ -82,6 +90,8 @@ class SignInViewModel : ViewModel() {
                         CurrentApplication.instance.setUser(email.getEmail())
                         CurrentApplication.instance.setUserInfo()
                         setupSavedLocations()
+                        setupSavedTheme()
+                        setupHomepageSettings()
                         navigateToHomepage(navController)
                     }
                 }
@@ -113,6 +123,42 @@ class SignInViewModel : ViewModel() {
                     )
                 )
             }
+        }
+    }
+
+    private suspend fun setupSavedTheme(){
+        val checkUser = accessUserTheme.checkIfUserExists()
+        if(checkUser.isEmpty()) {
+            accessUserTheme.addNewUser(
+                UserTheme(
+                    CurrentApplication.instance.user.email.getEmail(),
+                    "system"
+                )
+            )
+        }
+
+    }
+
+    private suspend fun setupHomepageSettings(){
+        val checkUser = accessHomepageSettings.checkIfUserExists()
+        if(checkUser.isEmpty()) {
+            accessHomepageSettings.addNewUser(
+                HomepageSettings(
+                    CurrentApplication.instance.user.email.getEmail(),
+                    avatarWindow = true,
+                    studyProgress = true,
+                    sleepProgress = true,
+                    overdueTasks = true,
+                    weeklyTasks = true,
+                    allTasks = true,
+                    studyCentreNav = true,
+                    plannerNav = true,
+                    taskListNav = true,
+                    historyNav = true,
+                    profileNav = true,
+
+                    )
+            )
         }
     }
 

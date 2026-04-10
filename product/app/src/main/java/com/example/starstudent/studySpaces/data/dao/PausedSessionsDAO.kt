@@ -4,13 +4,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.starstudent.studySpaces.data.entities.PausedSessions
-import com.example.starstudent.studySpaces.data.entities.StudySessions
 
+//Data access object for paused sessions
 @Dao
-interface PausedSessionsDAO {
+interface   PausedSessionsDAO {
+    //Insert a new paused session
     @Insert
     suspend fun pauseSession(session: PausedSessions)
 
+    //Update the end time for a paused session
     @Query("""
         UPDATE paused_sessions
         SET endTime = :endTime
@@ -23,6 +25,7 @@ interface PausedSessionsDAO {
         endTime: Long
     )
 
+    //Return list of incomplete paused sessions
     @Query("""
         SELECT * 
         FROM paused_sessions 
@@ -34,6 +37,7 @@ interface PausedSessionsDAO {
         sessionId: Int
     ) :  List<PausedSessions>
 
+    //Return list of completed paused session for a study session
     @Query("""
         SELECT * 
         FROM paused_sessions 
@@ -44,6 +48,7 @@ interface PausedSessionsDAO {
         sessionId: Int
     ) :  List<PausedSessions>
 
+    //Delete a paused session
     @Query("""
         DELETE  
         FROM paused_sessions 

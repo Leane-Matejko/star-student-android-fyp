@@ -10,6 +10,7 @@ import com.example.starstudent.planner.data.entities.Tasks
 
 class AccessTasks {
 
+    //Data access object for tasks
     val tasksDAO =
         DatabaseSingleton
             .getDatabase(
@@ -17,6 +18,7 @@ class AccessTasks {
                     .instance)
             .tasksDao()
 
+    //Add a new task to database
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun addNewTask(
@@ -41,6 +43,7 @@ class AccessTasks {
         )
     }
 
+    //Update the completion status and completion date of a task
     suspend fun updateTaskCompletion(
         taskId: Int,
         taskComplete: Boolean
@@ -60,6 +63,7 @@ class AccessTasks {
         }
     }
 
+    //Get all active tasks of a user within a specific date range
     suspend fun getTaskList(
         username : String,
         interval : Long
@@ -71,6 +75,8 @@ class AccessTasks {
             )
     }
 
+    /*Update the category, label, critical status, due date,
+     completion status and the completion date of a task */
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun updateExistingTask(
@@ -93,6 +99,7 @@ class AccessTasks {
         )
     }
 
+    //Return a list of all tasks with their categories within a specific range
     suspend fun getTasksWithCategories(
         username : String,
         intervalStart: Long,
@@ -107,6 +114,7 @@ class AccessTasks {
 
     }
 
+    //Set a task to inactive
     suspend fun hideTasks(
         cateId: Int
     ){
@@ -115,11 +123,30 @@ class AccessTasks {
         )
     }
 
+    //Set a task to active
     suspend fun showTasks(
         cateId: Int
     ){
         tasksDAO.showTasks(
             cateId
         )
+    }
+
+    //Hide tasks that have been completed before the most recent monday
+    suspend fun hideCompletedTasks(
+        user : String,
+        recentMonday : Long
+    ){
+        tasksDAO.hideCompletedTasks(
+            user,
+            recentMonday
+        )
+    }
+
+    //Get a list of all active tasks
+    suspend fun getAllCurrentTasks(
+        user: String
+    ): List<TaskWithCategory>{
+        return tasksDAO.getAllCurrentTasks(user)
     }
 }

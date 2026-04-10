@@ -14,6 +14,7 @@ import java.util.Date
 
 class CategoryTaskFormatting {
 
+    //Return the string for add/edit category button
     fun getCategoryButtonText(
         editCategory : Boolean
     ) : String{
@@ -23,6 +24,7 @@ class CategoryTaskFormatting {
         return "Save"
     }
 
+    //Return the string for add/edit task button
     fun getTaskButtonText(
         editTask : Boolean
     ) : String{
@@ -32,6 +34,7 @@ class CategoryTaskFormatting {
         return "Save"
     }
 
+    //Return the string for add/edit category header
     fun getEditCategoryDialogLabel(
         editCategory : Boolean
     ) : String {
@@ -41,6 +44,7 @@ class CategoryTaskFormatting {
         return "Add New Category"
     }
 
+    //Return the string for the add/edit task header
     fun getEditTaskDialogLabel(
         editTask : Boolean
     ) : String {
@@ -50,6 +54,7 @@ class CategoryTaskFormatting {
         return "Add New Task"
     }
 
+    //Return the string for a formatted date time
     @RequiresApi(Build.VERSION_CODES.O)
     fun formatDateTime(dateTime : Long) : String{
         return Instant.ofEpochMilli(dateTime)
@@ -62,6 +67,7 @@ class CategoryTaskFormatting {
             )
     }
 
+    //Return the string for a formatted date time long in a specific pattern
     @RequiresApi(Build.VERSION_CODES.O)
     fun formatDateTime(dateTime : Long, pattern : String) : String{
         return Instant.ofEpochMilli(dateTime)
@@ -74,12 +80,14 @@ class CategoryTaskFormatting {
             )
     }
 
+    //Return the string for a formatted date time in a specific format
     fun formatDateTime(dateTime : LocalDate, pattern : String) : String{
         return dateTime.format(
             DateTimeFormatter.ofPattern(pattern)
         )
     }
 
+    //Return the long for a long date and hour and minutes (Int)
     @RequiresApi(Build.VERSION_CODES.O)
     fun getDateTime(
         date: Long,
@@ -105,6 +113,7 @@ class CategoryTaskFormatting {
             .toEpochMilli()
     }
 
+    //Return the container height for the category list
     fun getCategoryListHeight(tasksNum : Int) : Int {
         if(tasksNum == 0){
             return 120
@@ -112,6 +121,7 @@ class CategoryTaskFormatting {
         return (100 + (tasksNum * 70))
     }
 
+    //Return the container height for the add/edit category window
     fun getEditCategoryDialogHeight(
         editCategory : Boolean
     ) : Int {
@@ -121,6 +131,7 @@ class CategoryTaskFormatting {
         return 520
     }
 
+    //Return the container height for the add/edit task window
     fun getEditTaskDialogHeight(
         editTask : Boolean
     ) : Int {
@@ -130,6 +141,7 @@ class CategoryTaskFormatting {
         return 600
     }
 
+    //Return the container height for the select task list
     fun getSelectedTaskListHeight(
         taskListNum : Int
     ) : Int {
@@ -140,6 +152,7 @@ class CategoryTaskFormatting {
         }
     }
 
+    //Return the window header for the categorised list
     fun getTaskTitle(key : String) : String{
         return when(key) {
             "overdue" -> "Overdue"
@@ -150,6 +163,7 @@ class CategoryTaskFormatting {
         }
     }
 
+    //Return the long for a date and hour and minutes (Ints)
     fun dateIntToLong(
         date : Date,
         hour : Int,
@@ -165,24 +179,28 @@ class CategoryTaskFormatting {
             .toEpochMilli()
     }
 
+    //Return the string of the duration in hours and minutes
     fun formatDuration(
         duration : Int,
     ) : String{
         return "${duration/(1000*60*60)}h : ${((duration / (1000*60))% 60)}m"
     }
 
+    //Return the long of a date at the start of the day
     fun getDayStart(
         day : Date
     ) : Long {
         return dateIntToLong(day, 0,0)
     }
 
+    //Return the long of a date at the end of the day
     fun getDayEnd(
         day : Date
     ) : Long {
         return dateIntToLong(day, 23,59)
     }
 
+    //Return the extended colour option from a string
     fun getCategoryColour(colour : String, colourList : ExtendedLabelColours) : Color {
         return when (colour) {
             "red" -> colourList.red

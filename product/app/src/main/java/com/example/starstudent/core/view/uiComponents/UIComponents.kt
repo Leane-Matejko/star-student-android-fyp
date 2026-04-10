@@ -29,7 +29,6 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -40,7 +39,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -89,8 +87,8 @@ fun Background() {
 
 @Composable
 fun mediumIconWidget(
-    quanIcon: ImageVector,
     repIcon: ImageVector,
+    quanIcon: ImageVector,
     label: String,
     onClick: () -> Unit,
     modifier: Modifier)
@@ -113,23 +111,23 @@ fun mediumIconWidget(
             )
             {
                 Icon(
-                    imageVector = quanIcon,
-                    contentDescription = "Quantify Icon",
+                    imageVector = repIcon,
+                    contentDescription = "Representation Icon",
                     modifier = Modifier
                         .size(36.dp)
-                        .testTag("mediumIconWidgetQuanIcon"),
-                    tint = MaterialTheme.colorScheme.background
+                        .testTag("mediumIconWidgetRepIcon"),
+                    tint = MaterialTheme.colorScheme.tertiary
 
                 )
 
                 Spacer(modifier = Modifier.width(5.dp))
 
                 Icon(
-                    imageVector = repIcon,
-                    contentDescription = "Representation Icon",
+                    imageVector = quanIcon,
+                    contentDescription = "Quantify Icon",
                     modifier = Modifier
                         .size(36.dp)
-                        .testTag("mediumIconWidgetRepIcon"),
+                        .testTag("mediumIconWidgetQuanIcon"),
                     tint = MaterialTheme.colorScheme.background
 
                 )
@@ -144,10 +142,71 @@ fun mediumIconWidget(
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.secondary
             )
         }
 }
+
+@Composable
+fun mediumIconWidget(
+    repIcon: ImageVector,
+    quanIcon: ImageVector,
+    label: String,
+    modifier: Modifier)
+{
+    Column(
+        modifier = modifier
+            .aspectRatio(1f)
+            .background(
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(36.dp)
+            )
+            .padding(start = 20.dp,end = 20.dp, top = 36.dp, bottom = 10.dp)
+            .testTag("mediumIconWidgetBackground"),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.Center
+        )
+        {
+            Icon(
+                imageVector = repIcon,
+                contentDescription = "Representation Icon",
+                modifier = Modifier
+                    .size(36.dp)
+                    .testTag("mediumIconWidgetRepIcon"),
+                tint = MaterialTheme.colorScheme.tertiary
+
+            )
+
+            Spacer(modifier = Modifier.width(5.dp))
+
+            Icon(
+                imageVector = quanIcon,
+                contentDescription = "Quantify Icon",
+                modifier = Modifier
+                    .size(36.dp)
+                    .testTag("mediumIconWidgetQuanIcon"),
+                tint = MaterialTheme.colorScheme.background
+
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(text = label,
+            modifier = Modifier
+                .size(100.dp)
+                .testTag("mediumIconWidgetText"),
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.secondary
+        )
+    }
+}
+
 
 /* UI component for a small progress widget.
 */
@@ -157,7 +216,18 @@ fun smallProgressWidget(
     numTasks: Int,
     label: String,
     textSize:Int,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier){
+
+    var safeTasks = 1
+
+    safeTasks = if (numTasks == 0){
+        1
+    }else{
+        numTasks
+    }
+
+
     Box(
         modifier = modifier
             .aspectRatio(1f)
@@ -165,24 +235,29 @@ fun smallProgressWidget(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(24.dp)
             )
-            .testTag("smallProgressWidgetBackground"),
+            .testTag("smallProgressWidgetBackground")
+            .clickable(onClick = onClick),
     ){
         CircularProgressIndicator(
-            progress = numCompleteTasks / numTasks.toFloat(),
+            progress = numCompleteTasks / safeTasks.toFloat(),
             modifier = Modifier.size(80.dp)
                 .align(Alignment.Center)
                 .testTag("smallProgressWidgetProgressBar"),
-            color = MaterialTheme.colorScheme.background,
-            trackColor = MaterialTheme.colorScheme.tertiary,
+            color = MaterialTheme.colorScheme.tertiary,
+            trackColor = MaterialTheme.colorScheme.background,
             strokeWidth = 10.dp,
         )
 
-        Column(modifier = Modifier.align(Alignment.Center)
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.align(Alignment.Center
+            )
             .padding(top = 6.dp)) {
             Text(
                 text = label,
                 color = MaterialTheme.colorScheme.background,
                 fontSize = textSize.sp,
+                fontWeight = FontWeight.SemiBold,
                 modifier = Modifier
                     .testTag("smallProgressWidgetNameLabel")
             )
@@ -363,7 +438,6 @@ fun smallAvatarWindow(
                 ))
             .height(150.dp)
             .fillMaxWidth()
-//            .width(160.dp)
             .padding(5.dp, 2.dp)
             .testTag("avatarWindowBackground")
 
@@ -449,8 +523,6 @@ fun inputField(label: String,
                seqNumber: Int?,
                onValueChange: (String) -> Unit){
 
-//    var info by remember { mutableStateOf("") }
-
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -474,8 +546,6 @@ fun numInputField(
                 seqNumber: Int?,
                 keyboardType: KeyboardType,
                 onValueChange: (String) -> Unit){
-
-//    var info by remember { mutableStateOf("") }
 
     TextField(
         value = value,
@@ -524,6 +594,7 @@ fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
     }
 }
 
+//UI for the top banner
 @Composable
 fun TopBanner(
     username : String,
@@ -595,6 +666,7 @@ fun TopBanner(
     }
 }
 
+//Formatting the banner to the top of the screen
 @Composable
 fun BannerFormat(
     username : String,
@@ -623,6 +695,7 @@ fun BannerFormat(
     }
 }
 
+//Toggle UI - not scalable
 @Composable
 fun toggle(
     header: String,
@@ -660,6 +733,7 @@ fun toggle(
     }
 }
 
+// Updated toggle - scalable
 @Composable
 fun simpleToggle(
     scale : Float,
@@ -680,6 +754,7 @@ fun simpleToggle(
     )
 }
 
+// Dropdown for navigation options
 @Composable
 fun navigationDropDown(
     list: List<NavigationOptions>,
@@ -715,34 +790,34 @@ fun navigationDropDown(
     }
 }
 
+//Data class for different calendar cells on the custom calendar grid
 sealed class CalendarItem {
     data class Weekday(val day: Int) : CalendarItem()
     object Empty : CalendarItem()
     data class Day(val date: Date, val signal: Boolean) : CalendarItem()
 }
 
+//Get the days of the week as a list of Ints
 fun getWeekDays(): List<Int> {
     val lista = (1..7).toList()
     return ((lista.drop(1) + lista.take(1)).toImmutableList())
 }
 
+//Return the string of a day from an Int
 private fun Int.getDayOfWeek3Letters(): String? = Calendar.getInstance().apply {
     set(Calendar.DAY_OF_WEEK, this@getDayOfWeek3Letters)
 }.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault())
 
-private fun Int.getFormattedMonth(): String? = Calendar.getInstance().apply {
-    set(Calendar.MONTH, this@getFormattedMonth)
-}.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
-
+//Format year into a string
 private fun Date.formatToYear(): String = SimpleDateFormat("yyyy", Locale.getDefault()).format(this)
-
-
-fun Date.formatToMonthString(): String = SimpleDateFormat("MMMM", Locale.getDefault()).format(this)
-
+//Format month into a string
+private fun Date.formatToMonthString(): String = SimpleDateFormat("MMMM", Locale.getDefault()).format(this)
+//Format date into a string
 private fun Date.formatToCalendarDate() : String = SimpleDateFormat("d", Locale.getDefault()).format(this)
 
+// Day cell on the custom calendar grid
 @Composable
-fun WeekdayCell(
+private fun WeekdayCell(
     weekday: Int,
     modifier: Modifier = Modifier
 ) {
@@ -762,18 +837,21 @@ fun WeekdayCell(
 }
 
 
-fun Date.formatToWeekDay(): Int {
+//Get the day of the month from a date
+private fun Date.formatToWeekDay(): Int {
     val calendar = Calendar.getInstance()
     calendar.time = this
     return calendar.get(Calendar.DAY_OF_WEEK)
 }
 
+//The number of spaces the first day of the month is away from Monday
 private fun getOffset(firstDay : Int) : Int{
     return (firstDay + 5) % 7
 }
 
 
-fun weekdayLabelsList(
+//Returns a string of the week as a string
+private fun weekdayLabelsList(
     dates: List<Date>
 ): List<CalendarItem> {
 
@@ -803,6 +881,8 @@ fun weekdayLabelsList(
     return items
 }
 
+
+//Returns a custom calendar grid
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarGrid(
@@ -934,6 +1014,8 @@ fun CalendarGrid(
     }
 }
 
+
+//Calendar cell shown on the calendar window
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarCell(
@@ -984,6 +1066,8 @@ fun CalendarCell(
     }
 }
 
+
+//Returns the top banner an addition floating button int he bottom right corner
 @Composable
 fun BannerFormatAndFloatingButtons(
         username : String,

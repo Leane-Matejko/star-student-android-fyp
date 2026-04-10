@@ -13,6 +13,7 @@ class LocationPermissions(
         const val LOCATION_PERMISSION_REQUEST_CODE = 100
     }
 
+    //Checks if the app has the location permission for precise location tracking
     fun hasLocationPermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             activity,
@@ -20,6 +21,7 @@ class LocationPermissions(
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    //Requests the user's location permission
     fun requestLocationPermission() {
         ActivityCompat.requestPermissions(
             activity,

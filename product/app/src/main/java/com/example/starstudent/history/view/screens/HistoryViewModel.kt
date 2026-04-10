@@ -40,27 +40,32 @@ class HistoryViewModel : ViewModel() {
         private set
 
 
-
+    //Updates the time of the top banner
     fun updateTime(){
         curDate = bannerFunctions.updateTime()
     }
 
+    //Shows the navigation menu
     fun showNavMenu()
     {showNavMenu = true}
 
+    //Hides the navigation menu
     fun dismissNavMenu()
     {showNavMenu = false }
 
+    //Navigates to the user's profile
     fun profileNav(navController: NavController){
         Log.d("TEST", "Navigating to the profile...")
         navigationFunctions.goToProfile(navController)
     }
 
+    //Navigates to the session history page
     fun historyStudySessionNav(navController: NavController){
         Log.d("TEST", "Navigating to the study session history...")
         navigationFunctions.goToHistoryStudySessions(navController)
     }
 
+    //Get the navigation options for the history page (all windows wo/ history)
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
 
         val navigationFunctions = NavigationFunctions()
@@ -79,6 +84,7 @@ class HistoryViewModel : ViewModel() {
         )
     }
 
+    //Closes error window
     fun resetErrorWindow(){
         errorWindow = false
     }

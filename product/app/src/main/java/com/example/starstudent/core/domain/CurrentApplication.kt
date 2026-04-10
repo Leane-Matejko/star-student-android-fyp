@@ -4,13 +4,12 @@ import android.app.Application
 import android.content.Context
 import android.location.LocationRequest
 import android.net.ConnectivityManager
-import androidx.room.Room
-import com.example.starstudent.core.data.AppDatabase
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.data.NetworkConnectivity
 import com.example.starstudent.userAccounts.data.entities.UserInfo
 import com.google.firebase.FirebaseApp
 
+//User state variables that maintains user's information while the app is running
 class CurrentApplication : Application(){
 
     companion object {

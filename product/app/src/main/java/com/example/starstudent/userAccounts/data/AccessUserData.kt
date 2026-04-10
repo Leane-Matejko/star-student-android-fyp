@@ -15,6 +15,7 @@ class AccessUserData {
         .instance
         .getUserInfo()
 
+    //Return if the user exists
     suspend fun checkIfUserExists() : String{
         val curUserInfo = userInfoDAO.getUserInfo(
             CurrentApplication
@@ -29,22 +30,27 @@ class AccessUserData {
         return ""
     }
 
+    //Return user's id
     fun getUserId() : String{
         return userInfo.id
     }
 
+    //Return user's username
     fun getUsername() : String{
         return userInfo.username
     }
 
+    //Return user's birthday
     fun getBirthday() : Long{
         return userInfo.birthday
     }
 
+    //Return user's location
     fun getUserLocationAccess() : Boolean{
         return userInfo.locationAccess
     }
 
+    //Update user's username
     suspend fun updateUsername(username : String){
         if(!username.isEmpty()){
             userInfoDAO.updateUsername(
@@ -55,6 +61,7 @@ class AccessUserData {
         }
     }
 
+    //Update user's birthday
     suspend fun updateBirthday(birthday: Long){
         if(birthday != 0L){
             userInfoDAO.updateBirthday(
@@ -65,6 +72,7 @@ class AccessUserData {
         }
     }
 
+    //Update user's location access
     suspend fun updateLocationAccess(locationAccess : Boolean){
         userInfoDAO.updateLocationAccess(
             checkIfUserExists(),
@@ -73,6 +81,7 @@ class AccessUserData {
         updateInstance()
     }
 
+    //Updating app's access the user information
     suspend fun updateInstance(){
         CurrentApplication.instance.setUserInfo()
         userInfo = CurrentApplication.instance.getUserInfo()

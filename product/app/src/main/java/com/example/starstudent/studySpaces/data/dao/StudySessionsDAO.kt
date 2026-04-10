@@ -3,18 +3,18 @@ package com.example.starstudent.studySpaces.data.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Update
 import com.example.starstudent.studySpaces.data.entities.StudySessionDuration
 import com.example.starstudent.studySpaces.data.entities.StudySessions
-import com.example.starstudent.userAccounts.data.entities.AppUserData
-import java.sql.Time
 
+//Data access object for study sessions
 @Dao
 interface StudySessionsDAO {
 
+    //Insert a new study session
     @Insert
     suspend fun startSession(session: StudySessions)
 
+    //Update the end time of an existing study session
     @Query("""
         UPDATE study_sessions
         SET endTime = :endTime
@@ -27,6 +27,7 @@ interface StudySessionsDAO {
         endTime: Long
     )
 
+    //Return a list of incomplete study sessions from the user
     @Query("""
         SELECT * 
         FROM study_sessions 
@@ -38,6 +39,7 @@ interface StudySessionsDAO {
         user: String
     ) :  List<StudySessions>
 
+    //Return up to 5 of the most recent sessions that are longer than 5 minutes
     @Query("""
         SELECT * 
         FROM study_sessions 
@@ -49,6 +51,7 @@ interface StudySessionsDAO {
         user: String
     ) :  List<StudySessions>
 
+    //Return list of completed study sessions
     @Query("""
         SELECT * 
         FROM study_sessions 
@@ -59,12 +62,25 @@ interface StudySessionsDAO {
         user: String
     ) :  List<StudySessions>
 
+    //Return list of the most recent incomplete study sessions
+    @Query("""
+        SELECT * 
+        FROM study_sessions 
+        WHERE user = :user AND endTime = 0
+        ORDER BY startTime DESC
+        LIMIT 1
+        """)
+    suspend fun getMostRecentActiveSessions(
+        user: String
+    ) :  List<StudySessions>
+
+    //Return list of Study Sessions with the calculated total duration
     @Query("""
         SELECT 
             study.id AS id, 
             study.user AS user, 
             study.startTime AS startTime, 
-            (study.endTime - study.startTime - IFNULL(SUM(paused.endTime - paused.endTime), 0)) AS duration
+            (study.endTime - study.startTime - IFNULL(SUM(paused.endTime - paused.startTime), 0)) AS duration
         FROM study_sessions study
         LEFT JOIN paused_sessions paused
         ON study.id == paused.sessionId
@@ -76,6 +92,7 @@ interface StudySessionsDAO {
         user : String
     ): List<StudySessionDuration>
 
+    //Delete a study session
     @Query("""
         DELETE  
         FROM study_sessions 
@@ -83,6 +100,32 @@ interface StudySessionsDAO {
         """)
     suspend fun deleteSession(
         id: Int
+    )
+
+    //Return the long of calculated total duration of a study sessions
+    @Query("""
+        SELECT 
+            (study.endTime - study.startTime - IFNULL(SUM(paused.endTime - paused.startTime), 0)) AS duration
+        FROM study_sessions study
+        LEFT JOIN paused_sessions paused
+        ON study.id == paused.sessionId
+        WHERE study.id = :id
+        GROUP BY study.id
+        ORDER BY study.startTime
+    """)
+    suspend fun getSessionDuration(
+        id : Int
+    ): Long
+
+    //Update the start time of a study session
+    @Query("""
+        UPDATE study_sessions
+        SET startTime = :startTime
+        WHERE id = :id
+    """)
+    suspend fun resetSessionStart(
+        id: Int,
+        startTime: Long
     )
 
 

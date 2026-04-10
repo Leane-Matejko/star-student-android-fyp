@@ -1,15 +1,23 @@
 package com.example.starstudent.userAccounts.domain
 
 import android.icu.text.SimpleDateFormat
+import com.example.starstudent.core.domain.Themes
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
 class FormatProfile {
 
+    val themeOptions = listOf(
+            "system",
+            "light",
+            "dark",
+            "strawberry"
+            )
+
+    //Format location access status
     fun profileLocationAccessFormatted(
         locationAccess : Boolean
     ) : String{
@@ -19,27 +27,18 @@ class FormatProfile {
         return "Denied"
     }
 
+    //Convert long date into string of specific pattern
     fun convertLongToDate(longDate : Long, pattern : String) : String{
         return SimpleDateFormat(pattern, Locale.getDefault()).format(Date(longDate))
     }
 
-    fun formatBannerDateTime() : String{
-        return LocalDateTime
-            .now()
-            .format(
-                DateTimeFormatter
-                    .ofPattern(
-                        "EEE d MMMM, HH:mm",
-                        Locale.getDefault()
-                    )
-            )
-    }
-
+    //Return if the month value is within possible month values
     fun withinMonthRange(day : String) : Boolean{
 
         return day.toIntOrNull()!! in 1..12
     }
 
+    //Return if the day is within a leap year
     fun leapYearCheck(day : String, newYear: String) : Boolean {
         if (newYear.toIntOrNull()?.div(4) == 0){
             return (day.toIntOrNull()!! <= 29)
@@ -47,6 +46,7 @@ class FormatProfile {
         return (day.toIntOrNull()!! <= 28)
     }
 
+    //Return if the day value is within range of a month
     fun withinDayRange(day : String, newMonth : String, newYear: String) : Boolean{
 
         val result =
@@ -65,6 +65,7 @@ class FormatProfile {
     }
 
 
+    //Convert temporary birthday values into a long
     fun convertBirthdayToLong(
         birthday: Long,
         newDD: String,
@@ -106,5 +107,16 @@ class FormatProfile {
             .atStartOfDay(ZoneId.systemDefault())
             .toInstant()
             .toEpochMilli()
+    }
+
+    //Return theme remunerated options
+    fun getThemeFromString (themeKey : String) : Themes{
+        return when(themeKey){
+            "system" -> Themes.SYSTEM
+            "light" -> Themes.LIGHT
+            "dark" -> Themes.DARK
+            "strawberry" -> Themes.STRAWBERRY
+            else -> Themes.SYSTEM
+        }
     }
 }

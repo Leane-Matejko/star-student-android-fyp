@@ -3,6 +3,7 @@ package com.example.starstudent.studySpaces.data.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+//Stores user's saved study space locations
 @Entity(tableName = "saved_locations")
 data class SavedLocations(
     @PrimaryKey(

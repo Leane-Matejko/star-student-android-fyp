@@ -2,6 +2,7 @@ package com.example.starstudent.planner.data.entities
 
 import androidx.room.PrimaryKey
 
+//Data class for storing tasks with its category
 data class TaskWithCategory(
     @PrimaryKey(
         autoGenerate = true

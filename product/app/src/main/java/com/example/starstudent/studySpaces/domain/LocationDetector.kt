@@ -17,6 +17,7 @@ class LocationDetector {
         .getFusedLocationProviderClient(
             CurrentApplication.instance)
 
+    //Get the user's most recent location via GPS
     fun getLocation() {
         locationManager.lastLocation
             .addOnSuccessListener { location ->
@@ -30,7 +31,8 @@ class LocationDetector {
             }
     }
 
-    suspend fun checkLocation(savedLocations: List<SavedLocations>) {
+    //Check if the user is within any of the saved study spaces
+    fun checkLocation(savedLocations: List<SavedLocations>) {
         var checked = false
         for (location in savedLocations){
             if((longitude <= (location.longitude + 0.0000350)) &&
@@ -46,6 +48,7 @@ class LocationDetector {
         withinStudySpace = checked
     }
 
+    //Return the string for the study space detector
     fun studyDetectorFormatted(): String {
         return if(withinStudySpace){
             "Study Space Detected"
@@ -54,14 +57,17 @@ class LocationDetector {
         }
     }
 
+    //Return if the user is within a study space
     fun getWithinStudySpace(): Boolean{
         return withinStudySpace
     }
 
+    //Return the latitude of the user
     fun getLatitude(): Double{
         return latitude
     }
 
+    //Return the longitude of the user
     fun getLongitude(): Double{
         return longitude
     }

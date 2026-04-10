@@ -2,14 +2,21 @@ package com.example.starstudent.core.data
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 
 object DatabaseSingleton {
     @Volatile
     private var INSTANCE: AppDatabase? = null
 
-    val migrations = MIGRATION_5_6
+    //Ensures that the app's database is up to date with the current version
+    val migrations = arrayOf(
+        MIGRATION_2_3,
+        MIGRATION_3_4,
+        MIGRATION_4_5,
+        MIGRATION_5_6,
+        MIGRATION_6_7,
+        MIGRATION_7_8,
+        MIGRATION_8_9,
+    )
 
     fun getDatabase(context: Context): AppDatabase{
         return INSTANCE ?: synchronized(this){
@@ -18,7 +25,7 @@ object DatabaseSingleton {
                 AppDatabase::class.java,
                 "app_database"
             )
-                .addMigrations(migrations)
+                .addMigrations(*migrations)
                 .build()
             INSTANCE = instance
             instance

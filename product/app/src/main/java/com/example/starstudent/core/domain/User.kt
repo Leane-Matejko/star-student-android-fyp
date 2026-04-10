@@ -21,6 +21,7 @@ class User {
         email.setEmail(emailValue)
     }
 
+    //Add a new user to the Firestore database (used for logins)
     suspend fun addUserAccount(passwordValue: String){
         val context = applicationContext.instance
 
@@ -37,6 +38,7 @@ class User {
 
     }
 
+    //Create a hashmap of the user's username and password
     fun createUserHashMap(password: String): HashMap<String, String>{
         return hashMapOf(
             "username" to CurrentApplication.instance.user.email.getEmail(),
