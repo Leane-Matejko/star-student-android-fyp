@@ -406,7 +406,7 @@
 
 - Set themes and theme options
     <div style="display:flex; align-items:center; gap:10px;">
-    <img src="readmeImages/SetThemeOptions.png" alt="DeleteSession" width="25%"/>
+    <img src="readmeImages/SetThemeProfile.png" alt="SetThemeProfile" width="25%"/>
     <img src="readmeImages/ThemeOptions.png" alt="ThemeOptions" width="25%"/>
     <ul>
         <li>Users can set theme theme to the options shown in the dropdown menu.</li>
@@ -457,7 +457,7 @@
     </ul>
     </div>
 
-- Homepage Tasks
+- Homepage Navigation
     <div style="display:flex; align-items:center; gap:10px;">
     <img src="readmeImages/HomepageNavigationOptions.png" alt="HomepageNavigationOptions" width="25%"/>
     <ul>
