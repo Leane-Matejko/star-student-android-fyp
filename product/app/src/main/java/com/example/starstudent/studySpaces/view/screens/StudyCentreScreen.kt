@@ -16,7 +16,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -120,7 +122,9 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
         ) {
 
             varLargeNavWidget(
-                repIcon = Icons.Filled.Star,
+                repIcon = if(viewModel.studySpaceDetector == "Not Detected")
+                                {Icons.Filled.Clear}
+                            else {Icons.Filled.LocationOn},
                 title = "Study Space Detector",
                 titleSize = 16,
                 description = viewModel.studySpaceDetector,
@@ -362,6 +366,8 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
 
     LaunchedEffect(Unit) {
         viewModel.getAllCurrentTasks()
+//        viewModel.getMostRecentActiveSessions()
+        viewModel.checkActiveSession()
     }
 
     if(viewModel.showTasksDialog){

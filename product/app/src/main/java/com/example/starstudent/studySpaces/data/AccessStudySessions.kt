@@ -1,5 +1,6 @@
 package com.example.starstudent.studySpaces.data
 
+import android.provider.Settings
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.studySpaces.data.entities.StudySessionDuration
@@ -82,5 +83,23 @@ class AccessStudySessions {
         id : Int
     ){
         studySessionsDAO.deleteSession(id)
+    }
+
+    suspend fun getSessionDuration(
+        id : Int
+    ) : Long{
+        return studySessionsDAO.getSessionDuration(
+            id
+        )
+    }
+
+    suspend fun resetSessionStart(
+        id : Int,
+        duration : Long
+    ){
+        studySessionsDAO.resetSessionStart(
+            id,
+            System.currentTimeMillis() - duration
+        )
     }
 }

@@ -73,11 +73,59 @@ class StudySession {
     suspend fun startSession(user: String){
         if(accessStudySessions.getCurrentStudySession(user).isEmpty()){
             startCurrentSession(user)
-//            getTimerClock()
         }else{
             endSession(accessStudySessions.getCurrentStudySession(user)[0])
             startCurrentSession(user)
         }
+    }
+
+    suspend fun continueSession(
+        session: StudySessions
+    ){
+        val pausedSessions = getPausedSessions(session.id)
+
+        val now = System.currentTimeMillis()
+        val pausedTime = pausedSessions.sumOf {
+            val end  = if (it.endTime == 0L) { now } else {it.endTime}
+            end - it.startTime
+            }
+
+        val duration = (now - session.startTime) - pausedTime
+        timer.startTimer(duration)
+
+//        val hasSessionPaused = pausedSessions.any { it.endTime == 0L }
+
+        val activePause = pausedSessions.find { it.endTime == 0L }
+
+        if(activePause != null){
+            timer.pauseTimer()
+            timer.setPauseStartTimer(activePause.startTime)
+        }
+
+        isSessionPause = activePause != null
+        sessionStatus = true
+        showSessionPause = true
+    }
+
+    suspend fun getPausedSessions(
+        sessionId : Int
+    ) : List<PausedSessions>{
+        return accessPausedSessions.getPausedSessions(
+            sessionId
+        )
+    }
+
+    suspend fun resetSessionStart(
+        id : Int,
+        duration : Long
+    ) {
+        accessStudySessions.resetSessionStart(
+            id,
+            duration
+        )
+        accessPausedSessions.deletePausedSessions(
+            id
+        )
     }
 
     suspend fun startCurrentSession(

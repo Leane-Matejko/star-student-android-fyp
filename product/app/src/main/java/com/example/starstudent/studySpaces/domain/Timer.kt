@@ -17,8 +17,18 @@ class Timer {
         isRunning = true
     }
 
+    fun startTimer(duration : Long){
+        startTime = System.currentTimeMillis() - duration
+        isRunning = true
+    }
+
     fun pauseTimer(){
         curPauseStart = System.currentTimeMillis()
+        isRunning = false
+    }
+
+    fun setPauseStartTimer(start : Long){
+        curPauseStart = start
         isRunning = false
     }
 

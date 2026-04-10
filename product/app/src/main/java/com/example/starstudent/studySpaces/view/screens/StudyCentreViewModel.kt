@@ -1,5 +1,6 @@
 package com.example.starstudent.studySpaces.view.screens
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -111,6 +112,13 @@ class StudyCentreViewModel : ViewModel() {
             .username)
         private set
 
+    var userId by mutableStateOf(
+        CurrentApplication
+            .instance
+            .getUserInfo()
+            .id)
+        private set
+
     var studyingStatus by mutableStateOf(
         "Let's Study!!")
     private set
@@ -201,6 +209,11 @@ class StudyCentreViewModel : ViewModel() {
 
     var currentTaskList by mutableStateOf(
         listOf<TaskWithCategory>()
+    )
+        private set
+
+    var sessionButtonFormat by mutableStateOf(
+        "Start Session"
     )
         private set
 
@@ -449,5 +462,27 @@ class StudyCentreViewModel : ViewModel() {
 
     fun getLocation() {
         locationDetector.getLocation()
+    }
+
+    suspend fun checkActiveSession(){
+        val currentSession = getMostRecentActiveSessions()
+        if(currentSession.isNotEmpty()){
+            studySession.continueSession(currentSession[0])
+            studyingStatus
+        }
+
+        showSessionPause = studySession.getShowSessionPause()
+        sessionStatus = studySession.getSessionStatus()
+        isSessionPause = studySession.getIsSessionPause()
+        timerClock = studySession.getTimerClock()
+
+        updateTimer()
+        updateStudyingStatus()
+    }
+
+    suspend fun getMostRecentActiveSessions() : List<StudySessions>{
+        return  accessStudySessions.getMostRecentActiveSessions(
+            userId
+        )
     }
 }

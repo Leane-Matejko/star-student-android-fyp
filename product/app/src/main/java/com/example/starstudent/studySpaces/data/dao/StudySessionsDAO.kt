@@ -75,7 +75,7 @@ interface StudySessionsDAO {
             study.id AS id, 
             study.user AS user, 
             study.startTime AS startTime, 
-            (study.endTime - study.startTime - IFNULL(SUM(paused.endTime - paused.endTime), 0)) AS duration
+            (study.endTime - study.startTime - IFNULL(SUM(paused.endTime - paused.startTime), 0)) AS duration
         FROM study_sessions study
         LEFT JOIN paused_sessions paused
         ON study.id == paused.sessionId
@@ -94,6 +94,30 @@ interface StudySessionsDAO {
         """)
     suspend fun deleteSession(
         id: Int
+    )
+
+    @Query("""
+        SELECT 
+            (study.endTime - study.startTime - IFNULL(SUM(paused.endTime - paused.startTime), 0)) AS duration
+        FROM study_sessions study
+        LEFT JOIN paused_sessions paused
+        ON study.id == paused.sessionId
+        WHERE study.id = :id
+        GROUP BY study.id
+        ORDER BY study.startTime
+    """)
+    suspend fun getSessionDuration(
+        id : Int
+    ): Long
+
+    @Query("""
+        UPDATE study_sessions
+        SET startTime = :startTime
+        WHERE id = :id
+    """)
+    suspend fun resetSessionStart(
+        id: Int,
+        startTime: Long
     )
 
 
