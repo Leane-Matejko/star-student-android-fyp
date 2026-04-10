@@ -11,6 +11,7 @@ class AccessUserTheme {
                 .instance)
         .userThemeDao()
 
+    //Return is the user exists within the theme's tab;e
     suspend fun checkIfUserExists() : String{
         val curUserInfo = userThemeDAO.getUserInfo(
             CurrentApplication
@@ -25,18 +26,21 @@ class AccessUserTheme {
         return ""
     }
 
+    //Insert new user
     suspend fun addNewUser(userTheme : UserTheme){
         userThemeDAO.addNewUser(
             userTheme
         )
     }
 
+    //Return user's stored theme
     suspend fun getUserTheme(user : String) : String{
         return userThemeDAO.getUserTheme(
             user
         )
     }
 
+    //Update user's stored them
     suspend fun updateUserTheme(
         user : String,
         theme : String

@@ -2,7 +2,6 @@ package com.example.starstudent.userAccounts.view.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,8 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -42,12 +39,12 @@ import com.example.starstudent.core.view.uiComponents.avatarWindow
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
 import com.example.starstudent.core.view.uiComponents.numInputField
-import com.example.starstudent.core.view.uiComponents.spacer
 import com.example.starstudent.core.view.uiComponents.textField
 import com.example.starstudent.core.view.uiComponents.toggle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+//Profile settings banner and scrollable region for the profile settings content
 @Composable
 fun ProfileInformationScreen(
     navController: NavController,
@@ -71,7 +68,9 @@ fun ProfileInformationScreen(
                 .padding(padding)
         ) {
             item{
-                ProfileInformationContent(navController, viewModel, applicationViewModel)
+                ProfileInformationContent(
+                    viewModel,
+                    applicationViewModel)
             }
         }
     }
@@ -93,10 +92,9 @@ fun ProfileInformationScreen(
 }
 
 
-
+//Content for profile settings
 @Composable
 fun ProfileInformationContent(
-    navController: NavController,
     viewModel: ProfileInformationViewModel,
     applicationViewModel: ApplicationViewModel) {
 
@@ -351,6 +349,8 @@ fun ProfileInformationContent(
 
 }
 
+
+//Dialog for user profile settings
 @Composable
 fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
     Card(
@@ -405,7 +405,7 @@ fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
 
                 numInputField(
                     "Day",
-                    viewModel.updateDD.toString(),
+                    viewModel.updateDD,
                     4,
                     KeyboardType.Number
                 ) {
@@ -421,7 +421,7 @@ fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
 
                 numInputField(
                     "Month",
-                    viewModel.updateMM.toString(),
+                    viewModel.updateMM,
                     5,
                     KeyboardType.Number
                 ) {
@@ -437,7 +437,7 @@ fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
 
                 numInputField(
                     "Year",
-                    viewModel.updateYYYY.toString(),
+                    viewModel.updateYYYY,
                     6,
                     KeyboardType.Number
                 ) {
@@ -465,8 +465,6 @@ fun SettingUpdateDialog(viewModel: ProfileInformationViewModel) {
             ) {
                 viewModel.saveChanges()
             }
-
         }
     }
-
 }

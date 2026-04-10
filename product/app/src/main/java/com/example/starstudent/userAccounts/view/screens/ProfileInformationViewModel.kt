@@ -127,6 +127,7 @@ class ProfileInformationViewModel() : ViewModel(){
     )
         private set
 
+    //Get the navigation options for the profile settings (all windows wo/ profile settings)
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
 
         val navigationFunctions = NavigationFunctions()
@@ -145,26 +146,32 @@ class ProfileInformationViewModel() : ViewModel(){
         )
     }
 
+    //Return string of formatted location access
     fun profileLocationAccessFormatted() : String{
         return formatProfile.profileLocationAccessFormatted(
             profileLocationAccess
         )
     }
 
+    //Show the profile setting dialog
     fun showDialog(){
         enableSettingUpdate = true
     }
 
+    //Hide the profile setting dialog
     fun closeDialog(){
         enableSettingUpdate = false
     }
 
+    //Show the navigation menu
     fun showNavMenu()
     {showNavMenu = true}
 
+    //Hide the navigation menu
     fun dismissNavMenu()
     {showNavMenu = false }
 
+    //Update the date time of the top banner
     fun updateTime(){
         curDate = LocalDateTime
             .now()
@@ -177,30 +184,37 @@ class ProfileInformationViewModel() : ViewModel(){
             )
     }
 
+    //Update the temporary username value
     fun updateUsernameChange(username: String){
         updateUsername = username
     }
 
+    //Update the temporary day value
     fun updateDDChange(day: String){
         updateDD = day
     }
 
+    //Update the temporary month value
     fun updateMMChange(month: String){
         updateMM = month
     }
 
+    //Update the temporary year value
     fun updateYYYYChange(year: String){
         updateYYYY = year
     }
 
+    //Update the temporary location access value
     fun updateLocationAccess(){
         updateLocationAccess = !updateLocationAccess
     }
 
+    //Check if the month is valid
     fun withinMonthRange(day : String) : Boolean{
         return formatProfile.withinMonthRange(day)
     }
 
+    //Check if the day is valid
     fun withinDayRange(day : String) : Boolean{
 
         return formatProfile.withinDayRange(
@@ -210,20 +224,27 @@ class ProfileInformationViewModel() : ViewModel(){
         )
     }
 
+    //Check if the year is valid
     fun isRealYear(year : String) : Boolean{
         return formatProfile.isRealYear(year)
     }
 
+    //Set the temporary day value to null
     fun setDayNull(){
         updateDD = ""
     }
+
+    //Set the temporary month value to null
     fun setMonthNull(){
         updateMM = ""
     }
+
+    //Set the temporary year value to null
     fun setYearNull(){
         updateYYYY = ""
     }
 
+    //Update screen variables of stored profile values
     fun updateProfile(){
         profileUsername = updateUsername
         profileBirthday = formatProfile.convertLongToDate(
@@ -238,16 +259,18 @@ class ProfileInformationViewModel() : ViewModel(){
         profileLocationAccess = updateLocationAccess
     }
 
+    //Show theme options dropdown
     fun showThemeOptions(){
         showThemeOptions = true
     }
 
+    //Hide theme options dropdown
     fun hideThemeOptions(){
         showThemeOptions = false
     }
 
+    //Save new profile settings to the database
     fun saveChanges(){
-
         viewModelScope.launch {
             if(!updateUsername.isEmpty()){
                 accessUserData.updateUsername(
@@ -271,12 +294,7 @@ class ProfileInformationViewModel() : ViewModel(){
         }
     }
 
-//    fun setNewTheme(
-//        newTheme : String
-//    ){
-//        currentTheme = newTheme
-//    }
-
+    //Update the user's theme throughout the app
     suspend fun updateTheme(
         themeKey: String,
         applicationViewModel: ApplicationViewModel
@@ -288,20 +306,29 @@ class ProfileInformationViewModel() : ViewModel(){
         hideThemeOptions()
     }
 
+    //Retrieve the enumerated theme option
     fun getThemeColor() : Themes{
         return formatProfile.getThemeFromString(currentTheme)
     }
 
+    //Retrieve the user's saved them
     suspend fun getCurrentTheme(){
         currentTheme = accessUserTheme.getUserTheme(
             userId
         )
     }
 
+    //Update the stored user theme
     suspend fun updateCurrentTheme(){
         accessUserTheme.updateUserTheme(
             userId,
             currentTheme
         )
+    }
+
+    //Navigates to the user's profile
+    fun profileNav(navController: NavController) {
+        Log.d("TEST", "Navigating to the profile...")
+        navigationFunctions.goToProfile(navController)
     }
 }
