@@ -198,7 +198,7 @@ class HomepageViewModel : ViewModel() {
     )
         private set
 
-    //Get the navigation options for the homepage (all windows w/ homepage)
+    //Get the navigation options for the homepage (all windows wo/ homepage)
     fun getNavigationMenu(navController: NavController): List<NavigationOptions> {
 
         return listOf(
