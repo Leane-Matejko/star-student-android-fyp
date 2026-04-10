@@ -209,26 +209,33 @@ class PlannerViewModel : ViewModel(){
     var errorMessage by mutableStateOf("")
         private set
 
+    //Update the banner to a formatted string
     fun updateTime(){
         curDate = bannerFunctions.updateTime()
     }
 
+    //Show or hide the year list options
     fun toggleYearList(){
         showYearList = !showYearList
     }
 
+    //Show the navigation menu
     fun showNavMenu()
     {showNavMenu = true}
 
+    //Hide the navigation menu
     fun dismissNavMenu()
     {showNavMenu = false }
 
+    //Show the select month/year dialog
     fun showSelectMonthDialog()
     {showSelectMonthDialog = true}
 
+    //Hide the select month/year dialog
     fun hideSelectMonthDialog()
     {showSelectMonthDialog = false }
 
+    //Show the chosen task list dialog
     fun showSeeTasksDialog(
         newDate : Long
     )
@@ -237,27 +244,33 @@ class PlannerViewModel : ViewModel(){
         showSeeTasksDialog = true
     }
 
+    //Hide the select month/year dialog
     fun hideSeeTasksDialog()
     {showSeeTasksDialog = false }
 
+    //Set the new selected month
     fun setMonth(newMonth: Int){
         calendarMonth = newMonth
     }
 
+    //Set the new selected year
     fun setYear(newYear: Int){
         calendarYear = newYear
     }
 
+    //Update the temporary new date for the task
     fun setNewTaskDate(
         newDate : Date
     ){
         selectedDate = newDate
     }
 
+    //Update the task list type selected
     fun updateTaskListType(taskType : String){
         taskListType = taskType
     }
 
+    //Return the long of the start of the local date
     fun LocalDate.getLocalDateStart() : Long{
         return this
             .atStartOfDay(ZoneId.systemDefault())
@@ -265,6 +278,7 @@ class PlannerViewModel : ViewModel(){
             .toEpochMilli()
     }
 
+    //Return the long of the end of the local date
     fun LocalDate.getLocalDateEnd() : Long{
         return this
             .atTime(23, 59, 59)
@@ -273,6 +287,7 @@ class PlannerViewModel : ViewModel(){
             .toEpochMilli()
     }
 
+    //Return the long of the start of the current week
     fun getWeekStart() : Long{
         return LocalDate
             .now()
@@ -280,6 +295,7 @@ class PlannerViewModel : ViewModel(){
             .getLocalDateStart()
     }
 
+    //Return the long of the end of the current week
     fun getWeekEnd() : Long{
         return LocalDate
             .now()
@@ -287,6 +303,7 @@ class PlannerViewModel : ViewModel(){
             .getLocalDateEnd()
     }
 
+    //Return the long of the start of the current month
     fun getMonthStart() : Long{
         return LocalDate
             .now()
@@ -294,6 +311,7 @@ class PlannerViewModel : ViewModel(){
             .getLocalDateStart()
     }
 
+    //Return the long of the end of the current month
     fun getMonthEnd() : Long{
         val currentDay = LocalDate.now()
 
@@ -302,6 +320,7 @@ class PlannerViewModel : ViewModel(){
             .getLocalDateEnd()
     }
 
+    //Return the string selected task group
     fun getTaskListTitle() : String{
         return when (taskListType){
             "overdue" -> categoryTaskFormatting.getTaskTitle("overdue")
@@ -312,30 +331,36 @@ class PlannerViewModel : ViewModel(){
         }
     }
 
+    //Return the string of the selected day
     fun getSelectedDateFormatted() : String{
         return categoryTaskFormatting.formatDateTime(
             selectedDay,
             "EEE d MMM yyyy")
     }
 
+    //Return the container length for the selected task list
     fun getSelectedTaskListHeight() : Int{
         return categoryTaskFormatting.getSelectedTaskListHeight(
             selectedDayTaskList.size
         )
     }
 
+    //Return the string of formatted date of a long
     fun formatDateTime(date : Long) : String{
         return categoryTaskFormatting.formatDateTime(date)
     }
 
+    //Return the string of formatted date of a long in a specific pattern
     fun formatDateTime(date : Long, pattern: String) : String{
         return categoryTaskFormatting.formatDateTime(date, pattern)
     }
 
+    //Return the extended color option of a category
     fun getCategoryColour(color: String, colorList: ExtendedLabelColours): Color{
         return categoryTaskFormatting.getCategoryColour(color, colorList)
     }
 
+    //Set the overall task list of all active tasks
     suspend fun getTaskList(){
         taskList = accessTasks.getTaskList(
             userId,
@@ -343,6 +368,7 @@ class PlannerViewModel : ViewModel(){
         )
     }
 
+    //Update the selected month to the previous month
     fun getPreviousMonth(){
         if (calendarMonth == 0){
             calendarMonth = 11
@@ -352,6 +378,7 @@ class PlannerViewModel : ViewModel(){
         }
     }
 
+    //Update the selected month to the next month
     fun getNextMonth(){
         if (calendarMonth == 11){
             calendarMonth = 0
@@ -361,42 +388,50 @@ class PlannerViewModel : ViewModel(){
         }
     }
 
+    //Return the long of the start of a selected date
     fun getDayStart(
         day : Date
     ) : Long{
         return categoryTaskFormatting.getDayStart(day)
     }
 
+    //Return the long of the start of a selected long date
     fun getDayStart(
         day : Long
     ) : Long{
         return categoryTaskFormatting.getDateTime(day, 0, 0)
     }
 
+    //Return the long of the end of a selected date
     fun getDayEnd(
         day : Date
     ) : Long{
         return categoryTaskFormatting.getDayEnd(day)
     }
 
+    //Return the long of the end of a selected long date
     fun getDayEnd(
         day : Long
     ) : Long{
         return categoryTaskFormatting.getDateTime(day, 23, 59)
     }
 
+    //Return the height of the edit task dialog
     fun getEditTaskDialogHeight() : Int {
         return categoryTaskFormatting.getEditTaskDialogHeight(editTask)
     }
 
+    //Return the label of the edit task dialog
     fun getEditTaskDialogLabel() : String {
         return categoryTaskFormatting.getEditTaskDialogLabel(editTask)
     }
 
+    //Show or hide the color options for the categories
     fun showCategoryColorList(){
         showCategoryColorList = !showCategoryColorList
     }
 
+    //Show the add or edit task dialog
     fun showAddOrEditTaskDialog(
         currentTask : Boolean
     ){
@@ -404,35 +439,42 @@ class PlannerViewModel : ViewModel(){
         showAddOrEditTaskDialog = true
     }
 
+    //Hide the add or edit task dialog
     fun hideAddOrEditTaskDialog(){
         showAddOrEditTaskDialog = false
     }
 
+    //Update the selected task category
     fun updateTaskCategory(newTaskCategory : TaskCategories){
         taskCategory = newTaskCategory
         acceptedTask = true
         showCategoryColorList()
     }
 
+    //Refresh the list of categories from the user
     suspend fun getCategoryList(){
         categoryList = accessTaskCategories.getCategoryList(userId)
     }
 
+    //Update the temporary label for the new task name
     fun updateTaskName(newName : String){
         if(newName.length <= 20){
             updateTaskName = newName
         }
     }
 
+    //Update the temporary critical status for the new task
     fun updateCriticalTask(){
         criticalTask = !criticalTask
     }
 
+    //Update the temporary completion status for the new task
     fun updateCompleteTask(){
         completeTask = !completeTask
         completionDate = System.currentTimeMillis()
     }
 
+    //Return the string of the completion date, depending on the current completion status
     @RequiresApi(Build.VERSION_CODES.O)
     fun getCompletionDate() : String{
         return if(!completeTask){
@@ -442,10 +484,12 @@ class PlannerViewModel : ViewModel(){
         }
     }
 
+    //Return the label for the add/edit task button
     fun getTaskButtonText() : String{
         return categoryTaskFormatting.getTaskButtonText(editTask)
     }
 
+    //Refresh the temporary variable for a new or updated task
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     fun resetTaskVariables(
@@ -484,6 +528,7 @@ class PlannerViewModel : ViewModel(){
         acceptedTask = false
     }
 
+    //Refresh variables for a new task
     fun startNewTask(){
         hideSeeTasksDialog()
         resetTaskVariables(
@@ -503,6 +548,7 @@ class PlannerViewModel : ViewModel(){
         showAddOrEditTaskDialog(false)
     }
 
+    //Refresh temporary variables for an existing task
     @RequiresApi(Build.VERSION_CODES.O)
     fun editTask(
         currentTask: Int,
@@ -526,6 +572,7 @@ class PlannerViewModel : ViewModel(){
         showAddOrEditTaskDialog(true)
     }
 
+    //Add or update a task within the database
     @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun addOrUpdateTask(){
@@ -551,6 +598,7 @@ class PlannerViewModel : ViewModel(){
 
     }
 
+    //Insert a new task
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun addNewTask(){
@@ -573,6 +621,7 @@ class PlannerViewModel : ViewModel(){
         )
     }
 
+    //Update an existing task
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun updateExistingTask(){
@@ -592,6 +641,7 @@ class PlannerViewModel : ViewModel(){
         )
     }
 
+    //Return the category from its id
     fun getCategoryWithId(
         cateId : Int
     )  : TaskCategories{
@@ -604,6 +654,7 @@ class PlannerViewModel : ViewModel(){
         )
     }
 
+    //Update database to set inactive tasks to tasks complete before the recent monday
     suspend fun updateTaskCompletion(
         taskId: Int,
         taskComplete: Boolean,
@@ -618,6 +669,7 @@ class PlannerViewModel : ViewModel(){
         getSelectDayTaskList(intervalStart, intervalEnd)
     }
 
+    //Return the number of all overdue tasks and all with a critical status
     fun getTotalAndCriticalTasksNumOverdue() : Pair<Int, Int>{
         val totalTasks = taskList.filter { it.dueDate <= System.currentTimeMillis() }
 
@@ -630,6 +682,7 @@ class PlannerViewModel : ViewModel(){
 
     }
 
+    //Return the number of all today's tasks and all with a critical status
     fun getTotalAndCriticalTasksNumToday() : Pair<Int, Int>{
         val today = System.currentTimeMillis()
         val totalTasks = taskList.filter { it.dueDate >= getDayStart(today) && it.dueDate <= getDayEnd(today) }
@@ -643,6 +696,7 @@ class PlannerViewModel : ViewModel(){
 
     }
 
+    //Return the number of all of this week's tasks and all with a critical status
     fun getTotalAndCriticalTasksNumWeek() : Pair<Int, Int>{
         val totalTasks = taskList.filter { it.dueDate >= getWeekStart() && it.dueDate <= getWeekEnd() }
 
@@ -655,6 +709,7 @@ class PlannerViewModel : ViewModel(){
 
     }
 
+    //Return the number of all of this month's tasks and all with a critical status
     fun getTotalAndCriticalTasksNumMonth() : Pair<Int, Int>{
         val totalTasks = taskList.filter { it.dueDate >= getMonthStart() && it.dueDate <= getMonthEnd() }
 
@@ -667,6 +722,8 @@ class PlannerViewModel : ViewModel(){
 
     }
 
+
+    //Update the selected tasks list to a specific group
     suspend fun getSelectDayTaskList(
         intervalStart: Long,
         intervalEnd: Long
@@ -678,6 +735,7 @@ class PlannerViewModel : ViewModel(){
         )
     }
 
+    //Return the list of dates for a specific month and year
     fun generateMonthDates(year: Int, month: Int): List<Date> {
         return calendarFunctions.generateMonthDates(
             year,
@@ -685,11 +743,13 @@ class PlannerViewModel : ViewModel(){
         )
     }
 
+    //Navigates to the user's profile
     fun profileNav(navController: NavController){
         Log.d("TEST", "Navigating to the profile...")
         navigationFunctions.goToProfile(navController)
     }
 
+    //Get the navigation options for the planner (all windows wo/ planner)
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
 
         val navigationFunctions = NavigationFunctions()
@@ -708,11 +768,13 @@ class PlannerViewModel : ViewModel(){
         )
     }
 
+    //Navigates to the task list
     fun navTaskList(navController: NavController){
         Log.d("TEST", "Navigating to the Task List...")
         navigationFunctions.goToTaskList(navController)
     }
 
+    //Closes the error window
     fun resetErrorWindow(){
         errorWindow = false
     }

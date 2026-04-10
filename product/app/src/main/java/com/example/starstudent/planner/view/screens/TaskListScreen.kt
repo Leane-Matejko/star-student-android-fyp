@@ -69,6 +69,8 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 
+
+//Task list banner and scrollable region for the task list content
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TaskListScreen(navController: NavController){
@@ -127,6 +129,7 @@ fun TaskListScreen(navController: NavController){
     }
 }
 
+//Content of the task list
 @SuppressLint("CoroutineCreationDuringComposition")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -332,20 +335,16 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
                                                     .size(20.dp)
                                             )
                                         }
-
                                     }
                                 }
-
                             }
 
                             Spacer(modifier = Modifier.height(20.dp))
                         }
                     }
-
                 }
             }
         }
-
     }
 
     if(viewModel.showCategoryDialog){
@@ -387,6 +386,7 @@ fun TaskListContent(viewModel : TaskListViewModel, navController : NavController
     }
 }
 
+//Dialog for adding different tasks or categories
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NewOptionsDialog(viewModel: TaskListViewModel){
@@ -441,6 +441,8 @@ fun NewOptionsDialog(viewModel: TaskListViewModel){
     }
 }
 
+
+//Dialog for adding or editing a category
 @Composable
 fun AddCategoryDialog(viewModel: TaskListViewModel){
 
@@ -620,12 +622,12 @@ fun AddCategoryDialog(viewModel: TaskListViewModel){
                     viewModel.addOrUpdateCategory()
                 }
             }
-
         }
     }
-
 }
 
+
+//Dialog for adding or editing tasks
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -773,7 +775,6 @@ fun TaskDialog(viewModel : TaskListViewModel){
                 modifier = Modifier
                     .fillMaxWidth()
                     .requiredSize(400.dp)
-//                    .align(Alignment.CenterHorizontally)
                     .scale(0.7f),
                 showModeToggle = false,
                 headline = null ,
@@ -858,12 +859,12 @@ fun TaskDialog(viewModel : TaskListViewModel){
             ) {
                 viewModel.viewModelScope.launch {  viewModel.addOrUpdateTask()}
             }
-
         }
     }
-
 }
 
+
+//Dialog for hidden categories
 @Composable
 fun HiddenCategoriesDialog(viewModel: TaskListViewModel){
 
@@ -947,13 +948,10 @@ fun HiddenCategoriesDialog(viewModel: TaskListViewModel){
                                 textAlign = TextAlign.Center,
                                 fontSize = 8.sp
                             )
-
                         }
-
                     }
                 }
             }
-
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+//Stores the tasks and are contained within a category
 @Entity(
     tableName = "tasks",
     foreignKeys = [

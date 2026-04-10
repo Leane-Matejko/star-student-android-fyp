@@ -32,11 +32,8 @@ class TaskListViewModel : ViewModel() {
 
     val accessTaskCategories = AccessTaskCategories()
     val accessTasks = AccessTasks()
-
     val categoryTaskFormatting = CategoryTaskFormatting()
-
     val bannerFunctions = BannerFunctions()
-
     val navigationFunctions = NavigationFunctions()
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -206,37 +203,47 @@ class TaskListViewModel : ViewModel() {
     )
 
     //Functions for menus and Dialogs
+    //Shows the category dialog
     fun showCategoryDialog(editCate : Boolean){
         editCategory = editCate
         showCategoryDialog = true
     }
+
+    //Hide the category dialog
     fun hideCategoryDialog(){
         showCategoryDialog = false
     }
 
+    //Show the new task or category options
     fun showNewOptionsDialog(){
         showNewOptionsDialog = true
     }
 
+    //Hide the new task or category options
     fun hideNewOptionsDialog(){
         showNewOptionsDialog = false
     }
 
+    //Show the task list dialog
     private fun showTaskDialog(currentTask: Boolean) {
         editTask = currentTask
         showTaskDialog = true
     }
 
+    //Hide the task list dialog
     fun hideTaskDialog(){
         showTaskDialog = false
     }
 
+    //Show the navigation window
     fun showNavMenu()
     {showNavMenu = true}
 
+    //Hide the navigation window
     fun dismissNavMenu()
     {showNavMenu = false}
 
+    //Return the string of the due date from the date picker and time picker
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     fun dueDateTask() : String  {
@@ -249,6 +256,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Return the long of a long date and hours and minutes (Int)
     @RequiresApi(Build.VERSION_CODES.O)
     fun getDateTime(
         date: Long,
@@ -262,6 +270,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Refresh the temporary category variables for a new category
     fun startNewCategory(){
         hideNewOptionsDialog()
         resetCategoryVariables(
@@ -273,6 +282,7 @@ class TaskListViewModel : ViewModel() {
         showCategoryDialog(false)
     }
 
+    //Refresh the temporary task variables for a new task
     @RequiresApi(Build.VERSION_CODES.O)
     fun startNewTask(){
         hideNewOptionsDialog()
@@ -294,6 +304,7 @@ class TaskListViewModel : ViewModel() {
         showTaskDialog(false)
     }
 
+    //Refresh the temporary task with category variables for a new category
     @RequiresApi(Build.VERSION_CODES.O)
     fun startNewTaskInCategory(
         currentTaskCategory: TaskCategories
@@ -311,6 +322,7 @@ class TaskListViewModel : ViewModel() {
         showTaskDialog(false)
     }
 
+    //Refresh the temporary category variables for a existing category
     fun editCategory(
         currentId : Int,
         currentName : String,
@@ -325,6 +337,7 @@ class TaskListViewModel : ViewModel() {
         showCategoryDialog(true)
     }
 
+    //Refresh the temporary task variables for a existing task
     @RequiresApi(Build.VERSION_CODES.O)
     fun editTask(
         currentTask: Int,
@@ -347,21 +360,25 @@ class TaskListViewModel : ViewModel() {
         showTaskDialog(true)
     }
 
+    //Update the temporary task label
     fun updateTaskName(newName : String){
         if(newName.length <= 20){
             updateTaskName = newName
         }
     }
 
+    //Update the critical status task
     fun updateCriticalTask(){
         criticalTask = !criticalTask
     }
 
+    //Update the completion status task
     fun updateCompleteTask(){
         completeTask = !completeTask
         completionDate = System.currentTimeMillis()
     }
 
+    //Return the string of the completion date, depending on the completion status
     @RequiresApi(Build.VERSION_CODES.O)
     fun getCompletionDate() : String{
         return if(!completeTask){
@@ -371,12 +388,14 @@ class TaskListViewModel : ViewModel() {
         }
     }
 
+    //Update the temporary task category
     fun updateTaskCategory(newTaskCategory : TaskCategories){
         taskCategory = newTaskCategory
         acceptedTask = true
         showCategoryColorList()
     }
 
+    //Reset the temporary variables for the task
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     fun resetTaskVariables(
@@ -415,6 +434,7 @@ class TaskListViewModel : ViewModel() {
         acceptedTask = false
     }
 
+    //Reset the temporary variables for the category
     fun resetCategoryVariables(
         defaultId : Int,
         defaultName : String,
@@ -431,64 +451,78 @@ class TaskListViewModel : ViewModel() {
         }
     }
 
+    //Return the container height of category section
     fun getCategoryListHeight(tasksNum : Int) : Int {
         return categoryTaskFormatting.getCategoryListHeight(tasksNum)
     }
 
+    //Return the container height of the category dialog
     fun getEditCategoryDialogHeight() : Int {
         return categoryTaskFormatting.getEditCategoryDialogHeight(editCategory)
     }
 
+    //Return the container height of the task dialog
     fun getEditTaskDialogHeight() : Int {
         return categoryTaskFormatting.getEditTaskDialogHeight(editTask)
     }
 
+    //Return the string of a long date
     @RequiresApi(Build.VERSION_CODES.O)
     fun formatDateTime(dateTime : Long) : String{
         return categoryTaskFormatting.formatDateTime(dateTime)
     }
 
+    //Show or hide the category color options
     fun showCategoryColorList() {
         showCategoryColorList = !showCategoryColorList
     }
 
+    //Update the temporary category color and label
     fun setCategoryLabelColour(colorString : String){
         labelCategory = colorString.replaceFirstChar { it.uppercase() }
         categoryLabelColor = colorString
 
     }
 
+    //Update the temporary category color
     fun updateCategoryColour(newColor : String){
         setCategoryLabelColour(newColor)
         showCategoryColorList()
     }
 
+    //Update the temporary category label
     fun updateCategoryName(newName : String){
         if (newName.length <= 20) {
             categoryName = newName
         }
     }
 
+    //Update the temporary category hide status
     fun updateHideCategory(newHideStatus : Boolean){
         hideCategory = newHideStatus
     }
 
+    //Return the string of the add/edit category label
     fun getEditCategoryDialogLabel() : String {
         return categoryTaskFormatting.getEditCategoryDialogLabel(editCategory)
     }
 
+    //Return the string of the add/edit task label
     fun getEditTaskDialogLabel() : String {
         return categoryTaskFormatting.getEditTaskDialogLabel(editTask)
     }
 
+    //Return the category button label
     fun getCategoryButtonText() : String{
         return categoryTaskFormatting.getCategoryButtonText(editCategory)
     }
 
+    //Return the task button label
     fun getTaskButtonText() : String{
         return categoryTaskFormatting.getTaskButtonText(editTask)
     }
 
+    //Return the extended color option
     fun getCategoryColour(colour : String, colourList : ExtendedLabelColours) : Color {
         return categoryTaskFormatting.getCategoryColour(
             colour,
@@ -496,18 +530,22 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Show the hidden category dialog
     fun showHiddenCategoryDialog(){
         showHiddenCategoryDialog = true
     }
 
+    //Hide the hidden category dialog
     fun hideHiddenCategoryDialog(){
         showHiddenCategoryDialog = false
     }
 
+    //Set the list of the user's categories
     suspend fun getCategoryList(){
         categoryList = accessTaskCategories.getCategoryList(userId)
     }
 
+    //Set the list of user's tasks
     suspend fun getTaskList(){
         taskList = accessTasks.getTaskList(
             userId,
@@ -515,6 +553,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Add or update a task
     @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun addOrUpdateTask(){
@@ -539,6 +578,7 @@ class TaskListViewModel : ViewModel() {
         }
     }
 
+    //Add or update a category
     suspend fun addOrUpdateCategory(){
         if(editCategory){
             updateExistingCategory()
@@ -549,6 +589,7 @@ class TaskListViewModel : ViewModel() {
         hideCategoryDialog()
     }
 
+    //Insert a new category
     suspend fun addNewCategory(){
         accessTaskCategories.addNewCategory(
             userId,
@@ -557,6 +598,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Insert a new task
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun addNewTask() {
@@ -579,10 +621,12 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Close the error window
     fun resetErrorWindow(){
         errorWindow = false
     }
 
+    //Update an existing category
     suspend fun updateExistingCategory(){
 
         val hideStatus = !hideCategory
@@ -600,6 +644,7 @@ class TaskListViewModel : ViewModel() {
         }
     }
 
+    //Update an existing task
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     suspend fun updateExistingTask(){
@@ -619,6 +664,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Update the complete status of a task
     suspend fun updateTaskCompletion(
         taskId: Int,
         taskComplete: Boolean
@@ -630,12 +676,14 @@ class TaskListViewModel : ViewModel() {
         getTaskList()
     }
 
+    //Set the list of hidden categories
     suspend fun getHiddenCategories(){
         hiddenCategoryList = accessTaskCategories.getHiddenCategories(
             userId
         )
     }
 
+    //Set a task to inactive
     suspend fun hideTasks(
         cateId : Int
     ){
@@ -644,6 +692,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Set a task to active
     suspend fun showTasks(
         cateId : Int
     ){
@@ -652,6 +701,7 @@ class TaskListViewModel : ViewModel() {
         )
     }
 
+    //Unhide a hidden category
     suspend fun addHiddenCategory(
         cateId : Int
     ){
@@ -662,16 +712,19 @@ class TaskListViewModel : ViewModel() {
         getHiddenCategories()
     }
 
+    //Navigates to the user's profile
     fun profileNav(navController: NavController){
         Log.d("NAVIGATION", "Navigating to the profile...")
         navigationFunctions.goToProfile(navController)
     }
 
+    //Navigates to the planner
     fun navToPlanner(navController: NavController){
         Log.d("NAVIGATION", "Navigating to the planner...")
         navigationFunctions.goToPlanner(navController)
     }
 
+    //Get the navigation options for the task (all windows wo/ task list)
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
 
         val navigationFunctions = NavigationFunctions()
