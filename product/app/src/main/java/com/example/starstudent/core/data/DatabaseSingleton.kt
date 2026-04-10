@@ -7,6 +7,7 @@ object DatabaseSingleton {
     @Volatile
     private var INSTANCE: AppDatabase? = null
 
+    //Ensures that the app's database is up to date with the current version
     val migrations = arrayOf(
         MIGRATION_2_3,
         MIGRATION_3_4,

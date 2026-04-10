@@ -4,6 +4,10 @@ import android.util.Log
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
+
+/*
+* All current database migrations, currently on version 9
+*/
 val MIGRATION_2_3 = object : Migration(2,3){
 
     override fun migrate(db: SupportSQLiteDatabase) {

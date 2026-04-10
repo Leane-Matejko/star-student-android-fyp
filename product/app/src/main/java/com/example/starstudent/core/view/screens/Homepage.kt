@@ -1,6 +1,5 @@
 package com.example.starstudent.core.view.screens
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,7 +29,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -54,7 +52,6 @@ import com.example.starstudent.core.view.uiComponents.mediumIconWidget
 import com.example.starstudent.core.view.uiComponents.simpleToggle
 import com.example.starstudent.core.view.uiComponents.smallProgressWidget
 import com.example.starstudent.core.view.uiComponents.spacer
-import com.example.starstudent.core.view.uiComponents.toggle
 import com.example.starstudent.ui.theme.LocalExtendedLabelColours
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -62,6 +59,8 @@ import kotlin.text.replaceFirstChar
 
 /* Responsible for populating the homepage screen.
 */
+
+//Homepage banner and scrollable region for the homepage content
 @Composable
 fun Homepage(
     navController: NavController,
@@ -109,6 +108,8 @@ fun Homepage(
 
 }
 
+
+//Content of the homepage
 @Composable
 fun HomepageContent(
     viewModel: HomepageViewModel,
@@ -158,8 +159,6 @@ fun HomepageContent(
 
                 if(viewModel.homepageSettings.studyProgress ||
                     viewModel.homepageSettings.sleepProgress) {
-
-//                    Spacer(modifier = Modifier.width(20.dp))
                     Column(
                         modifier = Modifier.weight(1f),
                         verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -223,7 +222,6 @@ fun HomepageContent(
                             viewModel.showTasksDialog("overdue")
                         },
                         Modifier
-//                            .weight(1f)
                     )
                 }
 
@@ -237,7 +235,6 @@ fun HomepageContent(
                             viewModel.showTasksDialog("weekly")
                         },
                         Modifier
-//                            .weight(1f)
                     )
                 }
 
@@ -251,7 +248,6 @@ fun HomepageContent(
                             viewModel.showTasksDialog("all")
                         },
                         Modifier
-//                            .weight(1f)
                     )
                 }
             }
@@ -392,6 +388,8 @@ fun HomepageContent(
     }
 }
 
+
+//Shows list of tasks of a specific category (with task category shown)
 @Composable
 fun TasksDialog(viewModel: HomepageViewModel){
     val colors = LocalExtendedLabelColours.current
@@ -573,6 +571,7 @@ fun TasksDialog(viewModel: HomepageViewModel){
     }
 }
 
+//Shows menu for homepage widget options
 @Composable
 fun HomepageCustomisationDialog(viewModel: HomepageViewModel) {
     Card(

@@ -6,17 +6,16 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.starstudent.core.domain.Themes
 
+//Sets the theme for the app
 class ApplicationViewModel : ViewModel() {
 
+    //Default theme is initially system
     var themeMode: Themes by mutableStateOf(
         Themes.SYSTEM
     )
         private set
 
-    fun getTheme() : Themes{
-        return themeMode
-    }
-
+    //Set the app's theme
     fun setTheme(
         theme : Themes
     ){

@@ -39,17 +39,11 @@ import com.example.starstudent.userAccounts.data.entities.UserTheme
 
 abstract class AppDatabase : RoomDatabase(){
     abstract fun appUserDao() : AppUserDAO
-
     abstract fun userInfoDao() : UserInfoDAO
-
     abstract fun studySessionsDao() : StudySessionsDAO
-
     abstract fun pausedSessionsDao() : PausedSessionsDAO
-
     abstract fun savedLocationsDao() : SavedLocationsDAO
-
     abstract fun taskCategoriesDao() : TaskCategoriesDAO
-
     abstract fun tasksDao() : TasksDAO
     abstract fun userThemeDao() : UserThemeDAO
     abstract fun homepageSettingsDao() : HomepageSettingsDAO

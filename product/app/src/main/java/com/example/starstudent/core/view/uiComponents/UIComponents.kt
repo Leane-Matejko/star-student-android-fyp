@@ -523,8 +523,6 @@ fun inputField(label: String,
                seqNumber: Int?,
                onValueChange: (String) -> Unit){
 
-//    var info by remember { mutableStateOf("") }
-
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -548,8 +546,6 @@ fun numInputField(
                 seqNumber: Int?,
                 keyboardType: KeyboardType,
                 onValueChange: (String) -> Unit){
-
-//    var info by remember { mutableStateOf("") }
 
     TextField(
         value = value,
@@ -598,6 +594,7 @@ fun button(label : String, seqNumber: Int?, onClick: () -> Unit) {
     }
 }
 
+//UI for the top banner
 @Composable
 fun TopBanner(
     username : String,
@@ -669,6 +666,7 @@ fun TopBanner(
     }
 }
 
+//Formatting the banner to the top of the screen
 @Composable
 fun BannerFormat(
     username : String,
@@ -697,6 +695,7 @@ fun BannerFormat(
     }
 }
 
+//Toggle UI - not scalable
 @Composable
 fun toggle(
     header: String,
@@ -734,6 +733,7 @@ fun toggle(
     }
 }
 
+// Updated toggle - scalable
 @Composable
 fun simpleToggle(
     scale : Float,
@@ -754,6 +754,7 @@ fun simpleToggle(
     )
 }
 
+// Dropdown for navigation options
 @Composable
 fun navigationDropDown(
     list: List<NavigationOptions>,
@@ -789,34 +790,34 @@ fun navigationDropDown(
     }
 }
 
+//Data class for different calendar cells on the custom calendar grid
 sealed class CalendarItem {
     data class Weekday(val day: Int) : CalendarItem()
     object Empty : CalendarItem()
     data class Day(val date: Date, val signal: Boolean) : CalendarItem()
 }
 
+//Get the days of the week as a list of Ints
 fun getWeekDays(): List<Int> {
     val lista = (1..7).toList()
     return ((lista.drop(1) + lista.take(1)).toImmutableList())
 }
 
+//Return the string of a day from an Int
 private fun Int.getDayOfWeek3Letters(): String? = Calendar.getInstance().apply {
     set(Calendar.DAY_OF_WEEK, this@getDayOfWeek3Letters)
 }.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault())
 
-private fun Int.getFormattedMonth(): String? = Calendar.getInstance().apply {
-    set(Calendar.MONTH, this@getFormattedMonth)
-}.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
-
+//Format year into a string
 private fun Date.formatToYear(): String = SimpleDateFormat("yyyy", Locale.getDefault()).format(this)
-
-
-fun Date.formatToMonthString(): String = SimpleDateFormat("MMMM", Locale.getDefault()).format(this)
-
+//Format month into a string
+private fun Date.formatToMonthString(): String = SimpleDateFormat("MMMM", Locale.getDefault()).format(this)
+//Format date into a string
 private fun Date.formatToCalendarDate() : String = SimpleDateFormat("d", Locale.getDefault()).format(this)
 
+// Day cell on the custom calendar grid
 @Composable
-fun WeekdayCell(
+private fun WeekdayCell(
     weekday: Int,
     modifier: Modifier = Modifier
 ) {
@@ -836,18 +837,21 @@ fun WeekdayCell(
 }
 
 
-fun Date.formatToWeekDay(): Int {
+//Get the day of the month from a date
+private fun Date.formatToWeekDay(): Int {
     val calendar = Calendar.getInstance()
     calendar.time = this
     return calendar.get(Calendar.DAY_OF_WEEK)
 }
 
+//The number of spaces the first day of the month is away from Monday
 private fun getOffset(firstDay : Int) : Int{
     return (firstDay + 5) % 7
 }
 
 
-fun weekdayLabelsList(
+//Returns a string of the week as a string
+private fun weekdayLabelsList(
     dates: List<Date>
 ): List<CalendarItem> {
 
@@ -877,6 +881,8 @@ fun weekdayLabelsList(
     return items
 }
 
+
+//Returns a custom calendar grid
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarGrid(
@@ -1008,6 +1014,8 @@ fun CalendarGrid(
     }
 }
 
+
+//Calendar cell shown on the calendar window
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarCell(
@@ -1058,6 +1066,8 @@ fun CalendarCell(
     }
 }
 
+
+//Returns the top banner an addition floating button int he bottom right corner
 @Composable
 fun BannerFormatAndFloatingButtons(
         username : String,

@@ -3,7 +3,6 @@ package com.example.starstudent.core.data
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
-import android.view.View
 import com.example.starstudent.core.domain.CurrentApplication
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
