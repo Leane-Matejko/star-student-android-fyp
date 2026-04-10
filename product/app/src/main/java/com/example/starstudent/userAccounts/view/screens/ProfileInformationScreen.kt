@@ -255,7 +255,7 @@ fun ProfileInformationContent(
                             expanded = viewModel.showThemeOptions,
                             shape = RoundedCornerShape(20.dp),
                             onDismissRequest = {
-                                viewModel.showThemeOptions()
+                                viewModel.hideThemeOptions()
                             }
                         ) {
 
