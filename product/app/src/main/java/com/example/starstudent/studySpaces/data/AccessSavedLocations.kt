@@ -12,6 +12,7 @@ class AccessSavedLocations {
                 CurrentApplication.instance
             ).savedLocationsDao()
 
+    //Default saved location
     var savedLocationsList = listOf(SavedLocations(
         1,
         "",
@@ -20,6 +21,7 @@ class AccessSavedLocations {
         0.0
     ))
 
+    //Update the longitude and latitude of a saved location
     suspend fun updateSavedLocation(
         id: Int,
         user: String,
@@ -35,24 +37,25 @@ class AccessSavedLocations {
         getSavedLocations(user)
     }
 
+    //Update the label of the saved location
     suspend fun updateSavedLocationLabel(
         id: Int,
-        user: String,
         newLabel: String
     ){
         savedLocationsDAO.updateSavedLabel(
             id,
-            CurrentApplication.instance.user.email.getEmail(),
             newLabel
         )
     }
 
+    //Update saved location list of a user
     suspend fun getSavedLocations(user : String){
         savedLocationsList = savedLocationsDAO.getSavedLocations(
             user
         )
     }
 
+    //Return the saved locations
     fun getCurrentSavedLocationsList(): List<SavedLocations>{
         return savedLocationsList
     }

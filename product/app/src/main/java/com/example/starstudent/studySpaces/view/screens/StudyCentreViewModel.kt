@@ -1,6 +1,5 @@
 package com.example.starstudent.studySpaces.view.screens
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -13,7 +12,6 @@ import com.example.starstudent.core.domain.FormatHomepage
 import com.example.starstudent.core.domain.navigation.NavigationOptions
 import com.example.starstudent.planner.data.AccessTasks
 import com.example.starstudent.planner.data.entities.TaskWithCategory
-import com.example.starstudent.planner.data.entities.Tasks
 import com.example.starstudent.planner.domain.CategoryTaskFormatting
 import com.example.starstudent.studySpaces.data.AccessSavedLocations
 import com.example.starstudent.studySpaces.data.AccessStudySessions
@@ -212,25 +210,24 @@ class StudyCentreViewModel : ViewModel() {
     )
         private set
 
-    var sessionButtonFormat by mutableStateOf(
-        "Start Session"
-    )
-        private set
-
+    //Shows update location dialog if location permission is granted
     fun showUpdateLocationDialog(){
         if(locationAccess){
             showUpdateLocationDialog = true
         }
     }
 
+    //Hide update location dialog
     fun dismissUpdateLocationDialog(){
         showUpdateLocationDialog = false
     }
 
+    //Update the user's location access
     fun updateLocationAccess(){
         locationAccess = accessUserData.getUserLocationAccess()
     }
 
+    //Update the temporary label for the saved locations
     fun updateLabel(id: Int, newLabel: String) {
         savedLocations = savedLocations.map { location ->
             if (location.id == id) {
@@ -240,6 +237,8 @@ class StudyCentreViewModel : ViewModel() {
             }
         }
     }
+
+    //Return the temporary label for the saved location
     fun getUpdatedLabel(id: Int): String {
         savedLocations.forEach { location ->
             if (location.id == id) {
@@ -249,11 +248,13 @@ class StudyCentreViewModel : ViewModel() {
         return "Default"
     }
 
+    //Retrieve the user's saved locations
     suspend fun getSavedLocations(){
         accessSavedLocations.getSavedLocations(getUser())
         savedLocations = accessSavedLocations.getCurrentSavedLocationsList()
     }
 
+    //Update the label of the saved location
     suspend fun updateSavedLocationLabel(
         id: Int
     ){
@@ -262,13 +263,13 @@ class StudyCentreViewModel : ViewModel() {
         if(newLabel.isNotEmpty()){
             accessSavedLocations.updateSavedLocationLabel(
                 id,
-                getUser(),
                 newLabel
             )
             getSavedLocations()
         }
     }
 
+    //Update the longitude and latitude of a saved location
     suspend fun updateSavedLocation(
         id: Int
     ){
@@ -282,10 +283,12 @@ class StudyCentreViewModel : ViewModel() {
         getSavedLocations()
     }
 
+    //Update the study session timer
     fun updateTimer(){
         timerClock = studySession.getTimerClock()
     }
 
+    //Increment the session count down
     fun increaseSessionCountdown(){
         studySession.increaseSessionCountdown()
         sessionCountDown = studySession.getSessionCountDown()
@@ -293,24 +296,30 @@ class StudyCentreViewModel : ViewModel() {
 
 
     //Banner Logic
+    //Update the date time on the banner
     fun updateTime(){
         curDate = bannerFunctions.updateTime()
     }
 
+    //Get the navigation options for the study centre (all windows wo/ study centre)
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
         return bannerFunctions.getNavigationMenu(navController)
     }
 
+    //Navigates to the user's profile
     fun profileNav(navController: NavController){
         bannerFunctions.profileNav(navController)
     }
 
+    //Show the navigation menu
     fun showNavMenu()
     {showNavMenu = true}
 
+    //Hide the navigation menu
     fun dismissNavMenu()
     {showNavMenu = false }
 
+    //Update the session widget w/ timer or prompt
     fun updateStudyingStatus(){
         studyingStatus = if(studySession.getSessionStatus()){
             "Studying..." +
@@ -320,6 +329,7 @@ class StudyCentreViewModel : ViewModel() {
         }
     }
 
+    //Update the current session status (start or end a session)
     suspend fun updateSessionStatus(){
         studySession.updateSessionStatus(getUser())
         sessionStatus = studySession.getSessionStatus()
@@ -332,6 +342,7 @@ class StudyCentreViewModel : ViewModel() {
         }
     }
 
+    //Format the pause study session button
     fun formatPauseSessionButton() : String{
         if(!isSessionPause){
             return "Pause Session"
@@ -339,15 +350,18 @@ class StudyCentreViewModel : ViewModel() {
         return "Unpause Session"
     }
 
+    //Show the pause session button
     fun showPauseButton() : Boolean{
         return showSessionPause
     }
 
+    //Update the pause session status
     suspend fun updatePauseSession(){
         studySession.updatePauseSession()
         isSessionPause = studySession.getIsSessionPause()
     }
 
+    //Format the study session button
     fun formatSessionButton() : String{
         if(!sessionStatus){
             return "Start Session"
@@ -355,10 +369,12 @@ class StudyCentreViewModel : ViewModel() {
         return "End Session"
     }
 
+    //Return the user id
     fun getUser(): String{
         return CurrentApplication.instance.user.email.getEmail()
     }
 
+    //Retrieve if the user is within a study space
     suspend fun checkLocation(){
         getSavedLocations()
         locationDetector.checkLocation(savedLocations)
@@ -366,29 +382,35 @@ class StudyCentreViewModel : ViewModel() {
         studySpaceDetector = locationDetector.studyDetectorFormatted()
     }
 
+    //Retrieve recent study session
     suspend fun getRecentStudySessions(){
         recentStudySessions = accessStudySessions.getRecentStudySessions(
             getUser()
         )
     }
 
+    //Retrieve list of formatted recent study sessions
     suspend fun updateFormattedRecentSessions(){
         getRecentStudySessions()
         recentStudySessionsFormatted = formatStudyCentre.formatRecentSessions(recentStudySessions)
     }
 
+    //Return the long for the most recent monday
     fun getRecentMonday() : Long{
         return formatHomepage.getRecentMonday()
     }
 
+    //Return the long for the end of the week
     fun getEndOfWeek() : Long{
         return formatHomepage.getEndOfWeek()
     }
 
+    //Return the long for now
     fun getNowLong() : Long{
         return formatHomepage.getNowLong()
     }
 
+    //Retrieve and refresh the task lists of different groups and their completion status
     fun resetTasksLists(){
         overdueTaskList = taskList.filter { it.dueDate <= getNowLong() && !it.isComplete }
         overdueToDo = overdueTaskList.filter { it.isComplete }.size
@@ -403,6 +425,7 @@ class StudyCentreViewModel : ViewModel() {
         }
     }
 
+    //Show dialog for group of tasks
     fun showTasksDialog(
         tasksTypeInput : String
     ){
@@ -411,10 +434,12 @@ class StudyCentreViewModel : ViewModel() {
         showTasksDialog = true
     }
 
+    //Hide dialog for group of tasks
     fun hideTasksDialog(){
         showTasksDialog = false
     }
 
+    //Return extended color option from string
     fun getCategoryColour(
         color : String,
         colorList : ExtendedLabelColours
@@ -425,6 +450,7 @@ class StudyCentreViewModel : ViewModel() {
         )
     }
 
+    //Return the strong of a long in a specific format
     fun formatDateTime(
         date : Long,
         pattern : String
@@ -435,6 +461,7 @@ class StudyCentreViewModel : ViewModel() {
         )
     }
 
+    //Set the current task list for the task dialog
     fun setCurrentTaskList(){
         currentTaskList = when (tasksType){
             "overdue" -> overdueTaskList
@@ -443,11 +470,13 @@ class StudyCentreViewModel : ViewModel() {
         }
     }
 
+    //Retrieve all active tasks
     suspend fun getAllCurrentTasks(){
         taskList = accessTasks.getAllCurrentTasks(getUser())
         resetTasksLists()
     }
 
+    //Update the completion status and completion date of a task
     suspend fun updateTaskCompletion(
         taskId: Int,
         taskComplete: Boolean
@@ -460,10 +489,12 @@ class StudyCentreViewModel : ViewModel() {
         resetTasksLists()
     }
 
+    //Get the user's most recent location from their GPS
     fun getLocation() {
         locationDetector.getLocation()
     }
 
+    //Check if a session is already active
     suspend fun checkActiveSession(){
         val currentSession = getMostRecentActiveSessions()
         if(currentSession.isNotEmpty()){
@@ -480,6 +511,7 @@ class StudyCentreViewModel : ViewModel() {
         updateStudyingStatus()
     }
 
+    //Return list of the most recent incomplete study sessions
     suspend fun getMostRecentActiveSessions() : List<StudySessions>{
         return  accessStudySessions.getMostRecentActiveSessions(
             userId

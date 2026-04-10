@@ -36,7 +36,6 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.starstudent.core.view.screens.HomepageViewModel
 import com.example.starstudent.core.view.uiComponents.BannerFormat
 import com.example.starstudent.core.view.uiComponents.button
 import com.example.starstudent.core.view.uiComponents.inputField
@@ -51,6 +50,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
+//Study Centre banner and scrollable region for the study centre content
 @Composable
 fun StudyCentreScreen(navController: NavController){
 
@@ -94,12 +94,13 @@ fun StudyCentreScreen(navController: NavController){
     }
 }
 
+//Content for the study centre
 @Composable
 fun StudyCentreContent(viewModel: StudyCentreViewModel){
     Column(
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.Companion.CenterHorizontally,
-        modifier = Modifier.Companion
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
             .fillMaxWidth()
             .padding(30.dp)
     ){
@@ -379,7 +380,7 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
     }
 }
 
-
+//Scrollable Dialog for user's saved locations
 @Composable
 fun SavedLocationDialog(viewModel: StudyCentreViewModel) {
     Card(
@@ -404,7 +405,7 @@ fun SavedLocationDialog(viewModel: StudyCentreViewModel) {
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            LazyColumn() {
+            LazyColumn {
                 item {
                     SavedLocationDialogContents(viewModel)
                 }
@@ -414,6 +415,7 @@ fun SavedLocationDialog(viewModel: StudyCentreViewModel) {
     }
 }
 
+//Dialog content for saved locations
 @Composable
 fun SavedLocationDialogContents(viewModel: StudyCentreViewModel){
 
@@ -478,6 +480,7 @@ fun SavedLocationDialogContents(viewModel: StudyCentreViewModel){
     }
 }
 
+//Dialog to show selected task list
 @Composable
 fun TasksDialog(viewModel: StudyCentreViewModel){
     val colors = LocalExtendedLabelColours.current

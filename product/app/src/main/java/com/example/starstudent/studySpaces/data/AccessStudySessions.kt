@@ -1,6 +1,5 @@
 package com.example.starstudent.studySpaces.data
 
-import android.provider.Settings
 import com.example.starstudent.core.data.DatabaseSingleton
 import com.example.starstudent.core.domain.CurrentApplication
 import com.example.starstudent.studySpaces.data.entities.StudySessionDuration
@@ -14,6 +13,7 @@ class AccessStudySessions {
                 .instance)
         .studySessionsDao()
 
+    //Return current study sessions
     suspend fun getCurrentStudySession(
         user : String
     ): List<StudySessions>{
@@ -22,6 +22,7 @@ class AccessStudySessions {
         )
     }
 
+    //Insert a new study session
     suspend fun startSession(
         user: String,
         startTime: Long
@@ -35,6 +36,7 @@ class AccessStudySessions {
         )
     }
 
+    //Update end time of a study session
     suspend fun endSession(
         currentSession: StudySessions,
         endTime: Long
@@ -47,6 +49,7 @@ class AccessStudySessions {
         )
     }
 
+    //Return recent study session
     suspend fun getRecentStudySessions(
         user: String
     ): List<StudySessions>{
@@ -55,6 +58,7 @@ class AccessStudySessions {
         )
     }
 
+    //Return list of all study sessions
     suspend fun getRecentStudySessionsAll(
         user: String
     ): List<StudySessions>{
@@ -63,6 +67,7 @@ class AccessStudySessions {
         )
     }
 
+    //Return list of most recent active session
     suspend fun getMostRecentActiveSessions(
         user: String
     ) : List<StudySessions>{
@@ -71,6 +76,7 @@ class AccessStudySessions {
         )
     }
 
+    //Return list of Study Session with calculated duration
     suspend fun getRecentSessionsWithDuration(
         user: String
     ): List<StudySessionDuration>{
@@ -79,27 +85,10 @@ class AccessStudySessions {
         )
     }
 
+    //Delete study session
     suspend fun deleteSession(
         id : Int
     ){
         studySessionsDAO.deleteSession(id)
-    }
-
-    suspend fun getSessionDuration(
-        id : Int
-    ) : Long{
-        return studySessionsDAO.getSessionDuration(
-            id
-        )
-    }
-
-    suspend fun resetSessionStart(
-        id : Int,
-        duration : Long
-    ){
-        studySessionsDAO.resetSessionStart(
-            id,
-            System.currentTimeMillis() - duration
-        )
     }
 }
