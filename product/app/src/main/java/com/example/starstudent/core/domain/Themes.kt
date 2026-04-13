@@ -7,5 +7,6 @@ enum class Themes {
     SYSTEM,
     LIGHT,
     DARK,
-    STRAWBERRY
+    STRAWBERRY,
+    NEON
 }
