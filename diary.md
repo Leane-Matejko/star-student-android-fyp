@@ -43,16 +43,16 @@
 - Singleton class added to prevent potential dataleaks of the main activity.
 - **Next steps:** Implement unit test cases for current implementation. Complete interim report, retrospective and presentation.
 
-### Week 11 - 24/11
+### Week 11 - 01/12
 - Implemented unit testing for model and UI elements. Jacoco dependency added to check for UI coverage. Readdresses pipeline issue -> still has not been resolved.
 - Created Interim report, presentation and retrospective for the end of term review.
 - **Next steps:** Clean up project for the first term review, along with the user manual. Complete the ViewModels for current implementation.
 
-### Week 12 - 24/11
+### Week 12 - 08/12
 - Interim report and presentation.
 - **Next steps:** Complete a submission for the interim report.
 
-### Week 13 - 24/11
+### Week 13 - 15/12
 - Completed the interim report and connected the viewModel to the register and sign in views to their model with minimal unit testing.
 - **Next steps:** Catch up with development work.
 
@@ -63,3 +63,34 @@
 ### Week 20 - 02/02
 - Completing unit testing for the current features along with some basic integration testing for the navigation and loading. Updated sign features to prevent duplicate users. Completing research about GPS functionality.
 - **Next steps:** Implementing GPS functionality and local db connection.
+
+### Week 21 - 09/02
+- 
+- **Next steps:** 
+### Week 22 - 16/02
+- 
+- **Next steps:** 
+### Week 23 - 23/02
+- 
+- **Next steps:** 
+### Week 24 - 02/03
+- 
+- **Next steps:** 
+### Week 25 - 09/03
+- 
+- **Next steps:** 
+### Week 26 - 16/03
+- 
+- **Next steps:** 
+### Week 27 - 23/03
+- 
+- **Next steps:** 
+### Week 28 - 30/03
+- 
+- **Next steps:** 
+### Week 29 - 06/04
+- 
+- **Next steps:** 
+### Week 30 - 13/04
+- 
+- **Next steps:** 
