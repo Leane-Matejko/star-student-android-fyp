@@ -22,11 +22,11 @@ import java.util.Locale
 
 class ProfileInformationViewModel() : ViewModel(){
 
-    val accessUserData = AccessUserData()
+    private val accessUserData = AccessUserData()
 
-    val accessUserTheme = AccessUserTheme()
+    private val accessUserTheme = AccessUserTheme()
 
-    val formatProfile = FormatProfile()
+    private val formatProfile = FormatProfile()
 
     private val navigationFunctions = NavigationFunctions()
 

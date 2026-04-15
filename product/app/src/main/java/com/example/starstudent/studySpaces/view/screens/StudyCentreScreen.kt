@@ -62,7 +62,10 @@ fun StudyCentreScreen(navController: NavController){
         profileOnClick = {
             viewModel.profileNav(navController)
                          },
-        list = viewModel.getNavigationMenu(navController),
+        list = viewModel.getNavigationMenu(
+            navController,
+            viewModel.getLocationDetector()
+        ),
         showNav = viewModel.showNavMenu,
         navOnClick = {
             viewModel.showNavMenu()
@@ -164,7 +167,7 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
                 )
 
                 smallAvatarWindow(
-                    "Leane",
+                    viewModel.username,
                     modifier = Modifier,
                     viewModel.studyingStatus
                 )
@@ -313,7 +316,6 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
                 viewModel.locationAccess &&
                 !viewModel.sessionStatus
             ) {
-                viewModel.getLocation()
                 viewModel.checkLocation()
                 if (viewModel.withinStudySpace) {
                     viewModel.increaseSessionCountdown()
@@ -330,11 +332,10 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
         //Checked every 10 seconds, checks if the user is within a Study Space
         while (isActive) {
             if (viewModel.locationAccess) {
-                viewModel.getLocation()
                 viewModel.checkLocation()
-                delay(10000)
+                delay(1000)
             } else {
-                delay(10000)
+                delay(1000)
             }
         }
     }
@@ -352,6 +353,7 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
             }
         }
     }
+
     LaunchedEffect(Unit) {
 
         while(isActive){
@@ -367,8 +369,11 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
 
     LaunchedEffect(Unit) {
         viewModel.getAllCurrentTasks()
-//        viewModel.getMostRecentActiveSessions()
         viewModel.checkActiveSession()
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.startLocationTracking()
     }
 
     if(viewModel.showTasksDialog){

@@ -210,6 +210,15 @@ class StudyCentreViewModel : ViewModel() {
     )
         private set
 
+    var longitude by mutableStateOf(
+        0.0
+    )
+        private set
+    var latitude by mutableStateOf(
+        0.0
+    )
+        private set
+
     //Shows update location dialog if location permission is granted
     fun showUpdateLocationDialog(){
         if(locationAccess){
@@ -273,7 +282,6 @@ class StudyCentreViewModel : ViewModel() {
     suspend fun updateSavedLocation(
         id: Int
     ){
-        locationDetector.getLocation()
         accessSavedLocations.updateSavedLocation(
             id,
             getUser(),
@@ -302,12 +310,14 @@ class StudyCentreViewModel : ViewModel() {
     }
 
     //Get the navigation options for the study centre (all windows wo/ study centre)
-    fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
+    fun getNavigationMenu(navController: NavController,
+                          locationDetector: LocationDetector): List<NavigationOptions>{
         return bannerFunctions.getNavigationMenu(navController)
     }
 
     //Navigates to the user's profile
     fun profileNav(navController: NavController){
+        locationDetector.stopLocationUpdates()
         bannerFunctions.profileNav(navController)
     }
 
@@ -376,7 +386,7 @@ class StudyCentreViewModel : ViewModel() {
 
     //Retrieve if the user is within a study space
     suspend fun checkLocation(){
-        getSavedLocations()
+//        getSavedLocations()
         locationDetector.checkLocation(savedLocations)
         withinStudySpace = locationDetector.getWithinStudySpace()
         studySpaceDetector = locationDetector.studyDetectorFormatted()
@@ -490,8 +500,17 @@ class StudyCentreViewModel : ViewModel() {
     }
 
     //Get the user's most recent location from their GPS
-    fun getLocation() {
-        locationDetector.getLocation()
+
+    fun startLocationTracking(){
+        locationDetector.startLocationUpdates { lat, long ->
+            latitude = lat
+            longitude = long
+
+        }
+    }
+
+    fun getLocationDetector(): LocationDetector{
+        return locationDetector
     }
 
     //Check if a session is already active

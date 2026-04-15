@@ -14,7 +14,8 @@ class FormatProfile {
             "system",
             "light",
             "dark",
-            "strawberry"
+            "strawberry",
+            "neon"
             )
 
     //Format location access status
@@ -116,6 +117,7 @@ class FormatProfile {
             "light" -> Themes.LIGHT
             "dark" -> Themes.DARK
             "strawberry" -> Themes.STRAWBERRY
+            "neon" -> Themes.NEON
             else -> Themes.SYSTEM
         }
     }

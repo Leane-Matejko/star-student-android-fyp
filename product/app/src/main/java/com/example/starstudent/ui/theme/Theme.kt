@@ -92,6 +92,29 @@ private val strawberryLabelColorScheme = ExtendedLabelColours(
     pink = strawberry_pink,
 )
 
+private val NeonColorScheme = lightColorScheme(
+    primary = neon_primary,
+    onPrimary = neon_onPrimary,
+    secondary = neon_secondary,
+    onSecondary = neon_onSecondary,
+    tertiary = neon_tertiary,
+    onTertiary = neon_onTertiary,
+    background = neon_background,
+    onBackground = neon_onBackground,
+    surface = White01
+)
+
+private val neonLabelColorScheme = ExtendedLabelColours(
+    red = neon_red,
+    orange = neon_orange,
+    yellow = neon_yellow,
+    green = neon_green,
+    blue = neon_blue,
+    navy = neon_navy,
+    purple = neon_purple,
+    pink = neon_pink,
+)
+
 @Composable
 fun StarStudentTheme(
     theme : Themes,
@@ -116,6 +139,7 @@ fun StarStudentTheme(
         Themes.DARK -> DarkColorScheme
         Themes.LIGHT -> LightColorScheme
         Themes.STRAWBERRY -> StrawberryColorScheme
+        Themes.NEON -> NeonColorScheme
     }
 
     val extendedColours =
@@ -124,6 +148,7 @@ fun StarStudentTheme(
             Themes.LIGHT -> lightLabelColorScheme
             Themes.DARK -> darkLabelColorScheme
             Themes.STRAWBERRY -> strawberryLabelColorScheme
+            Themes.NEON -> neonLabelColorScheme
         }
 
     CompositionLocalProvider(

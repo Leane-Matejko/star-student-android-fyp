@@ -35,12 +35,12 @@ import java.util.Date
 import java.util.Locale
 
 class PlannerViewModel : ViewModel(){
-    val calendarFunctions = CalendarFunctions()
-    val accessTaskCategories = AccessTaskCategories()
-    val categoryTaskFormatting = CategoryTaskFormatting()
-    val accessTasks = AccessTasks()
-    val bannerFunctions = BannerFunctions()
-    val navigationFunctions = NavigationFunctions()
+    private val calendarFunctions = CalendarFunctions()
+    private val accessTaskCategories = AccessTaskCategories()
+    private val categoryTaskFormatting = CategoryTaskFormatting()
+    private val accessTasks = AccessTasks()
+    private val bannerFunctions = BannerFunctions()
+    private val navigationFunctions = NavigationFunctions()
     val monthList = calendarFunctions.getMonthList()
     val yearList = calendarFunctions.getYearList()
 
@@ -639,6 +639,7 @@ class PlannerViewModel : ViewModel(){
             isComplete = completeTask,
             completeDate = if(completeTask){completionDate}else{0L}
         )
+        acceptedTask = true
     }
 
     //Return the category from its id

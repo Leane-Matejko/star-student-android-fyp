@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.navigation.NavController
 import com.example.starstudent.core.domain.navigation.NavigationFunctions
 import com.example.starstudent.core.domain.navigation.NavigationOptions
+import com.example.starstudent.studySpaces.domain.LocationDetector
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -30,7 +31,39 @@ class BannerFunctions {
         navigationFunctions.goToProfile(navController)
     }
 
-    //Produces options for a navigation menu
+    //Produces options for a navigation menu, and cancels location detector
+    fun getNavigationMenu(navController: NavController,
+                          locationDetector: LocationDetector): List<NavigationOptions>{
+        return listOf(
+            NavigationOptions("Homepage")
+            {
+                locationDetector.stopLocationUpdates()
+                navigationFunctions.goToHomepage(navController)
+            },
+            NavigationOptions("Planner")
+            {
+                locationDetector.stopLocationUpdates()
+                navigationFunctions.goToPlanner(navController)
+            },
+            NavigationOptions("Task List")
+            {
+                locationDetector.stopLocationUpdates()
+                navigationFunctions.goToTaskList(navController)
+            },
+            NavigationOptions("History")
+            {
+                locationDetector.stopLocationUpdates()
+                navigationFunctions.goToHistory(navController)
+            },
+            NavigationOptions("Profile Settings")
+            {
+                locationDetector.stopLocationUpdates()
+                navigationFunctions.goToProfile(navController)
+            }
+        )
+    }
+
+    //Produces options for a navigation menu (no location detector)
     fun getNavigationMenu(navController: NavController): List<NavigationOptions>{
         return listOf(
             NavigationOptions("Homepage")
