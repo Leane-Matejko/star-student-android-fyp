@@ -22,7 +22,7 @@ class LocationDetector {
 
     private var locationCallback: LocationCallback? = null
 
-    //Start tracking the user's location every five seconds (Resetting the longitude and latitude when successfull)
+    //Start tracking the user's location every five seconds (Resetting the longitude and latitude when successful)
     fun startLocationUpdates(onLocation: (Double, Double) -> Unit) {
         val locationRequest = LocationRequest.Builder(
             Priority.PRIORITY_HIGH_ACCURACY,

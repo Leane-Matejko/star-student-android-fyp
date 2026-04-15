@@ -36,7 +36,7 @@ class SignInViewModel : ViewModel() {
             ).savedLocationsDao()
 
     private val accessUserTheme = AccessUserTheme()
-    val accessHomepageSettings = AccessHomepageSettings()
+    private val accessHomepageSettings = AccessHomepageSettings()
 
     var currentUser by mutableStateOf(UserInfo(
         "default",

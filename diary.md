@@ -65,32 +65,38 @@
 - **Next steps:** Implementing GPS functionality and local db connection.
 
 ### Week 21 - 09/02
-- 
-- **Next steps:** 
+- Completed unit testing for the sign in and resigster model and UI.
+- **Next steps:** Improve and refactor sign in and register 
 ### Week 22 - 16/02
-- 
-- **Next steps:** 
+- Research for better UI formatting and icon options.
+- **Next steps:** Fix homepage formatting.
 ### Week 23 - 23/02
-- 
-- **Next steps:** 
+- Illness, leading to minimal development. Some research completed for location tracking and development.
+- **Next steps:** Include improved navigation and top banner.
 ### Week 24 - 02/03
-- 
-- **Next steps:** 
+- Top banner and scrolling region avaliable when signed into the main app. Created initial screen for basic user information.
+- **Next steps:** Local database connection.
 ### Week 25 - 09/03
-- 
-- **Next steps:** 
+- Room database implemented, local database can not be used to store app information -> Firebase only required for initial sign in.
+- User information represents stored db values and has an updatable dialog window for the user's username, birthday and location access.
+- **Next steps:** Navigation menu dropdown, study centre screen.
 ### Week 26 - 16/03
-- 
-- **Next steps:** 
+- Navigation menu implemented with main app pages.
+- Inintal study centre created with basic session tracking and location tracking.
+- **Next steps:** Refactor study centre. 
 ### Week 27 - 23/03
-- 
-- **Next steps:** 
+- Refactored study centre to move model logic out of the viewModel. 
+- Planning future DB tables for planners.
+- **Next steps:** Add calendar view
 ### Week 28 - 30/03
-- 
-- **Next steps:** 
+- Functional calendar and task list pages added. Possible to add categories and task, with editable fields.
+- Unwanted Categories can be hidden.
+- **Next steps:** Add history page.
 ### Week 29 - 06/04
-- 
-- **Next steps:** 
+- History page and study session history page added. Adds a monthly view and is possible to delete completed sessions.
+- Custom theme options that load once the user is signed in, along with an editable layout for the homepage.
+- **Next steps:** Finalising project code.
 ### Week 30 - 13/04
-- 
-- **Next steps:** 
+- Final project refactoring and bug fixing, with additional theme options. 
+- Completing final report and demo view.
+- **Next steps:** Project submission.

@@ -167,7 +167,7 @@ fun StudyCentreContent(viewModel: StudyCentreViewModel){
                 )
 
                 smallAvatarWindow(
-                    "Leane",
+                    viewModel.username,
                     modifier = Modifier,
                     viewModel.studyingStatus
                 )

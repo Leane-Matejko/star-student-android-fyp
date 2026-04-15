@@ -30,11 +30,11 @@ import kotlin.text.replaceFirstChar
 
 class TaskListViewModel : ViewModel() {
 
-    val accessTaskCategories = AccessTaskCategories()
-    val accessTasks = AccessTasks()
-    val categoryTaskFormatting = CategoryTaskFormatting()
-    val bannerFunctions = BannerFunctions()
-    val navigationFunctions = NavigationFunctions()
+    private val accessTaskCategories = AccessTaskCategories()
+    private val accessTasks = AccessTasks()
+    private val categoryTaskFormatting = CategoryTaskFormatting()
+    private val bannerFunctions = BannerFunctions()
+    private val navigationFunctions = NavigationFunctions()
 
     @OptIn(ExperimentalMaterial3Api::class)
     var taskDatePickerState = DatePickerState(Locale.getDefault())
@@ -319,6 +319,7 @@ class TaskListViewModel : ViewModel() {
             defaultCompleteTask = false,
             0L
         )
+        acceptedTask = true
         showTaskDialog(false)
     }
 

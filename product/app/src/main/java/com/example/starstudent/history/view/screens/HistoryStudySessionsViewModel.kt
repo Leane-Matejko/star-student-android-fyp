@@ -22,12 +22,12 @@ import java.time.ZoneId
 import java.util.Calendar
 
 class HistoryStudySessionsViewModel : ViewModel() {
-    val bannerFunctions = BannerFunctions()
-    val navigationFunctions = NavigationFunctions()
-    val calendarFunctions = CalendarFunctions()
-    val categoryTaskFormatting = CategoryTaskFormatting()
-    val accessStudySessions = AccessStudySessions()
-    val accessPausedSessions = AccessPausedSessions()
+    private val bannerFunctions = BannerFunctions()
+    private val navigationFunctions = NavigationFunctions()
+    private val calendarFunctions = CalendarFunctions()
+    private val categoryTaskFormatting = CategoryTaskFormatting()
+    private val accessStudySessions = AccessStudySessions()
+    private val accessPausedSessions = AccessPausedSessions()
     val monthList = calendarFunctions.getMonthList()
     val yearList = calendarFunctions.getYearList()
 

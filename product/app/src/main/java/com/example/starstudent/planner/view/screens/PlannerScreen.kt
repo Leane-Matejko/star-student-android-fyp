@@ -132,8 +132,6 @@ fun PlannerScreen(navController: NavController){
 @Composable
 fun PlannerContent(viewModel : PlannerViewModel, navController : NavController){
 
-    val viewModel = viewModel
-
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

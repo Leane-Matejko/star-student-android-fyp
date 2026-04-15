@@ -13,8 +13,8 @@ class StudySession {
     private var isSessionPause = false
     var timer = Timer()
     private var sessionCountDown = 1
-    val accessStudySessions = AccessStudySessions()
-    val accessPausedSessions = AccessPausedSessions()
+    private val accessStudySessions = AccessStudySessions()
+    private val accessPausedSessions = AccessPausedSessions()
 
     //Return the study session status
     fun getSessionStatus(): Boolean{

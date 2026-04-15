@@ -386,7 +386,7 @@ class StudyCentreViewModel : ViewModel() {
 
     //Retrieve if the user is within a study space
     suspend fun checkLocation(){
-        getSavedLocations()
+//        getSavedLocations()
         locationDetector.checkLocation(savedLocations)
         withinStudySpace = locationDetector.getWithinStudySpace()
         studySpaceDetector = locationDetector.studyDetectorFormatted()
